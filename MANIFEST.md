@@ -11,6 +11,7 @@ Single source of truth for cross-agent skills. `install.sh` symlinks each
 | mattpocock | https://github.com/mattpocock/skills | `6654f6b60cd9d5be8b54c6fafe44346dabeb3b76` | `skills/<category>/<slug>` |
 | pstack | https://github.com/cursor/plugins | `fdf357fae76feff7e5f2e5aaff57f99f644b55f8` | `pstack/skills/<slug>` |
 | ponytail | https://github.com/DietrichGebert/ponytail | `974d940a1c5344210874150b98ff0d2c861fab6a` | `skills/ponytail` |
+| humanlayer | https://github.com/humanlayer/skills | `3c2629142c5d437428269b1b722b08c0b87f574d` | `plugins/show-me/skills/show-me` |
 
 To update a skill: re-clone the upstream, diff its copy against ours since the
 recorded commit, merge what you want, keep the local edits below, bump the SHA.
@@ -30,6 +31,8 @@ unslop, why
 **ponytail (1):** ponytail — core minimalism mode only, taken verbatim
 (trigger deliberately NOT softened). Excluded: ponytail-review/-audit/-debt/
 -gain/-help and the plugin's hooks/MCP machinery.
+
+**humanlayer (1):** show-me — copied verbatim.
 
 Deliberately excluded: superpowers `using-superpowers` (session-wide
 self-triggering bootstrap) and `using-git-worktrees` (forced worktrees);
