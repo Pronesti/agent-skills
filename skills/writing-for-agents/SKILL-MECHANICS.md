@@ -2,6 +2,10 @@
 
 The skill-specific branch of [`writing-for-agents`](SKILL.md): what changes when the document is a skill (frontmatter, the invocation choice, and router skills). Everything else about writing it is the universal reference in `SKILL.md`.
 
+## Local invocation policy
+
+This collection is manual-only by user choice. Set both `disable-model-invocation: true` in SKILL.md and `policy.allow_implicit_invocation: false` in agents/openai.yaml. Preserve that choice when editing or updating a skill. The model-invoked options below describe upstream alternatives, not this installation's default.
+
 ## Invocation
 
 Two choices, trading the two loads:

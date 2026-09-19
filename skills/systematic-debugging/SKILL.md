@@ -1,7 +1,11 @@
 ---
 name: systematic-debugging
-description: Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes
+description: Investigate a difficult failure with an evidence-driven diagnostic workflow.
+disable-model-invocation: true
 ---
+
+Use this workflow only when the user explicitly selects it. Its scope ends with the requested task. Other named workflows are optional and require separate selection; declared supporting file references may be read as needed. Preserve the user's existing authorization and the project's runtime and verification requirements.
+
 
 # Systematic Debugging
 
@@ -174,7 +178,7 @@ You MUST complete each phase before proceeding to the next.
    - Automated test if possible
    - One-off test script if no framework
    - MUST have before fixing
-   - Use the `test-driven-development` skill for writing proper failing tests
+   - Write the regression test directly. Use a separate TDD workflow only if the user selects it.
 
 2. **Implement Single Fix**
    - Address the root cause identified

@@ -1,8 +1,9 @@
 MIT License
 
-This repository redistributes skills from three upstream projects, all
-MIT-licensed, with local modifications (see MANIFEST.md). The upstream
-copyright notices are preserved below and apply to the respective skills:
+This repository redistributes skills with local modifications (see MANIFEST.md).
+Complete upstream license notices are preserved in licenses/ and apply to their
+respective source material. The MIT terms below cover local modifications.
+Original author attributions include:
 
 - Copyright (c) 2025 Jesse Vincent — https://github.com/obra/superpowers
 - Copyright (c) 2026 Matt Pocock — https://github.com/mattpocock/skills

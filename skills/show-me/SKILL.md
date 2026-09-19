@@ -1,7 +1,12 @@
 ---
 name: show-me
-description: Help the user understand the current topic visually with concise diagrams, code-shape sketches, and focused HTML artifacts.
+description: 'Manual workflow: Help the user understand the current topic visually with concise diagrams, code-shape
+  sketches, and focused HTML artifacts.'
+disable-model-invocation: true
 ---
+
+Use this workflow only when the user explicitly selects it. Its scope ends with the requested task. Other named workflows are optional and require separate selection; declared supporting file references may be read as needed. Preserve the user's existing authorization and the project's runtime and verification requirements.
+
 
 Help the user understand the current topic of conversation visually. Skip the preamble and keep prose brief. Pick the smallest view that makes the key point clear.
 

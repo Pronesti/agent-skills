@@ -1,0 +1,524 @@
+{
+  "checked_on": "2026-09-19",
+  "sources": {
+    "superpowers": {
+      "url": "https://github.com/obra/superpowers",
+      "revision": "5bf4e78011075bcfc0dc295f0724994cd123ee71",
+      "previous_revision": "b36e0829c6d0140e93cfef2ca599b1b07d4a7797"
+    },
+    "mattpocock": {
+      "url": "https://github.com/mattpocock/skills",
+      "revision": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+      "previous_revision": "6654f6b60cd9d5be8b54c6fafe44346dabeb3b76"
+    },
+    "pstack": {
+      "url": "https://github.com/cursor/plugins",
+      "revision": "032be146865d973682535de75f2287da438550bf",
+      "previous_revision": "fdf357fae76feff7e5f2e5aaff57f99f644b55f8"
+    },
+    "ponytail": {
+      "url": "https://github.com/DietrichGebert/ponytail",
+      "revision": "e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156",
+      "previous_revision": "974d940a1c5344210874150b98ff0d2c861fab6a"
+    },
+    "humanlayer": {
+      "url": "https://github.com/humanlayer/skills",
+      "revision": "ca7c8088db69e315a8b2deea43820270457f8f3c",
+      "previous_revision": "3c2629142c5d437428269b1b722b08c0b87f574d"
+    },
+    "vercel": {
+      "url": "https://github.com/vercel-labs/skills",
+      "revision": "7407f3893ad4dceab546ac002c3ef806e4000c73"
+    },
+    "caveman": {
+      "url": "https://github.com/JuliusBrussee/caveman",
+      "revision": "542442bab314973709f95b85b1ac0b3f6f5b5dc6"
+    }
+  },
+  "skills": [
+    {
+      "name": "brainstorming",
+      "source": "superpowers",
+      "revision": "5bf4e78011075bcfc0dc295f0724994cd123ee71",
+      "path": "skills/brainstorming",
+      "changed_files": 2,
+      "local_path": "skills/brainstorming"
+    },
+    {
+      "name": "executing-plans",
+      "source": "superpowers",
+      "revision": "5bf4e78011075bcfc0dc295f0724994cd123ee71",
+      "path": "skills/executing-plans",
+      "changed_files": 3,
+      "local_path": "skills/executing-plans"
+    },
+    {
+      "name": "finishing-a-development-branch",
+      "source": "superpowers",
+      "revision": "5bf4e78011075bcfc0dc295f0724994cd123ee71",
+      "path": "skills/finishing-a-development-branch",
+      "changed_files": 0,
+      "local_path": "skills/finishing-a-development-branch"
+    },
+    {
+      "name": "requesting-code-review",
+      "source": "superpowers",
+      "revision": "5bf4e78011075bcfc0dc295f0724994cd123ee71",
+      "path": "skills/requesting-code-review",
+      "changed_files": 2,
+      "local_path": "skills/requesting-code-review"
+    },
+    {
+      "name": "subagent-driven-development",
+      "source": "superpowers",
+      "revision": "5bf4e78011075bcfc0dc295f0724994cd123ee71",
+      "path": "skills/subagent-driven-development",
+      "changed_files": 6,
+      "local_path": "skills/subagent-driven-development"
+    },
+    {
+      "name": "systematic-debugging",
+      "source": "superpowers",
+      "revision": "5bf4e78011075bcfc0dc295f0724994cd123ee71",
+      "path": "skills/systematic-debugging",
+      "changed_files": 1,
+      "local_path": "skills/systematic-debugging"
+    },
+    {
+      "name": "test-driven-development",
+      "source": "superpowers",
+      "revision": "5bf4e78011075bcfc0dc295f0724994cd123ee71",
+      "path": "skills/test-driven-development",
+      "changed_files": 1,
+      "local_path": "skills/test-driven-development"
+    },
+    {
+      "name": "writing-plans",
+      "source": "superpowers",
+      "revision": "5bf4e78011075bcfc0dc295f0724994cd123ee71",
+      "path": "skills/writing-plans",
+      "changed_files": 1,
+      "local_path": "skills/writing-plans"
+    },
+    {
+      "name": "grill-me",
+      "source": "mattpocock",
+      "revision": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+      "path": "skills/productivity/grill-me",
+      "changed_files": 0,
+      "local_path": "skills/grill-me"
+    },
+    {
+      "name": "grill-with-docs",
+      "source": "mattpocock",
+      "revision": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+      "path": "skills/engineering/grill-with-docs",
+      "changed_files": 0,
+      "local_path": "skills/grill-with-docs"
+    },
+    {
+      "name": "grilling",
+      "source": "mattpocock",
+      "revision": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+      "path": "skills/productivity/grilling",
+      "changed_files": 0,
+      "local_path": "skills/grilling"
+    },
+    {
+      "name": "research",
+      "source": "mattpocock",
+      "revision": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+      "path": "skills/engineering/research",
+      "changed_files": 0,
+      "local_path": "skills/research"
+    },
+    {
+      "name": "resolving-merge-conflicts",
+      "source": "mattpocock",
+      "revision": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+      "path": "skills/engineering/resolving-merge-conflicts",
+      "changed_files": 0,
+      "local_path": "skills/resolving-merge-conflicts"
+    },
+    {
+      "name": "wait-what",
+      "source": "mattpocock",
+      "revision": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+      "path": "skills/productivity/wait-what",
+      "changed_files": 0,
+      "local_path": "skills/wait-what"
+    },
+    {
+      "name": "wizard",
+      "source": "mattpocock",
+      "revision": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+      "path": "skills/engineering/wizard",
+      "changed_files": 0,
+      "local_path": "skills/wizard"
+    },
+    {
+      "name": "writing-for-agents",
+      "source": "mattpocock",
+      "revision": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+      "path": "skills/productivity/writing-for-agents",
+      "changed_files": 0,
+      "local_path": "skills/writing-for-agents"
+    },
+    {
+      "name": "ask-matt",
+      "source": "mattpocock",
+      "revision": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+      "path": "skills/engineering/ask-matt",
+      "changed_files": 0,
+      "local_path": "skills/ask-matt"
+    },
+    {
+      "name": "code-review",
+      "source": "mattpocock",
+      "revision": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+      "path": "skills/engineering/code-review",
+      "changed_files": 0,
+      "local_path": "skills/code-review"
+    },
+    {
+      "name": "codebase-design",
+      "source": "mattpocock",
+      "revision": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+      "path": "skills/engineering/codebase-design",
+      "changed_files": 0,
+      "local_path": "skills/codebase-design"
+    },
+    {
+      "name": "diagnosing-bugs",
+      "source": "mattpocock",
+      "revision": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+      "path": "skills/engineering/diagnosing-bugs",
+      "changed_files": 0,
+      "local_path": "skills/diagnosing-bugs"
+    },
+    {
+      "name": "domain-modeling",
+      "source": "mattpocock",
+      "revision": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+      "path": "skills/engineering/domain-modeling",
+      "changed_files": 0,
+      "local_path": "skills/domain-modeling"
+    },
+    {
+      "name": "handoff",
+      "source": "mattpocock",
+      "revision": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+      "path": "skills/productivity/handoff",
+      "changed_files": 0,
+      "local_path": "skills/handoff"
+    },
+    {
+      "name": "implement",
+      "source": "mattpocock",
+      "revision": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+      "path": "skills/engineering/implement",
+      "changed_files": 0,
+      "local_path": "skills/implement"
+    },
+    {
+      "name": "improve-codebase-architecture",
+      "source": "mattpocock",
+      "revision": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+      "path": "skills/engineering/improve-codebase-architecture",
+      "changed_files": 0,
+      "local_path": "skills/improve-codebase-architecture"
+    },
+    {
+      "name": "prototype",
+      "source": "mattpocock",
+      "revision": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+      "path": "skills/engineering/prototype",
+      "changed_files": 0,
+      "local_path": "skills/prototype"
+    },
+    {
+      "name": "setup-matt-pocock-skills",
+      "source": "mattpocock",
+      "revision": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+      "path": "skills/engineering/setup-matt-pocock-skills",
+      "changed_files": 0,
+      "local_path": "skills/setup-matt-pocock-skills"
+    },
+    {
+      "name": "tdd",
+      "source": "mattpocock",
+      "revision": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+      "path": "skills/engineering/tdd",
+      "changed_files": 0,
+      "local_path": "skills/tdd"
+    },
+    {
+      "name": "teach",
+      "source": "mattpocock",
+      "revision": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+      "path": "skills/productivity/teach",
+      "changed_files": 0,
+      "local_path": "skills/teach"
+    },
+    {
+      "name": "to-questionnaire",
+      "source": "mattpocock",
+      "revision": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+      "path": "skills/productivity/to-questionnaire",
+      "changed_files": 0,
+      "local_path": "skills/to-questionnaire"
+    },
+    {
+      "name": "to-spec",
+      "source": "mattpocock",
+      "revision": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+      "path": "skills/engineering/to-spec",
+      "changed_files": 0,
+      "local_path": "skills/to-spec"
+    },
+    {
+      "name": "to-tickets",
+      "source": "mattpocock",
+      "revision": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+      "path": "skills/engineering/to-tickets",
+      "changed_files": 0,
+      "local_path": "skills/to-tickets"
+    },
+    {
+      "name": "triage",
+      "source": "mattpocock",
+      "revision": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+      "path": "skills/engineering/triage",
+      "changed_files": 0,
+      "local_path": "skills/triage"
+    },
+    {
+      "name": "wayfinder",
+      "source": "mattpocock",
+      "revision": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+      "path": "skills/engineering/wayfinder",
+      "changed_files": 0,
+      "local_path": "skills/wayfinder"
+    },
+    {
+      "name": "blast-radius",
+      "source": "pstack",
+      "revision": "032be146865d973682535de75f2287da438550bf",
+      "path": "pstack/skills/blast-radius",
+      "changed_files": 1,
+      "local_path": "skills/blast-radius"
+    },
+    {
+      "name": "how",
+      "source": "pstack",
+      "revision": "032be146865d973682535de75f2287da438550bf",
+      "path": "pstack/skills/how",
+      "changed_files": 5,
+      "local_path": "skills/how"
+    },
+    {
+      "name": "recall",
+      "source": "pstack",
+      "revision": "032be146865d973682535de75f2287da438550bf",
+      "path": "pstack/skills/recall",
+      "changed_files": 1,
+      "local_path": "skills/recall"
+    },
+    {
+      "name": "show-me-your-work",
+      "source": "pstack",
+      "revision": "032be146865d973682535de75f2287da438550bf",
+      "path": "pstack/skills/show-me-your-work",
+      "changed_files": 1,
+      "local_path": "skills/show-me-your-work"
+    },
+    {
+      "name": "technical-writing",
+      "source": "pstack",
+      "revision": "032be146865d973682535de75f2287da438550bf",
+      "path": "pstack/skills/technical-writing",
+      "changed_files": 1,
+      "local_path": "skills/technical-writing"
+    },
+    {
+      "name": "unslop",
+      "source": "pstack",
+      "revision": "032be146865d973682535de75f2287da438550bf",
+      "path": "pstack/skills/unslop",
+      "changed_files": 1,
+      "local_path": "skills/unslop"
+    },
+    {
+      "name": "why",
+      "source": "pstack",
+      "revision": "032be146865d973682535de75f2287da438550bf",
+      "path": "pstack/skills/why",
+      "changed_files": 12,
+      "local_path": "skills/why"
+    },
+    {
+      "name": "ponytail",
+      "source": "ponytail",
+      "revision": "e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156",
+      "path": "skills/ponytail",
+      "changed_files": 0,
+      "local_path": "skills/ponytail"
+    },
+    {
+      "name": "show-me",
+      "source": "humanlayer",
+      "revision": "ca7c8088db69e315a8b2deea43820270457f8f3c",
+      "path": "plugins/show-me/skills/show-me",
+      "changed_files": 2,
+      "local_path": "skills/show-me"
+    },
+    {
+      "name": "find-skills",
+      "source": "vercel",
+      "revision": "7407f3893ad4dceab546ac002c3ef806e4000c73",
+      "path": "skills/find-skills",
+      "result": "updated_from_author_without_known_base",
+      "local_path": "skills/find-skills"
+    },
+    {
+      "name": "caveman:cavecrew",
+      "source": "caveman",
+      "revision": "542442bab314973709f95b85b1ac0b3f6f5b5dc6",
+      "path": "skills/cavecrew",
+      "local_path": "plugins/caveman/skills/cavecrew"
+    },
+    {
+      "name": "caveman:caveman",
+      "source": "caveman",
+      "revision": "542442bab314973709f95b85b1ac0b3f6f5b5dc6",
+      "path": "skills/caveman",
+      "local_path": "plugins/caveman/skills/caveman"
+    },
+    {
+      "name": "caveman:caveman-commit",
+      "source": "caveman",
+      "revision": "542442bab314973709f95b85b1ac0b3f6f5b5dc6",
+      "path": "skills/caveman-commit",
+      "local_path": "plugins/caveman/skills/caveman-commit"
+    },
+    {
+      "name": "caveman:caveman-compress",
+      "source": "caveman",
+      "revision": "542442bab314973709f95b85b1ac0b3f6f5b5dc6",
+      "path": "skills/caveman-compress",
+      "local_path": "plugins/caveman/skills/caveman-compress"
+    },
+    {
+      "name": "caveman:caveman-discover",
+      "source": "caveman",
+      "revision": "542442bab314973709f95b85b1ac0b3f6f5b5dc6",
+      "path": "skills/caveman-discover",
+      "local_path": "plugins/caveman/skills/caveman-discover"
+    },
+    {
+      "name": "caveman:caveman-evidence-review",
+      "source": "caveman",
+      "revision": "542442bab314973709f95b85b1ac0b3f6f5b5dc6",
+      "path": "skills/caveman-evidence-review",
+      "local_path": "plugins/caveman/skills/caveman-evidence-review"
+    },
+    {
+      "name": "caveman:caveman-explore",
+      "source": "caveman",
+      "revision": "542442bab314973709f95b85b1ac0b3f6f5b5dc6",
+      "path": "skills/caveman-explore",
+      "local_path": "plugins/caveman/skills/caveman-explore"
+    },
+    {
+      "name": "caveman:caveman-help",
+      "source": "caveman",
+      "revision": "542442bab314973709f95b85b1ac0b3f6f5b5dc6",
+      "path": "skills/caveman-help",
+      "local_path": "plugins/caveman/skills/caveman-help"
+    },
+    {
+      "name": "caveman:caveman-learn",
+      "source": "caveman",
+      "revision": "542442bab314973709f95b85b1ac0b3f6f5b5dc6",
+      "path": "skills/caveman-learn",
+      "local_path": "plugins/caveman/skills/caveman-learn"
+    },
+    {
+      "name": "caveman:caveman-manage",
+      "source": "caveman",
+      "revision": "542442bab314973709f95b85b1ac0b3f6f5b5dc6",
+      "path": "skills/caveman-manage",
+      "local_path": "plugins/caveman/skills/caveman-manage"
+    },
+    {
+      "name": "caveman:caveman-optimize",
+      "source": "caveman",
+      "revision": "542442bab314973709f95b85b1ac0b3f6f5b5dc6",
+      "path": "skills/caveman-optimize",
+      "local_path": "plugins/caveman/skills/caveman-optimize"
+    },
+    {
+      "name": "caveman:caveman-review",
+      "source": "caveman",
+      "revision": "542442bab314973709f95b85b1ac0b3f6f5b5dc6",
+      "path": "skills/caveman-review",
+      "local_path": "plugins/caveman/skills/caveman-review"
+    },
+    {
+      "name": "caveman:caveman-setup",
+      "source": "caveman",
+      "revision": "542442bab314973709f95b85b1ac0b3f6f5b5dc6",
+      "path": "skills/caveman-setup",
+      "local_path": "plugins/caveman/skills/caveman-setup"
+    },
+    {
+      "name": "caveman:caveman-stats",
+      "source": "caveman",
+      "revision": "542442bab314973709f95b85b1ac0b3f6f5b5dc6",
+      "path": "skills/caveman-stats",
+      "local_path": "plugins/caveman/skills/caveman-stats"
+    },
+    {
+      "name": "caveman:investigate-first",
+      "source": "caveman",
+      "revision": "542442bab314973709f95b85b1ac0b3f6f5b5dc6",
+      "path": "skills/investigate-first",
+      "local_path": "plugins/caveman/skills/investigate-first"
+    },
+    {
+      "name": "caveman:lean-build",
+      "source": "caveman",
+      "revision": "542442bab314973709f95b85b1ac0b3f6f5b5dc6",
+      "path": "skills/lean-build",
+      "local_path": "plugins/caveman/skills/lean-build"
+    },
+    {
+      "name": "caveman:migration",
+      "source": "caveman",
+      "revision": "542442bab314973709f95b85b1ac0b3f6f5b5dc6",
+      "path": "skills/migration",
+      "local_path": "plugins/caveman/skills/migration"
+    },
+    {
+      "name": "caveman:safe-refactor",
+      "source": "caveman",
+      "revision": "542442bab314973709f95b85b1ac0b3f6f5b5dc6",
+      "path": "skills/safe-refactor",
+      "local_path": "plugins/caveman/skills/safe-refactor"
+    },
+    {
+      "name": "caveman:surgical-patch",
+      "source": "caveman",
+      "revision": "542442bab314973709f95b85b1ac0b3f6f5b5dc6",
+      "path": "skills/surgical-patch",
+      "local_path": "plugins/caveman/skills/surgical-patch"
+    },
+    {
+      "name": "caveman:verify-and-stop",
+      "source": "caveman",
+      "revision": "542442bab314973709f95b85b1ac0b3f6f5b5dc6",
+      "path": "skills/verify-and-stop",
+      "local_path": "plugins/caveman/skills/verify-and-stop"
+    }
+  ]
+}

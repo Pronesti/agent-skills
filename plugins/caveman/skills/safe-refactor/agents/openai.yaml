@@ -1,0 +1,6 @@
+interface:
+  display_name: Safe Refactor
+  short_description: Preserve behavior through structural change
+  default_prompt: Use $safe-refactor to restructure this code while preserving behavior.
+policy:
+  allow_implicit_invocation: false

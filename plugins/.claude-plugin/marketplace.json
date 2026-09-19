@@ -1,0 +1,13 @@
+{
+  "name": "personal-manual",
+  "owner": {
+    "name": "Diego Pronesti"
+  },
+  "plugins": [
+    {
+      "name": "caveman",
+      "source": "./caveman",
+      "description": "Caveman workflows with explicit invocation and no automatic hooks."
+    }
+  ]
+}

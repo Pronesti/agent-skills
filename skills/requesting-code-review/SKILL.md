@@ -1,7 +1,12 @@
 ---
 name: requesting-code-review
-description: Use when a plan calls for a code review or the user asks for one, to verify completed work before merging.
+description: 'Manual workflow: Use when a plan calls for a code review or the user asks for one, to verify completed
+  work before merging.'
+disable-model-invocation: true
 ---
+
+Use this workflow only when the user explicitly selects it. Its scope ends with the requested task. Other named workflows are optional and require separate selection; declared supporting file references may be read as needed. Preserve the user's existing authorization and the project's runtime and verification requirements.
+
 
 # Requesting Code Review
 
@@ -25,7 +30,7 @@ Dispatch a code reviewer subagent to catch issues before they cascade. The revie
 
 **1. Get git SHAs:**
 ```bash
-BASE_SHA=$(git rev-parse HEAD~1)  # or origin/main
+BASE_SHA=$(git rev-parse HEAD~1)  # or: git merge-base origin/main HEAD
 HEAD_SHA=$(git rev-parse HEAD)
 ```
 

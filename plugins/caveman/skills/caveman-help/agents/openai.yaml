@@ -1,0 +1,5 @@
+policy:
+  allow_implicit_invocation: false
+interface:
+  display_name: Caveman Help
+  short_description: Manually selected caveman help workflow.

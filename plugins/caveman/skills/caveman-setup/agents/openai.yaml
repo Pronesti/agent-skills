@@ -1,0 +1,5 @@
+policy:
+  allow_implicit_invocation: false
+interface:
+  display_name: Caveman Setup
+  short_description: Manually selected caveman setup workflow.

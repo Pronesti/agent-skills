@@ -1,7 +1,13 @@
 ---
 name: research
-description: Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo. Use when the user wants a topic researched, docs or API facts gathered, or reading legwork delegated to a background agent.
+description: 'Manual workflow: Investigate a question against high-trust primary sources and capture the findings
+  as a Markdown file in the repo. Use when the user wants a topic researched, docs or API facts gathered, or reading
+  legwork delegated to a background agent.'
+disable-model-invocation: true
 ---
+
+Use this workflow only when the user explicitly selects it. Its scope ends with the requested task. Other named workflows are optional and require separate selection; declared supporting file references may be read as needed. Preserve the user's existing authorization and the project's runtime and verification requirements.
+
 
 Spin up a **background agent** to do the research, so you keep working while it reads.
 

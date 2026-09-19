@@ -1,0 +1,18 @@
+{
+  "name": "caveman",
+  "version": "2.7.0+manual.20260919",
+  "description": "Caveman skills with explicit invocation and no automatic hooks.",
+  "author": {
+    "name": "Julius Brussee; local invocation policy by Diego Pronesti"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Caveman (manual)",
+    "shortDescription": "Manually selected Caveman workflows.",
+    "longDescription": "Preserves the original Caveman skill names and workflows, with manual invocation and task-scoped modes.",
+    "developerName": "Julius Brussee / local policy",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": "Use the Caveman workflow I explicitly select."
+  }
+}

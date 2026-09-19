@@ -1,7 +1,12 @@
 ---
 name: test-driven-development
-description: Use when the user asks for TDD or test-first development, or a plan step calls for it - write the failing test before the implementation code.
+description: 'Manual workflow: Use when the user asks for TDD or test-first development, or a plan step calls for
+  it - write the failing test before the implementation code.'
+disable-model-invocation: true
 ---
+
+Use this workflow only when the user explicitly selects it. Its scope ends with the requested task. Other named workflows are optional and require separate selection; declared supporting file references may be read as needed. Preserve the user's existing authorization and the project's runtime and verification requirements.
+
 
 # Test-Driven Development (TDD)
 
@@ -181,6 +186,16 @@ Confirm:
 **Test fails?** Fix code, not test.
 
 **Other tests fail?** Fix now.
+
+**"Other tests" means the project's suite, not just your file.** A
+green run of the test you wrote is not a green suite. Before you call
+the change done, run the project's test command (bare `pytest`,
+`npm test`, `cargo test` — whatever the repo uses) even when your task
+named only one test file. A scope statement in your task bounds the
+deliverable, not your verification. Any failure that run shows —
+including one you didn't cause — goes in your report by name; a red
+test you watched scroll past and didn't mention is a report falsified
+by omission.
 
 ### REFACTOR - Clean Up
 

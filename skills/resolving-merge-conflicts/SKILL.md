@@ -1,7 +1,11 @@
 ---
 name: resolving-merge-conflicts
-description: "Use when you need to resolve an in-progress git merge/rebase conflict."
+description: 'Manual workflow: Use when you need to resolve an in-progress git merge/rebase conflict.'
+disable-model-invocation: true
 ---
+
+Use this workflow only when the user explicitly selects it. Its scope ends with the requested task. Other named workflows are optional and require separate selection; declared supporting file references may be read as needed. Preserve the user's existing authorization and the project's runtime and verification requirements.
+
 
 1. **See the current state** of the merge/rebase. Check git history, and the conflicting files.
 

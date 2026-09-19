@@ -1,0 +1,5 @@
+policy:
+  allow_implicit_invocation: false
+interface:
+  display_name: Caveman Compress
+  short_description: Manually selected caveman compress workflow.
