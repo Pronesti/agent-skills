@@ -1,13 +1,21 @@
 #!/usr/bin/env python3
-"""Validate manual invocation for both hosts and local supporting references."""
+"""Validate selective invocation for both hosts and local supporting references."""
 from pathlib import Path
 import json
 import re
 import sys
 import yaml
 
+from invocation_policy import automatic_skills
+
 ROOT = Path(__file__).resolve().parents[1]
 errors = []
+try:
+    automatic_entries = automatic_skills()
+except (ValueError, KeyError, OSError) as exc:
+    print(f"invocation-policy.json: {exc}")
+    sys.exit(1)
+automatic_paths = {entry['local_path'] for entry in automatic_entries}
 skills = list((ROOT / "skills").glob("*/SKILL.md")) + list((ROOT / "plugins/caveman/skills").glob("*/SKILL.md"))
 lock = json.loads((ROOT / "upstreams.json").read_text())
 locked_paths = [entry["local_path"] for entry in lock["skills"]]
@@ -24,8 +32,15 @@ for path in skills:
         policy = yaml.safe_load((path.parent / "agents/openai.yaml").read_text())
         assert data["name"] == path.parent.name, "name differs from directory"
         assert isinstance(data["description"], str) and data["description"].strip(), "missing description"
-        assert data.get("disable-model-invocation") is True, "Claude/Cursor manual policy missing"
-        assert policy.get("policy", {}).get("allow_implicit_invocation") is False, "Codex manual policy missing"
+        automatic = str(path.parent.relative_to(ROOT)) in automatic_paths
+        assert data.get("disable-model-invocation") is (not automatic), "Claude/Cursor invocation differs from allowlist"
+        assert policy.get("policy", {}).get("allow_implicit_invocation") is automatic, "Codex invocation differs from allowlist"
+        if automatic:
+            entry = next(e for e in automatic_entries if e['local_path'] == str(path.parent.relative_to(ROOT)))
+            expected_name = ('caveman:' if 'plugins/caveman/' in entry['local_path'] else '') + data['name']
+            assert entry['name'] == expected_name, "allowlist name differs from skill identity"
+            assert 'Manual workflow:' not in data['description'], "automatic description still says manual"
+            assert 'only when the user explicitly selects' not in text and 'Use only when explicitly selected' not in text, "automatic body still requires explicit selection"
     except (ValueError, KeyError, AssertionError, OSError, yaml.YAMLError) as exc:
         errors.append(f"{path}: {exc}")
     if re.search(r"^(<<<<<<<|=======|>>>>>>>)", text, re.M):
@@ -47,4 +62,4 @@ if (ROOT / "plugins/caveman/hooks/hooks.json").exists():
 if errors:
     print("\n".join(errors))
     sys.exit(1)
-print(f"Validated {len(skills)} manual skill manifests, supporting links, and hook-free plugin manifests.")
+print(f"Validated {len(skills)} skill manifests ({len(automatic_paths)} automatic, {len(skills) - len(automatic_paths)} manual), supporting links, and hook-free plugin manifests.")

@@ -3,4 +3,4 @@ interface:
   short_description: Fix narrow responsible layer with proof
   default_prompt: Use $surgical-patch to fix this bug with a narrow verified change.
 policy:
-  allow_implicit_invocation: false
+  allow_implicit_invocation: true

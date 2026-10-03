@@ -1,0 +1,639 @@
+{
+  "checked_on": "2026-10-03",
+  "sources": [
+    {
+      "source": "superpowers",
+      "url": "https://github.com/obra/superpowers",
+      "pinned": "5bf4e78011075bcfc0dc295f0724994cd123ee71",
+      "remote": "8ca22dba9a94f28898bbce59f2537ff4d87c747d",
+      "skills": [
+        {
+          "name": "brainstorming",
+          "local_path": "skills/brainstorming",
+          "upstream_path": "skills/brainstorming",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "executing-plans",
+          "local_path": "skills/executing-plans",
+          "upstream_path": "skills/executing-plans",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "finishing-a-development-branch",
+          "local_path": "skills/finishing-a-development-branch",
+          "upstream_path": "skills/finishing-a-development-branch",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "requesting-code-review",
+          "local_path": "skills/requesting-code-review",
+          "upstream_path": "skills/requesting-code-review",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "subagent-driven-development",
+          "local_path": "skills/subagent-driven-development",
+          "upstream_path": "skills/subagent-driven-development",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "systematic-debugging",
+          "local_path": "skills/systematic-debugging",
+          "upstream_path": "skills/systematic-debugging",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "test-driven-development",
+          "local_path": "skills/test-driven-development",
+          "upstream_path": "skills/test-driven-development",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "writing-plans",
+          "local_path": "skills/writing-plans",
+          "upstream_path": "skills/writing-plans",
+          "status": "changed",
+          "changed_files": [
+            "M\tskills/writing-plans/SKILL.md",
+            "D\tskills/writing-plans/plan-document-reviewer-prompt.md"
+          ],
+          "candidate_paths": []
+        }
+      ]
+    },
+    {
+      "source": "mattpocock",
+      "url": "https://github.com/mattpocock/skills",
+      "pinned": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+      "remote": "d81f3a183412e71a5b1e84ca21bc1a35eea03a60",
+      "skills": [
+        {
+          "name": "grill-me",
+          "local_path": "skills/grill-me",
+          "upstream_path": "skills/productivity/grill-me",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "grill-with-docs",
+          "local_path": "skills/grill-with-docs",
+          "upstream_path": "skills/engineering/grill-with-docs",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "grilling",
+          "local_path": "skills/grilling",
+          "upstream_path": "skills/productivity/grilling",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "research",
+          "local_path": "skills/research",
+          "upstream_path": "skills/engineering/research",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "resolving-merge-conflicts",
+          "local_path": "skills/resolving-merge-conflicts",
+          "upstream_path": "skills/engineering/resolving-merge-conflicts",
+          "status": "moved_or_removed",
+          "changed_files": [
+            "D\tskills/engineering/resolving-merge-conflicts/SKILL.md",
+            "D\tskills/engineering/resolving-merge-conflicts/agents/openai.yaml"
+          ],
+          "candidate_paths": []
+        },
+        {
+          "name": "wait-what",
+          "local_path": "skills/wait-what",
+          "upstream_path": "skills/productivity/wait-what",
+          "status": "changed",
+          "changed_files": [
+            "M\tskills/productivity/wait-what/SKILL.md"
+          ],
+          "candidate_paths": []
+        },
+        {
+          "name": "wizard",
+          "local_path": "skills/wizard",
+          "upstream_path": "skills/engineering/wizard",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "writing-for-agents",
+          "local_path": "skills/writing-for-agents",
+          "upstream_path": "skills/productivity/writing-for-agents",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "ask-matt",
+          "local_path": "skills/ask-matt",
+          "upstream_path": "skills/engineering/ask-matt",
+          "status": "changed",
+          "changed_files": [
+            "M\tskills/engineering/ask-matt/SKILL.md"
+          ],
+          "candidate_paths": []
+        },
+        {
+          "name": "code-review",
+          "local_path": "skills/code-review",
+          "upstream_path": "skills/engineering/code-review",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "codebase-design",
+          "local_path": "skills/codebase-design",
+          "upstream_path": "skills/engineering/codebase-design",
+          "status": "changed",
+          "changed_files": [
+            "M\tskills/engineering/codebase-design/DESIGN-IT-TWICE.md"
+          ],
+          "candidate_paths": []
+        },
+        {
+          "name": "diagnosing-bugs",
+          "local_path": "skills/diagnosing-bugs",
+          "upstream_path": "skills/engineering/diagnosing-bugs",
+          "status": "changed",
+          "changed_files": [
+            "M\tskills/engineering/diagnosing-bugs/SKILL.md"
+          ],
+          "candidate_paths": []
+        },
+        {
+          "name": "domain-modeling",
+          "local_path": "skills/domain-modeling",
+          "upstream_path": "skills/engineering/domain-modeling",
+          "status": "changed",
+          "changed_files": [
+            "D\tskills/engineering/domain-modeling/CONTEXT-FORMAT.md",
+            "A\tskills/engineering/domain-modeling/GLOSSARY-FORMAT.md",
+            "M\tskills/engineering/domain-modeling/SKILL.md"
+          ],
+          "candidate_paths": []
+        },
+        {
+          "name": "handoff",
+          "local_path": "skills/handoff",
+          "upstream_path": "skills/productivity/handoff",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "implement",
+          "local_path": "skills/implement",
+          "upstream_path": "skills/engineering/implement",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "improve-codebase-architecture",
+          "local_path": "skills/improve-codebase-architecture",
+          "upstream_path": "skills/engineering/improve-codebase-architecture",
+          "status": "changed",
+          "changed_files": [
+            "M\tskills/engineering/improve-codebase-architecture/SKILL.md"
+          ],
+          "candidate_paths": []
+        },
+        {
+          "name": "prototype",
+          "local_path": "skills/prototype",
+          "upstream_path": "skills/engineering/prototype",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "setup-matt-pocock-skills",
+          "local_path": "skills/setup-matt-pocock-skills",
+          "upstream_path": "skills/engineering/setup-matt-pocock-skills",
+          "status": "changed",
+          "changed_files": [
+            "M\tskills/engineering/setup-matt-pocock-skills/SKILL.md",
+            "M\tskills/engineering/setup-matt-pocock-skills/domain.md"
+          ],
+          "candidate_paths": []
+        },
+        {
+          "name": "tdd",
+          "local_path": "skills/tdd",
+          "upstream_path": "skills/engineering/tdd",
+          "status": "changed",
+          "changed_files": [
+            "M\tskills/engineering/tdd/SKILL.md"
+          ],
+          "candidate_paths": []
+        },
+        {
+          "name": "teach",
+          "local_path": "skills/teach",
+          "upstream_path": "skills/productivity/teach",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "to-questionnaire",
+          "local_path": "skills/to-questionnaire",
+          "upstream_path": "skills/productivity/to-questionnaire",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "to-spec",
+          "local_path": "skills/to-spec",
+          "upstream_path": "skills/engineering/to-spec",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "to-tickets",
+          "local_path": "skills/to-tickets",
+          "upstream_path": "skills/engineering/to-tickets",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "triage",
+          "local_path": "skills/triage",
+          "upstream_path": "skills/engineering/triage",
+          "status": "changed",
+          "changed_files": [
+            "M\tskills/engineering/triage/SKILL.md"
+          ],
+          "candidate_paths": []
+        },
+        {
+          "name": "wayfinder",
+          "local_path": "skills/wayfinder",
+          "upstream_path": "skills/engineering/wayfinder",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        }
+      ]
+    },
+    {
+      "source": "pstack",
+      "url": "https://github.com/cursor/plugins",
+      "pinned": "032be146865d973682535de75f2287da438550bf",
+      "remote": "23e4138daa01c42d4969f7a5465f82704e64f798",
+      "skills": [
+        {
+          "name": "blast-radius",
+          "local_path": "skills/blast-radius",
+          "upstream_path": "pstack/skills/blast-radius",
+          "status": "changed",
+          "changed_files": [
+            "M\tpstack/skills/blast-radius/SKILL.md"
+          ],
+          "candidate_paths": []
+        },
+        {
+          "name": "how",
+          "local_path": "skills/how",
+          "upstream_path": "pstack/skills/how",
+          "status": "changed",
+          "changed_files": [
+            "M\tpstack/skills/how/SKILL.md",
+            "M\tpstack/skills/how/references/explorer-prompt.md"
+          ],
+          "candidate_paths": []
+        },
+        {
+          "name": "recall",
+          "local_path": "skills/recall",
+          "upstream_path": "pstack/skills/recall",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "show-me-your-work",
+          "local_path": "skills/show-me-your-work",
+          "upstream_path": "pstack/skills/show-me-your-work",
+          "status": "changed",
+          "changed_files": [
+            "M\tpstack/skills/show-me-your-work/SKILL.md",
+            "M\tpstack/skills/show-me-your-work/scripts/log.sh"
+          ],
+          "candidate_paths": []
+        },
+        {
+          "name": "technical-writing",
+          "local_path": "skills/technical-writing",
+          "upstream_path": "pstack/skills/technical-writing",
+          "status": "changed",
+          "changed_files": [
+            "M\tpstack/skills/technical-writing/SKILL.md"
+          ],
+          "candidate_paths": []
+        },
+        {
+          "name": "unslop",
+          "local_path": "skills/unslop",
+          "upstream_path": "pstack/skills/unslop",
+          "status": "changed",
+          "changed_files": [
+            "M\tpstack/skills/unslop/SKILL.md"
+          ],
+          "candidate_paths": []
+        },
+        {
+          "name": "why",
+          "local_path": "skills/why",
+          "upstream_path": "pstack/skills/why",
+          "status": "changed",
+          "changed_files": [
+            "M\tpstack/skills/why/SKILL.md"
+          ],
+          "candidate_paths": []
+        }
+      ]
+    },
+    {
+      "source": "ponytail",
+      "url": "https://github.com/DietrichGebert/ponytail",
+      "pinned": "e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156",
+      "remote": "c982cd411abb53323c4baa1baa3c2f020b8d0b08",
+      "skills": [
+        {
+          "name": "ponytail",
+          "local_path": "skills/ponytail",
+          "upstream_path": "skills/ponytail",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        }
+      ]
+    },
+    {
+      "source": "humanlayer",
+      "url": "https://github.com/humanlayer/skills",
+      "pinned": "ca7c8088db69e315a8b2deea43820270457f8f3c",
+      "remote": "ca7c8088db69e315a8b2deea43820270457f8f3c",
+      "skills": [
+        {
+          "name": "show-me",
+          "local_path": "skills/show-me",
+          "upstream_path": "plugins/show-me/skills/show-me",
+          "status": "current"
+        }
+      ]
+    },
+    {
+      "source": "vercel",
+      "url": "https://github.com/vercel-labs/skills",
+      "pinned": "7407f3893ad4dceab546ac002c3ef806e4000c73",
+      "remote": "18f96ea131dab3b0fcc9b27cf7c6f6cbb6174680",
+      "skills": [
+        {
+          "name": "find-skills",
+          "local_path": "skills/find-skills",
+          "upstream_path": "skills/find-skills",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        }
+      ]
+    },
+    {
+      "source": "caveman",
+      "url": "https://github.com/JuliusBrussee/caveman",
+      "pinned": "542442bab314973709f95b85b1ac0b3f6f5b5dc6",
+      "remote": "aeb45e2f787c0757a8af383a291a280cb6aeb4c1",
+      "skills": [
+        {
+          "name": "caveman:cavecrew",
+          "local_path": "plugins/caveman/skills/cavecrew",
+          "upstream_path": "skills/cavecrew",
+          "status": "changed",
+          "changed_files": [
+            "M\tskills/cavecrew/SKILL.md"
+          ],
+          "candidate_paths": []
+        },
+        {
+          "name": "caveman:caveman",
+          "local_path": "plugins/caveman/skills/caveman",
+          "upstream_path": "skills/caveman",
+          "status": "changed",
+          "changed_files": [
+            "M\tskills/caveman/README.md",
+            "M\tskills/caveman/SKILL.md"
+          ],
+          "candidate_paths": []
+        },
+        {
+          "name": "caveman:caveman-commit",
+          "local_path": "plugins/caveman/skills/caveman-commit",
+          "upstream_path": "skills/caveman-commit",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "caveman:caveman-compress",
+          "local_path": "plugins/caveman/skills/caveman-compress",
+          "upstream_path": "skills/caveman-compress",
+          "status": "changed",
+          "changed_files": [
+            "M\tskills/caveman-compress/README.md",
+            "M\tskills/caveman-compress/scripts/compress.py",
+            "M\tskills/caveman-compress/scripts/validate.py"
+          ],
+          "candidate_paths": []
+        },
+        {
+          "name": "caveman:caveman-discover",
+          "local_path": "plugins/caveman/skills/caveman-discover",
+          "upstream_path": "skills/caveman-discover",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "caveman:caveman-evidence-review",
+          "local_path": "plugins/caveman/skills/caveman-evidence-review",
+          "upstream_path": "skills/caveman-evidence-review",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "caveman:caveman-explore",
+          "local_path": "plugins/caveman/skills/caveman-explore",
+          "upstream_path": "skills/caveman-explore",
+          "status": "changed",
+          "changed_files": [
+            "M\tskills/caveman-explore/package.json"
+          ],
+          "candidate_paths": []
+        },
+        {
+          "name": "caveman:caveman-help",
+          "local_path": "plugins/caveman/skills/caveman-help",
+          "upstream_path": "skills/caveman-help",
+          "status": "changed",
+          "changed_files": [
+            "M\tskills/caveman-help/README.md",
+            "M\tskills/caveman-help/SKILL.md"
+          ],
+          "candidate_paths": []
+        },
+        {
+          "name": "caveman:caveman-learn",
+          "local_path": "plugins/caveman/skills/caveman-learn",
+          "upstream_path": "skills/caveman-learn",
+          "status": "changed",
+          "changed_files": [
+            "M\tskills/caveman-learn/CLAUDE.md",
+            "M\tskills/caveman-learn/README.md",
+            "M\tskills/caveman-learn/SKILL.md",
+            "M\tskills/caveman-learn/package.json"
+          ],
+          "candidate_paths": []
+        },
+        {
+          "name": "caveman:caveman-manage",
+          "local_path": "plugins/caveman/skills/caveman-manage",
+          "upstream_path": "skills/caveman-manage",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "caveman:caveman-optimize",
+          "local_path": "plugins/caveman/skills/caveman-optimize",
+          "upstream_path": "skills/caveman-optimize",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "caveman:caveman-review",
+          "local_path": "plugins/caveman/skills/caveman-review",
+          "upstream_path": "skills/caveman-review",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "caveman:caveman-setup",
+          "local_path": "plugins/caveman/skills/caveman-setup",
+          "upstream_path": "skills/caveman-setup",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "caveman:caveman-stats",
+          "local_path": "plugins/caveman/skills/caveman-stats",
+          "upstream_path": "skills/caveman-stats",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "caveman:investigate-first",
+          "local_path": "plugins/caveman/skills/investigate-first",
+          "upstream_path": "skills/investigate-first",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "caveman:lean-build",
+          "local_path": "plugins/caveman/skills/lean-build",
+          "upstream_path": "skills/lean-build",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "caveman:migration",
+          "local_path": "plugins/caveman/skills/migration",
+          "upstream_path": "skills/migration",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "caveman:safe-refactor",
+          "local_path": "plugins/caveman/skills/safe-refactor",
+          "upstream_path": "skills/safe-refactor",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "caveman:surgical-patch",
+          "local_path": "plugins/caveman/skills/surgical-patch",
+          "upstream_path": "skills/surgical-patch",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        },
+        {
+          "name": "caveman:verify-and-stop",
+          "local_path": "plugins/caveman/skills/verify-and-stop",
+          "upstream_path": "skills/verify-and-stop",
+          "status": "current",
+          "changed_files": [],
+          "candidate_paths": []
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "current": 40,
+    "changed": 22,
+    "moved_or_removed": 1
+  },
+  "scope": "Checks the 63 managed skill directories against recorded upstream paths. Does not install upstream changes or add new upstream skills.",
+  "automatic_invocation": {
+    "enabled": [
+      "caveman:investigate-first",
+      "caveman:surgical-patch",
+      "caveman:safe-refactor",
+      "caveman:verify-and-stop",
+      "writing-for-agents"
+    ],
+    "manual_count": 58
+  }
+}

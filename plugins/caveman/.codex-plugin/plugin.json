@@ -1,18 +1,18 @@
 {
   "name": "caveman",
-  "version": "2.7.0+manual.20260919",
-  "description": "Caveman skills with explicit invocation and no automatic hooks.",
+  "version": "2.7.0+selective.20261003",
+  "description": "Caveman skills with a selective automatic allowlist, manual modes, and no automatic hooks.",
   "author": {
     "name": "Julius Brussee; local invocation policy by Diego Pronesti"
   },
   "skills": "./skills/",
   "interface": {
-    "displayName": "Caveman (manual)",
-    "shortDescription": "Manually selected Caveman workflows.",
-    "longDescription": "Preserves the original Caveman skill names and workflows, with manual invocation and task-scoped modes.",
+    "displayName": "Caveman (selective)",
+    "shortDescription": "Focused automatic skills; manually selected modes.",
+    "longDescription": "Four focused workflows may activate for authorized tasks. Other Caveman workflows and task-scoped modes require explicit selection.",
     "developerName": "Julius Brussee / local policy",
     "category": "Productivity",
     "capabilities": [],
-    "defaultPrompt": "Use the Caveman workflow I explicitly select."
+    "defaultPrompt": "Use the Caveman workflow that fits my authorized task."
   }
 }

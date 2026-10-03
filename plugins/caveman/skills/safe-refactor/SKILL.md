@@ -1,11 +1,11 @@
 ---
 name: safe-refactor
-description: 'Manual workflow: Restructure code while preserving behavior. Use for extraction, consolidation, ownership
+description: 'Restructure code while preserving behavior. Use for extraction, consolidation, ownership
   moves, or cleanup where verification must bracket structural edits.'
-disable-model-invocation: true
+disable-model-invocation: false
 ---
 
-Use only when explicitly selected by the user. Other named workflows require separate selection.
+This skill may be selected automatically when its trigger fits the authorized task. Apply only to that task. Other named workflows follow their own invocation policy; automatic selection grants no additional authorization.
 
 
 # Safe refactor

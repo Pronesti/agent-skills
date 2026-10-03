@@ -1,0 +1,29 @@
+{
+  "automatic_skills": [
+    {
+      "name": "caveman:investigate-first",
+      "local_path": "plugins/caveman/skills/investigate-first",
+      "trigger": "Diagnose an ambiguous failure, intermittent behavior, or performance regression before editing."
+    },
+    {
+      "name": "caveman:surgical-patch",
+      "local_path": "plugins/caveman/skills/surgical-patch",
+      "trigger": "Implement a requested scoped bug fix or small behavior change."
+    },
+    {
+      "name": "caveman:safe-refactor",
+      "local_path": "plugins/caveman/skills/safe-refactor",
+      "trigger": "Perform a requested extraction, consolidation, or structural cleanup while preserving behavior."
+    },
+    {
+      "name": "caveman:verify-and-stop",
+      "local_path": "plugins/caveman/skills/verify-and-stop",
+      "trigger": "Run requested validation or final acceptance checks and stop when the proof is complete."
+    },
+    {
+      "name": "writing-for-agents",
+      "local_path": "skills/writing-for-agents",
+      "trigger": "Create or edit a skill, AGENTS.md, or CLAUDE.md; reviewing the skill catalog alone does not activate it."
+    }
+  ]
+}

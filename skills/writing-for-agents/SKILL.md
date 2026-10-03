@@ -1,11 +1,11 @@
 ---
 name: writing-for-agents
-description: 'Manual workflow: Writing documents for agents. Use when creating or editing skills, or modifying AGENTS.md
+description: 'Writing documents for agents. Use when creating or editing skills, or modifying AGENTS.md
   or CLAUDE.md.'
-disable-model-invocation: true
+disable-model-invocation: false
 ---
 
-Use this workflow only when the user explicitly selects it. Its scope ends with the requested task. Other named workflows are optional and require separate selection; declared supporting file references may be read as needed. Preserve the user's existing authorization and the project's runtime and verification requirements.
+Use for requested creation or editing of skills, AGENTS.md, or CLAUDE.md. Catalog analysis alone does not activate this workflow. Apply only to the authorized document task; read declared supporting references as needed. Other named workflows follow their own invocation policy. Preserve project requirements and existing authorization.
 
 
 Reference for writing any document an agent consumes: a skill, an `AGENTS.md` / `CLAUDE.md`, a doc reached by a pointer. The packaging differs; the writing does not: the same levers make each one predictable, since the agent takes the same _process_ every run rather than producing the same output.

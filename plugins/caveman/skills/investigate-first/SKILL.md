@@ -1,11 +1,11 @@
 ---
 name: investigate-first
-description: 'Manual workflow: Diagnose ambiguous failures before editing. Use for unknown causes, intermittent
+description: 'Diagnose ambiguous failures before editing. Use for unknown causes, intermittent
   behavior, performance regressions, or investigations needing evidence-ranked hypotheses.'
-disable-model-invocation: true
+disable-model-invocation: false
 ---
 
-Use only when explicitly selected by the user. Other named workflows require separate selection.
+This skill may be selected automatically when its trigger fits the authorized task. Apply only to that task. Other named workflows follow their own invocation policy; automatic selection grants no additional authorization.
 
 
 # Investigate first

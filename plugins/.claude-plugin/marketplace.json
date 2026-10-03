@@ -7,7 +7,7 @@
     {
       "name": "caveman",
       "source": "./caveman",
-      "description": "Caveman workflows with explicit invocation and no automatic hooks."
+      "description": "Caveman workflows with selective automatic invocation and no automatic hooks."
     }
   ]
 }

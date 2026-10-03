@@ -1,10 +1,10 @@
 # Curated Agent Skills
 
-This repository owns **43 standalone skills and a 20-skill Caveman edition**. All 63 personal workflows require explicit user selection. See [POLICY.md](POLICY.md) for invocation boundaries.
+This repository owns **43 standalone skills and a 20-skill Caveman edition**. Five focused skills allow automatic invocation; the other 58 personal workflows require explicit user selection. See [POLICY.md](POLICY.md) for invocation boundaries.
 
 ## Author revisions
 
-Checked against each original repository on 19 September 2026. Full revisions, upstream paths, and local destinations are pinned in [upstreams.json](upstreams.json). A newer repository revision does not necessarily change every selected skill.
+Pinned author revisions were recorded on 19 September 2026. All 63 skill directories were checked again on 3 October 2026: 40 unchanged, 22 with upstream changes available, and one absent from its recorded upstream path. The check is recorded in `reports/2026-10-03-skill-updates/upstream-check.json`; it does not replace the pinned content. Full revisions, upstream paths, and local destinations are pinned in [upstreams.json](upstreams.json). A newer repository revision does not necessarily change every selected skill.
 
 | Source | Original repository | Pinned revision | Skills |
 |---|---|---|---:|
@@ -50,17 +50,17 @@ Disable the original `caveman@caveman` entry in Codex plugin settings as well; l
 
 ## Local policy overlay
 
-- Every entrypoint sets `disable-model-invocation: true`; every `agents/openai.yaml` sets `policy.allow_implicit_invocation: false`. Both are required for the supported hosts.
+- [invocation-policy.json](invocation-policy.json) owns the five automatic skills and their triggers. Their entrypoints set `disable-model-invocation: false` and `policy.allow_implicit_invocation: true`. The other 58 entrypoints keep the opposite settings. Both fields must agree with the allowlist.
 - Selection applies to one task. Session-wide modes need an explicit request. Always-on style mandates, forced workflow transitions, and automatic activation from generated plans or handoffs are removed or made optional.
 - Supporting files are still readable. `grill-me` declares the grilling procedure; `grill-with-docs` declares grilling and domain documentation.
 - Project runtime, verification, delivery requirements, and existing user authorization take precedence. Superpowers namespace references are adapted for standalone installation; optional isolation uses host facilities.
-- Caveman preserves its 20 workflow names, reviewer presets, and manual stats helper, with no startup/prompt hook registration. The original plugin is disabled rather than deleted. The stats helper cannot reconstruct mode attribution that was never recorded.
+- Caveman preserves its 20 workflow names, reviewer presets, and manual stats helper, with four focused automatic workflows and no startup/prompt hook registration. The original plugin is disabled rather than deleted. The stats helper cannot reconstruct mode attribution that was never recorded.
 - Duplicate installations are consolidated by name. Distinct alternative workflows such as `tdd` and `test-driven-development` remain separate, manually selected choices.
 
 ## Updating without losing the policy
 
-Run `python3 scripts/check_updates.py` to compare the pinned revisions with the authors’ default branches. It reports only; it never replaces skills. Merge changed skill files against the recorded base, preserve the local overlay, update `upstreams.json`, and review executable helpers. For Caveman, bump the local plugin version and reinstall through each host after editing the source. Do not edit versioned plugin caches.
+Run `python3 scripts/check_updates.py` to compare the pinned revisions with the authors’ default branches. It reports only; it never replaces skills. Merge changed skill files against the recorded base, preserve the selective invocation overlay, update `upstreams.json`, and review executable helpers. For Caveman, bump the local plugin version and reinstall through each host after editing the source. Do not edit versioned plugin caches.
 
-Validate metadata and references with `python3 scripts/validate.py` (requires `pip install -r scripts/requirements.txt` in your chosen environment). Run `python3 -m unittest discover -s tests -v` for installer behavior. Verify that the personal skills remain in Codex `skills/list` while absent from an ordinary `codex debug prompt-input` catalog; then smoke-test an explicitly selected skill.
+Validate metadata and references with `python3 scripts/validate.py` (requires `pip install -r scripts/requirements.txt` in your chosen environment). Run `python3 -m unittest discover -s tests -v` for installer behavior. Verify that all personal skills remain available for explicit selection, only the allowlisted skills appear in automatic discovery, and each automatic trigger stays within the authorized task. Start a fresh task after changing discovery.
 
 Third-party licenses are preserved in [licenses/](licenses/). Excluded upstream bundles, bootstrap skills, and hooks are not installed by this repository.

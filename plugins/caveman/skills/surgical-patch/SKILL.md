@@ -1,11 +1,11 @@
 ---
 name: surgical-patch
-description: 'Manual workflow: Fix bugs and small behavior changes at the narrowest responsible layer. Use when
+description: 'Fix bugs and small behavior changes at the narrowest responsible layer. Use when
   regression proof, preserved surrounding behavior, and task-relevant tests matter.'
-disable-model-invocation: true
+disable-model-invocation: false
 ---
 
-Use only when explicitly selected by the user. Other named workflows require separate selection.
+This skill may be selected automatically when its trigger fits the authorized task. Apply only to that task. Other named workflows follow their own invocation policy; automatic selection grants no additional authorization.
 
 
 # Surgical patch

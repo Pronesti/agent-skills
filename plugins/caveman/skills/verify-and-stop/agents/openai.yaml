@@ -4,4 +4,4 @@ interface:
   default_prompt: Use $verify-and-stop to prove acceptance criteria without adding
     scope.
 policy:
-  allow_implicit_invocation: false
+  allow_implicit_invocation: true

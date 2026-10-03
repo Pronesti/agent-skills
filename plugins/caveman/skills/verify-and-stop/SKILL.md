@@ -1,11 +1,11 @@
 ---
 name: verify-and-stop
-description: 'Manual workflow: Prove existing work meets acceptance conditions without expanding scope. Use for
+description: 'Prove existing work meets acceptance conditions without expanding scope. Use for
   validation-only tasks, completion checks, focused gate runs, and last-mile proof.'
-disable-model-invocation: true
+disable-model-invocation: false
 ---
 
-Use only when explicitly selected by the user. Other named workflows require separate selection.
+This skill may be selected automatically when its trigger fits the authorized task. Apply only to that task. Other named workflows follow their own invocation policy; automatic selection grants no additional authorization.
 
 
 # Verify and stop
