@@ -1,5 +1,5 @@
 policy:
   allow_implicit_invocation: false
 interface:
-  display_name: Caveman Discover
+  display_name: "Measurement: Caveman Discover"
   short_description: Manually selected caveman discover workflow.

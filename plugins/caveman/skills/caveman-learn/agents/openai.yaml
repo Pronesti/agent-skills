@@ -1,5 +1,5 @@
 policy:
   allow_implicit_invocation: false
 interface:
-  display_name: Caveman Learn
+  display_name: "Optimization: Caveman Learn"
   short_description: Manually selected caveman learn workflow.

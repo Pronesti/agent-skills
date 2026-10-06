@@ -1,5 +1,5 @@
 policy:
   allow_implicit_invocation: false
 interface:
-  display_name: Caveman
+  display_name: "Compression: Caveman"
   short_description: Manually selected caveman workflow.

@@ -1,5 +1,5 @@
 policy:
   allow_implicit_invocation: false
 interface:
-  display_name: Caveman Manage
+  display_name: "Optimization: Caveman Manage"
   short_description: Manually selected caveman manage workflow.

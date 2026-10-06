@@ -1,5 +1,5 @@
 policy:
   allow_implicit_invocation: false
 interface:
-  display_name: Caveman Evidence Review
+  display_name: "Measurement: Caveman Evidence Review"
   short_description: Manually selected caveman evidence review workflow.

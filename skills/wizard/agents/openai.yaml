@@ -1,5 +1,5 @@
 interface:
-  display_name: Wizard
+  display_name: "Setup: Wizard"
   short_description: Generate an interactive setup wizard
 policy:
   allow_implicit_invocation: false

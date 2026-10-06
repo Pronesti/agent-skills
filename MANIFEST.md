@@ -16,6 +16,10 @@ Pinned author revisions were recorded on 19 September 2026. All 63 skill directo
 | vercel | [vercel-labs/skills](https://github.com/vercel-labs/skills) | `7407f3893ad4dceab546ac002c3ef806e4000c73` | 1 |
 | caveman | [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) | `542442bab314973709f95b85b1ac0b3f6f5b5dc6` | 20 |
 
+## Functional groups
+
+Skill picker labels use 18 functional prefixes, each grouping 3–5 skills by their main purpose. All 62 skills are assigned exactly once. Invocation names and installation paths are preserved. See the [complete grouping](reports/skill-groups.md).
+
 ## Catalog
 
 **superpowers:** `brainstorming`, `executing-plans`, `finishing-a-development-branch`, `requesting-code-review`, `subagent-driven-development`, `systematic-debugging`, `test-driven-development`, `writing-plans`.

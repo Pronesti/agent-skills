@@ -1,5 +1,5 @@
 interface:
-  display_name: TDD
+  display_name: "Testing: TDD"
   short_description: Test-driven red-green-refactor
 policy:
   allow_implicit_invocation: false

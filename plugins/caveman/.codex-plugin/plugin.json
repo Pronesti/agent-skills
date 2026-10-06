@@ -1,6 +1,6 @@
 {
   "name": "caveman",
-  "version": "2.7.0+selective.20261003",
+  "version": "2.7.0+selective.20261006",
   "description": "Caveman skills with a selective automatic allowlist, manual modes, and no automatic hooks.",
   "author": {
     "name": "Julius Brussee; local invocation policy by Diego Pronesti"
