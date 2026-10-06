@@ -165,14 +165,6 @@
       "local_path": "skills/writing-for-agents"
     },
     {
-      "name": "ask-matt",
-      "source": "mattpocock",
-      "revision": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
-      "path": "skills/engineering/ask-matt",
-      "changed_files": 0,
-      "local_path": "skills/ask-matt"
-    },
-    {
       "name": "code-review",
       "source": "mattpocock",
       "revision": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
