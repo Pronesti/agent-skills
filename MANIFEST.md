@@ -2,6 +2,8 @@
 
 This repository owns **46 standalone skills and a 20-skill Caveman edition**. Five focused skills allow automatic invocation; the other 61 personal workflows require explicit user selection. See [POLICY.md](POLICY.md) for invocation boundaries.
 
+Read the [workflow guide](WORKFLOW-GUIDE.md) for 51 scenarios in ASD-STE100 English. The guide covers all 67 workflows, their sequences, and combinations with different instructions.
+
 ## Author revisions
 
 Pinned author revisions were recorded on 19 September 2026. All 63 skill directories were checked again on 3 October 2026: 40 unchanged, 22 with upstream changes available, and one absent from its recorded upstream path. The check is recorded in `reports/2026-10-03-skill-updates/upstream-check.json`; it does not replace the pinned content. Full revisions, upstream paths, and local destinations are pinned in [upstreams.json](upstreams.json). A newer repository revision does not necessarily change every selected skill.
