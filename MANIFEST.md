@@ -2,7 +2,7 @@
 
 This repository owns **47 standalone skills and a 20-skill Caveman edition**. Five focused skills allow automatic invocation; the other 62 personal workflows require explicit user selection. See [POLICY.md](POLICY.md) for invocation boundaries.
 
-Read the [workflow guide](WORKFLOW-GUIDE.md) for 51 scenarios in ASD-STE100 English. The guide covers all 67 workflows, their sequences, and combinations with different instructions.
+Read the [workflow guide](WORKFLOW-GUIDE.md) for 56 scenarios in ASD-STE100 English. The guide covers all 67 workflows, their sequences, and combinations with different instructions.
 
 ## Author revisions
 

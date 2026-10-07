@@ -1,7 +1,7 @@
 # Use the collected skills together
 
 This guide tells you how to use the 67 workflows in this repository.
-It gives the sequence, purpose, and completion conditions for 51 scenarios.
+It gives the sequence, purpose, and completion conditions for 56 scenarios.
 It also identifies workflows that can conflict.
 
 **Library date: 7 October 2026.**
@@ -19,8 +19,9 @@ Software terms and skill names keep their technical meanings.
 - [Select the first workflow](#select-the-first-workflow)
 - [Use workflows in sequence](#use-workflows-in-sequence)
 - [Select between similar workflows](#select-between-similar-workflows)
+- [Use Manual QA](#use-manual-qa)
 - [Combinations with different instructions](#combinations-with-different-instructions)
-- [51 scenarios](#51-scenarios)
+- [56 scenarios](#56-scenarios)
   - [New projects and initial investigation](#new-projects-and-initial-investigation)
   - [Features and behavior changes](#features-and-behavior-changes)
   - [Failures and performance](#failures-and-performance)
@@ -29,6 +30,7 @@ Software terms and skill names keep their technical meanings.
   - [Documents, instruction, and handoff](#documents-instruction-and-handoff)
   - [Agent cost and Caveman Cloud](#agent-cost-and-caveman-cloud)
   - [Library configuration](#library-configuration)
+  - [Additional QA scenarios](#additional-qa-scenarios)
 - [Example requests](#example-requests)
 - [All 67 workflows](#all-67-workflows)
 - [Information for the next stage](#information-for-the-next-stage)
@@ -260,7 +262,11 @@ flowchart TD
 | `caveman:lean-build` + `ponytail lite` | Lean Build keeps the complete requested outcome. Ponytail examines reuse and unnecessary code. |
 | `caveman:safe-refactor` + `codebase-design` | Safe Refactor keeps behavior. Codebase Design helps select the interface. |
 | `caveman:migration` + `incremental-implementation` | Migration controls compatibility. Incremental Implementation keeps the stages small and ready for review. |
+| Implementation → `manual-qa` | Implementation supplies working behavior. Manual QA exercises the selected user journeys through the interface. |
+| `caveman:safe-refactor` → `manual-qa` | Automated checks compare behavior. Manual QA examines the selected visible flows after the structural change. |
+| `caveman:migration` → `manual-qa` | Migration supplies data and compatibility evidence. Manual QA examines the requested interface behavior at that stage. |
 | `manual-qa` → diagnosis or repair | Manual QA records visible failures. Diagnosis finds their cause during a separately permitted task. |
+| `manual-qa` + `show-me-your-work` | The QA report records cases and issues. The decision trail references important scope decisions and evidence. |
 | `how` + `show-me` | How supplies the explanation. Show Me supplies the visual form. |
 | `technical-writing` → `unslop` | Technical Writing sets the structure. Unslop makes the text better after the facts are correct. |
 | Implementation + `show-me-your-work` | Implementation changes the software. Show Me Your Work records decisions and evidence. |
@@ -437,6 +443,158 @@ Caveman Review prepares finding text.
 It does not change code or run linters.
 It also does not submit a PR review or give review approval.
 
+## Use Manual QA
+
+Select [`manual-qa`](skills/manual-qa/SKILL.md) when you want evidence from actual user actions.
+Its result is a case ledger and an issue report.
+The procedure uses native Codex Computer Use.
+It has no separate browser CLI or plugin dependency.
+
+### 1. Get the target and scope from context
+
+Use the latest QA target that the user specifies.
+Keep earlier browser, account, scope, output, and budget instructions when those instructions still apply.
+A later message changes only the fields that it addresses.
+
+For example, “test the category filter” can retain an earlier staging URL and desktop-only scope.
+Do not ask for those values again when the values are clear.
+An upstream repository link does not identify the application under test.
+A browser tab does not automatically identify an approved QA target.
+
+Before sign-in, make sure that the destination and environment are correct.
+Use the existing approved session or supplied test credentials.
+Keep credentials within their specified target and role.
+Record missing optional roles as coverage gaps.
+Get missing information only when dependent cases cannot proceed correctly.
+
+Read the [context and access procedure](skills/manual-qa/references/context-and-access.md) for the complete setup rules.
+
+### 2. Prepare the UI session and report
+
+Use the selected native browser or app control.
+Read the tool's initialization instructions before the first UI action.
+Keep one controller for that browser session or app.
+After sign-in, make sure that the actual account role and environment agree with the case plan.
+Record the resolved setup and its source in the report.
+
+If native UI control is unavailable, record the affected cases as `BLOCKED`.
+Do not replace those cases with scripts or HTTP requests.
+
+Use the user's output destination when the user supplies one.
+Otherwise, make a new run directory under `qa-output/` in the target project.
+Use the task workspace when no target project is available.
+Keep the report and screenshots together.
+Keep evidence from previous runs intact.
+
+Use the [report template](skills/manual-qa/templates/manual-qa-report-template.md) for the case ledger, counts, and issue entries.
+Read the [computer interaction procedure](skills/manual-qa/references/computer-interaction.md) for native UI operation.
+
+### 3. Record the cases before execution
+
+Give each case these fields:
+
+| Field | Necessary information |
+|---|---|
+| ID and priority | A stable case identifier and its execution priority. |
+| Starting state | The account role, existing data, and interface state before the actions. |
+| Actions and data | The actions that a user performs and the non-secret test values. |
+| Expected result | The observable result from the request, accepted decisions, spec, or existing QA plan. |
+| Actual result | The result that the agent observes during execution. |
+| Status | `PASS`, `FAIL`, `BLOCKED`, or `NOT RUN`. |
+| Evidence or blocker | A capture, artifact reference, or specified reason that execution cannot proceed. |
+
+Do not use current behavior as its own success criterion.
+Keep unresolved expected results visible as questions or blocked cases.
+Show the finite case list before execution.
+This display does not add an approval stage.
+
+Select applicable cases from these families:
+
+- Normal and returning-user journeys.
+- Empty, valid, invalid, boundary, long, and unusual inputs.
+- Loading, empty results, visible errors, and recovery.
+- Refresh, Back/Forward, interacting controls, and repeated or rapid actions.
+- Signed-out behavior and approved account roles.
+- Keyboard navigation, focus, layout, and permitted viewport sizes.
+
+Keep unavailable cases in the plan.
+Add a newly found in-scope case before execution of that case.
+Use the [issue checklist](skills/manual-qa/references/issue-taxonomy.md) to select applicable coverage and severity categories.
+
+### 4. Execute and record one case at a time
+
+1. Establish the case's starting state through the interface.
+2. Make sure that the current screen agrees with that starting state.
+3. Act through visible controls.
+4. Wait for the relevant visible state.
+5. Compare the observed result with the expected result.
+6. Save evidence through the tool's permitted capture method.
+7. Record the case status immediately.
+
+Use new observations after navigation or interface changes.
+Use screenshots for layout, visibility, and usability findings.
+Accessible control names alone do not show visual correctness.
+Console and network information can supplement UI evidence when the native tools supply that information.
+Do not use API calls, database writes, or product-source inspection to claim a UI case passed.
+
+After a failure, record the issue before further cases.
+Continue independent cases that remain in scope.
+Record dependent cases as blocked when their prerequisite fails.
+Keep an observed-once issue even when a second attempt does not reproduce it.
+
+### 5. Give issue evidence and coverage counts
+
+| Status | Meaning |
+|---|---|
+| `PASS` | The agent did the specified actions and observed the expected result. |
+| `FAIL` | The agent did the actions and observed a different result. |
+| `BLOCKED` | A necessary prerequisite prevents execution or a meaningful result. |
+| `NOT RUN` | The agent has not executed the case. |
+
+Use these count relationships:
+
+```text
+Executed cases = PASS + FAIL
+Planned cases = PASS + FAIL + BLOCKED + NOT RUN
+```
+
+Keep issue counts separate from case counts.
+One issue can affect multiple cases.
+Blocked and unexecuted cases make coverage incomplete even when all executed cases pass.
+Keep approved deferrals visible.
+
+Give each issue an ID and a category.
+For each issue, give the affected case IDs, severity, starting state, expected result, actual result, and reproduction actions.
+Include screenshots and the observed account/environment context without secrets.
+Remove visible secrets from evidence before you save it.
+Examine URLs and other screen areas for exposed tokens.
+Record whether replay confirmed the issue or whether the issue occurred once or intermittently.
+Keep visible symptoms separate from an unverified cause.
+Use video only when the native tool supplies that capability and the issue needs timing evidence.
+
+If a blocker or supplied budget stops execution, record every remaining case and its reason.
+Give a continuation point with the report path and evidence references.
+Do not stop after a target number of bugs.
+Do not conclude that an application has no bugs from incomplete coverage.
+
+### 6. Use the report for the next selected task
+
+| Next task | Combination and handoff |
+|---|---|
+| Find a failure cause | Use Investigate First or Diagnosing Bugs with the issue's original reproduction and evidence. |
+| Repair a confirmed bug | Use Surgical Patch after the cause is clear and repair has task approval. |
+| Prevent recurrence | Add a regression test at the interface that reaches the real failure. |
+| Repeat UI checks after a repair | Use Manual QA again for affected cases and related user journeys. |
+| Prepare tracker work | Use `triage` or `to-tickets` only when the task includes that tracker outcome. |
+| Final acceptance | Use Verify and Stop for specified acceptance conditions after the applicable QA results exist. |
+| Continue another session | Use `handoff` with the report, remaining case IDs, and current access constraints. |
+
+Select each manual workflow explicitly.
+QA findings do not give approval for product repairs, commits, tracker writes, or external messages.
+Restore temporary UI state only within the task's approval.
+Remove only owned test data when cleanup has approval.
+Keep report evidence and user-owned sessions intact.
+
 ## Combinations with different instructions
 
 | Combination or use | Problem | Instruction |
@@ -467,9 +625,12 @@ It also does not submit a PR review or give review approval.
 | Manual QA and a parallel agent on the same UI surface | The agents can change the state that each case expects. | Use one controller for the selected app or browser session. |
 | Manual QA replaced with API or source inspection | The substitute does not exercise the stated user journey. | Use native UI control or report blocked coverage. |
 | Bug repairs during a QA-only pass | Repairs change the application and its reproduction state. | Record findings before a separately permitted diagnosis or repair. |
+| A QA pass that treats observed behavior as the expected result | The case can pass by construction. | Use the request, accepted decisions, spec, or QA plan for expectations. |
+| Viewport resizing as proof of another device or browser | The same browser engine still executes the application. | Record viewport coverage and unavailable device/browser coverage separately. |
+| A QA issue threshold as a stopping rule | The threshold leaves planned cases unaccounted for. | Complete the specified cases or record an actual blocker or supplied budget limit. |
 | Additional cleanup after Verify and Stop passes | The acceptance task is complete. | Give the evidence and stop. |
 
-## 51 scenarios
+## 56 scenarios
 
 Each scenario gives an example, an ordered procedure, and a completion condition.
 Each scenario also identifies a common incorrect combination.
@@ -691,7 +852,7 @@ Keep unrelated cleanup outside the patch.
 3. Find the failing boundary.
 4. Give the cause and supporting evidence.
 
-**Completion:** Evidence identifies a credible cause or an specified missing observation.
+**Completion:** Evidence identifies a credible cause or a specified missing observation.
 **Separation:** Do not repair product code during a diagnosis-only task.
 Give the proposed repair as a recommendation.
 
@@ -1064,7 +1225,9 @@ Report failures without repairs when the user requested verification only.
 5. Continue independent cases after a failure.
 6. Reconcile case counts and issue findings before completion.
 
-**Completion:** Each planned case has a result, and the report identifies incomplete coverage.
+**Completion:** The report accounts for each planned case and its evidence or blocker.
+Complete coverage requires execution of all required cases.
+Blocked or unexecuted cases keep coverage incomplete.
 **Separation:** Do not replace interface actions with API calls or product-source inspection.
 Keep product repairs outside a QA-only task.
 Use one controller for the chosen app or browser session.
@@ -1198,6 +1361,91 @@ Its Cloud lifecycle is separate from Learn's local holdout measurement procedure
 **Separation:** These are alternative setup tasks, not a mandatory sequence.
 Caveman Cloud Setup does not install local workflow skills.
 
+### Additional QA scenarios
+
+#### 52. Test a new feature after implementation
+
+**Example:** A new category filter must preserve selected categories after a page refresh.
+
+1. Use `incremental-implementation` for the requested feature.
+2. Use one selected TDD procedure for the behavior tests.
+3. Run the project's necessary checks.
+4. Use `manual-qa` on the available application build.
+5. Get expected results from the accepted feature requirements.
+6. Test normal selection, empty results, invalid inputs, refresh, and recovery where applicable.
+7. Record UI evidence and coverage counts.
+
+**Completion:** The report gives an actual result for each executed case and explains each coverage gap.
+**Separation:** Manual QA supplies UI evidence alongside automated checks.
+Do not remove necessary automated checks because UI cases pass.
+
+#### 53. Test preserved behavior after a refactor or migration
+
+**Example:** A navigation refactor must preserve existing page routes and account permissions.
+
+1. Use `caveman:safe-refactor` for a structural change that preserves behavior.
+2. Select `caveman:migration` instead when the task changes a compatibility contract.
+3. Complete the preservation checks for the requested stage.
+4. Use `manual-qa` on the resulting application build.
+5. Test affected user journeys against their established requirements.
+6. Exercise supported old and new paths through the UI where applicable.
+7. Record the build, account role, path, and evidence for each result.
+
+**Completion:** The checks and QA report show the requested preservation results and their limits.
+**Separation:** UI results do not replace data integrity, compatibility, or rollback checks.
+Later destructive migration stages need their own task scope.
+
+#### 54. Continue QA when access or tools are unavailable
+
+**Example:** Customer cases are available, but administrator cases require an unavailable test account.
+
+1. Use `manual-qa` with the target and access instructions already supplied.
+2. Make sure that the available account has the expected role.
+3. Keep administrator cases in the plan.
+4. Record cases with unavailable prerequisites as `BLOCKED`.
+5. Continue independent customer cases through the UI.
+6. Give the blocked case IDs and missing prerequisites in the report.
+7. Give a continuation point for the remaining cases.
+
+**Completion:** The report accounts for all cases and makes incomplete coverage clear.
+**Separation:** Do not invent credentials.
+Do not use API calls to bypass unavailable UI access.
+If native UI control is unavailable, record the affected coverage as blocked.
+
+#### 55. Test rapid actions and intermittent interface failures
+
+**Example:** Rapid clicks on Submit sometimes create two records.
+
+1. Use `manual-qa` for the specified interaction and its expected result.
+2. Record the starting state and relevant action timing in the case plan.
+3. Establish that state through the UI.
+4. Execute the planned rapid actions through native controls.
+5. Save the visible result and timing evidence that the tool permits.
+6. Repeat from the correct starting state when safe.
+7. Record whether the issue is repeatable, intermittent, or observed once.
+
+**Completion:** The report gives reproduction actions, observations, and the limits of the available evidence.
+**Separation:** Slow actions can conceal a failure that depends on rapid input.
+A successful second attempt does not erase the first observed failure.
+Select diagnosis separately when you want the cause.
+
+#### 56. Repeat QA after a bug repair
+
+**Example:** A repair must prevent duplicate submissions without preventing a valid retry.
+
+1. Get the original case ID, issue evidence, and expected result from the QA report.
+2. Use `caveman:investigate-first` when the cause is unclear.
+3. Use `caveman:surgical-patch` within the authorized repair task.
+4. Run the regression test that reaches the original failure.
+5. Use `manual-qa` for the original case and affected recovery journeys.
+6. Save the new results in a fresh run directory.
+7. Use `caveman:verify-and-stop` for the remaining acceptance conditions.
+
+**Completion:** Regression proof and the new QA report show the repair result and remaining coverage limits.
+**Separation:** Preserve the original report and its evidence.
+QA findings alone do not authorize product repairs.
+Keep unrelated journeys outside the repair verification scope.
+
 ## Example requests
 
 Replace bracketed text with the project information.
@@ -1276,12 +1524,29 @@ Do the correctness checks.
 
 ```text
 Use manual-qa for [app or URL] in [environment] with [account role].
+Keep earlier browser and access instructions that still apply.
 Test [specified user journeys] and their applicable edge cases.
 Keep [excluded areas] outside the task.
+Save the report and evidence in [destination].
 Show the case list before execution.
 Use native Computer Use for interface actions.
-Record each case result and issue with evidence.
+Record PASS, FAIL, BLOCKED, or NOT RUN for each case.
+Give issue evidence.
+Reconcile the case counts.
+Continue independent cases after a failure.
+Keep unavailable coverage visible in the report.
 This task includes QA only.
+```
+
+### Repeat QA after a repair
+
+```text
+Use manual-qa to repeat [case IDs] after the repair in [build].
+Use [original report] for expected results and reproduction actions.
+Test these affected recovery journeys: [journeys].
+Preserve the original evidence.
+Save the new results in a fresh run directory.
+Give executed and total case counts, findings, and coverage gaps.
 ```
 
 ### Review only
@@ -1378,7 +1643,7 @@ Possible pairings do not automatically select another skill.
 | Workflow | Purpose | Boundary or next use |
 |---|---|---|
 | [`caveman:verify-and-stop`](plugins/caveman/skills/verify-and-stop/SKILL.md) | Show whether acceptance conditions and necessary gates pass. | The skill can start automatically for verification. Repairs must have task approval. |
-| [`manual-qa`](skills/manual-qa/SKILL.md) | Exercise planned user journeys and edge cases through native Computer Use. | Record each case and issue with evidence. Unexecuted cases are not passes. |
+| [`manual-qa`](skills/manual-qa/SKILL.md) | Exercise planned user journeys and edge cases through native Computer Use. | Reuse applicable setup instructions. Record evidence and all case statuses. Blocked or unexecuted cases keep coverage incomplete. |
 | [`tdd`](skills/tdd/SKILL.md) | Use red/green behavior tests at agreed public seams. | Keep refactors in the separate review stage. |
 | [`test-driven-development`](skills/test-driven-development/SKILL.md) | Use failing-test-first red/green/refactor cycles. | Select this procedure instead of the other TDD procedure. |
 
@@ -1485,10 +1750,11 @@ Keep primary artifacts as the source of task information.
 | Research | Sources, applicable version, factual result, and unresolved questions. | The necessary fact is available or its blocker is specified. |
 | Interview or design | Confirmed decisions, assumptions, non-goals, and review status. | The selected procedure's necessary decisions and reviews are complete. |
 | Prototype | Question, probe, result, limitations, and artifact reference. | The design question has an answer. Production scope is a separate decision. |
-| Diagnosis | Original reproduction, minimum failing case, cause, evidence, and constraints. | Evidence shows the cause or identifies an specified blocker. |
+| Diagnosis | Original reproduction, minimum failing case, cause, evidence, and constraints. | Evidence shows the cause or identifies a specified blocker. |
 | Spec, plan, or tickets | Primary artifact, acceptance conditions, interfaces, blockers, and approval. | The next task has a clear result and complete prerequisites. |
 | Implementation or refactor | Diff, checks, repository state, and remaining limitations. | The checks show the requested behavior or structure. |
 | Migration stage | Data evidence, compatibility evidence, retry/rollback results, and current stage. | The requested stage passes. Later destructive work must have its own scope. |
+| Manual QA | Target, environment, build, role, case ledger, counts, issue evidence, gaps, and continuation point. | All required cases are executed, or the report clearly records incomplete coverage. Further actions use existing task authorization. |
 | Review | Baseline, findings, effect, evidence, and unproven claims. | The next action distinguishes necessary repairs from deferred changes. |
 | Verification | Commands and results for the current state. | Each condition has a result, or the report specifies the missing proof. |
 | Handoff | Artifact references, live state, outstanding work, decisions, and existing approval. | Another session can continue without repetition of completed stages. |
