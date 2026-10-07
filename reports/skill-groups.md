@@ -1,6 +1,6 @@
 # Skill groups
 
-All 62 repository-owned skills are divided into 18 functional groups, each containing 3–5 skills. Prefixes appear in `interface.display_name` in each skill’s `agents/openai.yaml`. Existing skill IDs, directories, invocation policy, and supporting references stay compatible. Host-owned skills outside this repository are outside this catalog.
+All 65 repository-owned skills are divided into 18 functional groups, each containing 3–5 skills. Prefixes appear in `interface.display_name` in each skill’s `agents/openai.yaml`. Existing skill IDs, directories, invocation policy, and supporting references stay compatible. Host-owned skills outside this repository are outside this catalog.
 
 Standalone installations linked to this repository pick up the metadata after discovery refresh. The Caveman source version is `2.7.0+selective.20261006`; installed plugin copies need updating through their host to load these labels.
 
@@ -8,10 +8,10 @@ Standalone installations linked to this repository pick up the metadata after di
 |---|---:|---|
 | Interview: | 4 | Clarify decisions through questions. |
 | Planning: | 4 | Explore requirements and plan work. |
-| Architecture: | 3 | Model domains and improve code structure. |
-| Implementation: | 4 | Build features and prototypes with appropriate scope. |
+| Architecture: | 4 | Model domains and improve code structure. |
+| Implementation: | 5 | Build features and prototypes with appropriate scope. |
 | Execution: | 3 | Carry out plans inline or with selected delegation. |
-| Maintenance: | 3 | Refactor, migrate, and patch existing behavior. |
+| Maintenance: | 4 | Refactor, migrate, and patch existing behavior. |
 | Testing: | 3 | Develop test-first and verify acceptance conditions. |
 | Debugging: | 3 | Investigate failures and regressions. |
 | Review: | 4 | Review code and assess change impact. |
@@ -47,17 +47,18 @@ Explore requirements and plan work.
 | `wayfinder` | [Planning: Wayfinder](../skills/wayfinder/SKILL.md) |
 | `writing-plans` | [Planning: Writing Plans](../skills/writing-plans/SKILL.md) |
 
-## Architecture (3)
+## Architecture (4)
 
 Model domains and improve code structure.
 
 | Invocation name | Display name |
 |---|---|
+| `architecture-patterns` | [Architecture: Architecture Patterns](../skills/architecture-patterns/SKILL.md) |
 | `codebase-design` | [Architecture: Codebase Design](../skills/codebase-design/SKILL.md) |
 | `domain-modeling` | [Architecture: Domain Modeling](../skills/domain-modeling/SKILL.md) |
 | `improve-codebase-architecture` | [Architecture: Improve Codebase Architecture](../skills/improve-codebase-architecture/SKILL.md) |
 
-## Implementation (4)
+## Implementation (5)
 
 Build features and prototypes with appropriate scope.
 
@@ -65,6 +66,7 @@ Build features and prototypes with appropriate scope.
 |---|---|
 | `caveman:lean-build` | [Implementation: Lean Build](../plugins/caveman/skills/lean-build/SKILL.md) |
 | `implement` | [Implementation: Implement](../skills/implement/SKILL.md) |
+| `incremental-implementation` | [Implementation: Incremental Implementation](../skills/incremental-implementation/SKILL.md) |
 | `ponytail` | [Implementation: Ponytail](../skills/ponytail/SKILL.md) |
 | `prototype` | [Implementation: Prototype](../skills/prototype/SKILL.md) |
 
@@ -78,7 +80,7 @@ Carry out plans inline or with selected delegation.
 | `executing-plans` | [Execution: Executing Plans](../skills/executing-plans/SKILL.md) |
 | `subagent-driven-development` | [Execution: Subagent Driven Development](../skills/subagent-driven-development/SKILL.md) |
 
-## Maintenance (3)
+## Maintenance (4)
 
 Refactor, migrate, and patch existing behavior.
 
@@ -87,6 +89,7 @@ Refactor, migrate, and patch existing behavior.
 | `caveman:migration` | [Maintenance: Migration](../plugins/caveman/skills/migration/SKILL.md) |
 | `caveman:safe-refactor` | [Maintenance: Safe Refactor](../plugins/caveman/skills/safe-refactor/SKILL.md) |
 | `caveman:surgical-patch` | [Maintenance: Surgical Patch](../plugins/caveman/skills/surgical-patch/SKILL.md) |
+| `code-simplification` | [Maintenance: Code Simplification](../skills/code-simplification/SKILL.md) |
 
 ## Testing (3)
 

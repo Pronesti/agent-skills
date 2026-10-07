@@ -1,0 +1,5 @@
+interface:
+  display_name: "Maintenance: Code Simplification"
+  short_description: "Simplify code while preserving its behavior"
+policy:
+  allow_implicit_invocation: false

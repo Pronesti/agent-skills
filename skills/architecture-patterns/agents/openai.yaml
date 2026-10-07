@@ -1,0 +1,5 @@
+interface:
+  display_name: "Architecture: Architecture Patterns"
+  short_description: "DDD, clean architecture, and ports/adapters"
+policy:
+  allow_implicit_invocation: false

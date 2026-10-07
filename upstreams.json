@@ -33,6 +33,16 @@
     "caveman": {
       "url": "https://github.com/JuliusBrussee/caveman",
       "revision": "542442bab314973709f95b85b1ac0b3f6f5b5dc6"
+    },
+    "wshobson": {
+      "url": "https://github.com/wshobson/agents",
+      "revision": "46891e7e60da0e52baf1050b7b6391b64e84c6d9",
+      "added_on": "2026-10-07"
+    },
+    "addyosmani": {
+      "url": "https://github.com/addyosmani/agent-skills",
+      "revision": "1401c8b8030e023baeebb31781a6653fe8e93026",
+      "added_on": "2026-10-07"
     }
   },
   "skills": [
@@ -511,6 +521,33 @@
       "revision": "542442bab314973709f95b85b1ac0b3f6f5b5dc6",
       "path": "skills/verify-and-stop",
       "local_path": "plugins/caveman/skills/verify-and-stop"
+    },
+    {
+      "name": "architecture-patterns",
+      "source": "wshobson",
+      "revision": "46891e7e60da0e52baf1050b7b6391b64e84c6d9",
+      "path": "plugins/backend-development/skills/architecture-patterns",
+      "local_path": "skills/architecture-patterns"
+    },
+    {
+      "name": "code-simplification",
+      "source": "addyosmani",
+      "revision": "1401c8b8030e023baeebb31781a6653fe8e93026",
+      "path": "skills/code-simplification",
+      "local_path": "skills/code-simplification"
+    },
+    {
+      "name": "incremental-implementation",
+      "source": "addyosmani",
+      "revision": "1401c8b8030e023baeebb31781a6653fe8e93026",
+      "path": "skills/incremental-implementation",
+      "local_path": "skills/incremental-implementation",
+      "supporting_files": [
+        {
+          "path": "references/definition-of-done.md",
+          "local_path": "skills/incremental-implementation/references/definition-of-done.md"
+        }
+      ]
     }
   ]
 }
