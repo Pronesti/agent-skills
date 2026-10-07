@@ -1,13 +1,13 @@
 # Skill groups
 
-All 65 repository-owned skills are divided into 18 functional groups, each containing 3–5 skills. Prefixes appear in `interface.display_name` in each skill’s `agents/openai.yaml`. Existing skill IDs, directories, invocation policy, and supporting references stay compatible. Host-owned skills outside this repository are outside this catalog.
+All 66 repository-owned skills are divided into 18 functional groups, each containing 3–5 skills. Prefixes appear in `interface.display_name` in each skill’s `agents/openai.yaml`. Existing skill IDs, directories, invocation policy, and supporting references stay compatible. Host-owned skills outside this repository are outside this catalog.
 
 Standalone installations linked to this repository pick up the metadata after discovery refresh. The Caveman source version is `2.7.0+selective.20261006`; installed plugin copies need updating through their host to load these labels.
 
 | Prefix | Skills | Purpose |
 |---|---:|---|
 | Interview: | 4 | Clarify decisions through questions. |
-| Planning: | 4 | Explore requirements and plan work. |
+| Planning: | 5 | Explore requirements and plan work. |
 | Architecture: | 4 | Model domains and improve code structure. |
 | Implementation: | 5 | Build features and prototypes with appropriate scope. |
 | Execution: | 3 | Carry out plans inline or with selected delegation. |
@@ -36,13 +36,14 @@ Clarify decisions through questions.
 | `grilling` | [Interview: Grilling](../skills/grilling/SKILL.md) |
 | `to-questionnaire` | [Interview: To Questionnaire](../skills/to-questionnaire/SKILL.md) |
 
-## Planning (4)
+## Planning (5)
 
 Explore requirements and plan work.
 
 | Invocation name | Display name |
 |---|---|
 | `brainstorming` | [Planning: Brainstorming](../skills/brainstorming/SKILL.md) |
+| `prompt-improver` | [Planning: Prompt Improver](../skills/prompt-improver/SKILL.md) |
 | `to-spec` | [Planning: To Spec](../skills/to-spec/SKILL.md) |
 | `wayfinder` | [Planning: Wayfinder](../skills/wayfinder/SKILL.md) |
 | `writing-plans` | [Planning: Writing Plans](../skills/writing-plans/SKILL.md) |

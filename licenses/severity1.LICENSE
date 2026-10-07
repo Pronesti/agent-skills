@@ -1,19 +1,6 @@
 MIT License
 
-This repository redistributes skills with local modifications (see MANIFEST.md).
-Complete upstream license notices are preserved in licenses/ and apply to their
-respective source material. The MIT terms below cover local modifications.
-Original author attributions include:
-
-- Copyright (c) 2025 Jesse Vincent — https://github.com/obra/superpowers
-- Copyright (c) 2026 Matt Pocock — https://github.com/mattpocock/skills
-- Copyright (c) 2026 Lauren Tan — https://github.com/cursor/plugins (pstack)
-- Copyright (c) 2026 DietrichGebert — https://github.com/DietrichGebert/ponytail
-- Copyright (c) 2024 Seth Hobson — https://github.com/wshobson/agents
-- Copyright (c) 2025 Addy Osmani — https://github.com/addyosmani/agent-skills
-- Copyright (c) 2025 severity1 — https://github.com/severity1/claude-code-prompt-improver
-
-Local modifications: Copyright (c) 2026 Diego Pronesti
+Copyright (c) 2025 severity1
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

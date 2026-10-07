@@ -43,6 +43,11 @@
       "url": "https://github.com/addyosmani/agent-skills",
       "revision": "1401c8b8030e023baeebb31781a6653fe8e93026",
       "added_on": "2026-10-07"
+    },
+    "severity1": {
+      "url": "https://github.com/severity1/claude-code-prompt-improver",
+      "revision": "50aae187bb4f08b852f318234b654df3332726a4",
+      "added_on": "2026-10-07"
     }
   },
   "skills": [
@@ -547,6 +552,20 @@
           "path": "references/definition-of-done.md",
           "local_path": "skills/incremental-implementation/references/definition-of-done.md"
         }
+      ]
+    },
+    {
+      "name": "prompt-improver",
+      "source": "severity1",
+      "revision": "50aae187bb4f08b852f318234b654df3332726a4",
+      "path": "skills/prompt-improver",
+      "local_path": "skills/prompt-improver",
+      "local_changes": [
+        "Manual invocation without plugin hooks; delegate read-only prompt research to one lightweight subagent.",
+        "Research and recheck existing behavior before choosing verification, repair, or addition.",
+        "Add explicit reuse, implementation-fit, scope, acceptance, and diff-review requirements.",
+        "Return the grounded prompt to the main agent, expose it to the user, and execute within existing authorization.",
+        "Replace Claude-specific tool requirements and upstream guides with a portable subagent research brief and worked examples."
       ]
     }
   ]

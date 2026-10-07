@@ -1,0 +1,6 @@
+interface:
+  display_name: "Planning: Prompt Improver"
+  short_description: "Delegate prompt research, show it, then execute"
+  default_prompt: "Use $prompt-improver to have a light subagent research my request, show me its grounded prompt, then carry out the scoped task."
+policy:
+  allow_implicit_invocation: false
