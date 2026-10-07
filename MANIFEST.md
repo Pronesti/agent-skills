@@ -1,6 +1,6 @@
 # Curated Agent Skills
 
-This repository owns **46 standalone skills and a 20-skill Caveman edition**. Five focused skills allow automatic invocation; the other 61 personal workflows require explicit user selection. See [POLICY.md](POLICY.md) for invocation boundaries.
+This repository owns **47 standalone skills and a 20-skill Caveman edition**. Five focused skills allow automatic invocation; the other 62 personal workflows require explicit user selection. See [POLICY.md](POLICY.md) for invocation boundaries.
 
 Read the [workflow guide](WORKFLOW-GUIDE.md) for 51 scenarios in ASD-STE100 English. The guide covers all 67 workflows, their sequences, and combinations with different instructions.
 
@@ -8,7 +8,7 @@ Read the [workflow guide](WORKFLOW-GUIDE.md) for 51 scenarios in ASD-STE100 Engl
 
 Pinned author revisions were recorded on 19 September 2026. All 63 skill directories were checked again on 3 October 2026: 40 unchanged, 22 with upstream changes available, and one absent from its recorded upstream path. The check is recorded in `reports/2026-10-03-skill-updates/upstream-check.json`; it does not replace the pinned content. Full revisions, upstream paths, and local destinations are pinned in [upstreams.json](upstreams.json). A newer repository revision does not necessarily change every selected skill.
 
-The wshobson, addyosmani, and severity1 sources were added on 7 October 2026 at the revisions below. These are local forks with the same selective invocation overlay; their upstream repositories remain the reference for future updates.
+The wshobson, addyosmani, severity1, and vercel-agent-browser sources were added on 7 October 2026 at the revisions below. These are local forks with the same selective invocation overlay; their upstream repositories remain the reference for future updates.
 
 | Source | Original repository | Pinned revision | Skills |
 |---|---|---|---:|
@@ -22,14 +22,17 @@ The wshobson, addyosmani, and severity1 sources were added on 7 October 2026 at 
 | wshobson | [wshobson/agents](https://github.com/wshobson/agents) | `46891e7e60da0e52baf1050b7b6391b64e84c6d9` | 1 |
 | addyosmani | [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) | `1401c8b8030e023baeebb31781a6653fe8e93026` | 2 |
 | severity1 | [severity1/claude-code-prompt-improver](https://github.com/severity1/claude-code-prompt-improver) | `50aae187bb4f08b852f318234b654df3332726a4` | 1 |
+| vercel-agent-browser | [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser) | `f7c8b071343dda29477a56cb336ea76144c05496` | 1 |
 
 Architecture Patterns includes its upstream `references/details.md` and `references/advanced-patterns.md`. Incremental Implementation bundles the upstream shared `references/definition-of-done.md` inside its own reference directory; `upstreams.json` records that additional source-to-local mapping. Commit and delivery instructions in the Addy forks honor existing authorization and project requirements. Other workflow names remain optional, separately selected choices.
 
 Prompt Improver adapts severity1's research-first workflow into a manually invoked research and execution handoff. One light subagent answers investigation questions from code and supplied conversation history, checks existing behavior and reuse targets, and returns a scoped prompt. The main agent displays that prompt and executes it without an extra approval round; unresolved user decisions are clarified first. Local supporting references cover the subagent assignment and complete, partial, missing, and inaccessible implementations. No upstream plugin or automatic hooks are included; the local adaptations are recorded in `upstreams.json`.
 
+Manual QA preserves Vercel's exploratory QA guidance, issue checklist, and adapted report template. It uses native Codex Computer Use, resolves URL/sign-in/scope from user context, plans and tracks every case, continues independent cases after failures, and reports incomplete coverage. The source revision, original file paths, renamed destinations, and local changes are recorded in `upstreams.json`. It has no separate browser CLI or plugin dependency.
+
 ## Functional groups
 
-Skill picker labels use 18 functional prefixes, each grouping 3–5 skills by their main purpose. All 66 skills are assigned exactly once. Invocation names and installation paths are preserved. See the [complete grouping](reports/skill-groups.md).
+Skill picker labels use 18 functional prefixes, each grouping 3–5 skills by their main purpose. All 67 skills are assigned exactly once. Invocation names and installation paths are preserved. See the [complete grouping](reports/skill-groups.md).
 
 ## Catalog
 
@@ -51,6 +54,8 @@ Skill picker labels use 18 functional prefixes, each grouping 3–5 skills by th
 
 **severity1:** `prompt-improver`.
 
+**vercel-agent-browser:** `manual-qa`.
+
 **caveman:** `caveman:cavecrew`, `caveman:caveman`, `caveman:caveman-commit`, `caveman:caveman-compress`, `caveman:caveman-discover`, `caveman:caveman-evidence-review`, `caveman:caveman-explore`, `caveman:caveman-help`, `caveman:caveman-learn`, `caveman:caveman-manage`, `caveman:caveman-optimize`, `caveman:caveman-review`, `caveman:caveman-setup`, `caveman:caveman-stats`, `caveman:investigate-first`, `caveman:lean-build`, `caveman:migration`, `caveman:safe-refactor`, `caveman:surgical-patch`, `caveman:verify-and-stop`.
 
 ## Installation
@@ -71,7 +76,7 @@ Disable the original `caveman@caveman` entry in Codex plugin settings as well; l
 
 ## Local policy overlay
 
-- [invocation-policy.json](invocation-policy.json) owns the five automatic skills and their triggers. Their entrypoints set `disable-model-invocation: false` and `policy.allow_implicit_invocation: true`. The other 61 entrypoints keep the opposite settings. Both fields must agree with the allowlist.
+- [invocation-policy.json](invocation-policy.json) owns the five automatic skills and their triggers. Their entrypoints set `disable-model-invocation: false` and `policy.allow_implicit_invocation: true`. The other 62 entrypoints keep the opposite settings. Both fields must agree with the allowlist.
 - Selection applies to one task. Session-wide modes need an explicit request. Always-on style mandates, forced workflow transitions, and automatic activation from generated plans or handoffs are removed or made optional.
 - Supporting files are still readable. `grill-me` declares the grilling procedure; `grill-with-docs` declares grilling and domain documentation.
 - Project runtime, verification, delivery requirements, and existing user authorization take precedence. Superpowers namespace references are adapted for standalone installation; optional isolation uses host facilities.

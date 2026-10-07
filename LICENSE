@@ -13,6 +13,9 @@ Original author attributions include:
 - Copyright (c) 2025 Addy Osmani — https://github.com/addyosmani/agent-skills
 - Copyright (c) 2025 severity1 — https://github.com/severity1/claude-code-prompt-improver
 
+Vercel Agent Browser source material uses Apache-2.0; its complete license is
+preserved in licenses/vercel-agent-browser.LICENSE.
+
 Local modifications: Copyright (c) 2026 Diego Pronesti
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

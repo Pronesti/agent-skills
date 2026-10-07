@@ -1,0 +1,6 @@
+interface:
+  display_name: "Testing: Manual QA"
+  short_description: "Test user journeys and edge cases through the UI"
+  default_prompt: "Use $manual-qa to test the app with Codex Computer Use, reuse the URL, sign-in and scope from our conversation, and execute and report every planned case."
+policy:
+  allow_implicit_invocation: false

@@ -48,6 +48,11 @@
       "url": "https://github.com/severity1/claude-code-prompt-improver",
       "revision": "50aae187bb4f08b852f318234b654df3332726a4",
       "added_on": "2026-10-07"
+    },
+    "vercel-agent-browser": {
+      "url": "https://github.com/vercel-labs/agent-browser",
+      "revision": "f7c8b071343dda29477a56cb336ea76144c05496",
+      "added_on": "2026-10-07"
     }
   },
   "skills": [
@@ -566,6 +571,31 @@
         "Add explicit reuse, implementation-fit, scope, acceptance, and diff-review requirements.",
         "Return the grounded prompt to the main agent, expose it to the user, and execute within existing authorization.",
         "Replace Claude-specific tool requirements and upstream guides with a portable subagent research brief and worked examples."
+      ]
+    },
+    {
+      "name": "manual-qa",
+      "source": "vercel-agent-browser",
+      "revision": "f7c8b071343dda29477a56cb336ea76144c05496",
+      "path": "skill-data/dogfood",
+      "local_path": "skills/manual-qa",
+      "local_changes": [
+        "Rename the local skill, UI labels, report, and references to Manual QA; retain original paths only for upstream update tracking.",
+        "Replace browser CLI restrictions and commands with native Codex Computer Use and supported runtime documentation.",
+        "Resolve target, credentials, browser, scope, exclusions, and budget from the invoking prompt and relevant conversation context.",
+        "Plan and display multiple realistic and edge cases, reset their starting states, and track PASS, FAIL, BLOCKED, and NOT RUN.",
+        "Continue independent cases after failures and finish by scoped coverage rather than a bug-count target.",
+        "Preserve issue categories and reproduction evidence; make recording and diagnostics conditional on native capability and retain intermittent findings."
+      ],
+      "supporting_files": [
+        {
+          "path": "skill-data/dogfood/references/issue-taxonomy.md",
+          "local_path": "skills/manual-qa/references/issue-taxonomy.md"
+        },
+        {
+          "path": "skill-data/dogfood/templates/dogfood-report-template.md",
+          "local_path": "skills/manual-qa/templates/manual-qa-report-template.md"
+        }
       ]
     }
   ]

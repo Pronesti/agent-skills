@@ -1,6 +1,6 @@
 # Skill groups
 
-All 66 repository-owned skills are divided into 18 functional groups, each containing 3–5 skills. Prefixes appear in `interface.display_name` in each skill’s `agents/openai.yaml`. Existing skill IDs, directories, invocation policy, and supporting references stay compatible. Host-owned skills outside this repository are outside this catalog.
+All 67 repository-owned skills are divided into 18 functional groups, each containing 3–5 skills. Prefixes appear in `interface.display_name` in each skill’s `agents/openai.yaml`. Existing skill IDs, directories, invocation policy, and supporting references stay compatible. Host-owned skills outside this repository are outside this catalog.
 
 Standalone installations linked to this repository pick up the metadata after discovery refresh. The Caveman source version is `2.7.0+selective.20261006`; installed plugin copies need updating through their host to load these labels.
 
@@ -12,7 +12,7 @@ Standalone installations linked to this repository pick up the metadata after di
 | Implementation: | 5 | Build features and prototypes with appropriate scope. |
 | Execution: | 3 | Carry out plans inline or with selected delegation. |
 | Maintenance: | 4 | Refactor, migrate, and patch existing behavior. |
-| Testing: | 3 | Develop test-first and verify acceptance conditions. |
+| Testing: | 4 | Develop test-first, exercise user journeys, and verify acceptance conditions. |
 | Debugging: | 3 | Investigate failures and regressions. |
 | Review: | 4 | Review code and assess change impact. |
 | Delivery: | 4 | Organize tickets and complete branch integration. |
@@ -92,13 +92,14 @@ Refactor, migrate, and patch existing behavior.
 | `caveman:surgical-patch` | [Maintenance: Surgical Patch](../plugins/caveman/skills/surgical-patch/SKILL.md) |
 | `code-simplification` | [Maintenance: Code Simplification](../skills/code-simplification/SKILL.md) |
 
-## Testing (3)
+## Testing (4)
 
-Develop test-first and verify acceptance conditions.
+Develop test-first, exercise user journeys, and verify acceptance conditions.
 
 | Invocation name | Display name |
 |---|---|
 | `caveman:verify-and-stop` | [Testing: Verify and Stop](../plugins/caveman/skills/verify-and-stop/SKILL.md) |
+| `manual-qa` | [Testing: Manual QA](../skills/manual-qa/SKILL.md) |
 | `tdd` | [Testing: TDD](../skills/tdd/SKILL.md) |
 | `test-driven-development` | [Testing: Test Driven Development](../skills/test-driven-development/SKILL.md) |
 
