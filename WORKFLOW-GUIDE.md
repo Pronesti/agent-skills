@@ -1,11 +1,11 @@
 # Use the collected skills together
 
-This guide tells you how to use the 67 workflows in this repository.
+This guide tells you how to use the 69 workflows in this repository.
 It gives the sequence, purpose, and completion conditions for 56 scenarios.
 It also identifies workflows that can conflict.
 
-**Library date: 7 October 2026.**
-The library contains 47 standalone skills and 20 Caveman skills.
+**Library date: 8 October 2026.**
+The library contains 49 standalone skills and 20 Caveman skills.
 
 **Language reference:** [ASD-STE100, Issue 9](https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf).
 The guide uses short sentences and active voice.
@@ -19,6 +19,7 @@ Software terms and skill names keep their technical meanings.
 - [Select the first workflow](#select-the-first-workflow)
 - [Use workflows in sequence](#use-workflows-in-sequence)
 - [Select between similar workflows](#select-between-similar-workflows)
+- [Use visual references](#use-visual-references)
 - [Use Manual QA](#use-manual-qa)
 - [Combinations with different instructions](#combinations-with-different-instructions)
 - [56 scenarios](#56-scenarios)
@@ -32,7 +33,7 @@ Software terms and skill names keep their technical meanings.
   - [Library configuration](#library-configuration)
   - [Additional QA scenarios](#additional-qa-scenarios)
 - [Example requests](#example-requests)
-- [All 67 workflows](#all-67-workflows)
+- [All 69 workflows](#all-69-workflows)
 - [Information for the next stage](#information-for-the-next-stage)
 - [Source documents](#source-documents)
 
@@ -121,7 +122,7 @@ Only five personal skills can start automatically for an applicable task.
 | `caveman:verify-and-stop` | Show that existing work gives the specified acceptance results. |
 | `writing-for-agents` | Make or change a skill, `AGENTS.md`, or `CLAUDE.md`. |
 
-Select the other 62 personal workflows explicitly.
+Select the other 64 personal workflows explicitly.
 A workflow name in an agent-generated plan does not select that workflow.
 A workflow name in a handoff does not select that workflow.
 Catalog examination does not activate `writing-for-agents`.
@@ -173,7 +174,7 @@ Neither alias selects a planning or implementation workflow.
 
 ### This guide covers the collected library
 
-The repository owns the 67 workflows in this guide.
+The repository owns the 69 workflows in this guide.
 Host-owned document, spreadsheet, image, and website plugins are outside this catalog.
 Follow the host's mandatory built-in skill rules for specialist artifacts.
 Other hosts can use different procedures or upstream editions.
@@ -442,6 +443,19 @@ The skill reports coverage and bugs without unrequested product changes.
 Caveman Review prepares finding text.
 It does not change code or run linters.
 It also does not submit a PR review or give review approval.
+
+## Use visual references
+
+Select `image-to-code` for a text design brief.
+It generates readable section images before it analyzes and implements them.
+Select `screenshot-to-code` for an existing screenshot or mockup.
+It records visible layout and styling before it implements and compares the render.
+Both workflows preserve the project's framework and runtime requirements.
+Report unavailable image generation or visual comparison clearly.
+Keep the original screenshot as the source when reproduction is the requested task.
+
+Example: "Use $image-to-code to design and implement a photography portfolio."
+Example: "Use $screenshot-to-code to reproduce this attached dashboard screenshot."
 
 ## Use Manual QA
 
@@ -1577,7 +1591,7 @@ Keep stored artifacts in clear English.
 Keep all necessary acceptance and project checks.
 ```
 
-## All 67 workflows
+## All 69 workflows
 
 The groups below follow [the functional catalog](reports/skill-groups.md).
 Each workflow appears once in this reference.
@@ -1620,6 +1634,13 @@ Possible pairings do not automatically select another skill.
 | [`incremental-implementation`](skills/incremental-implementation/SKILL.md) | Deliver small complete parts with verification evidence. | Skip the more procedure for an minimal single-function change. |
 | [`ponytail`](skills/ponytail/SKILL.md) | Select the least code that gives the correct task result. | Keep requested behavior and necessary correctness checks. Select the intensity. |
 | [`prototype`](skills/prototype/SKILL.md) | Make temporary UI options or a logic/state demonstration. | Record the design answer before production implementation. |
+
+### Design — 2 workflows
+
+| Workflow | Purpose | Boundary or next use |
+|---|---|---|
+| [`image-to-code`](skills/image-to-code/SKILL.md) | Generate section images, analyze them, and implement the frontend. | Text-to-image-to-code. Requires image generation for its preferred process. |
+| [`screenshot-to-code`](skills/screenshot-to-code/SKILL.md) | Extract a visual spec from a supplied screenshot and implement it. | Match the source viewport. Report missing assets and unverified comparisons. |
 
 ### Execution — 3 workflows
 
@@ -1773,7 +1794,7 @@ Upstream editions can have different hooks, transitions, delivery steps, and hos
 - [MANIFEST.md](MANIFEST.md) identifies the collection, versions, installation procedure, and update procedure.
 - [POLICY.md](POLICY.md) gives the invocation boundaries.
 - [invocation-policy.json](invocation-policy.json) owns the five automatic triggers.
-- [reports/skill-groups.md](reports/skill-groups.md) lists the 67 workflows in 18 groups.
+- [reports/skill-groups.md](reports/skill-groups.md) lists the 69 workflows in 19 groups.
 - Each linked `SKILL.md` gives the specified procedure and supporting references.
 - [upstreams.json](upstreams.json) records pinned revisions and local file mappings.
 - [ASD-STE100, Issue 9](https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf) supplies the language rules and dictionary.

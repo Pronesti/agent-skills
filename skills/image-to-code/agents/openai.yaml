@@ -1,0 +1,6 @@
+interface:
+  display_name: "Design: Text → Image → Code"
+  short_description: "Generate design images, analyze them, and implement the frontend"
+  default_prompt: "Use $image-to-code to generate readable mockups from my design brief, inspect their layout and styling, and implement them faithfully in this project."
+policy:
+  allow_implicit_invocation: false

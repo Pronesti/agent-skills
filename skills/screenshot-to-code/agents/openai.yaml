@@ -1,0 +1,6 @@
+interface:
+  display_name: "Design: Screenshot → Code"
+  short_description: "Recreate a screenshot and compare the rendered frontend"
+  default_prompt: "Use $screenshot-to-code to inspect my screenshot, record its visual spec, implement it in this project, and compare the render with the reference."
+policy:
+  allow_implicit_invocation: false

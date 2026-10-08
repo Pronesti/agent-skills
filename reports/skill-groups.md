@@ -1,6 +1,6 @@
 # Skill groups
 
-All 67 repository-owned skills are divided into 18 functional groups, each containing 3–5 skills. Prefixes appear in `interface.display_name` in each skill’s `agents/openai.yaml`. Existing skill IDs, directories, invocation policy, and supporting references stay compatible. Host-owned skills outside this repository are outside this catalog.
+All 69 repository-owned skills are divided into 19 functional groups, each containing 2–5 skills. Prefixes appear in `interface.display_name` in each skill’s `agents/openai.yaml`. Existing skill IDs, directories, invocation policy, and supporting references stay compatible. Host-owned skills outside this repository are outside this catalog.
 
 Standalone installations linked to this repository pick up the metadata after discovery refresh. The Caveman source version is `2.7.0+selective.20261006`; installed plugin copies need updating through their host to load these labels.
 
@@ -9,6 +9,7 @@ Standalone installations linked to this repository pick up the metadata after di
 | Interview: | 4 | Clarify decisions through questions. |
 | Planning: | 5 | Explore requirements and plan work. |
 | Architecture: | 4 | Model domains and improve code structure. |
+| Design: | 2 | Translate a visual brief or screenshot into a frontend. |
 | Implementation: | 5 | Build features and prototypes with appropriate scope. |
 | Execution: | 3 | Carry out plans inline or with selected delegation. |
 | Maintenance: | 4 | Refactor, migrate, and patch existing behavior. |
@@ -58,6 +59,15 @@ Model domains and improve code structure.
 | `codebase-design` | [Architecture: Codebase Design](../skills/codebase-design/SKILL.md) |
 | `domain-modeling` | [Architecture: Domain Modeling](../skills/domain-modeling/SKILL.md) |
 | `improve-codebase-architecture` | [Architecture: Improve Codebase Architecture](../skills/improve-codebase-architecture/SKILL.md) |
+
+## Design (2)
+
+Translate a visual brief or screenshot into a frontend.
+
+| Invocation name | Display name |
+|---|---|
+| `image-to-code` | [Design: Text → Image → Code](../skills/image-to-code/SKILL.md) |
+| `screenshot-to-code` | [Design: Screenshot → Code](../skills/screenshot-to-code/SKILL.md) |
 
 ## Implementation (5)
 
