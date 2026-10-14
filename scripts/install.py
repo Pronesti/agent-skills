@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Install canonical skill links and a local runtime profile, backing up replacements."""
+"""Install skills, shared Codex instructions, and a local runtime profile with backups."""
 import argparse
 import datetime
 import json
@@ -7,12 +7,15 @@ from pathlib import Path
 import shutil
 
 from runtime_profile import apply_runtime, plan_runtime
+from codex_instructions import resolve_codex_home, sync_instructions
 
 REPO = Path(__file__).resolve().parents[1]
 
 
-def install(home, apply=False, runtime='auto', refresh_runtime=False):
+def install(home, apply=False, runtime='auto', refresh_runtime=False, codex_home=None):
     runtime_plan = plan_runtime(home, runtime, refresh_runtime)
+    codex_home = resolve_codex_home(home, codex_home)
+    codex_result = sync_instructions(home, codex_home, root=REPO)
     source = REPO / "skills"
     skills = sorted(p for p in source.iterdir() if (p / "SKILL.md").is_file())
     lock_path = home / ".agents/.skill-lock.json"
@@ -38,6 +41,14 @@ def install(home, apply=False, runtime='auto', refresh_runtime=False):
             if target.exists() or target.is_symlink():
                 if not (target_root == home / ".agents/skills" and skill.name in owned):
                     raise RuntimeError(f"Unmanaged collision at {target}; left untouched")
+
+    if apply:
+        codex_result = sync_instructions(home, codex_home, apply=True, root=REPO)
+    codex_actions = []
+    if codex_result['changed']:
+        if codex_result['backup']:
+            codex_actions.append(f"backup {codex_result['target']} -> {codex_result['backup']}")
+        codex_actions.append(f"write {codex_result['target']} (shared Codex instructions)")
 
     for target_root in (home / ".agents/skills", home / ".claude/skills"):
         for skill in skills:
@@ -74,12 +85,14 @@ def install(home, apply=False, runtime='auto', refresh_runtime=False):
             actions.append(f"backup {runtime_result['target']} -> {runtime_result['backup']}")
         actions.append(f"write {runtime_result['target']} ({runtime_result['selected']})")
     return {"applied": apply, "skills": len(skills), "backup": str(backup) if actions else None,
-            "actions": actions, "runtime": runtime_result}
+            "actions": codex_actions + actions, "runtime": runtime_result,
+            "codex_agents": codex_result}
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--home", type=Path, default=Path.home(), help="Installation root; use a scratch root for tests")
+    parser.add_argument("--home", type=Path, help="Installation root; explicit scratch roots isolate Codex from CODEX_HOME")
+    parser.add_argument("--codex-home", type=Path, help="Codex directory; overrides --home and CODEX_HOME")
     parser.add_argument("--apply", action="store_true", help="Without this flag, preview only")
     parser.add_argument("--runtime", choices=('auto', 'lerd', 'direct', 'skip'), default='auto',
                         help="Runtime selection for a missing profile (default: auto); existing profiles are preserved")
@@ -88,4 +101,10 @@ if __name__ == "__main__":
     args = parser.parse_args()
     if args.refresh_runtime and args.runtime == 'skip':
         parser.error('--refresh-runtime cannot be combined with --runtime skip')
-    print(json.dumps(install(args.home.expanduser().resolve(), args.apply, args.runtime, args.refresh_runtime), indent=2))
+    try:
+        home = (args.home or Path.home()).expanduser().resolve()
+        codex_home = resolve_codex_home(args.home, args.codex_home)
+        result = install(home, args.apply, args.runtime, args.refresh_runtime, codex_home)
+    except (OSError, ValueError, RuntimeError) as exc:
+        parser.exit(1, f'Installation: {exc}\n')
+    print(json.dumps(result, indent=2))

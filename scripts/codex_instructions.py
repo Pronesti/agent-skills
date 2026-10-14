@@ -1,6 +1,7 @@
 """Render and explicitly install the repository's complete global Codex instructions."""
 import datetime
 import difflib
+import os
 from pathlib import Path
 import shutil
 import stat
@@ -12,6 +13,13 @@ REPO = Path(__file__).resolve().parents[1]
 START = '<!-- personal-skill-policy:start -->'
 END = '<!-- personal-skill-policy:end -->'
 TOKEN = '{{PERSONAL_SKILL_POLICY}}'
+
+
+def resolve_codex_home(home=None, codex_home=None):
+    if codex_home is None:
+        codex_home = (home / '.codex' if home is not None else
+                      Path(os.environ.get('CODEX_HOME') or Path.home() / '.codex'))
+    return codex_home.expanduser().resolve()
 
 
 def render_instructions(root=REPO):

@@ -86,6 +86,7 @@ class RuntimeDetectionTests(unittest.TestCase):
         self.assertEqual(result['runtime']['status'], 'ambiguous')
         self.assertFalse(self.target.exists())
         self.assertTrue((self.home / '.agents/skills/grilling').is_symlink())
+        self.assertTrue((self.home / '.codex/AGENTS.md').is_file())
         for choice in ('lerd', 'direct'):
             plan = runtime_profile.plan_runtime(self.home, runtime=choice)
             self.assertEqual(plan['selected'], choice)
@@ -189,6 +190,33 @@ class RuntimeDetectionTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, 'Unmanaged collision'):
             installer.install(self.home, apply=True)
         self.assertFalse(self.target.exists())
+        self.assertFalse((self.home / '.codex/AGENTS.md').exists())
+
+    def test_codex_override_prevents_skill_and_runtime_changes(self):
+        self.executable('lerd')
+        override = self.home / '.codex/AGENTS.override.md'
+        override.parent.mkdir(parents=True)
+        override.write_text('Local override')
+        with self.assertRaisesRegex(ValueError, 'takes precedence'):
+            installer.install(self.home, apply=True)
+        self.assertEqual(override.read_text(), 'Local override')
+        self.assertFalse((self.home / '.agents').exists())
+        self.assertFalse(self.target.exists())
+
+    def test_failed_codex_sync_prevents_skill_and_runtime_changes(self):
+        self.executable('lerd')
+        agents = self.home / '.codex/AGENTS.md'
+        agents.parent.mkdir(parents=True)
+        agents.write_text('Existing global instructions')
+        with patch.object(Path, 'replace', side_effect=OSError('disk failure')):
+            with self.assertRaisesRegex(OSError, 'disk failure'):
+                installer.install(self.home, apply=True)
+        self.assertEqual(agents.read_text(), 'Existing global instructions')
+        self.assertFalse((self.home / '.agents').exists())
+        self.assertFalse(self.target.exists())
+        backups = list((self.home / '.local/share/agent-skills/backups').glob('*/AGENTS.md'))
+        self.assertEqual(len(backups), 1)
+        self.assertEqual(backups[0].read_bytes(), agents.read_bytes())
 
     def test_runtime_directory_collision_fails_before_skill_changes(self):
         self.target.mkdir(parents=True)
@@ -233,6 +261,7 @@ class RuntimeDetectionTests(unittest.TestCase):
             capture_output=True, text=True, check=True,
         )
         self.assertEqual(json.loads(preview.stdout)['runtime']['status'], 'planned')
+        self.assertTrue(json.loads(preview.stdout)['codex_agents']['changed'])
         self.assertFalse(self.home.exists())
         # The shell entrypoint needs dirname as well as Python on PATH.
         (self.bin / 'dirname').symlink_to('/usr/bin/dirname')
@@ -241,6 +270,8 @@ class RuntimeDetectionTests(unittest.TestCase):
             capture_output=True, text=True, check=True,
         )
         self.assertEqual(json.loads(applied.stdout)['runtime']['status'], 'written')
+        self.assertTrue(json.loads(applied.stdout)['codex_agents']['changed'])
+        self.assertIn('## Working with me', (self.home / '.codex/AGENTS.md').read_text())
         invalid_home = self.root / 'invalid-home'
         invalid = subprocess.run(
             [sys.executable, str(ROOT / 'scripts/install.py'), '--home', str(invalid_home),

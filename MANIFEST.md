@@ -76,7 +76,7 @@ Skill picker labels use 20 functional prefixes, each grouping 2–5 skills by th
 
 ## Installation
 
-Run `python3 scripts/install.py` to preview, then `./install.sh` to apply. The installer keeps one canonical directory per standalone skill under this repository, links it through `~/.agents/skills` and `~/.claude/skills`, and retires repository-owned aliases under `~/.codex/skills` and `~/.cursor/skills-cursor`. It also detects the local PHP command forms and creates a missing [runtime profile](#machine-specific-php-and-composer-runtimes) when the result is unambiguous. It refuses unmanaged skill name collisions and backs up replaced copies outside discovery roots. Re-running it preserves an existing runtime profile and makes no changes to current skill links.
+Run `python3 scripts/install.py` to preview, then `./install.sh` to apply. This one command installs skill links, syncs the complete [shared Codex AGENTS.md](#share-global-codex-instructions-across-computers-and-vms), and generates a missing [runtime profile](#machine-specific-php-and-composer-runtimes) when local executable paths identify an unambiguous runtime. The installer keeps one canonical directory per standalone skill under this repository, links it through `~/.agents/skills` and `~/.claude/skills`, and retires repository-owned aliases under `~/.codex/skills` and `~/.cursor/skills-cursor`. It refuses unmanaged skill name collisions and backs up replaced copies outside discovery roots. Re-running it preserves an existing runtime profile and makes no changes to current skill links or identical global instructions.
 
 For the local Caveman edition and the personal instruction block:
 
@@ -94,30 +94,35 @@ Disable the original `caveman@caveman` entry in Codex plugin settings as well; l
 
 [config/codex/AGENTS.md](config/codex/AGENTS.md) is the shared template for the complete global Codex instructions. Edit personal rules there. Keep its `{{PERSONAL_SKILL_POLICY}}` placeholder inside the policy markers; the sync command fills that section from [invocation-policy.json](invocation-policy.json) and the existing policy generator. The generated file contains your personal rules and the current skill policy on every machine running the same repository revision.
 
-After cloning this repository, run these commands from its directory:
+After cloning this repository, run `./install.sh` from its directory. To preview all changes first:
 
 ```sh
-python3 scripts/configure_hosts.py --sync-codex-agents
-python3 scripts/configure_hosts.py --sync-codex-agents --apply
+python3 scripts/install.py
+./install.sh
 ```
 
-The first command prints a JSON result with the target path, whether it would change, and a unified diff. It creates no files. The second installs a regular UTF-8 file and reports the backup file path when replacing existing content. Backups live under `~/.local/share/agent-skills/backups`. A repeated apply with identical content does not rewrite the file or create another backup. Existing file permissions are preserved; installation uses an atomic replacement.
+The preview prints a JSON result with a `codex_agents` section containing the target path, whether it would change, and a unified diff. It creates no files. Apply installs a regular UTF-8 file and reports the backup file path in `codex_agents.backup` when replacing existing content. Backups live under `~/.local/share/agent-skills/backups`. A repeated apply with identical content does not rewrite the file or create another backup. Existing file permissions are preserved; installation uses an atomic replacement.
 
 Sync replaces the entire global file, including any local additions. Edit the repository template for changes you want to share; edits to the installed file are not imported. After committing and pushing shared changes, update each other machine with:
 
 ```sh
-git pull --ff-only
+git pull --ff-only && ./install.sh
+```
+
+Git transport and installation are explicit. Switching branches or pulling changes does not change the installed copy until you run the installer or apply the standalone sync. Start a fresh Codex session to load updated instructions.
+
+The target is `$CODEX_HOME/AGENTS.md` when that variable is set, otherwise `~/.codex/AGENTS.md`. Both the installer and standalone sync accept `--codex-home /path/to/profile` to select a specific Codex directory. For isolated testing, `--home /path/to/scratch-home` puts both the target and backups under that home and ignores `CODEX_HOME`; an explicit `--codex-home` can still select a separate target. Backups always use the selected home.
+
+Installation stops if `AGENTS.override.md` exists in the selected Codex directory, because it can take precedence over the shared file. Resolve that override before syncing. It also refuses an existing symlink or non-file at the target; preserve or move that item before retrying. The installer checks these conditions before changing skill links or runtime profiles. To restore a replaced file, copy the backup file reported in the JSON result to the reported target.
+
+To sync only Codex instructions, the standalone commands remain available:
+
+```sh
 python3 scripts/configure_hosts.py --sync-codex-agents
 python3 scripts/configure_hosts.py --sync-codex-agents --apply
 ```
 
-Git transport and installation are explicit. Switching branches or pulling changes does not change the installed copy until you apply the sync. Start a fresh Codex session to load updated instructions.
-
-The target is `$CODEX_HOME/AGENTS.md` when that variable is set, otherwise `~/.codex/AGENTS.md`. Use `--codex-home /path/to/profile` to select a specific Codex directory. For isolated testing, `--home /path/to/scratch-home` puts both the target and backups under that home and ignores `CODEX_HOME`; an explicit `--codex-home` can still select a separate target. Backups always use the selected home.
-
-The command stops if `AGENTS.override.md` exists in the selected Codex directory, because it can take precedence over the shared file. Resolve that override before syncing. It also refuses an existing symlink or non-file at the target; preserve or move that item before retrying. These checks leave existing content untouched. To restore a replaced file, copy the backup file reported in the JSON result to the reported target.
-
-This mode only installs Codex instructions. It does not update Claude, skills, or marketplace registration, and cannot be combined with `--policy-only`. The existing `--policy-only` command continues to update just the managed blocks while preserving other instructions. See [OpenAI's instruction discovery documentation](https://learn.chatgpt.com/docs/agent-configuration/agents-md) for global overrides and session loading.
+This standalone mode leaves skills, runtime profiles, Claude instructions, and marketplace registration untouched, and cannot be combined with `--policy-only`. The existing `--policy-only` command continues to update just the managed blocks while preserving other instructions. The combined installer also leaves Claude instructions and marketplace registration untouched. See [OpenAI's instruction discovery documentation](https://learn.chatgpt.com/docs/agent-configuration/agents-md) for global overrides and session loading.
 
 #### Machine-specific PHP and Composer runtimes
 
@@ -132,9 +137,9 @@ Automatic detection follows these rules:
 - Both runtime managers are found: report `ambiguous` and leave the profile untouched.
 - The paths do not establish either setup, or tools are missing: report `unavailable` and leave the profile untouched. The presence of Yerd alone does not prove the direct commands use it.
 
-Skill installation can complete when runtime detection is ambiguous or unavailable. Inspect the JSON `runtime` result: it includes the status, reason, discovered executable paths, selected command forms, proposed file content, and any backup file. A preview creates no profile; apply reports `written` after generation.
+Skill installation and shared AGENTS.md syncing can complete when runtime detection is ambiguous or unavailable. Inspect the JSON `runtime` result: it includes the status, reason, discovered executable paths, selected command forms, proposed file content, and any backup file. A preview creates no profile; apply reports `written` after generation.
 
-Use an explicit choice when necessary. `lerd` requires an executable `lerd` on PATH; `direct` requires both `php` and `composer`. Explicit `direct` can also be used for a non-Yerd setup you have verified. `skip` disables runtime detection and generation.
+Use an explicit choice when necessary. `lerd` requires an executable `lerd` on PATH; `direct` requires both `php` and `composer`. Explicit `direct` can also be used for a non-Yerd setup you have verified. `skip` disables runtime detection and generation; the installer still installs skills and syncs AGENTS.md.
 
 ```sh
 python3 scripts/install.py --runtime lerd

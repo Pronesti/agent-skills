@@ -3,14 +3,13 @@
 import argparse
 import datetime
 import json
-import os
 from pathlib import Path
 import re
 import shutil
 import sys
 
 from invocation_policy import host_policy_body
-from codex_instructions import sync_instructions
+from codex_instructions import resolve_codex_home, sync_instructions
 
 REPO = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser(description=__doc__)
@@ -25,11 +24,9 @@ if (args.apply or args.codex_home is not None) and not args.sync_codex_agents:
     parser.error('--apply and --codex-home require --sync-codex-agents')
 HOME_DIR = (args.home or Path.home()).expanduser().resolve()
 if args.sync_codex_agents:
-    codex_home = args.codex_home
-    if codex_home is None:
-        codex_home = HOME_DIR / '.codex' if args.home is not None else Path(os.environ.get('CODEX_HOME') or HOME_DIR / '.codex')
     try:
-        result = sync_instructions(HOME_DIR, codex_home.expanduser().resolve(), args.apply)
+        codex_home = resolve_codex_home(args.home, args.codex_home)
+        result = sync_instructions(HOME_DIR, codex_home, args.apply)
     except (OSError, ValueError) as exc:
         parser.exit(1, f'Codex instructions: {exc}\n')
     print(json.dumps(result, indent=2))
