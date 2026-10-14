@@ -1,0 +1,5 @@
+interface:
+  display_name: "Pull Requests: Write Description"
+  short_description: "Draft a specific PR description from verified facts"
+policy:
+  allow_implicit_invocation: true

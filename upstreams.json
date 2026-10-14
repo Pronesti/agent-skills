@@ -63,6 +63,17 @@
       "url": "https://github.com/OneWave-AI/claude-skills",
       "revision": "fc5b7851a6c7ba367e05797df46ad3679df355dd",
       "added_on": "2026-10-08"
+    },
+    "mattpocock-pr": {
+      "url": "https://github.com/mattpocock/skills",
+      "revision": "49dd158d1076134a641b33efb035946536778336",
+      "added_on": "2026-10-14",
+      "note": "New PR skill pinned independently; existing Matt skills retain their recorded revision."
+    },
+    "warpdotdev": {
+      "url": "https://github.com/warpdotdev/common-skills",
+      "revision": "7c4eb852de8d7c3e68c81802e1c59db9a611f914",
+      "added_on": "2026-10-14"
     }
   },
   "skills": [
@@ -638,6 +649,32 @@
           "path": "screenshot-to-code/references/visual-check.md",
           "local_path": "skills/screenshot-to-code/references/visual-check.md"
         }
+      ]
+    },
+    {
+      "name": "pr",
+      "source": "mattpocock-pr",
+      "revision": "49dd158d1076134a641b33efb035946536778336",
+      "path": "skills/engineering/pr",
+      "local_path": "skills/pr",
+      "local_changes": [
+        "Enable narrow automatic invocation in both host metadata formats and the shared allowlist.",
+        "Require a specific authorized PR authoring deliverable; exclude review, research, ordinary coding, and instruction/template editing.",
+        "Share an activation/authorization check and format precedence; compose one body using Warp procedure and Matt evidence/impact guidance.",
+        "Use existing domain documentation and report unavailable evidence without invented before/after results."
+      ]
+    },
+    {
+      "name": "write-pr-description",
+      "source": "warpdotdev",
+      "revision": "7c4eb852de8d7c3e68c81802e1c59db9a611f914",
+      "path": ".agents/skills/write-pr-description",
+      "local_path": "skills/write-pr-description",
+      "local_changes": [
+        "Enable narrow automatic invocation in both host metadata formats and the shared allowlist.",
+        "Require a specific authorized PR authoring deliverable; exclude review, research, ordinary coding, and instruction/template editing.",
+        "Share an activation/authorization check and format precedence; compose one body using Warp procedure and Matt evidence/impact guidance.",
+        "Retain upstream references and evaluation cases; inspect the full branch diff, support requested titles, honor combined format precedence, and keep publication native and separately authorized."
       ]
     }
   ]

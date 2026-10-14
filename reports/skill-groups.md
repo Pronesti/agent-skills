@@ -1,6 +1,6 @@
 # Skill groups
 
-All 69 repository-owned skills are divided into 19 functional groups, each containing 2–5 skills. Prefixes appear in `interface.display_name` in each skill’s `agents/openai.yaml`. Existing skill IDs, directories, invocation policy, and supporting references stay compatible. Host-owned skills outside this repository are outside this catalog.
+All 71 repository-owned skills are divided into 20 functional groups, each containing 2–5 skills. Prefixes appear in `interface.display_name` in each skill’s `agents/openai.yaml`. Existing skill IDs, directories, invocation policy, and supporting references stay compatible. Host-owned skills outside this repository are outside this catalog.
 
 Standalone installations linked to this repository pick up the metadata after discovery refresh. The Caveman source version is `2.7.0+selective.20261006`; installed plugin copies need updating through their host to load these labels.
 
@@ -17,6 +17,7 @@ Standalone installations linked to this repository pick up the metadata after di
 | Debugging: | 3 | Investigate failures and regressions. |
 | Review: | 4 | Review code and assess change impact. |
 | Delivery: | 4 | Organize tickets and complete branch integration. |
+| Pull Requests: | 2 | Draft PR descriptions from verified changes and evidence. |
 | Exploration: | 4 | Research questions and understand repositories. |
 | Teaching: | 3 | Explain concepts clearly and visually. |
 | Writing: | 3 | Create and improve technical and agent documentation. |
@@ -144,6 +145,15 @@ Organize tickets and complete branch integration.
 | `resolving-merge-conflicts` | [Delivery: Resolving Merge Conflicts](../skills/resolving-merge-conflicts/SKILL.md) |
 | `to-tickets` | [Delivery: To Tickets](../skills/to-tickets/SKILL.md) |
 | `triage` | [Delivery: Triage](../skills/triage/SKILL.md) |
+
+## Pull Requests (2)
+
+Draft PR descriptions from verified changes and evidence.
+
+| Invocation name | Display name |
+|---|---|
+| `pr` | [Pull Requests: Summary and Evidence](../skills/pr/SKILL.md) |
+| `write-pr-description` | [Pull Requests: Write Description](../skills/write-pr-description/SKILL.md) |
 
 ## Exploration (4)
 

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Pull Requests: Summary and Evidence"
+  short_description: "Shape a specific PR body with evidence and risk"
+policy:
+  allow_implicit_invocation: true

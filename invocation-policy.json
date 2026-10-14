@@ -24,6 +24,16 @@
       "name": "writing-for-agents",
       "local_path": "skills/writing-for-agents",
       "trigger": "Create or edit a skill, AGENTS.md, or CLAUDE.md; reviewing the skill catalog alone does not activate it."
+    },
+    {
+      "name": "pr",
+      "local_path": "skills/pr",
+      "trigger": "Provide summary, evidence, and impact guidance only while drafting/revising the body of a specific PR; exclude review-only, coding-only, PR research, and template/skill editing."
+    },
+    {
+      "name": "write-pr-description",
+      "local_path": "skills/write-pr-description",
+      "trigger": "Draft/revise a specific PR title or body when requested or while executing authorized PR creation/update; exclude review-only, coding-only, PR research, and template/skill editing."
     }
   ]
 }

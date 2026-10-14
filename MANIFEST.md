@@ -1,8 +1,8 @@
 # Curated Agent Skills
 
-This repository owns **49 standalone skills and a 20-skill Caveman edition**. Five focused skills allow automatic invocation; the other 64 personal workflows require explicit user selection. See [POLICY.md](POLICY.md) for invocation boundaries.
+This repository owns **51 standalone skills and a 20-skill Caveman edition**. Seven focused skills allow automatic invocation; the other 64 personal workflows require explicit user selection. See [POLICY.md](POLICY.md) for invocation boundaries.
 
-Read the [workflow guide](WORKFLOW-GUIDE.md) for 56 scenarios in ASD-STE100 English. The guide covers all 69 workflows, their sequences, and combinations with different instructions.
+Read the [workflow guide](WORKFLOW-GUIDE.md) for 56 scenarios in ASD-STE100 English. The guide covers all 71 workflows, their sequences, and combinations with different instructions.
 
 ## Author revisions
 
@@ -14,6 +14,8 @@ The wshobson, addyosmani, severity1, and vercel-agent-browser sources were added
 |---|---|---|---:|
 | superpowers | [obra/superpowers](https://github.com/obra/superpowers) | `5bf4e78011075bcfc0dc295f0724994cd123ee71` | 8 |
 | mattpocock | [mattpocock/skills](https://github.com/mattpocock/skills) | `c55ee46073ed923f86ce59a5eb3b6d895095d1b7` | 24 |
+| mattpocock-pr | [mattpocock/skills](https://github.com/mattpocock/skills) | `49dd158d1076134a641b33efb035946536778336` | 1 |
+| warpdotdev | [warpdotdev/common-skills](https://github.com/warpdotdev/common-skills) | `7c4eb852de8d7c3e68c81802e1c59db9a611f914` | 1 |
 | pstack | [cursor/plugins](https://github.com/cursor/plugins) | `032be146865d973682535de75f2287da438550bf` | 7 |
 | ponytail | [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | `e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156` | 1 |
 | humanlayer | [humanlayer/skills](https://github.com/humanlayer/skills) | `ca7c8088db69e315a8b2deea43820270457f8f3c` | 1 |
@@ -34,15 +36,21 @@ Manual QA preserves Vercel's exploratory QA guidance, issue checklist, and adapt
 
 Taste and OneWave were added on 8 October 2026. Taste `image-to-code` preserves text → generated images → analysis → frontend implementation. OneWave `screenshot-to-code` preserves screenshot → visual spec → implementation → render comparison, including its stack and visual-check references. Both use manual invocation and retain upstream workflow bodies. Their license notices are preserved in `licenses/`.
 
+Matt's `pr` and Warp's `write-pr-description` were added on 14 October 2026 with narrow automatic invocation. Warp owns the drafting procedure; Matt supplies summary, evidence, and impact guidance in the same body. Both require a specific authorized PR authoring deliverable, honor repository templates, and keep publication within existing authorization. Their shared scope reference excludes review-only, coding-only, research, and template/skill editing. Matt's new skill has a separate provenance pin so the other Matt skills retain their recorded revision. Warp's references and upstream evaluation cases are bundled; both authors' license notices are preserved.
+
 ## Functional groups
 
-Skill picker labels use 19 functional prefixes, each grouping 2–5 skills by their main purpose. All 69 skills are assigned exactly once. Invocation names and installation paths are preserved. See the [complete grouping](reports/skill-groups.md).
+Skill picker labels use 20 functional prefixes, each grouping 2–5 skills by their main purpose. All 71 skills are assigned exactly once. Invocation names and installation paths are preserved. See the [complete grouping](reports/skill-groups.md).
 
 ## Catalog
 
 **superpowers:** `brainstorming`, `executing-plans`, `finishing-a-development-branch`, `requesting-code-review`, `subagent-driven-development`, `systematic-debugging`, `test-driven-development`, `writing-plans`.
 
 **mattpocock:** `grill-me`, `grill-with-docs`, `grilling`, `research`, `resolving-merge-conflicts`, `wait-what`, `wizard`, `writing-for-agents`, `code-review`, `codebase-design`, `diagnosing-bugs`, `domain-modeling`, `handoff`, `implement`, `improve-codebase-architecture`, `prototype`, `setup-matt-pocock-skills`, `tdd`, `teach`, `to-questionnaire`, `to-spec`, `to-tickets`, `triage`, `wayfinder`.
+
+**mattpocock-pr:** `pr`.
+
+**warpdotdev:** `write-pr-description`.
 
 **pstack:** `blast-radius`, `how`, `recall`, `show-me-your-work`, `technical-writing`, `unslop`, `why`.
 
@@ -84,7 +92,7 @@ Disable the original `caveman@caveman` entry in Codex plugin settings as well; l
 
 ## Local policy overlay
 
-- [invocation-policy.json](invocation-policy.json) owns the five automatic skills and their triggers. Their entrypoints set `disable-model-invocation: false` and `policy.allow_implicit_invocation: true`. The other 64 entrypoints keep the opposite settings. Both fields must agree with the allowlist.
+- [invocation-policy.json](invocation-policy.json) owns the seven automatic skills and their triggers. Their entrypoints set `disable-model-invocation: false` and `policy.allow_implicit_invocation: true`. The other 64 entrypoints keep the opposite settings. Both fields must agree with the allowlist.
 - Selection applies to one task. Session-wide modes need an explicit request. Always-on style mandates, forced workflow transitions, and automatic activation from generated plans or handoffs are removed or made optional.
 - Supporting files are still readable. `grill-me` declares the grilling procedure; `grill-with-docs` declares grilling and domain documentation.
 - Project runtime, verification, delivery requirements, and existing user authorization take precedence. Superpowers namespace references are adapted for standalone installation; optional isolation uses host facilities.

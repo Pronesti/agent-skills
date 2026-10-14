@@ -1,11 +1,11 @@
 # Use the collected skills together
 
-This guide tells you how to use the 69 workflows in this repository.
+This guide tells you how to use the 71 workflows in this repository.
 It gives the sequence, purpose, and completion conditions for 56 scenarios.
 It also identifies workflows that can conflict.
 
-**Library date: 8 October 2026.**
-The library contains 49 standalone skills and 20 Caveman skills.
+**Library date: 14 October 2026.**
+The library contains 51 standalone skills and 20 Caveman skills.
 
 **Language reference:** [ASD-STE100, Issue 9](https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf).
 The guide uses short sentences and active voice.
@@ -33,7 +33,7 @@ Software terms and skill names keep their technical meanings.
   - [Library configuration](#library-configuration)
   - [Additional QA scenarios](#additional-qa-scenarios)
 - [Example requests](#example-requests)
-- [All 69 workflows](#all-69-workflows)
+- [All 71 workflows](#all-71-workflows)
 - [Information for the next stage](#information-for-the-next-stage)
 - [Source documents](#source-documents)
 
@@ -112,7 +112,7 @@ They do not activate skills.
 Read [POLICY.md](POLICY.md) for the specified selection rules.
 Read each selected `SKILL.md` for its procedure.
 
-Only five personal skills can start automatically for an applicable task.
+Only seven personal skills can start automatically for an applicable task.
 
 | Skill | Applicable task |
 |---|---|
@@ -121,6 +121,13 @@ Only five personal skills can start automatically for an applicable task.
 | `caveman:safe-refactor` | Change code structure and keep the specified behavior. |
 | `caveman:verify-and-stop` | Show that existing work gives the specified acceptance results. |
 | `writing-for-agents` | Make or change a skill, `AGENTS.md`, or `CLAUDE.md`. |
+| `pr` | Supply summary, evidence, and impact guidance while drafting a specific PR body. |
+| `write-pr-description` | Draft or revise a specific PR title/body from verified changes and the repository template. |
+
+The PR skills apply only at a requested or authorized PR authoring stage.
+Code review, ordinary coding, PR research, and template/skill editing do not trigger them.
+Warp handles one drafting pass; Matt supplies guidance within the same body.
+Read their [shared scope](skills/pr/references/authoring-scope.md) for the activation check.
 
 Select the other 64 personal workflows explicitly.
 A workflow name in an agent-generated plan does not select that workflow.
@@ -174,7 +181,7 @@ Neither alias selects a planning or implementation workflow.
 
 ### This guide covers the collected library
 
-The repository owns the 69 workflows in this guide.
+The repository owns the 71 workflows in this guide.
 Host-owned document, spreadsheet, image, and website plugins are outside this catalog.
 Follow the host's mandatory built-in skill rules for specialist artifacts.
 Other hosts can use different procedures or upstream editions.
@@ -1591,7 +1598,7 @@ Keep stored artifacts in clear English.
 Keep all necessary acceptance and project checks.
 ```
 
-## All 69 workflows
+## All 71 workflows
 
 The groups below follow [the functional catalog](reports/skill-groups.md).
 Each workflow appears once in this reference.
@@ -1694,6 +1701,13 @@ Possible pairings do not automatically select another skill.
 | [`to-tickets`](skills/to-tickets/SKILL.md) | Write complete delivery tickets with blocking dependencies. | Get breakdown approval before publication. Use expand–contract for applicable wide refactors. |
 | [`triage`](skills/triage/SKILL.md) | Assign categories to issues or external PRs after evidence checks. | The task can include tracker writes. Keep those writes within the permitted outcome. |
 
+### Pull Requests — 2 workflows
+
+| Workflow | Purpose | Boundary or next use |
+|---|---|---|
+| [`pr`](skills/pr/SKILL.md) | Make a specific PR body clear with summary, evidence, and impact guidance. | Automatic use requires a PR authoring deliverable; preserve the user's and repository's format. |
+| [`write-pr-description`](skills/write-pr-description/SKILL.md) | Draft the title/body from verified changes and meaningful results. | Automatic use applies at the authoring stage. Publication retains existing authorization. |
+
 ### Exploration — 4 workflows
 
 | Workflow | Purpose | Boundary or next use |
@@ -1793,8 +1807,8 @@ Upstream editions can have different hooks, transitions, delivery steps, and hos
 
 - [MANIFEST.md](MANIFEST.md) identifies the collection, versions, installation procedure, and update procedure.
 - [POLICY.md](POLICY.md) gives the invocation boundaries.
-- [invocation-policy.json](invocation-policy.json) owns the five automatic triggers.
-- [reports/skill-groups.md](reports/skill-groups.md) lists the 69 workflows in 19 groups.
+- [invocation-policy.json](invocation-policy.json) owns the seven automatic triggers.
+- [reports/skill-groups.md](reports/skill-groups.md) lists the 71 workflows in 20 groups.
 - Each linked `SKILL.md` gives the specified procedure and supporting references.
 - [upstreams.json](upstreams.json) records pinned revisions and local file mappings.
 - [ASD-STE100, Issue 9](https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf) supplies the language rules and dictionary.

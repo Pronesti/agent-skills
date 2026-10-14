@@ -1,6 +1,6 @@
 # Invocation policy
 
-Five personal skills may activate automatically when their trigger fits the authorized task: `caveman:investigate-first`, `caveman:surgical-patch`, `caveman:safe-refactor`, `caveman:verify-and-stop`, and `writing-for-agents`. [invocation-policy.json](invocation-policy.json) owns this allowlist and its triggers. All other personal workflows require explicit user selection.
+Seven personal skills may activate automatically when their trigger fits the authorized task: `caveman:investigate-first`, `caveman:surgical-patch`, `caveman:safe-refactor`, `caveman:verify-and-stop`, `writing-for-agents`, `pr`, and `write-pr-description`. [invocation-policy.json](invocation-policy.json) owns this allowlist and its triggers. The two PR skills apply only at an authorized title/body drafting stage for a specific PR or change set. General review, coding, research, and template/skill editing do not trigger them. Their shared [activation check](skills/pr/references/authoring-scope.md) defines target resolution, one drafting pass, and format precedence. All other personal workflows require explicit user selection.
 
 Selection applies to the requested task; a session-wide mode requires an explicit request. Automatic invocation does not authorize additional work, external actions, commits, or delegation. Use native capabilities when no allowlisted trigger fits.
 
