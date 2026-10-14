@@ -76,7 +76,7 @@ Skill picker labels use 20 functional prefixes, each grouping 2–5 skills by th
 
 ## Installation
 
-Run `python3 scripts/install.py` to preview, then `./install.sh` to apply. The installer keeps one canonical directory per standalone skill under this repository, links it through `~/.agents/skills` and `~/.claude/skills`, and retires repository-owned aliases under `~/.codex/skills` and `~/.cursor/skills-cursor`. It refuses unmanaged name collisions and backs up replaced copies outside discovery roots. Re-running it is a no-op.
+Run `python3 scripts/install.py` to preview, then `./install.sh` to apply. The installer keeps one canonical directory per standalone skill under this repository, links it through `~/.agents/skills` and `~/.claude/skills`, and retires repository-owned aliases under `~/.codex/skills` and `~/.cursor/skills-cursor`. It also detects the local PHP command forms and creates a missing [runtime profile](#machine-specific-php-and-composer-runtimes) when the result is unambiguous. It refuses unmanaged skill name collisions and backs up replaced copies outside discovery roots. Re-running it preserves an existing runtime profile and makes no changes to current skill links.
 
 For the local Caveman edition and the personal instruction block:
 
@@ -89,6 +89,95 @@ claude plugin disable caveman@caveman
 ```
 
 Disable the original `caveman@caveman` entry in Codex plugin settings as well; leave `caveman@personal` enabled. Do not delete upstream caches. Start a fresh task after changing discovery, and restart Claude Code to unload previously registered hooks. Application-managed built-in and specialist plugins remain owned by their host.
+
+### Share global Codex instructions across computers and VMs
+
+[config/codex/AGENTS.md](config/codex/AGENTS.md) is the shared template for the complete global Codex instructions. Edit personal rules there. Keep its `{{PERSONAL_SKILL_POLICY}}` placeholder inside the policy markers; the sync command fills that section from [invocation-policy.json](invocation-policy.json) and the existing policy generator. The generated file contains your personal rules and the current skill policy on every machine running the same repository revision.
+
+After cloning this repository, run these commands from its directory:
+
+```sh
+python3 scripts/configure_hosts.py --sync-codex-agents
+python3 scripts/configure_hosts.py --sync-codex-agents --apply
+```
+
+The first command prints a JSON result with the target path, whether it would change, and a unified diff. It creates no files. The second installs a regular UTF-8 file and reports the backup file path when replacing existing content. Backups live under `~/.local/share/agent-skills/backups`. A repeated apply with identical content does not rewrite the file or create another backup. Existing file permissions are preserved; installation uses an atomic replacement.
+
+Sync replaces the entire global file, including any local additions. Edit the repository template for changes you want to share; edits to the installed file are not imported. After committing and pushing shared changes, update each other machine with:
+
+```sh
+git pull --ff-only
+python3 scripts/configure_hosts.py --sync-codex-agents
+python3 scripts/configure_hosts.py --sync-codex-agents --apply
+```
+
+Git transport and installation are explicit. Switching branches or pulling changes does not change the installed copy until you apply the sync. Start a fresh Codex session to load updated instructions.
+
+The target is `$CODEX_HOME/AGENTS.md` when that variable is set, otherwise `~/.codex/AGENTS.md`. Use `--codex-home /path/to/profile` to select a specific Codex directory. For isolated testing, `--home /path/to/scratch-home` puts both the target and backups under that home and ignores `CODEX_HOME`; an explicit `--codex-home` can still select a separate target. Backups always use the selected home.
+
+The command stops if `AGENTS.override.md` exists in the selected Codex directory, because it can take precedence over the shared file. Resolve that override before syncing. It also refuses an existing symlink or non-file at the target; preserve or move that item before retrying. These checks leave existing content untouched. To restore a replaced file, copy the backup file reported in the JSON result to the reported target.
+
+This mode only installs Codex instructions. It does not update Claude, skills, or marketplace registration, and cannot be combined with `--policy-only`. The existing `--policy-only` command continues to update just the managed blocks while preserving other instructions. See [OpenAI's instruction discovery documentation](https://learn.chatgpt.com/docs/agent-configuration/agents-md) for global overrides and session loading.
+
+#### Machine-specific PHP and Composer runtimes
+
+The shared instructions explicitly tell the agent to read `~/.config/agent-skills/runtime.md` before running PHP or Composer commands. Run the installer on each computer or VM to generate this machine-specific file. It stays outside the repository, so the global `AGENTS.md` can remain identical across machines. The separate `--sync-codex-agents` command only installs the shared instructions and leaves runtime profiles alone.
+
+The installer inspects executables on its current `PATH` and resolves symlinks. It does not invoke the discovered tools, start containers, install runtimes, or test their health. Shell aliases and functions are not included. An explicit `--home` changes the installation destination; detection still describes the machine and environment running the installer.
+
+Automatic detection follows these rules:
+
+- Lerd alone is available: select `lerd php` and `lerd composer`.
+- Both `php` and `composer` resolve to Yerd's launcher, with no competing Lerd: select direct `php` and `composer` commands.
+- Both runtime managers are found: report `ambiguous` and leave the profile untouched.
+- The paths do not establish either setup, or tools are missing: report `unavailable` and leave the profile untouched. The presence of Yerd alone does not prove the direct commands use it.
+
+Skill installation can complete when runtime detection is ambiguous or unavailable. Inspect the JSON `runtime` result: it includes the status, reason, discovered executable paths, selected command forms, proposed file content, and any backup file. A preview creates no profile; apply reports `written` after generation.
+
+Use an explicit choice when necessary. `lerd` requires an executable `lerd` on PATH; `direct` requires both `php` and `composer`. Explicit `direct` can also be used for a non-Yerd setup you have verified. `skip` disables runtime detection and generation.
+
+```sh
+python3 scripts/install.py --runtime lerd
+./install.sh --runtime lerd
+./install.sh --runtime direct
+./install.sh --runtime skip
+```
+
+Existing profiles, including handwritten files and symlinks, are preserved before detection. An explicit runtime choice does not replace an existing profile by itself. After changing runtimes or PATH, preview a refresh, then apply it:
+
+```sh
+python3 scripts/install.py --refresh-runtime
+./install.sh --refresh-runtime
+```
+
+Combine refresh with `--runtime lerd` or `--runtime direct` if needed. Refresh backs up changed regular files under `~/.local/share/agent-skills/backups` before atomic replacement, preserves permissions, and does nothing when the content already matches. It refuses symlinks and cannot be combined with `--runtime skip`. Unsuccessful detection leaves the previous file intact.
+
+You can also maintain a profile manually: create the directory with `mkdir -p ~/.config/agent-skills`, then save the applicable example below as `runtime.md` inside it. Adapt the command forms if your setup differs. These command forms follow the [Lerd PHP documentation](https://lerd.sh/usage/php) and [Yerd PHP documentation](https://yerd.app/guide/php-versions).
+
+For your Mac using Lerd:
+
+```markdown
+# PHP and Composer runtime
+
+Run PHP and Composer commands through Lerd from the project directory:
+
+- PHP: `lerd php ...` (for example, `lerd php artisan test`).
+- Composer: `lerd composer ...` (for example, `lerd composer check`).
+```
+
+For your VM with direct access to Yerd's PHP and Composer through PATH:
+
+```markdown
+# PHP and Composer runtime
+
+Yerd's PHP and Composer are available directly through PATH. Run commands
+from the project directory:
+
+- PHP: `php ...` (for example, `php artisan test`).
+- Composer: `composer ...` (for example, `composer check`).
+```
+
+The example test commands assume the project provides those commands or scripts. When commands execute in a VM or remote host, read that execution host's runtime file. The file is consulted through the shared instruction; it is not an automatically discovered Codex instruction filename. If it is missing or unclear, establish the runtime configuration before executing project commands. An operating system name alone does not select a runtime.
 
 ## Local policy overlay
 

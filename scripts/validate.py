@@ -7,9 +7,14 @@ import sys
 import yaml
 
 from invocation_policy import automatic_skills
+from codex_instructions import render_instructions
 
 ROOT = Path(__file__).resolve().parents[1]
 errors = []
+try:
+    render_instructions()
+except (ValueError, KeyError, OSError) as exc:
+    errors.append(f'Global Codex instructions: {exc}')
 try:
     automatic_entries = automatic_skills()
 except (ValueError, KeyError, OSError) as exc:

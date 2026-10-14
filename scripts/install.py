@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
-"""Install canonical skill links; back up replaced copies outside discovery roots."""
+"""Install canonical skill links and a local runtime profile, backing up replacements."""
 import argparse
 import datetime
 import json
 from pathlib import Path
 import shutil
 
+from runtime_profile import apply_runtime, plan_runtime
+
 REPO = Path(__file__).resolve().parents[1]
 
 
-def install(home, apply=False):
+def install(home, apply=False, runtime='auto', refresh_runtime=False):
+    runtime_plan = plan_runtime(home, runtime, refresh_runtime)
     source = REPO / "skills"
     skills = sorted(p for p in source.iterdir() if (p / "SKILL.md").is_file())
     lock_path = home / ".agents/.skill-lock.json"
@@ -65,13 +68,24 @@ def install(home, apply=False):
                 del lock["skills"][name]
             lock_path.write_text(json.dumps(lock, indent=2) + "\n")
         actions.append(f"retire {len(migrated)} old package-manager ownership records")
+    runtime_result = apply_runtime(runtime_plan, backup) if apply else runtime_plan
+    if runtime_result['status'] in ('planned', 'written'):
+        if runtime_result['backup']:
+            actions.append(f"backup {runtime_result['target']} -> {runtime_result['backup']}")
+        actions.append(f"write {runtime_result['target']} ({runtime_result['selected']})")
     return {"applied": apply, "skills": len(skills), "backup": str(backup) if actions else None,
-            "actions": actions}
+            "actions": actions, "runtime": runtime_result}
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--home", type=Path, default=Path.home(), help="Installation root; use a scratch root for tests")
     parser.add_argument("--apply", action="store_true", help="Without this flag, preview only")
+    parser.add_argument("--runtime", choices=('auto', 'lerd', 'direct', 'skip'), default='auto',
+                        help="Runtime selection for a missing profile (default: auto); existing profiles are preserved")
+    parser.add_argument("--refresh-runtime", action='store_true',
+                        help="Regenerate an existing runtime profile, backing it up on apply")
     args = parser.parse_args()
-    print(json.dumps(install(args.home.resolve(), args.apply), indent=2))
+    if args.refresh_runtime and args.runtime == 'skip':
+        parser.error('--refresh-runtime cannot be combined with --runtime skip')
+    print(json.dumps(install(args.home.expanduser().resolve(), args.apply, args.runtime, args.refresh_runtime), indent=2))
