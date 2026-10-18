@@ -1,8 +1,8 @@
 # Curated Agent Skills
 
-This repository owns **51 standalone skills and a 20-skill Caveman edition**. Seven focused skills allow automatic invocation; the other 64 personal workflows require explicit user selection. See [POLICY.md](POLICY.md) for invocation boundaries.
+This repository owns **53 standalone skills and a 20-skill Caveman edition**. Seven focused skills allow automatic invocation; the other 66 personal workflows require explicit user selection. See [POLICY.md](POLICY.md) for invocation boundaries.
 
-Read the [workflow guide](WORKFLOW-GUIDE.md) for 56 scenarios in ASD-STE100 English. The guide covers all 71 workflows, their sequences, and combinations with different instructions.
+Read the [workflow guide](WORKFLOW-GUIDE.md) for 56 scenarios in ASD-STE100 English. The guide covers all 73 workflows, their sequences, and combinations with different instructions.
 
 ## Author revisions
 
@@ -38,9 +38,11 @@ Taste and OneWave were added on 8 October 2026. Taste `image-to-code` preserves 
 
 Matt's `pr` and Warp's `write-pr-description` were added on 14 October 2026 with narrow automatic invocation. Warp owns the drafting procedure; Matt supplies summary, evidence, and impact guidance in the same body. Both require a specific authorized PR authoring deliverable, honor repository templates, and keep publication within existing authorization. Their shared scope reference excludes review-only, coding-only, research, and template/skill editing. Matt's new skill has a separate provenance pin so the other Matt skills retain their recorded revision. Warp's references and upstream evaluation cases are bundled; both authors' license notices are preserved.
 
+Anthropic `frontend-design` and Next Level Builder `ui-ux-pro-max` were added on 17 October 2026. The first guides visual direction and frontend implementation. The second provides a local searchable UI/UX catalog and stack-specific guidance. Both are manual workflows with pinned upstream revisions, bundled data and scripts where needed, and upstream license notices.
+
 ## Functional groups
 
-Skill picker labels use 20 functional prefixes, each grouping 2–5 skills by their main purpose. All 71 skills are assigned exactly once. Invocation names and installation paths are preserved. See the [complete grouping](reports/skill-groups.md).
+Skill picker labels use 20 functional prefixes, each grouping 2–5 skills by their main purpose. All 73 skills are assigned exactly once. Invocation names and installation paths are preserved. See the [complete grouping](reports/skill-groups.md).
 
 ## Catalog
 
@@ -71,6 +73,10 @@ Skill picker labels use 20 functional prefixes, each grouping 2–5 skills by th
 **taste:** `image-to-code`.
 
 **onewave:** `screenshot-to-code`.
+
+**anthropics-frontend:** `frontend-design`.
+
+**nextlevelbuilder:** `ui-ux-pro-max`.
 
 **caveman:** `caveman:cavecrew`, `caveman:caveman`, `caveman:caveman-commit`, `caveman:caveman-compress`, `caveman:caveman-discover`, `caveman:caveman-evidence-review`, `caveman:caveman-explore`, `caveman:caveman-help`, `caveman:caveman-learn`, `caveman:caveman-manage`, `caveman:caveman-optimize`, `caveman:caveman-review`, `caveman:caveman-setup`, `caveman:caveman-stats`, `caveman:investigate-first`, `caveman:lean-build`, `caveman:migration`, `caveman:safe-refactor`, `caveman:surgical-patch`, `caveman:verify-and-stop`.
 
@@ -186,7 +192,7 @@ The example test commands assume the project provides those commands or scripts.
 
 ## Local policy overlay
 
-- [invocation-policy.json](invocation-policy.json) owns the seven automatic skills and their triggers. Their entrypoints set `disable-model-invocation: false` and `policy.allow_implicit_invocation: true`. The other 64 entrypoints keep the opposite settings. Both fields must agree with the allowlist.
+- [invocation-policy.json](invocation-policy.json) owns the seven automatic skills and their triggers. Their entrypoints set `disable-model-invocation: false` and `policy.allow_implicit_invocation: true`. The other 66 entrypoints keep the opposite settings. Both fields must agree with the allowlist.
 - Selection applies to one task. Session-wide modes need an explicit request. Always-on style mandates, forced workflow transitions, and automatic activation from generated plans or handoffs are removed or made optional.
 - Supporting files are still readable. `grill-me` declares the grilling procedure; `grill-with-docs` declares grilling and domain documentation.
 - Project runtime, verification, delivery requirements, and existing user authorization take precedence. Superpowers namespace references are adapted for standalone installation; optional isolation uses host facilities.

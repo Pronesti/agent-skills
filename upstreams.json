@@ -74,6 +74,16 @@
       "url": "https://github.com/warpdotdev/common-skills",
       "revision": "7c4eb852de8d7c3e68c81802e1c59db9a611f914",
       "added_on": "2026-10-14"
+    },
+    "anthropics-frontend": {
+      "url": "https://github.com/anthropics/skills",
+      "revision": "dbd4588f9e1033efb41dad4bef2f7947c8993d44",
+      "added_on": "2026-10-17"
+    },
+    "nextlevelbuilder": {
+      "url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+      "revision": "56ea9cf174ed86786187daa9de0e6247cb0747e4",
+      "added_on": "2026-10-17"
     }
   },
   "skills": [
@@ -675,6 +685,44 @@
         "Require a specific authorized PR authoring deliverable; exclude review, research, ordinary coding, and instruction/template editing.",
         "Share an activation/authorization check and format precedence; compose one body using Warp procedure and Matt evidence/impact guidance.",
         "Retain upstream references and evaluation cases; inspect the full branch diff, support requested titles, honor combined format precedence, and keep publication native and separately authorized."
+      ]
+    },
+    {
+      "name": "frontend-design",
+      "source": "anthropics-frontend",
+      "revision": "dbd4588f9e1033efb41dad4bef2f7947c8993d44",
+      "path": "skills/frontend-design",
+      "local_path": "skills/frontend-design",
+      "local_changes": [
+        "Apply the repository manual invocation and task-scoped policy overlay.",
+        "Add Codex picker metadata; retain the upstream Apache 2.0 license inside the skill."
+      ]
+    },
+    {
+      "name": "ui-ux-pro-max",
+      "source": "nextlevelbuilder",
+      "revision": "56ea9cf174ed86786187daa9de0e6247cb0747e4",
+      "path": ".claude/skills/ui-ux-pro-max",
+      "local_path": "skills/ui-ux-pro-max",
+      "local_changes": [
+        "Apply the repository manual invocation and task-scoped policy overlay.",
+        "Resolve the search script from this installed skill directory instead of CLAUDE_PLUGIN_ROOT.",
+        "Add Codex picker metadata and the upstream MIT license.",
+        "Normalize trailing whitespace in the bundled design-system script for the repository Git gate."
+      ],
+      "supporting_files": [
+        {
+          "path": ".claude/skills/ui-ux-pro-max/data",
+          "local_path": "skills/ui-ux-pro-max/data"
+        },
+        {
+          "path": ".claude/skills/ui-ux-pro-max/references",
+          "local_path": "skills/ui-ux-pro-max/references"
+        },
+        {
+          "path": ".claude/skills/ui-ux-pro-max/scripts",
+          "local_path": "skills/ui-ux-pro-max/scripts"
+        }
       ]
     }
   ]
