@@ -48,7 +48,7 @@ class CodexInstructionsTests(unittest.TestCase):
             files = [home / '.codex/AGENTS.md' for home in homes]
             self.assertEqual(files[0].read_bytes(), files[1].read_bytes())
             content = files[0].read_text()
-            self.assertIn('`caveman:surgical-patch`', content)
+            self.assertIn('No personal workflow skills activate automatically', content)
             self.assertIn('Use one feature branch created from `main`', content)
             self.assertEqual(content.count('<!-- personal-skill-policy:start -->'), 1)
             self.assertNotIn('{{PERSONAL_SKILL_POLICY}}', content)

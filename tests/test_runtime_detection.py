@@ -85,7 +85,7 @@ class RuntimeDetectionTests(unittest.TestCase):
         result = installer.install(self.home, apply=True)
         self.assertEqual(result['runtime']['status'], 'ambiguous')
         self.assertFalse(self.target.exists())
-        self.assertTrue((self.home / '.agents/skills/grilling').is_symlink())
+        self.assertTrue((self.home / '.agents/skills/how').is_symlink())
         self.assertTrue((self.home / '.codex/AGENTS.md').is_file())
         for choice in ('lerd', 'direct'):
             plan = runtime_profile.plan_runtime(self.home, runtime=choice)
@@ -185,7 +185,7 @@ class RuntimeDetectionTests(unittest.TestCase):
 
     def test_skill_collision_prevents_runtime_creation(self):
         self.executable('lerd')
-        collision = self.home / '.claude/skills/writing-plans'
+        collision = self.home / '.claude/skills/poteto-mode'
         collision.mkdir(parents=True)
         with self.assertRaisesRegex(RuntimeError, 'Unmanaged collision'):
             installer.install(self.home, apply=True)

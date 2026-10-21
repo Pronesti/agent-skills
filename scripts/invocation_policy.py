@@ -23,15 +23,15 @@ def automatic_skills(root=ROOT):
 def host_policy_body(root=ROOT):
     entries = automatic_skills(root)
     rules = '\n'.join(f"- `{entry['name']}`: {entry['trigger']}" for entry in entries)
+    introduction = ('The following personal skills may be invoked automatically when their trigger fits the authorized task:\n\n' + rules
+                    if entries else 'No personal workflow skills activate automatically in this catalog.')
     return f"""## Personal workflow skills
 
-The following personal skills may be invoked automatically when their trigger fits the authorized task:
-
-{rules}
+{introduction}
 
 All other personal workflow skills require my explicit selection. Apply any skill only to the requested task; session-wide modes require an explicit request. Automatic selection does not authorize additional work, external actions, commits, or delegation. Use native capabilities when no allowlisted trigger fits.
 
-Read a selected workflow's declared supporting references as needed. Other workflow names in skills, generated plans, and handoffs are suggestions, not activation instructions; each workflow must independently meet its invocation policy. The grill-me alias includes grilling; grill-with-docs includes grilling and domain documentation.
+Read a selected workflow's declared supporting references as needed. Other workflow names in skills, generated plans, and handoffs are suggestions, not activation instructions; each workflow must independently meet its invocation policy. Selected pstack entrypoints load their host adapter and complete upstream workflow; their declared supporting resources stay within the selected task.
 
 Preserve project runtime, integration, verification, delivery requirements, and existing user authorization. Application-required built-in skills still follow the host's instructions.
 """

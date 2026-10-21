@@ -1,43 +1,20 @@
 ---
 name: tdd
-description: 'Manual workflow: Test-driven development. Use when the user wants to build features or fix bugs test-first,
-  mentions "red-green-refactor", or wants integration tests.'
+description: Use only when the user explicitly asks for TDD, a failing test, or a regression test, OR when the bug has an obvious cheap local test target. Skip when the test path is unclear, expensive, integration-heavy, or not requested.
 disable-model-invocation: true
 ---
 
-Use this workflow only when the user explicitly selects it. Its scope ends with the requested task. Other named workflows are optional and require separate selection; declared supporting file references may be read as needed. Preserve the user's existing authorization and the project's runtime and verification requirements.
+# tdd
 
+Use only when explicitly selected. Apply this workflow to the authorized task.
+Resolve this entrypoint's symlink to its canonical directory before following relative paths.
 
-# Test-Driven Development
+1. In Codex, read [the Codex harness adapter](../../pstack/docs/harness/codex.md).
+   In Claude Code, read [the Claude harness adapter](../../pstack/docs/harness/claude-code.md).
+   In Cursor, use the upstream tool names. Apply the repository's invocation policy in every host.
+2. Read [the complete upstream workflow](../../pstack/skills/tdd/SKILL.md),
+   then follow it using that adapter. Resolve its references relative to the upstream file.
 
-TDD is the red → green loop. This skill is the reference that makes that loop produce tests worth keeping: what a good test is, where tests go, the anti-patterns, and the rules of the loop. Every section applies on every cycle — consult them before and during the loop, not after.
-
-When exploring the codebase, read `CONTEXT.md` (if it exists) so test names and interface vocabulary match the project's domain language, and respect ADRs in the area you're touching.
-
-## What a good test is
-
-Tests verify behavior through public interfaces, not implementation details. Code can change entirely; tests shouldn't. A good test reads like a specification — "user can checkout with valid cart" tells you exactly what capability exists — and survives refactors because it doesn't care about internal structure.
-
-See [tests.md](tests.md) for examples and [mocking.md](mocking.md) for mocking guidelines.
-
-## Seams — where tests go
-
-A **seam** is the public boundary you test at: the interface where you observe behavior without reaching inside. Tests live at seams, never against internals.
-
-**Test only at pre-agreed seams.** Before writing any test, write down the seams under test and confirm them with the user. No test is written at an unconfirmed seam. You can't test everything — agreeing the seams up front is how testing effort lands on the critical paths and complex logic instead of every edge case.
-
-Ask: "What's the public interface, and which seams should we test?"
-
-When the shape of that interface is itself in question — how deep the module is, where the seam belongs, what the interface should expose — use the vocabulary in `codebase-design` if the user selected it; otherwise reason about the interface directly without loading another workflow.
-
-## Anti-patterns
-
-- **Implementation-coupled** — mocks internal collaborators, tests private methods, or verifies through a side channel (querying the database instead of using the interface). The tell: the test breaks when you refactor but behavior hasn't changed.
-- **Tautological** — the assertion recomputes the expected value the way the code does (`expect(add(a, b)).toBe(a + b)`, a snapshot derived by hand the same way, a constant asserted equal to itself), so it passes by construction and can never disagree with the code. Expected values must come from an independent source of truth — a known-good literal, a worked example, the spec.
-- **Horizontal slicing** — writing all tests first, then all implementation. Bulk tests verify _imagined_ behavior: you test the _shape_ of things rather than user-facing behavior, the tests go insensitive to real changes, and you commit to test structure before understanding the implementation. Work in **vertical slices** instead — one test → one implementation → repeat, each test a **tracer bullet** that responds to what the last cycle taught you.
-
-## Rules of the loop
-
-- **Red before green.** Write the failing test first, then only enough code to pass it. Don't anticipate future tests or add speculative features.
-- **One slice at a time.** One seam, one test, one minimal implementation per cycle.
-- **Refactoring is not part of the loop.** It belongs to the review stage (see the `code-review` skill), not the red → green implementation cycle.
+The adapter applies to the workflow and all resources it reaches. A selected workflow
+may read its declared supporting resources within scope; naming another workflow
+does not independently authorize additional work, external actions, or a session-wide mode.

@@ -1,5 +1,2 @@
-interface:
-  display_name: "Teaching: Teach"
-  short_description: Learn a concept in a guided workspace
 policy:
   allow_implicit_invocation: false

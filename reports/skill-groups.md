@@ -1,3 +1,5 @@
+> Historical catalog from main before the pstack-only branch. For the active catalog, see [MANIFEST.md](../MANIFEST.md#catalog).
+
 # Skill groups
 
 All 73 repository-owned skills are divided into 20 functional groups, each containing 2–5 skills. Prefixes appear in `interface.display_name` in each skill’s `agents/openai.yaml`. Existing skill IDs, directories, invocation policy, and supporting references stay compatible. Host-owned skills outside this repository are outside this catalog.

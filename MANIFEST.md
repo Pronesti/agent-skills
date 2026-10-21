@@ -1,100 +1,90 @@
-# Curated Agent Skills
+# Personal agent skills — pstack edition
 
-This repository owns **53 standalone skills and a 20-skill Caveman edition**. Seven focused skills allow automatic invocation; the other 66 personal workflows require explicit user selection. See [POLICY.md](POLICY.md) for invocation boundaries.
+This branch replaces the multi-source personal catalog with the complete pstack
+package, adapted for Codex. The shared [AGENTS.md template](config/codex/AGENTS.md),
+runtime detection, instruction syncing, installer backups, and read-only update
+checker remain in this repository. The template is unchanged from main.
 
-Read the [workflow guide](WORKFLOW-GUIDE.md) for 56 scenarios in ASD-STE100 English. The guide covers all 73 workflows, their sequences, and combinations with different instructions.
+## Source and contents
 
-## Author revisions
+- Upstream: [cursor/plugins, pstack](https://github.com/cursor/plugins/tree/190d28736eff128ec94f502a22c7fe0c4b56cd37/pstack).
+- Revision: `190d28736eff128ec94f502a22c7fe0c4b56cd37`, version `0.15.29`.
+- All 172 upstream files are preserved byte-for-byte under [pstack/](pstack/README.md).
+  This includes 56 public skills, 23 playbooks, two agent definitions, guides,
+  scripts, assets, and the Benny automation pack with three internal skills.
+- The [MIT license](pstack/LICENSE) permits forks with the notices retained.
+  Earlier license notices remain in `licenses/` for retained history and tooling.
 
-Pinned author revisions were recorded on 19 September 2026. All 63 skill directories were checked again on 3 October 2026: 40 unchanged, 22 with upstream changes available, and one absent from its recorded upstream path. The check is recorded in `reports/2026-10-03-skill-updates/upstream-check.json`; it does not replace the pinned content. Full revisions, upstream paths, and local destinations are pinned in [upstreams.json](upstreams.json). A newer repository revision does not necessarily change every selected skill.
+The 56 personal [entrypoints](skills/) load a host adapter and then the unmodified
+upstream workflow. Codex uses the [local adapter](pstack/docs/harness/codex.md);
+Claude Code uses the bundled upstream adapter. Cursor keeps its native names.
+The installer exposes only the public skills, not Benny's internal skills. It also
+generates native Codex agent configurations from the local role registry.
+[upstreams.json](upstreams.json) records every original file checksum and maps
+each entrypoint to its upstream source. No upstream instructions or assets were
+removed to make the package appear portable.
 
-The wshobson, addyosmani, severity1, and vercel-agent-browser sources were added on 7 October 2026 at the revisions below. These are local forks with the same selective invocation overlay; their upstream repositories remain the reference for future updates.
+## Codex support and limits
 
-| Source | Original repository | Pinned revision | Skills |
-|---|---|---|---:|
-| superpowers | [obra/superpowers](https://github.com/obra/superpowers) | `5bf4e78011075bcfc0dc295f0724994cd123ee71` | 8 |
-| mattpocock | [mattpocock/skills](https://github.com/mattpocock/skills) | `c55ee46073ed923f86ce59a5eb3b6d895095d1b7` | 24 |
-| mattpocock-pr | [mattpocock/skills](https://github.com/mattpocock/skills) | `49dd158d1076134a641b33efb035946536778336` | 1 |
-| warpdotdev | [warpdotdev/common-skills](https://github.com/warpdotdev/common-skills) | `7c4eb852de8d7c3e68c81802e1c59db9a611f914` | 1 |
-| pstack | [cursor/plugins](https://github.com/cursor/plugins) | `032be146865d973682535de75f2287da438550bf` | 7 |
-| ponytail | [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | `e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156` | 1 |
-| humanlayer | [humanlayer/skills](https://github.com/humanlayer/skills) | `ca7c8088db69e315a8b2deea43820270457f8f3c` | 1 |
-| vercel | [vercel-labs/skills](https://github.com/vercel-labs/skills) | `7407f3893ad4dceab546ac002c3ef806e4000c73` | 1 |
-| caveman | [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) | `542442bab314973709f95b85b1ac0b3f6f5b5dc6` | 20 |
-| wshobson | [wshobson/agents](https://github.com/wshobson/agents) | `46891e7e60da0e52baf1050b7b6391b64e84c6d9` | 1 |
-| addyosmani | [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) | `1401c8b8030e023baeebb31781a6653fe8e93026` | 2 |
-| severity1 | [severity1/claude-code-prompt-improver](https://github.com/severity1/claude-code-prompt-improver) | `50aae187bb4f08b852f318234b654df3332726a4` | 1 |
-| taste | [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) | `b482f7a970abb98c4108d4a9f761e458c64cefc8` | 1 |
-| onewave | [OneWave-AI/claude-skills](https://github.com/OneWave-AI/claude-skills) | `fc5b7851a6c7ba367e05797df46ad3679df355dd` | 1 |
-| vercel-agent-browser | [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser) | `f7c8b071343dda29477a56cb336ea76144c05496` | 1 |
+Use `$poteto-mode` for the main router, `$poteto-help` for guidance, and
+`$setup-pstack` for supported model-role choices. All entrypoints require explicit
+selection, matching the prior policy for pstack. Bundled supporting resources
+can be read within a selected task. See [POLICY.md](POLICY.md).
 
-Architecture Patterns includes its upstream `references/details.md` and `references/advanced-patterns.md`. Incremental Implementation bundles the upstream shared `references/definition-of-done.md` inside its own reference directory; `upstreams.json` records that additional source-to-local mapping. Commit and delivery instructions in the Addy forks honor existing authorization and project requirements. Other workflow names remain optional, separately selected choices.
+The adapter integrates native custom agents, validated per-role model settings,
+project-scoped persisted history, and native PR monitoring. See the
+[agents/model guide](docs/codex/agents-and-models.md),
+[history guide](docs/codex/history.md), and
+[monitoring guide](docs/codex/monitoring.md). It keeps model settings
+outside the shared AGENTS template. Individual sessions may lack delegation,
+history, browser control, or model selection; the adapter requires reporting that
+limit instead of inventing an equivalent result. Existing authorization governs
+external messages, commits, publication, merging, and deployment.
 
-Prompt Improver adapts severity1's research-first workflow into a manually invoked research and execution handoff. One light subagent answers investigation questions from code and supplied conversation history, checks existing behavior and reuse targets, and returns a scoped prompt. The main agent displays that prompt and executes it without an extra approval round; unresolved user decisions are clarified first. Local supporting references cover the subagent assignment and complete, partial, missing, and inaccessible implementations. No upstream plugin or automatic hooks are included; the local adaptations are recorded in `upstreams.json`.
-
-Manual QA preserves Vercel's exploratory QA guidance, issue checklist, and adapted report template. It uses native Codex Computer Use, resolves URL/sign-in/scope from user context, plans and tracks every case, continues independent cases after failures, and reports incomplete coverage. The source revision, original file paths, renamed destinations, and local changes are recorded in `upstreams.json`. It has no separate browser CLI or plugin dependency.
-
-Taste and OneWave were added on 8 October 2026. Taste `image-to-code` preserves text → generated images → analysis → frontend implementation. OneWave `screenshot-to-code` preserves screenshot → visual spec → implementation → render comparison, including its stack and visual-check references. Both use manual invocation and retain upstream workflow bodies. Their license notices are preserved in `licenses/`.
-
-Matt's `pr` and Warp's `write-pr-description` were added on 14 October 2026 with narrow automatic invocation. Warp owns the drafting procedure; Matt supplies summary, evidence, and impact guidance in the same body. Both require a specific authorized PR authoring deliverable, honor repository templates, and keep publication within existing authorization. Their shared scope reference excludes review-only, coding-only, research, and template/skill editing. Matt's new skill has a separate provenance pin so the other Matt skills retain their recorded revision. Warp's references and upstream evaluation cases are bundled; both authors' license notices are preserved.
-
-Anthropic `frontend-design` and Next Level Builder `ui-ux-pro-max` were added on 17 October 2026. The first guides visual direction and frontend implementation. The second provides a local searchable UI/UX catalog and stack-specific guidance. Both are manual workflows with pinned upstream revisions, bundled data and scripts where needed, and upstream license notices.
-
-## Functional groups
-
-Skill picker labels use 20 functional prefixes, each grouping 2–5 skills by their main purpose. All 73 skills are assigned exactly once. Invocation names and installation paths are preserved. See the [complete grouping](reports/skill-groups.md).
+Cursor Automations/Benny, cloud-agent dashboards, Cursor model APIs, Bugbot setup,
+and cursor-team-kit integrations do not carry over unchanged. Benny is retained
+as source, not installed as a working Codex automation. Existing forge review
+comments and bounded PR checks can use native tools; recurring monitoring needs
+an authorized native automation. Full source preservation is verified; full
+Cursor feature parity is not claimed.
 
 ## Catalog
 
-**superpowers:** `brainstorming`, `executing-plans`, `finishing-a-development-branch`, `requesting-code-review`, `subagent-driven-development`, `systematic-debugging`, `test-driven-development`, `writing-plans`.
+`architect`, `arena`, `automate-me`, `benchmark-checklist`, `blast-radius`, `bro`, `correct`, `create-formal-verification-skill`, `create-verification-skill`, `figure-it-out`, `how`, `in-your-own-words`, `interrogate`, `ketchup`, `maintain-formal-verification-skill`, `maintain-verification-skill`, `make-bot-ui`, `no-comments`, `poteto-help`, `poteto-mode`, `principle-attack-the-premise`, `principle-boundary-discipline`, `principle-build-the-lever`, `principle-encode-lessons-in-structure`, `principle-exhaust-the-design-space`, `principle-experience-first`, `principle-explain-the-number`, `principle-fix-root-causes`, `principle-foundational-thinking`, `principle-guard-the-context-window`, `principle-laziness-protocol`, `principle-make-operations-idempotent`, `principle-migrate-callers-then-delete-legacy-apis`, `principle-minimize-reader-load`, `principle-model-the-domain`, `principle-never-block-on-the-human`, `principle-outcome-oriented-execution`, `principle-prove-it-works`, `principle-redesign-from-first-principles`, `principle-separate-before-serializing-shared-state`, `principle-sequence-verifiable-units`, `principle-subtract-before-you-add`, `principle-test-behavior-not-implementation`, `principle-type-system-discipline`, `recall`, `reflect`, `setup-pstack`, `sharpen`, `show-me-your-work`, `swarm`, `tdd`, `teach`, `technical-writing`, `typescript-best-practices`, `unslop`, `why`.
 
-**mattpocock:** `grill-me`, `grill-with-docs`, `grilling`, `research`, `resolving-merge-conflicts`, `wait-what`, `wizard`, `writing-for-agents`, `code-review`, `codebase-design`, `diagnosing-bugs`, `domain-modeling`, `handoff`, `implement`, `improve-codebase-architecture`, `prototype`, `setup-matt-pocock-skills`, `tdd`, `teach`, `to-questionnaire`, `to-spec`, `to-tickets`, `triage`, `wayfinder`.
-
-**mattpocock-pr:** `pr`.
-
-**warpdotdev:** `write-pr-description`.
-
-**pstack:** `blast-radius`, `how`, `recall`, `show-me-your-work`, `technical-writing`, `unslop`, `why`.
-
-**ponytail:** `ponytail`.
-
-**humanlayer:** `show-me`.
-
-**vercel:** `find-skills`.
-
-**wshobson:** `architecture-patterns`.
-
-**addyosmani:** `code-simplification`, `incremental-implementation`.
-
-**severity1:** `prompt-improver`.
-
-**vercel-agent-browser:** `manual-qa`.
-
-**taste:** `image-to-code`.
-
-**onewave:** `screenshot-to-code`.
-
-**anthropics-frontend:** `frontend-design`.
-
-**nextlevelbuilder:** `ui-ux-pro-max`.
-
-**caveman:** `caveman:cavecrew`, `caveman:caveman`, `caveman:caveman-commit`, `caveman:caveman-compress`, `caveman:caveman-discover`, `caveman:caveman-evidence-review`, `caveman:caveman-explore`, `caveman:caveman-help`, `caveman:caveman-learn`, `caveman:caveman-manage`, `caveman:caveman-optimize`, `caveman:caveman-review`, `caveman:caveman-setup`, `caveman:caveman-stats`, `caveman:investigate-first`, `caveman:lean-build`, `caveman:migration`, `caveman:safe-refactor`, `caveman:surgical-patch`, `caveman:verify-and-stop`.
+See [the workflow guide](WORKFLOW-GUIDE.md) and the complete upstream
+[README](pstack/README.md) for routing, principles, and examples.
 
 ## Installation
 
-Run `python3 scripts/install.py` to preview, then `./install.sh` to apply. This one command installs skill links, syncs the complete [shared Codex AGENTS.md](#share-global-codex-instructions-across-computers-and-vms), and generates a missing [runtime profile](#machine-specific-php-and-composer-runtimes) when local executable paths identify an unambiguous runtime. The installer keeps one canonical directory per standalone skill under this repository, links it through `~/.agents/skills` and `~/.claude/skills`, and retires repository-owned aliases under `~/.codex/skills` and `~/.cursor/skills-cursor`. It refuses unmanaged skill name collisions and backs up replaced copies outside discovery roots. Re-running it preserves an existing runtime profile and makes no changes to current skill links or identical global instructions.
+Preview with `python3 scripts/install.py`, then apply with `./install.sh`.
+The installer links entrypoints into `~/.agents/skills` and `~/.claude/skills`,
+syncs the shared Codex instructions, installs 23 native agent configurations by
+default, and detects a missing machine runtime profile. Native agent defaults
+inherit model and effort; saved role choices are validated against native model
+discovery. Edited or unmanaged same-name agent files stop the install before
+skill links or shared instructions change. Preview does not change files. Use `--home /path/to/scratch-home` and
+`--runtime skip` for isolated validation. Existing runtime flags are preserved.
 
-For the local Caveman edition and the personal instruction block:
+When replacing the catalog, links into this repository's old `skills/` or
+`plugins/caveman/skills/` roots, including sibling worktrees, can be backed up
+and retired. This applies to stale links and same-name links that need to move.
+User copies, unrelated links, and unrelated package-manager records are preserved;
+a same-name unmanaged collision stops installation before changes.
+Backups live under `~/.local/share/agent-skills/backups` outside discovery roots.
+A repeat install is idempotent.
 
-```sh
-python3 scripts/configure_hosts.py
-codex plugin add caveman@personal
-claude plugin marketplace add ./plugins
-claude plugin install caveman@personal-manual
-claude plugin disable caveman@caveman
-```
+Caveman plugin caches and marketplace registrations are not silently modified.
+If migrating a machine with Caveman enabled, disable or uninstall its old plugin
+through that host to complete the pstack-only live catalog. Application-owned
+skills and plugins remain managed by the host. This branch does not install
+itself on the live machine or change the main checkout.
 
-Disable the original `caveman@caveman` entry in Codex plugin settings as well; leave `caveman@personal` enabled. Do not delete upstream caches. Start a fresh task after changing discovery, and restart Claude Code to unload previously registered hooks. Application-managed built-in and specialist plugins remain owned by their host.
+`configure_hosts.py --policy-only` keeps its managed-block behavior. Without a
+mode flag it also updates only host policy; the obsolete Caveman marketplace
+registration step is removed. Use `./install.sh` to install the skills. The standalone shared-instructions mode
+and flags below remain available. No plugin marketplace registration is needed
+for these personal skill folders.
 
 ### Share global Codex instructions across computers and VMs
 
@@ -190,19 +180,41 @@ from the project directory:
 
 The example test commands assume the project provides those commands or scripts. When commands execute in a VM or remote host, read that execution host's runtime file. The file is consulted through the shared instruction; it is not an automatically discovered Codex instruction filename. If it is missing or unclear, establish the runtime configuration before executing project commands. An operating system name alone does not select a runtime.
 
-## Local policy overlay
+## Updating without losing local behavior
 
-- [invocation-policy.json](invocation-policy.json) owns the seven automatic skills and their triggers. Their entrypoints set `disable-model-invocation: false` and `policy.allow_implicit_invocation: true`. The other 66 entrypoints keep the opposite settings. Both fields must agree with the allowlist.
-- Selection applies to one task. Session-wide modes need an explicit request. Always-on style mandates, forced workflow transitions, and automatic activation from generated plans or handoffs are removed or made optional.
-- Supporting files are still readable. `grill-me` declares the grilling procedure; `grill-with-docs` declares grilling and domain documentation.
-- Project runtime, verification, delivery requirements, and existing user authorization take precedence. Superpowers namespace references are adapted for standalone installation; optional isolation uses host facilities.
-- Caveman preserves its 20 workflow names, reviewer presets, and manual stats helper, with four focused automatic workflows and no startup/prompt hook registration. The original plugin is disabled rather than deleted. The stats helper cannot reconstruct mode attribution that was never recorded.
-- Duplicate installations are consolidated by name. Distinct alternative workflows such as `tdd` and `test-driven-development` remain separate, manually selected choices.
+`python3 scripts/check_updates.py` compares the pstack pin with upstream HEAD and
+reports only. It never overwrites source. Review upstream changes before importing
+an exact new revision. Replace the complete pstack snapshot, refresh its checksum
+inventory and public-skill provenance, and create or retire the corresponding
+personal entrypoints. Keep the Codex adapter and manual invocation policy.
+Changes to upstream source require an explicit new pin/checksum review; do not
+silently update the checksums to hide local modifications.
 
-## Updating without losing the policy
+Use Python 3.11 or later for the native TOML integration. Install validation
+dependencies in a Python environment:
 
-Run `python3 scripts/check_updates.py` to compare the pinned revisions with the authors’ default branches. It reports only; it never replaces skills. Merge changed skill files against the recorded base, preserve the selective invocation overlay, update `upstreams.json`, and review executable helpers. For Caveman, bump the local plugin version and reinstall through each host after editing the source. Do not edit versioned plugin caches.
+```sh
+python3 -m pip install -r scripts/requirements.txt
+python3 scripts/validate.py
+python3 -m unittest discover -s tests -v
+```
 
-Validate metadata and references with `python3 scripts/validate.py` (requires `pip install -r scripts/requirements.txt` in your chosen environment). Run `python3 -m unittest discover -s tests -v` for installer behavior. Verify that all personal skills remain available for explicit selection, only the allowlisted skills appear in automatic discovery, and each automatic trigger stays within the authorized task. Start a fresh task after changing discovery.
+The validator checks the complete public catalog, entrypoint links, invocation
+metadata, provenance, and every preserved upstream file checksum. Upstream helper
+checks, when Bun and dependencies are available, run from
+`pstack/skills/poteto-mode/scripts`: `bun run test` and `bun run typecheck`.
+Start a fresh chat after installing a changed catalog.
 
-Third-party licenses are preserved in [licenses/](licenses/). Excluded upstream bundles, bootstrap skills, and hooks are not installed by this repository.
+Opt-in native workflow checks (authenticated CLI; all profiles and fixtures are
+disposable):
+
+```sh
+python3 tests/native_codex_smoke.py
+python3 tests/native_monitor_smoke.py --bun /path/to/bun
+```
+
+The first verifies actual native agent roles, model/effort application, full
+persisted history, and read-only fixture behavior. The second executes the
+unchanged upstream watcher against a local forge fixture, testing terminal
+notification and deduplication. It makes no live forge calls or scheduled tasks.
+See [native integration verification](reports/pstack-native-validation-2026-10-21.md).

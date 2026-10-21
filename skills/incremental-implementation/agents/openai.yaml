@@ -1,5 +1,0 @@
-interface:
-  display_name: "Implementation: Incremental Implementation"
-  short_description: "Build changes in small, verified slices"
-policy:
-  allow_implicit_invocation: false

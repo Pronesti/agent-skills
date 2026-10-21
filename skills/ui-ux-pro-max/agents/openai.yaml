@@ -1,6 +1,0 @@
-interface:
-  display_name: "Design: UI and UX"
-  short_description: "Search UI and UX guidance for interface decisions"
-  default_prompt: "Use $ui-ux-pro-max to guide the UI and UX for this task, using its local design data and the project's actual stack."
-policy:
-  allow_implicit_invocation: false

@@ -1,4 +1,2 @@
 policy:
   allow_implicit_invocation: false
-interface:
-  display_name: "Context: Show Me Your Work"

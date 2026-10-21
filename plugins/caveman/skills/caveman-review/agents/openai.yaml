@@ -1,5 +1,0 @@
-policy:
-  allow_implicit_invocation: false
-interface:
-  display_name: "Review: Caveman Review"
-  short_description: Manually selected caveman review workflow.

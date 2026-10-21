@@ -1,6 +1,0 @@
-interface:
-  display_name: "Design: Frontend"
-  short_description: "Give frontend UI a distinctive visual direction"
-  default_prompt: "Use $frontend-design to design and implement a distinctive UI for this project while following its existing framework and design system."
-policy:
-  allow_implicit_invocation: false

@@ -6,6 +6,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 spec = importlib.util.spec_from_file_location("installer", Path(__file__).resolve().parents[1] / "scripts/install.py")
 installer = importlib.util.module_from_spec(spec)
@@ -15,32 +16,114 @@ sys.path.pop(0)
 
 
 class InstallationTests(unittest.TestCase):
+    def test_nested_repository_directory_is_not_a_managed_checkout_root(self):
+        with tempfile.TemporaryDirectory() as temp:
+            target = Path(temp) / 'keep'
+            target.symlink_to(installer.REPO / 'tests/skills/keep')
+            self.assertIsNone(installer.git_common_dir(installer.REPO / 'tests'))
+            self.assertFalse(installer.managed_link(target))
+
+    def test_pstack_replaces_only_repository_links_and_repeat_is_empty(self):
+        with tempfile.TemporaryDirectory() as temp:
+            home = Path(temp).resolve()
+            unrelated = home / 'unrelated/skills/keep'
+            unrelated.mkdir(parents=True)
+            (unrelated / 'SKILL.md').write_text('external skill')
+            old_links = []
+            for host in ('.agents', '.claude', '.codex', '.cursor'):
+                location = home / host / 'skills'
+                location.mkdir(parents=True)
+                stale = location / 'removed-skill'
+                stale.symlink_to(installer.REPO / 'skills/removed-skill')
+                old_links.append(stale)
+                (location / 'keep').symlink_to(unrelated)
+                copy = location / 'personal-copy'
+                copy.mkdir()
+                (copy / 'SKILL.md').write_text('personal edits')
+            expected = {p.name for p in (installer.REPO / 'skills').iterdir()
+                        if (p / 'SKILL.md').is_file()}
+            self.assertEqual(len(expected), 56)
+            self.assertNotIn('benny', expected)
+            preview = installer.install(home, runtime='skip')
+            self.assertEqual(preview['skills'], len(expected))
+            self.assertTrue(all(p.is_symlink() for p in old_links))
+            self.assertFalse((home / '.local').exists())
+            applied = installer.install(home, True, runtime='skip')
+            for old in old_links:
+                self.assertFalse(old.is_symlink())
+                saved = Path(applied['backup']) / old.relative_to(home)
+                self.assertTrue(saved.is_symlink())
+                self.assertEqual(saved.readlink(), installer.REPO / 'skills/removed-skill')
+            for host in ('.agents', '.claude'):
+                for name in expected:
+                    installed = home / host / 'skills' / name
+                    self.assertEqual(installed.resolve(), installer.REPO / 'skills' / name)
+                    canonical = installed.resolve()
+                    self.assertTrue((canonical / '../../pstack/skills' / name / 'SKILL.md').is_file())
+            for host in ('.agents', '.claude', '.codex', '.cursor'):
+                location = home / host / 'skills'
+                self.assertEqual((location / 'keep').resolve(), unrelated)
+                self.assertEqual((location / 'personal-copy/SKILL.md').read_text(), 'personal edits')
+            self.assertEqual(installer.install(home, True, runtime='skip')['actions'], [])
+
+    def test_sibling_worktree_migration_and_unrelated_same_name_collision(self):
+        with tempfile.TemporaryDirectory() as temp:
+            home = Path(temp).resolve()
+            sibling = home / 'sibling-checkout'
+            target = home / '.agents/skills/how'
+            target.parent.mkdir(parents=True)
+            target.symlink_to(sibling / 'skills/how')
+            common = installer.git_common_dir(installer.REPO)
+            def same_repository(root):
+                return common if root in (sibling, installer.REPO) else None
+            with patch.object(installer, 'git_common_dir', side_effect=same_repository):
+                preview = installer.install(home, runtime='skip')
+                self.assertTrue(preview['actions'])
+                self.assertEqual(target.readlink(), sibling / 'skills/how')
+                result = installer.install(home, True, runtime='skip')
+            self.assertEqual(target.resolve(), installer.REPO / 'skills/how')
+            saved = Path(result['backup']) / '.agents/skills/how'
+            self.assertEqual(saved.readlink(), sibling / 'skills/how')
+
+        with tempfile.TemporaryDirectory() as temp:
+            home = Path(temp).resolve()
+            foreign = home / 'other-repository/skills/how'
+            foreign.mkdir(parents=True)
+            target = home / '.agents/skills/how'
+            target.parent.mkdir(parents=True)
+            target.symlink_to(foreign)
+            with self.assertRaisesRegex(RuntimeError, 'Unmanaged collision'):
+                installer.install(home, True, runtime='skip')
+            self.assertEqual(target.resolve(), foreign)
+            self.assertFalse((home / '.codex').exists())
+            self.assertFalse((home / '.local').exists())
+
     def test_migration_preserves_old_copy_and_is_idempotent(self):
         with tempfile.TemporaryDirectory() as temp:
             home = Path(temp)
-            existing = home / ".agents/skills/grilling"
+            existing = home / ".agents/skills/how"
             existing.mkdir(parents=True)
             (existing / "SKILL.md").write_text("local customization")
             lock = home / ".agents/.skill-lock.json"
-            lock.write_text(json.dumps({"skills": {"grilling": {"source": "mattpocock/skills"}, "unrelated": {"source": "someone/else"}}}))
-            old = home / ".codex/skills/grilling"
+            lock.write_text(json.dumps({"skills": {"how": {"source": "mattpocock/skills"}, "unrelated": {"source": "someone/else"}}}))
+            old = home / ".codex/skills/how"
             old.parent.mkdir(parents=True)
-            old.symlink_to(installer.REPO / "skills/grilling")
+            old.symlink_to(installer.REPO / "skills/how")
             preview = installer.install(home, runtime='skip')
             self.assertFalse(existing.is_symlink())
             self.assertTrue(preview["actions"])
             result = installer.install(home, True, runtime='skip')
-            self.assertEqual(existing.resolve(), installer.REPO / "skills/grilling")
+            self.assertEqual(existing.resolve(), installer.REPO / "skills/how")
             self.assertFalse(old.is_symlink())
-            self.assertEqual((Path(result["backup"]) / ".agents/skills/grilling/SKILL.md").read_text(), "local customization")
+            self.assertEqual((Path(result["backup"]) / ".agents/skills/how/SKILL.md").read_text(), "local customization")
             self.assertIn("unrelated", json.loads(lock.read_text())["skills"])
-            self.assertNotIn("grilling", json.loads(lock.read_text())["skills"])
+            self.assertNotIn("how", json.loads(lock.read_text())["skills"])
             self.assertEqual(installer.install(home, True, runtime='skip')["actions"], [])
 
     def test_unmanaged_collision_changes_nothing(self):
         with tempfile.TemporaryDirectory() as temp:
             home = Path(temp)
-            collision = home / ".claude/skills/writing-plans"
+            collision = home / ".claude/skills/poteto-mode"
             collision.mkdir(parents=True)
             (collision / "SKILL.md").write_text("unrelated installation")
             with self.assertRaisesRegex(RuntimeError, "Unmanaged collision"):
@@ -129,7 +212,7 @@ class InstallationTests(unittest.TestCase):
                 data = json.loads(result.stdout)
                 self.assertEqual(data['codex_agents']['target'], str(profile / 'AGENTS.md'))
                 self.assertTrue((profile / 'AGENTS.md').is_file())
-                self.assertTrue((destination / '.agents/skills/grilling').is_symlink())
+                self.assertTrue((destination / '.agents/skills/how').is_symlink())
                 if mode != 'environment':
                     self.assertFalse(environment_profile.exists())
                 if mode in ('home', 'codex-home'):

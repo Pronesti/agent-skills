@@ -5,17 +5,57 @@ import datetime
 import json
 from pathlib import Path
 import shutil
+import subprocess
+from functools import lru_cache
 
 from runtime_profile import apply_runtime, plan_runtime
 from codex_instructions import resolve_codex_home, sync_instructions
+from codex_native import native_agent_plan, apply_agent_plan
 
 REPO = Path(__file__).resolve().parents[1]
+
+
+@lru_cache(maxsize=None)
+def git_common_dir(root):
+    """Identify this repository across its managed worktrees, without using remotes."""
+    try:
+        result = subprocess.run(
+            ['git', '-C', str(root), 'rev-parse', '--show-toplevel', '--git-common-dir'],
+            capture_output=True, text=True, check=True, timeout=5,
+        ).stdout.splitlines()
+        top, common = result
+        if Path(top).resolve() != root.resolve():
+            return None
+        return (root / common).resolve()
+    except (OSError, ValueError, subprocess.SubprocessError):
+        return None
+
+
+def managed_link(target):
+    """Recognize only direct skill links into this checkout or a sibling worktree."""
+    if not target.is_symlink():
+        return False
+    destination = (target.parent / target.readlink()).absolute()
+    if destination.name != target.name:
+        return False
+    for relative in ('skills', 'plugins/caveman/skills'):
+        parts = Path(relative).parts
+        if tuple(destination.parent.parts[-len(parts):]) != parts:
+            continue
+        root = destination.parents[len(parts)]
+        if root.resolve() == REPO.resolve():
+            return True
+        common = git_common_dir(root)
+        if common is not None and common == git_common_dir(REPO):
+            return True
+    return False
 
 
 def install(home, apply=False, runtime='auto', refresh_runtime=False, codex_home=None):
     runtime_plan = plan_runtime(home, runtime, refresh_runtime)
     codex_home = resolve_codex_home(home, codex_home)
     codex_result = sync_instructions(home, codex_home, root=REPO)
+    native_plan = native_agent_plan(home, codex_home, root=REPO)
     source = REPO / "skills"
     skills = sorted(p for p in source.iterdir() if (p / "SKILL.md").is_file())
     lock_path = home / ".agents/.skill-lock.json"
@@ -39,7 +79,7 @@ def install(home, apply=False, runtime='auto', refresh_runtime=False, codex_home
             if target.is_symlink() and target.resolve() == skill.resolve():
                 continue
             if target.exists() or target.is_symlink():
-                if not (target_root == home / ".agents/skills" and skill.name in owned):
+                if not managed_link(target) and not (target_root == home / ".agents/skills" and skill.name in owned):
                     raise RuntimeError(f"Unmanaged collision at {target}; left untouched")
 
     if apply:
@@ -51,6 +91,11 @@ def install(home, apply=False, runtime='auto', refresh_runtime=False, codex_home
         codex_actions.append(f"write {codex_result['target']} (shared Codex instructions)")
 
     for target_root in (home / ".agents/skills", home / ".claude/skills"):
+        if target_root.exists():
+            current_names = {skill.name for skill in skills}
+            for target in sorted(target_root.iterdir()):
+                if target.name not in current_names and managed_link(target):
+                    save(target)
         for skill in skills:
             target = target_root / skill.name
             if target.is_symlink() and target.resolve() == skill.resolve():
@@ -66,7 +111,7 @@ def install(home, apply=False, runtime='auto', refresh_runtime=False, codex_home
         if not target_root.exists():
             continue
         for target in target_root.iterdir():
-            if target.is_symlink() and target.readlink().parent == source:
+            if managed_link(target):
                 save(target)
 
     migrated = owned.intersection(p.name for p in skills)
@@ -80,13 +125,15 @@ def install(home, apply=False, runtime='auto', refresh_runtime=False, codex_home
             lock_path.write_text(json.dumps(lock, indent=2) + "\n")
         actions.append(f"retire {len(migrated)} old package-manager ownership records")
     runtime_result = apply_runtime(runtime_plan, backup) if apply else runtime_plan
+    native_result = apply_agent_plan(native_plan, home, backup, apply)
+    actions.extend(native_result['actions'])
     if runtime_result['status'] in ('planned', 'written'):
         if runtime_result['backup']:
             actions.append(f"backup {runtime_result['target']} -> {runtime_result['backup']}")
         actions.append(f"write {runtime_result['target']} ({runtime_result['selected']})")
     return {"applied": apply, "skills": len(skills), "backup": str(backup) if actions else None,
             "actions": codex_actions + actions, "runtime": runtime_result,
-            "codex_agents": codex_result}
+            "codex_agents": codex_result, "native_agents": native_result}
 
 
 if __name__ == "__main__":

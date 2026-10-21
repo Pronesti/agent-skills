@@ -1,19 +1,31 @@
 # Invocation policy
 
-Seven personal skills may activate automatically when their trigger fits the authorized task: `caveman:investigate-first`, `caveman:surgical-patch`, `caveman:safe-refactor`, `caveman:verify-and-stop`, `writing-for-agents`, `pr`, and `write-pr-description`. [invocation-policy.json](invocation-policy.json) owns this allowlist and its triggers. The two PR skills apply only at an authorized title/body drafting stage for a specific PR or change set. General review, coding, research, and template/skill editing do not trigger them. Their shared [activation check](skills/pr/references/authoring-scope.md) defines target resolution, one drafting pass, and format precedence. All other personal workflows require explicit user selection.
+The personal catalog contains only pstack. Every public entrypoint requires
+explicit selection. [invocation-policy.json](invocation-policy.json) retains the
+allowlist mechanism with an empty list; entrypoints set
+`disable-model-invocation: true` and `policy.allow_implicit_invocation: false`.
 
-Selection applies to the requested task; a session-wide mode requires an explicit request. Automatic invocation does not authorize additional work, external actions, commits, or delegation. Use native capabilities when no allowlisted trigger fits.
+Selection applies to the requested task. A session-wide mode needs an explicit
+request. A selected workflow reads its host adapter and unmodified upstream
+instructions. It may read declared supporting procedures and principles within
+scope. Merely naming another workflow does not authorize independent work.
+Existing user and project requirements govern runtime, verification, delegation,
+external actions, delivery, and memory. An upstream autonomy statement does not
+supply missing authorization.
 
-A selected skill may read its declared supporting references. Other workflow names in a skill, plan, or handoff are suggestions, not activation instructions; each workflow must independently meet its invocation policy. `grill-me` declares the grilling procedure; `grill-with-docs` declares grilling and domain documentation. Neither alias starts planning or implementation.
+[config/codex/AGENTS.md](config/codex/AGENTS.md) remains the shared template. Its
+managed policy section is rendered from the current allowlist; the rest of the
+template is unchanged. Installation syncs the complete instructions with a backup
+and preserves existing runtime profiles. `--policy-only` updates managed blocks
+in Codex and Claude while preserving other text. `--sync-codex-agents` previews
+the complete shared file; add `--apply` to replace it with a backup.
 
-Project runtime, integration contracts, verification, delivery requirements, and existing user authorization remain mandatory. Keep repository requirements in project instructions and executable checks. Application-required built-in skills follow the host's instructions.
-
-Allowlisted entrypoints set `disable-model-invocation: false` in `SKILL.md` and `policy.allow_implicit_invocation: true` in `agents/openai.yaml`. All other managed entrypoints set those fields to `true` and `false`, respectively. Preserve this selective policy during upstream updates. The Caveman edition registers no startup or prompt hooks.
-
-Install canonical skills and sync shared Codex instructions through `./install.sh`. Preview all changes with `python3 scripts/install.py`. Replaced copies and retired links are retained under `~/.local/share/agent-skills/backups`, outside directories scanned for skills. Codex and Cursor use `~/.agents/skills`; Claude uses links to the same canonical files in `~/.claude/skills`.
-
-The installer also generates a missing `~/.config/agent-skills/runtime.md` when executable paths identify Lerd or direct Yerd access. It preserves existing profiles, reports ambiguous or unavailable runtimes, and supports explicit `--runtime lerd|direct|skip` selection. Use `--refresh-runtime` to regenerate with a backup after runtime changes. Detection describes the active environment and does not assume a runtime from the operating system. See the [runtime setup guide](MANIFEST.md#machine-specific-php-and-composer-runtimes).
-
-Run `python3 scripts/configure_hosts.py --policy-only` to update the managed policy blocks in Codex and Claude without modifying marketplace registration. It generates the automatic rules from the allowlist, preserves text outside the managed blocks, and backs up changed files. Reinstall the local Caveman plugin after changing its source; start a fresh task or restart the host to load the new skill catalog.
-
-For identical global Codex instructions across machines, edit [config/codex/AGENTS.md](config/codex/AGENTS.md) and distribute changes through Git. Run `git pull --ff-only && ./install.sh` on each machine to update skills, sync the complete instructions with a backup, and generate a missing runtime profile. The skill-policy section remains generated from the existing allowlist. Sync replaces local additions and leaves Claude instructions and marketplace setup untouched. For an instructions-only preview, use `python3 scripts/configure_hosts.py --sync-codex-agents`, then add `--apply` to sync. See the [installation guide](MANIFEST.md#share-global-codex-instructions-across-computers-and-vms) for custom Codex directories, override handling, backups, and updates.
+Run `python3 scripts/install.py` to preview and `./install.sh` to apply. The
+installer preserves unmanaged skills and backs up retired repository links. It
+also installs native Codex agent files with ownership checks, backups, and
+validated saved model roles. Native agents inherit permissions and provider;
+their availability does not authorize unsolicited delegation.
+It leaves plugin caches and marketplace registrations alone; disable an old
+Caveman plugin through its host when migrating a live machine. See the
+[installation guide](MANIFEST.md#installation) for isolation, runtime choices,
+custom Codex directories, and updates. No live installation is part of this task.

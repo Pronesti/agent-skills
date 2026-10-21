@@ -12,6 +12,22 @@ spec.loader.exec_module(policy)
 
 
 class InvocationPolicyTests(unittest.TestCase):
+    def test_default_host_configuration_preserves_local_text_without_plugins(self):
+        with tempfile.TemporaryDirectory() as temp:
+            home = Path(temp)
+            target = home / '.codex/AGENTS.md'
+            target.parent.mkdir()
+            target.write_text('Personal instruction outside the managed block.\n')
+            command = ['python3', str(ROOT / 'scripts/configure_hosts.py'), '--home', str(home)]
+            result = json.loads(subprocess.check_output(command, text=True))
+            self.assertTrue(result['policy_only'])
+            self.assertTrue(target.read_text().startswith('Personal instruction outside the managed block.'))
+            self.assertIn(policy.host_policy_body(), target.read_text())
+            self.assertFalse((home / '.agents').exists())
+            self.assertFalse((home / 'plugins').exists())
+            second = json.loads(subprocess.check_output(command, text=True))
+            self.assertIsNone(second['backup'])
+
     def test_allowlist_rejects_missing_skill_and_duplicate_entries(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)

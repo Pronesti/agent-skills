@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "roles": {
+    "feature, refactoring": {
+      "agent": "pstack-code",
+      "workflow": "poteto-mode",
+      "read_only": false,
+      "purpose": "Implement the scoped feature or refactor and verify behavior.",
+      "panel": false
+    },
+    "bug-fix": {
+      "agent": "pstack-bug-fix",
+      "workflow": "poteto-mode",
+      "read_only": false,
+      "purpose": "Reproduce the bug, fix its cause, and verify the regression.",
+      "panel": false
+    },
+    "perf-issue": {
+      "agent": "pstack-performance",
+      "workflow": "poteto-mode",
+      "read_only": false,
+      "purpose": "Measure the bottleneck and verify the performance change.",
+      "panel": false
+    },
+    "hillclimb": {
+      "agent": "pstack-hillclimb",
+      "workflow": "poteto-mode",
+      "read_only": false,
+      "purpose": "Optimize against the frozen benchmark and regression gates.",
+      "panel": false
+    },
+    "judgment and prose": {
+      "agent": "pstack-judgment",
+      "workflow": "poteto-mode",
+      "read_only": false,
+      "purpose": "Review evidence and communicate a grounded judgment.",
+      "panel": false
+    },
+    "hardest tasks": {
+      "agent": "pstack-hardest",
+      "workflow": "poteto-mode",
+      "read_only": false,
+      "purpose": "Solve the assigned difficult task within the parent scope.",
+      "panel": false
+    },
+    "how explorer": {
+      "agent": "pstack-how-explorer",
+      "workflow": "how",
+      "read_only": true,
+      "purpose": "Trace the implementation and return source evidence.",
+      "panel": false
+    },
+    "how explainer": {
+      "agent": "pstack-how-explainer",
+      "workflow": "how",
+      "read_only": true,
+      "purpose": "Explain the implementation from the supplied evidence.",
+      "panel": false
+    },
+    "why investigators": {
+      "agent": "pstack-why-investigator",
+      "workflow": "why",
+      "read_only": true,
+      "purpose": "Investigate the assigned source and cite evidence for decisions.",
+      "panel": false
+    },
+    "why synthesizer": {
+      "agent": "pstack-why-synthesizer",
+      "workflow": "why",
+      "read_only": true,
+      "purpose": "Synthesize motivation from the source investigators.",
+      "panel": false
+    },
+    "reflect tooling": {
+      "agent": "pstack-reflect-tooling",
+      "workflow": "reflect",
+      "read_only": true,
+      "purpose": "Find concrete tool/workflow problems in the scoped history.",
+      "panel": false
+    },
+    "reflect judgment, divergent, synthesizer": {
+      "agent": "pstack-reflect-judgment",
+      "workflow": "reflect",
+      "read_only": true,
+      "purpose": "Analyze the assigned history and propose evidence-based lessons.",
+      "panel": false
+    },
+    "arena runners": {
+      "agent": "pstack-arena-runner",
+      "workflow": "arena",
+      "read_only": false,
+      "purpose": "Produce one independent candidate for the parent arena.",
+      "panel": true
+    },
+    "arena cross-judge pool": {
+      "agent": "pstack-arena-judge",
+      "workflow": "arena",
+      "read_only": true,
+      "purpose": "Judge the supplied arena candidates independently.",
+      "panel": true
+    },
+    "swarm workers": {
+      "agent": "pstack-swarm-worker",
+      "workflow": "swarm",
+      "read_only": false,
+      "purpose": "Complete only the assigned slice and return verification evidence.",
+      "panel": false
+    },
+    "architect runners": {
+      "agent": "pstack-architect",
+      "workflow": "architect",
+      "read_only": false,
+      "purpose": "Propose one caller-focused design with source evidence.",
+      "panel": true
+    },
+    "interrogate reviewers": {
+      "agent": "pstack-reviewer",
+      "workflow": "interrogate",
+      "read_only": true,
+      "purpose": "Review independently against the supplied intent, diff and rubric.",
+      "panel": true
+    }
+  }
+}
