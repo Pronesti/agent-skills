@@ -44,8 +44,9 @@ Subagent (general-purpose):
     **While you work:** If you encounter something unexpected or unclear, **ask questions**.
     It's always OK to pause and clarify. Don't guess or make assumptions.
 
-    While iterating, run the focused test for what you're changing; run the
-    full suite once before committing, not after every edit.
+    Run focused tests and relevant checks for the change; widen them when the change or a failure warrants it. Follow the active project’s rules and explicit user requests for full verification, including any local pre-push gate. Reuse passing evidence when the tested state and relevant inputs still match under those rules; rerun affected checks when they no longer match. Report commands, scope, results, and any deferred or blocked verification accurately; never call a focused pass a full-suite pass.
+    A task, review, or local commit alone does not require another full suite.
+    The controller coordinates any required delivery gate.
 
     ## You Do Not Dispatch Subagents
 
@@ -129,7 +130,7 @@ Subagent (general-purpose):
 
     Write your full report to [REPORT_FILE]:
     - What you implemented (or what you attempted, if blocked)
-    - What you tested and test results
+    - Commands, scope, tested state and relevant inputs, results, and any deferred or blocked verification
     - **TDD Evidence** (if TDD was required for this task):
       - RED: command run, relevant failing output before implementation, and why the failure was expected
       - GREEN: command run and relevant passing output after implementation

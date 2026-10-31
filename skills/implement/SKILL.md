@@ -11,7 +11,7 @@ Implement the work described by the user in the spec or tickets.
 
 Use /tdd where possible, at pre-agreed seams.
 
-Run typechecking regularly, single test files regularly, and the full test suite once at the end.
+Run focused tests and relevant checks for the change; widen them when the change or a failure warrants it. Follow the active project’s rules and explicit user requests for full verification, including any local pre-push gate. Reuse passing evidence when the tested state and relevant inputs still match under those rules; rerun affected checks when they no longer match. Report commands, scope, results, and any deferred or blocked verification accurately; never call a focused pass a full-suite pass. A task or local commit alone does not add a full gate. Do not substitute CI for a required local pre-push gate unless the project or user permits it.
 
 Once done, use /code-review to review the work.
 

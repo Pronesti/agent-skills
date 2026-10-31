@@ -84,7 +84,7 @@ Subagent (general-purpose):
     - Tests verify real behavior, not mocks?
     - Edge cases covered?
     - Integration tests where they matter?
-    - All tests passing?
+    - Are the reported checks appropriate and passing for the tested state? Identify missing, deferred, or blocked required verification; do not infer a full-suite pass from focused checks.
 
     **Production readiness:**
     - Migration strategy if schema changed?

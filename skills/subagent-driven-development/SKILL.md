@@ -338,8 +338,14 @@ needed.
   project's spec demands.
 - Do not add open-ended directives like "check all uses" or "run race tests
   if useful" without a concrete, task-specific reason
-- Do not ask a reviewer to re-run tests the implementer already ran on the
-  same code — the implementer's report carries the test evidence
+- Pass the project’s verification rules and explicit user requests to implementers.
+  Coordinate required full gates at the project’s delivery boundary, including
+  local pre-push gates; do not substitute CI without permission. Reuse passing
+  evidence when the tested state and relevant inputs still match under those
+  rules; rerun affected checks when invalidated. Record scope and results.
+- Reuse the implementer's test evidence when the tested state and relevant
+  inputs still match under project rules; do not ask a reviewer to repeat it
+  merely to confirm the report
 - Do not pre-judge findings for the reviewer — never instruct a reviewer to
   ignore or not flag a specific issue. If you believe a finding would be a
   false positive, let the reviewer raise it and adjudicate it in the review

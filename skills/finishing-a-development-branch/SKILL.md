@@ -1,6 +1,6 @@
 ---
 name: finishing-a-development-branch
-description: 'Manual workflow: Use when implementation is complete, all tests pass, and you need to decide how to
+description: 'Manual workflow: Use when implementation is complete and you need to decide how to
   integrate the work'
 disable-model-invocation: true
 ---
@@ -18,9 +18,9 @@ Use this workflow only when the user explicitly selects it. Its scope ends with 
 
 ## Step 1: Verify Tests
 
-Run the project's full test suite (`npm test` / `cargo test` / `pytest` / `go test ./...`).
+Review the available verification evidence and run focused tests and relevant checks for the change as needed; widen them when the change or a failure warrants it. Follow the active project’s rules and explicit user requests for full verification, including any local pre-push gate. Reuse passing evidence when the tested state and relevant inputs still match under those rules; rerun affected checks when they no longer match. Report commands, scope, results, and any deferred or blocked verification accurately; never call a focused pass a full-suite pass. A handoff or review alone does not add a full gate. Do not substitute CI for a required local pre-push gate unless the project or user permits it.
 
-**If tests fail**, report the failures and stop — the menu comes after a green suite:
+**If required checks fail or are blocked**, report their scope and results and stop before the affected delivery action:
 
 ```
 Tests failing (<N> failures). Must fix before completing:
@@ -28,7 +28,7 @@ Tests failing (<N> failures). Must fix before completing:
 [Show failures]
 ```
 
-**If tests pass:** continue to Step 2.
+**If the checks required at this stage pass:** continue to Step 2. Run any remaining project-required gate at its specified delivery boundary.
 
 ## Step 2: Detect Environment
 
@@ -100,7 +100,7 @@ git checkout <base-branch>
 git pull
 git merge <feature-branch>
 
-# Verify tests on merged result
+# Run checks required for the merged result
 <test command>
 ```
 
@@ -118,6 +118,7 @@ git branch -d <feature-branch>
 ### Option 2: Push and Create PR
 
 ```bash
+# First satisfy any project-required local pre-push gate on the applicable state.
 git push -u origin <feature-branch>
 # From a detached HEAD, name the new branch on the remote:
 # git push origin HEAD:refs/heads/<new-branch>
@@ -218,7 +219,7 @@ place. If your platform provides a workspace-exit tool, use it.
 
 | Excuse | Reality |
 |--------|---------|
-| "Tests passed earlier this session" | Run the suite on the tree you are about to integrate. A green run only proves the tree it ran on. |
+| "Tests passed earlier this session" | Reuse evidence only when the tested state and relevant inputs still match under project rules; rerun affected checks otherwise. |
 | "They obviously want it merged" | Integration is your human partner's decision. Present the menu and wait. |
 | "They seem done with this feature — I'll offer to discard it" | The menu is complete as written. Discard happens only when your human partner asks for it in so many words. |
 | "'Yeah, get rid of it' counts as confirmation" | Only the typed word `discard` authorizes deletion. |

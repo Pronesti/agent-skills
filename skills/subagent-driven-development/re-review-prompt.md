@@ -67,9 +67,11 @@ Subagent (general-purpose):
     the results to the report file. Treat the report as unverified claims:
     confirm the fix report names the covering tests and shows their output,
     and verify the claims against the diff. Do not re-run the suite to
-    confirm their report. Run a test only when reading the code raises a
-    specific doubt that no existing run answers — and then a focused test,
-    never a package-wide suite.
+    confirm their report when the tested state and relevant inputs still
+    match under project rules. Run focused checks for unanswered doubts and
+    widen them when warranted. Follow explicit user requests and project
+    requirements; coordinate any required full gate with the controller.
+    Report checks and results or identify deferred or blocked verification.
 
     ## Output Format
 

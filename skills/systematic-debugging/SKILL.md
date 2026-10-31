@@ -188,9 +188,9 @@ You MUST complete each phase before proceeding to the next.
 
 3. **Verify Fix**
    - Test passes now?
-   - No other tests broken?
+   - Do focused tests and relevant checks cover likely regressions? Widen them when the change or failure warrants it.
    - Issue actually resolved?
-   - Run the repository's verification gate (e.g. a `pre-handoff-verify` skill or the full test suite) before claiming success
+   - Run focused tests and relevant checks for the change; widen them when the change or a failure warrants it. Follow the active project’s rules and explicit user requests for full verification, including any local pre-push gate. Reuse passing evidence when the tested state and relevant inputs still match under those rules; rerun affected checks when they no longer match. Report commands, scope, results, and any deferred or blocked verification accurately; never call a focused pass a full-suite pass. Follow the project’s timing for required gates, including a local pre-push gate; do not substitute CI unless the project or user permits it. A fix or handoff alone does not add a full gate.
 
 4. **If Fix Doesn't Work**
    - STOP

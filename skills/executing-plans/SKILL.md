@@ -81,13 +81,13 @@ digraph process {
         "Plan wrong? Rule and ledger. Code wrong? systematic-debugging" [shape=box];
         "Commit as the plan's commit steps say" [shape=box];
         "Completion contract met?" [shape=diamond];
-        "task-done: run tests, ledger the result; mark todo complete" [shape=box];
+        "Record passing task checks; mark todo complete" [shape=box];
     }
 
     "Setup: worktree, workspace + ledger, read plan + spec, pre-flight scan" [shape=box];
     "More tasks remain?" [shape=diamond];
     "Final whole-branch review (fresh reviewer if you have one)" [shape=box];
-    "Re-grade, then: Critical/Important → ONE fix pass, each fix RED→GREEN + green suite; Minor → ledger" [shape=box];
+    "Re-grade, then: Critical/Important → ONE fix pass, each fix RED→GREEN + relevant checks; Minor → ledger" [shape=box];
     "Final review clean: delete this plan's workspace" [shape=box];
     "Complete authorized delivery" [shape=box style=filled fillcolor=lightgreen];
 
@@ -99,12 +99,12 @@ digraph process {
     "Step output matches plan's Expected?" -> "Commit as the plan's commit steps say" [label="yes, last step"];
     "Commit as the plan's commit steps say" -> "Completion contract met?";
     "Completion contract met?" -> "Work the steps in order: TDD, run every verification, read every output" [label="no - finish the task"];
-    "Completion contract met?" -> "task-done: run tests, ledger the result; mark todo complete" [label="yes"];
-    "task-done: run tests, ledger the result; mark todo complete" -> "More tasks remain?";
+    "Completion contract met?" -> "Record passing task checks; mark todo complete" [label="yes"];
+    "Record passing task checks; mark todo complete" -> "More tasks remain?";
     "More tasks remain?" -> "task-start: brief + BASE; read the brief" [label="yes"];
     "More tasks remain?" -> "Final whole-branch review (fresh reviewer if you have one)" [label="no"];
-    "Final whole-branch review (fresh reviewer if you have one)" -> "Re-grade, then: Critical/Important → ONE fix pass, each fix RED→GREEN + green suite; Minor → ledger";
-    "Re-grade, then: Critical/Important → ONE fix pass, each fix RED→GREEN + green suite; Minor → ledger" -> "Final review clean: delete this plan's workspace";
+    "Final whole-branch review (fresh reviewer if you have one)" -> "Re-grade, then: Critical/Important → ONE fix pass, each fix RED→GREEN + relevant checks; Minor → ledger";
+    "Re-grade, then: Critical/Important → ONE fix pass, each fix RED→GREEN + relevant checks; Minor → ledger" -> "Final review clean: delete this plan's workspace";
     "Final review clean: delete this plan's workspace" -> "Complete authorized delivery";
 }
 ```
@@ -206,28 +206,28 @@ is fine; BASE is what the review range is cut from, never `HEAD~1`.
 
 ### 3. The completion contract
 
-Before a task's ledger line, all of the following are true, with evidence
-in this session — not inferred from the diff looking right:
+Before a task's ledger line, all of the following are true, with valid
+evidence under project rules — not inferred from the diff looking right:
 
-- Every test the brief names exists and ran in this task, and you read
-  the output.
-- The final test run for the task passed — `task-done` is that run, and
-  it writes the command and result into the ledger line.
+- Every test the brief names exists and has valid passing evidence for the
+  final task state and relevant inputs, and you read the output.
+- The focused checks for the final task state passed, with commands and results recorded in the ledger.
 - Every `Expected:` line in the brief was compared against real output.
 - Every deviation from the brief has a `Ruling:` line in the ledger.
 
-Run the repository's required verification gate. If any item is missing, finish it before claiming completion.
+Run focused tests and relevant checks for the change; widen them when the change or a failure warrants it. Follow the active project’s rules and explicit user requests for full verification, including any local pre-push gate. Reuse passing evidence when the tested state and relevant inputs still match under those rules; rerun affected checks when they no longer match. Report commands, scope, results, and any deferred or blocked verification accurately; never call a focused pass a full-suite pass. A task or local commit alone does not add a full gate. Run required gates at the project’s specified boundary; do not replace a local pre-push gate with CI unless the project or user permits it. If a task item is missing, finish it before marking that task complete.
 
 ### 4. Complete the task
 
-Run this skill's `scripts/task-done PLAN_FILE N BASE -- <test command>`
-with the test command the brief names for the whole task. It runs the
-tests, keeps the full output in the workspace, prints the tail, and — only
-if they pass — appends the completion line to the ledger:
+Use `scripts/task-done PLAN_FILE N BASE -- <test command>` when a task check
+needs to run. It saves output and appends a ledger line only on success.
+When valid passing evidence already covers the final task state and relevant
+inputs, record its command, result, and evidence location in the same ledger
+format without rerunning it. Follow project rules for evidence reuse:
 
 `Task <N>: complete (commits <base7>..<head7>, tests: <command> → <result>)`
 
-A failing run records nothing; the task is not complete. When it records,
+A failing run records nothing; the task is not complete. When recorded,
 mark the todo complete and take the next task.
 
 ## Final Review
@@ -276,12 +276,10 @@ because the spec was silent has graded the spec, not the effect. Then:
 Fix the Critical and Important findings yourself — you are the
 implementer here — in ONE pass. Each fix is verified by TDD, not by a
 second reviewer: write the test that reproduces the finding, watch it
-fail, make it pass, then run the whole suite. Record each in the ledger as
-`Final: fixed <finding> — <test name> RED→GREEN, suite <N>/<N>`. A fix
-without a test that failed first is not verified; a suite that is not
-green after the pass means the pass is not over. Do not dispatch a
-re-review: it would re-read a diff whose covering tests already answer
-"addressed" and whose suite run already answers "broke nothing".
+fail, make it pass, then run relevant checks, widening as warranted. Record
+each check’s scope and result in the ledger. A fix without a test that
+failed first is not verified. Do not dispatch a re-review: covering tests
+provide evidence for the fix; report the limits of that evidence.
 
 A finding you decide not to fix is a ruling — `Final: Ruling: <finding> —
 <why the code stands> — <cost if wrong>` — and reaches your human partner
@@ -308,7 +306,7 @@ Complete the user-authorized delivery steps and report the actual verification r
 |--------|---------|
 | "I remember what Task N says" | You remember a summary. The brief has the exact values. Read it. |
 | "The plan's code is right, skip watching the test fail" | A test you never saw fail proves nothing. It is one step. Run it. |
-| "I'll run the full suite at the end instead of per step" | Per-step runs are how you learn which step broke it. The end-of-task run is the contract, not a substitute. |
+| "I'll skip focused checks until the end" | Focused checks per step identify where a failure arose; run any required full gate at its project-specified boundary. |
 | "The plan is wrong here, I'll just do the right thing" | Do the right thing and ledger the ruling. Unledgered deviation is a decision made in secret. |
 | "I'll write the ledger lines after a few tasks" | Compaction does not wait for a convenient moment. One line per task, in the same message as the commit. |
 | "Let me check in before the next task" | They chose inline to spend less. Progress prompts spend their time instead. Only the four stops stop you. |
@@ -317,7 +315,7 @@ Complete the user-authorized delivery steps and report the actual verification r
 | "Subagents are slow and expensive, I'll skip the final review too" | Inline already removed the per-task reviewers. One review of the whole branch is the floor, not the ceiling. |
 | "The reviewer said Minor, so it's Minor" | The label graded the spec's silence. Grade what the person gets. Re-grade, then gate. |
 | "The fix is obvious, no need for a failing test first" | The failing test is the only proof the finding was real and is now gone. Without it you have a diff and a hope. |
-| "I'll fix the minors too while I'm in there" | Every minor you fix is a test, a fix, and a suite run your partner did not ask for. Ledger them; your partner decides. |
+| "I'll fix the minors too while I'm in there" | Every minor you fix is a test, a fix, and relevant checks your partner did not ask for. Ledger them; your partner decides. |
 
 ## Example Workflow
 
@@ -356,8 +354,8 @@ Task 2: Recovery modes
 [After all tasks: review-package plan MERGE_BASE HEAD; dispatch code-reviewer, most capable model]
 Reviewer: One Important finding — progress reporting interval hardcoded. Two Minor.
 [Re-grade: Important stands; minors → ledger as deferred]
-[Fix pass: test_progress_interval_configurable RED → extract PROGRESS_INTERVAL → GREEN; suite 12/12; commit]
-[Ledger: Final: fixed hardcoded interval — test_progress_interval_configurable RED→GREEN, suite 12/12]
+[Fix pass: test_progress_interval_configurable RED → extract PROGRESS_INTERVAL → GREEN; focused recovery tests 12/12; commit]
+[Ledger: Final: fixed hardcoded interval — test_progress_interval_configurable RED→GREEN, focused recovery tests 12/12]
 
 Rulings I made:
 - Task 2: install_hook → installHook (brief typo; cost if wrong: one rename)

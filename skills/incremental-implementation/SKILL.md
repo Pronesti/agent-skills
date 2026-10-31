@@ -44,7 +44,7 @@ Commit checkpoints follow the project's delivery requirements and existing user 
 For each slice:
 
 1. **Implement** the smallest complete piece of functionality
-2. **Test** — run the test suite (or write a test if none exists)
+2. **Test** — run focused tests for the slice (or write a relevant test if needed); widen checks when warranted
 3. **Verify** — confirm the slice works as expected (tests pass, build succeeds, manual check)
 4. **Save a checkpoint** — commit with a descriptive message when already authorized; otherwise retain the verified diff. `git-workflow-and-versioning` is an optional upstream workflow, not a required dependency.
 5. **Move to the next slice** — carry forward, don't restart
@@ -150,7 +150,7 @@ Each increment changes one logical thing. Don't mix concerns:
 
 ### Rule 2: Keep It Compilable
 
-After each increment, the project must build and existing tests must pass. Don't leave the codebase in a broken state between slices.
+Keep each increment in a working state; use relevant checks to establish this, widening them when the change or failure warrants it.
 
 ### Rule 3: Feature Flags for Incomplete Features
 
@@ -198,8 +198,7 @@ When directing an agent to implement incrementally:
 Start with just the database schema change and the API endpoint.
 Don't touch the UI yet — we'll do that in the next increment.
 
-After implementing, run the repository's test and build commands to
-verify nothing is broken."
+After implementing, run focused tests and relevant checks for this slice."
 ```
 
 Be explicit about what's in scope and what's NOT in scope for each increment.
@@ -209,14 +208,11 @@ Be explicit about what's in scope and what's NOT in scope for each increment.
 After each increment, discover and use the repository's own verification commands. `test-driven-development` is an optional separately selected workflow:
 
 - [ ] The change does one thing and does it completely
-- [ ] All existing tests still pass (the repository's test command: `npm test`, `./gradlew test`, `pytest`, ...)
-- [ ] The build succeeds (the repository's build command)
-- [ ] Type checking passes, where the stack has one (`npx tsc --noEmit`, `mypy`, ...)
-- [ ] Linting passes (the repository's lint command)
+- [ ] Focused tests and relevant build, type, or lint checks pass for the slice
 - [ ] The new functionality works as expected
 - [ ] The verified change is reviewable; any authorized commit has a descriptive message
 
-**Note:** Run each verification command after a change that could affect it. After a successful run, don't repeat the same command unless the code has changed since — re-running on unchanged code adds no information.
+**Note:** Run focused tests and relevant checks for the change; widen them when the change or a failure warrants it. Follow the active project’s rules and explicit user requests for full verification, including any local pre-push gate. Reuse passing evidence when the tested state and relevant inputs still match under those rules; rerun affected checks when they no longer match. Report commands, scope, results, and any deferred or blocked verification accurately; never call a focused pass a full-suite pass. A slice or local commit alone does not add a full gate. Do not replace a required local pre-push gate with CI unless the project or user permits it.
 
 ## Common Rationalizations
 
@@ -247,8 +243,7 @@ After each increment, discover and use the repository's own verification command
 After completing all increments for a task:
 
 - [ ] Each increment was individually verified, with commits only where authorized
-- [ ] The full test suite passes
-- [ ] The build is clean
+- [ ] Project-required and explicitly requested verification is complete at the applicable boundary, or accurately reported as deferred or blocked
 - [ ] The feature works end-to-end as specified
 - [ ] Delivery matches the requested scope and the project's requirements
 

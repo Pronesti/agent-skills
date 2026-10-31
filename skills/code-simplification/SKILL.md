@@ -43,7 +43,7 @@ ASK BEFORE EVERY CHANGE:
 → Does this produce the same output for every input?
 → Does this maintain the same error behavior?
 → Does this preserve the same side effects and ordering?
-→ Do all existing tests still pass without modification?
+→ Does relevant verification support unchanged behavior without modifying tests?
 ```
 
 ### 2. Follow Project Conventions
@@ -166,7 +166,7 @@ Make one simplification at a time. Run the project's relevant checks after each 
 ```
 FOR EACH SIMPLIFICATION:
 1. Make the change
-2. Run the test suite
+2. Run focused tests and relevant checks; widen them when warranted
 3. If tests pass → continue to the next simplification; commit only when already authorized
 4. If tests fail → revert and reconsider
 ```
@@ -327,9 +327,10 @@ function UserBadge({ user }: Props) {
 
 After completing a simplification pass:
 
-- [ ] All existing tests pass without modification
-- [ ] Build succeeds with no new warnings
-- [ ] Linter/formatter passes (no style regressions)
+Run focused tests and relevant checks for the change; widen them when the change or a failure warrants it. Follow the active project’s rules and explicit user requests for full verification, including any local pre-push gate. Reuse passing evidence when the tested state and relevant inputs still match under those rules; rerun affected checks when they no longer match. Report commands, scope, results, and any deferred or blocked verification accurately; never call a focused pass a full-suite pass. A completed pass or local commit alone does not add a full gate. Do not substitute CI for a required local pre-push gate unless the project or user permits it.
+
+- [ ] Focused tests and relevant checks pass without modifying tests to conceal behavior changes
+- [ ] Project-required and explicitly requested gates are complete at the applicable boundary, or reported as deferred or blocked
 - [ ] Each simplification is a reviewable, incremental change
 - [ ] The diff is clean — no unrelated changes mixed in
 - [ ] Simplified code follows project conventions (checked against CLAUDE.md or equivalent)

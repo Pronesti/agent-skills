@@ -24,7 +24,7 @@ Apply this to every change before declaring it done.
 - [ ] All acceptance criteria for the task are met
 - [ ] Code runs and behaves as intended, verified at runtime, not just compiled or typechecked
 - [ ] New behavior is covered by tests that fail without the change and pass with it
-- [ ] Existing tests still pass; no regressions introduced
+- [ ] Focused tests and relevant checks support the absence of regressions; widen when warranted. Follow project rules and explicit user requests for full gates at their required boundaries; reuse valid evidence and report its scope and any deferred or blocked checks accurately.
 - [ ] Edge cases and error paths are handled, not just the happy path
 
 ### Quality

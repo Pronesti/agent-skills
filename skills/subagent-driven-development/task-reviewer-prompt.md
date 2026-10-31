@@ -73,13 +73,12 @@ Subagent (general-purpose):
     ## Tests
 
     The implementer already ran the tests and reported results with TDD
-    evidence for exactly this code. Do not re-run the suite to confirm their
-    report. Run a test only when reading the code raises a specific doubt
-    that no existing run answers — and then a focused test, never a
-    package-wide suite, race detector run, or repeated/high-count loop. If
-    heavy validation seems warranted, recommend it in your report instead of
-    running it. If you cannot run commands in this environment, name the
-    test you would run.
+    evidence for the tested state and relevant inputs. Reuse valid evidence
+    under project rules; do not repeat checks merely to confirm the report.
+    Run focused checks for unanswered doubts and widen them when warranted.
+    Follow explicit user requests and project requirements; coordinate any
+    required full gate with the controller. Report the scope and results, or
+    name checks that are deferred or blocked.
 
     Warnings or other noise in the implementer's reported test output are
     findings — test output should be pristine.
