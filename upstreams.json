@@ -138,6 +138,15 @@
       "checked_on": "2026-11-07",
       "checked_revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
       "upstream_status": "selected_skill_removed"
+    },
+    "impeccable": {
+      "url": "https://github.com/pbakaus/impeccable",
+      "revision": "414603bf14c7a344edb466bb1f85690c77ce8b7d",
+      "added_on": "2026-11-07",
+      "release": "skill-v4.8.0",
+      "artifact": "https://github.com/pbakaus/impeccable/releases/download/skill-v4.8.0/universal.zip",
+      "artifact_sha256": "82e6f6ff3a2b18f46f0f2fc388c1ab7abf3ccc52bbfc522456396d13011d6706",
+      "note": "Vendor the compiled Codex skill from the pinned release, not unreleased HEAD."
     }
   },
   "skills": [
@@ -958,6 +967,21 @@
       "changed_files": 12,
       "checked_on": "2026-11-07",
       "upstream_status": "reconciled"
+    },
+    {
+      "name": "impeccable",
+      "source": "impeccable",
+      "revision": "414603bf14c7a344edb466bb1f85690c77ce8b7d",
+      "path": "skill/SKILL.src.md",
+      "local_path": "skills/impeccable",
+      "release_path": ".agents/skills/impeccable",
+      "local_changes": [
+        "Vendor the compiled Codex skill from universal.zip with references, helper agents, portable launchers, and data; exclude hook manifests and platform binaries.",
+        "Apply manual invocation metadata and the task-scoped authorization policy.",
+        "Resolve documented launcher calls from the installed skill directory for user-level discovery while retaining project cwd.",
+        "Retain the upstream Apache 2.0 license; update managed content through this repository.",
+        "Normalize Markdown whitespace for the Git gate and preserve the Windows launcher CRLF through scoped Git attributes."
+      ]
     }
   ]
 }

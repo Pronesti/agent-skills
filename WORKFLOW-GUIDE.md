@@ -1,11 +1,11 @@
 # Use the collected skills together
 
-This guide tells you how to use the 73 workflows in this repository.
+This guide tells you how to use the 74 workflows in this repository.
 It gives the sequence, purpose, and completion conditions for 56 scenarios.
 It also identifies workflows that can conflict.
 
-**Library date: 17 October 2026.**
-The library contains 53 standalone skills and 20 Caveman skills.
+**Library date: 7 November 2026.**
+The library contains 54 standalone skills and 20 Caveman skills.
 
 **Language reference:** [ASD-STE100, Issue 9](https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf).
 The guide uses short sentences and active voice.
@@ -33,7 +33,7 @@ Software terms and skill names keep their technical meanings.
   - [Library configuration](#library-configuration)
   - [Additional QA scenarios](#additional-qa-scenarios)
 - [Example requests](#example-requests)
-- [All 73 workflows](#all-73-workflows)
+- [All 74 workflows](#all-74-workflows)
 - [Information for the next stage](#information-for-the-next-stage)
 - [Source documents](#source-documents)
 
@@ -129,7 +129,7 @@ Code review, ordinary coding, PR research, and template/skill editing do not tri
 Warp handles one drafting pass; Matt supplies guidance within the same body.
 Read their [shared scope](skills/pr/references/authoring-scope.md) for the activation check.
 
-Select the other 66 personal workflows explicitly.
+Select the other 67 personal workflows explicitly.
 A workflow name in an agent-generated plan does not select that workflow.
 A workflow name in a handoff does not select that workflow.
 Catalog examination does not activate `writing-for-agents`.
@@ -181,7 +181,7 @@ Neither alias selects a planning or implementation workflow.
 
 ### This guide covers the collected library
 
-The repository owns the 73 workflows in this guide.
+The repository owns the 74 workflows in this guide.
 Host-owned document, spreadsheet, image, and website plugins are outside this catalog.
 Follow the host's mandatory built-in skill rules for specialist artifacts.
 Other hosts can use different procedures or upstream editions.
@@ -1602,7 +1602,7 @@ Keep stored artifacts in clear English.
 Keep all necessary acceptance and project checks.
 ```
 
-## All 73 workflows
+## All 74 workflows
 
 The groups below follow [the functional catalog](reports/skill-groups.md).
 Each workflow appears once in this reference.
@@ -1646,10 +1646,11 @@ Possible pairings do not automatically select another skill.
 | [`ponytail`](skills/ponytail/SKILL.md) | Select the least code that gives the correct task result. | Keep requested behavior and necessary correctness checks. Select the intensity. |
 | [`prototype`](skills/prototype/SKILL.md) | Make temporary UI options or a logic/state demonstration. | Record the design answer before production implementation. |
 
-### Design — 4 workflows
+### Design — 5 workflows
 
 | Workflow | Purpose | Boundary or next use |
 |---|---|---|
+| [`impeccable`](skills/impeccable/SKILL.md) | Design, critique, audit, and refine interfaces through one selected command. | Runs from the installed user-level skill directory with the target project as cwd. Hooks require explicit selection. |
 | [`frontend-design`](skills/frontend-design/SKILL.md) | Choose a distinctive visual direction and implement frontend UI. | Follow the product brief and existing design system. |
 | [`ui-ux-pro-max`](skills/ui-ux-pro-max/SKILL.md) | Search local UI/UX data for design systems, usability rules, and stack guidance. | Its search script and bundled data provide verified matches. |
 | [`image-to-code`](skills/image-to-code/SKILL.md) | Generate section images, analyze them, and implement the frontend. | Text-to-image-to-code. Requires image generation for its preferred process. |
@@ -1814,7 +1815,7 @@ Upstream editions can have different hooks, transitions, delivery steps, and hos
 - [MANIFEST.md](MANIFEST.md) identifies the collection, versions, installation procedure, and update procedure.
 - [POLICY.md](POLICY.md) gives the invocation boundaries.
 - [invocation-policy.json](invocation-policy.json) owns the seven automatic triggers.
-- [reports/skill-groups.md](reports/skill-groups.md) lists the 73 workflows in 20 groups.
+- [reports/skill-groups.md](reports/skill-groups.md) lists the 74 workflows in 20 groups.
 - Each linked `SKILL.md` gives the specified procedure and supporting references.
 - [upstreams.json](upstreams.json) records pinned revisions and local file mappings.
 - [ASD-STE100, Issue 9](https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf) supplies the language rules and dictionary.

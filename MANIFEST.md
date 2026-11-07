@@ -1,8 +1,8 @@
 # Curated Agent Skills
 
-This repository owns **53 standalone skills and a 20-skill Caveman edition**. Seven focused skills allow automatic invocation; the other 66 personal workflows require explicit user selection. See [POLICY.md](POLICY.md) for invocation boundaries.
+This repository owns **54 standalone skills and a 20-skill Caveman edition**. Seven focused skills allow automatic invocation; the other 67 personal workflows require explicit user selection. See [POLICY.md](POLICY.md) for invocation boundaries.
 
-Read the [workflow guide](WORKFLOW-GUIDE.md) for 56 scenarios in ASD-STE100 English. The guide covers all 73 workflows, their sequences, and combinations with different instructions.
+Read the [workflow guide](WORKFLOW-GUIDE.md) for 56 scenarios in ASD-STE100 English. The guide covers all 74 workflows, their sequences, and combinations with different instructions.
 
 ## Author revisions
 
@@ -28,6 +28,7 @@ All 73 managed skills were checked against their authors on 7 November 2026: 41 
 | anthropics-frontend | [anthropics/skills](https://github.com/anthropics/skills) | `2c5958ecac7cee2b583967a2c4981d0f4a75c579` | 1 |
 | nextlevelbuilder | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | `b7d5353e0130feb8c5574ef1251f8a1db1873ccb` | 1 |
 | mattpocock-conflicts | [mattpocock/skills](https://github.com/mattpocock/skills) | `c55ee46073ed923f86ce59a5eb3b6d895095d1b7` | 1 |
+| impeccable | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) | `414603bf14c7a344edb466bb1f85690c77ce8b7d` (`skill-v4.8.0`) | 1 |
 
 Architecture Patterns includes its upstream `references/details.md` and `references/advanced-patterns.md`. Incremental Implementation bundles the upstream shared `references/definition-of-done.md` inside its own reference directory; `upstreams.json` records that additional source-to-local mapping. Commit and delivery instructions in the Addy forks honor existing authorization and project requirements. Other workflow names remain optional, separately selected choices.
 
@@ -41,9 +42,11 @@ Matt's `pr` and Warp's `write-pr-description` were added on 14 October 2026 with
 
 Anthropic `frontend-design` and Next Level Builder `ui-ux-pro-max` were added on 17 October 2026. The first guides visual direction and frontend implementation. The second provides a local searchable UI/UX catalog and stack-specific guidance. Both are manual workflows with pinned upstream revisions, bundled data and scripts where needed, and upstream license notices.
 
+Impeccable 4.8.0 was added on 7 November 2026 from the compiled Codex skill in the pinned `skill-v4.8.0` release. It bundles references, helper-agent prompts, data, and portable launchers; platform binaries and hook registration are excluded. The launcher downloads a checksum-verified engine into the user cache when needed. Invoke `$impeccable` explicitly. The same repository directory is linked at user level for Codex, Cursor, and Claude. Existing project-local copies can take precedence and remain separately managed.
+
 ## Functional groups
 
-Skill picker labels use 20 functional prefixes, each grouping 2–5 skills by their main purpose. All 73 skills are assigned exactly once. Invocation names and installation paths are preserved. See the [complete grouping](reports/skill-groups.md).
+Skill picker labels use 20 functional prefixes, each grouping 2–5 skills by their main purpose. All 74 skills are assigned exactly once. Invocation names and installation paths are preserved. See the [complete grouping](reports/skill-groups.md).
 
 ## Catalog
 
@@ -79,13 +82,15 @@ Skill picker labels use 20 functional prefixes, each grouping 2–5 skills by th
 
 **nextlevelbuilder:** `ui-ux-pro-max`.
 
+**impeccable:** `impeccable`.
+
 **caveman:** `caveman:cavecrew`, `caveman:caveman`, `caveman:caveman-commit`, `caveman:caveman-compress`, `caveman:caveman-discover`, `caveman:caveman-evidence-review`, `caveman:caveman-explore`, `caveman:caveman-help`, `caveman:caveman-learn`, `caveman:caveman-manage`, `caveman:caveman-optimize`, `caveman:caveman-review`, `caveman:caveman-setup`, `caveman:caveman-stats`, `caveman:investigate-first`, `caveman:lean-build`, `caveman:migration`, `caveman:safe-refactor`, `caveman:surgical-patch`, `caveman:verify-and-stop`.
 
 ## Installation
 
 Run `python3 scripts/install.py` to preview, then `./install.sh` to apply. This command installs skill links and generates a missing [runtime profile](#machine-specific-php-and-composer-runtimes) when local executable paths identify an unambiguous runtime. Existing global instructions are preserved byte for byte, including local additions and managed policy blocks. When neither `AGENTS.md` nor `AGENTS.override.md` exists in the selected Codex directory, the installer creates the [shared Codex AGENTS.md](#share-global-codex-instructions-across-computers-and-vms). Existing symlinks and overrides are left in place. Full instruction replacement requires the explicit `--sync-codex-agents` flag.
 
-The installer keeps one canonical directory per standalone skill under this repository, links it through `~/.agents/skills` and `~/.claude/skills`, and retires repository-owned aliases under `~/.codex/skills` and `~/.cursor/skills-cursor`. It refuses unmanaged skill name collisions and backs up replaced copies outside discovery roots. Re-running it preserves existing runtime profiles, global instructions, and current skill links.
+The installer keeps one canonical directory per standalone skill under this repository, links it through `~/.agents/skills` and `~/.claude/skills`, and retires repository-owned aliases under `~/.codex/skills` and `~/.cursor/skills-cursor`. It refuses unmanaged skill name collisions and backs up replaced copies outside discovery roots. Re-running it preserves existing runtime profiles, global instructions, and current skill links. If Impeccable was already installed globally by `npx`, back up that unmanaged skill directory outside discovery roots before running the installer; unmanaged collisions remain protected. Update the managed copy through Git and this installer, rather than `npx impeccable update`.
 
 For the local Caveman edition and the personal instruction block:
 

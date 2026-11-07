@@ -1,0 +1,6 @@
+interface:
+  display_name: "Design: Impeccable"
+  short_description: "Design, audit, and refine frontend interfaces"
+  default_prompt: "Use $impeccable to design, critique, audit, or refine this interface within the requested scope."
+policy:
+  allow_implicit_invocation: false
