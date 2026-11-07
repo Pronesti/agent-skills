@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Install skills, shared Codex instructions, and a local runtime profile with backups."""
+"""Install skills and a runtime profile; preserve existing global instructions by default."""
 import argparse
 import datetime
 import json
@@ -12,10 +12,12 @@ from codex_instructions import resolve_codex_home, sync_instructions
 REPO = Path(__file__).resolve().parents[1]
 
 
-def install(home, apply=False, runtime='auto', refresh_runtime=False, codex_home=None):
+def install(home, apply=False, runtime='auto', refresh_runtime=False, codex_home=None,
+            sync_codex_agents=False):
     runtime_plan = plan_runtime(home, runtime, refresh_runtime)
     codex_home = resolve_codex_home(home, codex_home)
-    codex_result = sync_instructions(home, codex_home, root=REPO)
+    codex_result = sync_instructions(home, codex_home, root=REPO,
+                                     replace_existing=sync_codex_agents)
     source = REPO / "skills"
     skills = sorted(p for p in source.iterdir() if (p / "SKILL.md").is_file())
     lock_path = home / ".agents/.skill-lock.json"
@@ -43,7 +45,8 @@ def install(home, apply=False, runtime='auto', refresh_runtime=False, codex_home
                     raise RuntimeError(f"Unmanaged collision at {target}; left untouched")
 
     if apply:
-        codex_result = sync_instructions(home, codex_home, apply=True, root=REPO)
+        codex_result = sync_instructions(home, codex_home, apply=True, root=REPO,
+                                         replace_existing=sync_codex_agents)
     codex_actions = []
     if codex_result['changed']:
         if codex_result['backup']:
@@ -94,6 +97,8 @@ if __name__ == "__main__":
     parser.add_argument("--home", type=Path, help="Installation root; explicit scratch roots isolate Codex from CODEX_HOME")
     parser.add_argument("--codex-home", type=Path, help="Codex directory; overrides --home and CODEX_HOME")
     parser.add_argument("--apply", action="store_true", help="Without this flag, preview only")
+    parser.add_argument("--sync-codex-agents", action="store_true",
+                        help="Replace the complete global AGENTS.md with the shared template, backing up existing content")
     parser.add_argument("--runtime", choices=('auto', 'lerd', 'direct', 'skip'), default='auto',
                         help="Runtime selection for a missing profile (default: auto); existing profiles are preserved")
     parser.add_argument("--refresh-runtime", action='store_true',
@@ -104,7 +109,8 @@ if __name__ == "__main__":
     try:
         home = (args.home or Path.home()).expanduser().resolve()
         codex_home = resolve_codex_home(args.home, args.codex_home)
-        result = install(home, args.apply, args.runtime, args.refresh_runtime, codex_home)
+        result = install(home, args.apply, args.runtime, args.refresh_runtime, codex_home,
+                         args.sync_codex_agents)
     except (OSError, ValueError, RuntimeError) as exc:
         parser.exit(1, f'Installation: {exc}\n')
     print(json.dumps(result, indent=2))

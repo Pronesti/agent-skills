@@ -14,6 +14,29 @@ sys.path.pop(0)
 
 
 class CodexInstructionsTests(unittest.TestCase):
+    def test_bootstrap_preserves_a_file_created_during_installation(self):
+        with tempfile.TemporaryDirectory() as temp:
+            home = Path(temp).resolve()
+            target = home / '.codex/AGENTS.md'
+            original = b'Instructions created concurrently\r\n'
+            link = os.link
+
+            def create_before_link(source, destination):
+                target.write_bytes(original)
+                return link(source, destination)
+
+            with patch.object(codex_instructions.os, 'link', side_effect=create_before_link):
+                result = codex_instructions.sync_instructions(
+                    home, target.parent, apply=True, replace_existing=False,
+                )
+            self.assertTrue(result['preserved'])
+            self.assertFalse(result['changed'])
+            self.assertIsNone(result['backup'])
+            self.assertEqual(result['diff'], '')
+            self.assertEqual(target.read_bytes(), original)
+            self.assertEqual(list(target.parent.iterdir()), [target])
+            self.assertFalse((home / '.local').exists())
+
     def run_sync(self, home, *flags, env=None, success=True):
         command = [sys.executable, str(ROOT / 'scripts/configure_hosts.py')]
         if home is not None:

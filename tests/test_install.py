@@ -15,6 +15,74 @@ sys.path.pop(0)
 
 
 class InstallationTests(unittest.TestCase):
+    def test_local_update_preserves_existing_global_instructions_byte_for_byte(self):
+        with tempfile.TemporaryDirectory() as temp:
+            home = Path(temp).resolve()
+            target = home / '.codex/AGENTS.md'
+            target.parent.mkdir()
+            original = ('# Personal instructions: español\r\n'
+                        'Ask before creating another checkout.\r\n'
+                        '<!-- personal-skill-policy:start -->\r\n'
+                        'My existing policy\r\n'
+                        '<!-- personal-skill-policy:end -->\r\n'
+                        '<!-- lerd:begin -->\r\nLocal Lerd guidance\r\n'
+                        '<!-- lerd:end -->\r\n').encode('utf-8')
+            target.write_bytes(original)
+            target.chmod(0o600)
+            claude = home / '.claude/CLAUDE.md'
+            claude.parent.mkdir()
+            claude.write_bytes(b'Existing Claude instructions\r\n')
+            initial = target.stat()
+            for apply in (False, True, True):
+                result = installer.install(home, apply=apply, runtime='skip')
+                self.assertFalse(result['codex_agents']['changed'])
+                self.assertIsNone(result['codex_agents']['backup'])
+                self.assertEqual(result['codex_agents']['diff'], '')
+                self.assertEqual(target.read_bytes(), original)
+                self.assertEqual(target.stat().st_ino, initial.st_ino)
+                self.assertEqual(target.stat().st_mtime_ns, initial.st_mtime_ns)
+                self.assertEqual(target.stat().st_mode & 0o777, 0o600)
+            self.assertTrue((home / '.agents/skills/grilling').is_symlink())
+            self.assertTrue((home / '.claude/skills/grilling').is_symlink())
+            applied = subprocess.run(
+                ['/bin/bash', str(installer.REPO / 'install.sh'), '--home', str(home),
+                 '--runtime', 'skip'], capture_output=True, text=True, check=True,
+            )
+            self.assertTrue(json.loads(applied.stdout)['codex_agents']['preserved'])
+            self.assertEqual(target.read_bytes(), original)
+            self.assertEqual(claude.read_bytes(), b'Existing Claude instructions\r\n')
+            self.assertEqual(target.stat().st_mtime_ns, initial.st_mtime_ns)
+            self.assertFalse((home / '.local').exists())
+
+    def test_local_update_preserves_override_and_symlink_targets(self):
+        for kind in ('override', 'symlink', 'broken-symlink'):
+            with self.subTest(kind=kind), tempfile.TemporaryDirectory() as temp:
+                home = Path(temp).resolve()
+                target = home / '.codex/AGENTS.md'
+                target.parent.mkdir()
+                if kind == 'override':
+                    protected = target.with_name('AGENTS.override.md')
+                    protected.write_text('Local override')
+                else:
+                    protected = home / 'personal-instructions.md'
+                    if kind == 'symlink':
+                        protected.write_text('Personal instructions')
+                    target.symlink_to(protected)
+                for apply in (False, True):
+                    result = installer.install(home, apply=apply, runtime='skip')
+                    self.assertFalse(result['codex_agents']['changed'])
+                    if kind == 'override':
+                        self.assertFalse(target.exists())
+                        self.assertEqual(protected.read_text(), 'Local override')
+                    else:
+                        self.assertTrue(target.is_symlink())
+                        if kind == 'symlink':
+                            self.assertEqual(protected.read_text(), 'Personal instructions')
+                        else:
+                            self.assertFalse(protected.exists())
+                self.assertTrue((home / '.agents/skills/grilling').is_symlink())
+                self.assertFalse((home / '.local').exists())
+
     def test_migration_preserves_old_copy_and_is_idempotent(self):
         with tempfile.TemporaryDirectory() as temp:
             home = Path(temp)
@@ -49,7 +117,7 @@ class InstallationTests(unittest.TestCase):
             self.assertFalse((home / ".codex/AGENTS.md").exists())
             self.assertEqual((collision / "SKILL.md").read_text(), "unrelated installation")
 
-    def test_shared_instructions_preview_backup_and_repeat(self):
+    def test_explicit_instruction_sync_preview_backup_and_repeat(self):
         with tempfile.TemporaryDirectory() as temp:
             home = Path(temp).resolve()
             target = home / '.codex/AGENTS.md'
@@ -60,14 +128,14 @@ class InstallationTests(unittest.TestCase):
             claude = home / '.claude/CLAUDE.md'
             claude.parent.mkdir()
             claude.write_text('Existing Claude instructions')
-            preview = installer.install(home, runtime='skip')
+            preview = installer.install(home, runtime='skip', sync_codex_agents=True)
             self.assertTrue(preview['codex_agents']['changed'])
             self.assertIn('-Local instructions: español', preview['codex_agents']['diff'])
             self.assertEqual(target.read_bytes(), old)
             self.assertFalse((home / '.agents').exists())
             self.assertFalse((home / '.local').exists())
 
-            applied = installer.install(home, apply=True, runtime='skip')
+            applied = installer.install(home, apply=True, runtime='skip', sync_codex_agents=True)
             self.assertEqual(Path(applied['codex_agents']['backup']).read_bytes(), old)
             self.assertIn('## Working with me', target.read_text())
             self.assertIn('~/.config/agent-skills/runtime.md', target.read_text())
@@ -75,14 +143,14 @@ class InstallationTests(unittest.TestCase):
             self.assertEqual(target.stat().st_mode & 0o777, 0o600)
             self.assertEqual(claude.read_text(), 'Existing Claude instructions')
             before = target.stat()
-            repeated = installer.install(home, apply=True, runtime='skip')
+            repeated = installer.install(home, apply=True, runtime='skip', sync_codex_agents=True)
             self.assertFalse(repeated['codex_agents']['changed'])
             self.assertIsNone(repeated['codex_agents']['backup'])
             self.assertEqual(repeated['actions'], [])
             self.assertEqual(target.stat().st_mtime_ns, before.st_mtime_ns)
             self.assertEqual(target.stat().st_ino, before.st_ino)
 
-    def test_unsafe_codex_targets_stop_before_skill_changes(self):
+    def test_explicit_sync_rejects_unsafe_targets_before_skill_changes(self):
         for conflict in ('override', 'symlink', 'directory'):
             with self.subTest(conflict=conflict), tempfile.TemporaryDirectory() as temp:
                 home = Path(temp).resolve()
@@ -96,7 +164,7 @@ class InstallationTests(unittest.TestCase):
                     target.mkdir()
                 for apply in (False, True):
                     with self.assertRaises(ValueError):
-                        installer.install(home, apply=apply, runtime='skip')
+                        installer.install(home, apply=apply, runtime='skip', sync_codex_agents=True)
                     self.assertFalse((home / '.agents').exists())
                     self.assertFalse((home / '.claude').exists())
                     self.assertFalse((home / '.local').exists())
@@ -121,9 +189,10 @@ class InstallationTests(unittest.TestCase):
                     if mode == 'codex-home':
                         profile = root / 'explicit-profile'
                         flags += ['--codex-home', str(profile)]
+                command = [sys.executable, str(installer.REPO / 'scripts/install.py'),
+                           '--runtime', 'skip', '--apply', *flags]
                 result = subprocess.run(
-                    [sys.executable, str(installer.REPO / 'scripts/install.py'),
-                     '--runtime', 'skip', '--apply', *flags],
+                    command,
                     capture_output=True, text=True, env=env, check=True,
                 )
                 data = json.loads(result.stdout)
@@ -134,6 +203,18 @@ class InstallationTests(unittest.TestCase):
                     self.assertFalse(environment_profile.exists())
                 if mode in ('home', 'codex-home'):
                     self.assertFalse(host.exists())
+                target = profile / 'AGENTS.md'
+                original = b'My checkout rule\r\n<!-- lerd:begin -->\r\nLocal runtime guidance\r\n'
+                target.write_bytes(original)
+                preserved = subprocess.run(command, capture_output=True, text=True, env=env, check=True)
+                self.assertTrue(json.loads(preserved.stdout)['codex_agents']['preserved'])
+                self.assertEqual(target.read_bytes(), original)
+                synced = subprocess.run(command + ['--sync-codex-agents'],
+                                        capture_output=True, text=True, env=env, check=True)
+                sync_result = json.loads(synced.stdout)['codex_agents']
+                self.assertTrue(sync_result['changed'])
+                self.assertEqual(Path(sync_result['backup']).read_bytes(), original)
+                self.assertIn('## Working with me', target.read_text())
 
 
 if __name__ == "__main__":

@@ -192,13 +192,13 @@ class RuntimeDetectionTests(unittest.TestCase):
         self.assertFalse(self.target.exists())
         self.assertFalse((self.home / '.codex/AGENTS.md').exists())
 
-    def test_codex_override_prevents_skill_and_runtime_changes(self):
+    def test_explicit_codex_sync_override_prevents_skill_and_runtime_changes(self):
         self.executable('lerd')
         override = self.home / '.codex/AGENTS.override.md'
         override.parent.mkdir(parents=True)
         override.write_text('Local override')
         with self.assertRaisesRegex(ValueError, 'takes precedence'):
-            installer.install(self.home, apply=True)
+            installer.install(self.home, apply=True, sync_codex_agents=True)
         self.assertEqual(override.read_text(), 'Local override')
         self.assertFalse((self.home / '.agents').exists())
         self.assertFalse(self.target.exists())
@@ -210,7 +210,7 @@ class RuntimeDetectionTests(unittest.TestCase):
         agents.write_text('Existing global instructions')
         with patch.object(Path, 'replace', side_effect=OSError('disk failure')):
             with self.assertRaisesRegex(OSError, 'disk failure'):
-                installer.install(self.home, apply=True)
+                installer.install(self.home, apply=True, sync_codex_agents=True)
         self.assertEqual(agents.read_text(), 'Existing global instructions')
         self.assertFalse((self.home / '.agents').exists())
         self.assertFalse(self.target.exists())
