@@ -9,10 +9,12 @@ Use this workflow only when the user explicitly selects it. Its scope ends with 
 
 Implement the work described by the user in the spec or tickets.
 
-Use /tdd where possible, at pre-agreed seams.
+If the user passes a ticket reference, fetch it from the issue tracker and state its title before starting. If the reference is ambiguous, ask.
+
+Use the separately selected `tdd` workflow where applicable, at pre-agreed seams; otherwise use the project's testing conventions directly.
 
 Run focused tests and relevant checks for the change; widen them when the change or a failure warrants it. Follow the active project’s rules and explicit user requests for full verification, including any local pre-push gate. Reuse passing evidence when the tested state and relevant inputs still match under those rules; rerun affected checks when they no longer match. Report commands, scope, results, and any deferred or blocked verification accurately; never call a focused pass a full-suite pass. A task or local commit alone does not add a full gate. Do not substitute CI for a required local pre-push gate unless the project or user permits it.
 
-Once done, use /code-review to review the work.
+Once done, review the work. Use `code-review` only when separately selected.
 
 Commit your work to the current branch.

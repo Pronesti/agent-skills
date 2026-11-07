@@ -4,34 +4,32 @@ Talk like smart caveman. Same brain, fewer tokens.
 
 ## What it does
 
-Compress model responses to caveman-style prose by dropping articles, filler,
-pleasantries, and hedging. Instruction preserves technical detail, code blocks,
-error strings, and symbols. Result depends on model and workload; no aggregate
-reduction or quality-equivalence claim is published, and mode persists until
-changed or stopped.
+Makes the model answer first and cut the ceremony: no greeting, hedging,
+filler, recap, or closer. Articles drop when the sentence still reads in one
+pass. Code, commands, paths, numbers, and exact error strings never change.
+Result depends on model and workload. Measured once on the 3.1.0 skill text (`evals/snapshots/results.json`: claude-opus-5-5, ten prompts, single run, output length only, tiktoken o200k approximation): caveman 3% fewer output tokens at the median than a plain `Answer concisely.` control, inside the noise; ultracave 35%; megacave 9%. No quality-equivalence claim is published. The measurements describe upstream fixtures, not a quality or savings guarantee for this local edition.
 
-Six intensity levels:
+This local edition retains `lite`, `full`, `ultra`, and the `wenyan-*`
+intensity controls inside the Caveman skill. Upstream's separate `ultracave`
+and `megacave` skills are not bundled. Styles apply to the selected task;
+session-wide behavior requires an explicit request.
 
-| Level | What change |
-|-------|-------------|
-| `lite` | Drop filler/hedging. Sentences stay full. Professional but tight. |
-| `full` | Default. Drop articles, fragments OK, short synonyms. |
-| `ultra` | Bare fragments. Abbreviations (DB, auth, fn). Arrows for causality. |
-| `wenyan-lite` | Classical Chinese register, light compression. |
-| `wenyan-full` | Maximum 文言文 compression. |
-| `wenyan-ultra` | Extreme classical compression. |
-
-Auto-clarity rule: caveman drops to normal prose for security warnings, irreversible-action confirmations, multi-step sequences where fragment ambiguity risks misread, and when user repeats a question. Resumes after the clear part.
+Auto-clarity: every skill drops to normal prose for security warnings,
+irreversible-action confirmations, step sequences a fragment could scramble,
+and a user who repeats a question. Resumes after the clear part.
 
 ## How to invoke
 
 ```
-/caveman              # full mode (default)
-/caveman lite         # lighter compression
-/caveman ultra        # extreme compression
-/caveman wenyan       # classical Chinese
+/caveman              # the voice (default)
+/caveman status       # show current mode without changing it
+/caveman ultra       # shorter fragments
+/caveman wenyan      # explicitly selected classical Chinese
 stop caveman          # back to normal prose
 ```
+
+This hook-free edition answers status from the conversation and marks it
+`(not tracked by this host)`. It has no automatic startup activation.
 
 ## Example output
 
@@ -40,11 +38,14 @@ Question: "Why does my React component re-render?"
 Normal prose:
 > Your component re-renders because you create a new object reference each render. Wrapping it in `useMemo` will fix the issue.
 
-Caveman (full):
-> New object ref each render. Inline object prop = new ref = re-render. Wrap in `useMemo`.
+caveman:
+> New object ref each render, so React re-renders. Wrap the prop in `useMemo`.
 
-Caveman (ultra):
-> Inline obj prop → new ref → re-render. `useMemo`.
+Upstream ultracave example (not a bundled skill):
+> Inline object prop, new ref, re-render. `useMemo`.
+
+Upstream megacave example (not a bundled skill):
+> 每繪新生對象參照，故重繪；以 `useMemo` 包之則免。
 
 ## See also
 

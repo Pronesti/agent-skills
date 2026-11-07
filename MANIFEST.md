@@ -6,27 +6,28 @@ Read the [workflow guide](WORKFLOW-GUIDE.md) for 56 scenarios in ASD-STE100 Engl
 
 ## Author revisions
 
-Pinned author revisions were recorded on 19 September 2026. All 63 skill directories were checked again on 3 October 2026: 40 unchanged, 22 with upstream changes available, and one absent from its recorded upstream path. The check is recorded in `reports/2026-10-03-skill-updates/upstream-check.json`; it does not replace the pinned content. Full revisions, upstream paths, and local destinations are pinned in [upstreams.json](upstreams.json). A newer repository revision does not necessarily change every selected skill.
-
-The wshobson, addyosmani, severity1, and vercel-agent-browser sources were added on 7 October 2026 at the revisions below. These are local forks with the same selective invocation overlay; their upstream repositories remain the reference for future updates.
+All 73 managed skills were checked against their authors on 7 November 2026: 41 had upstream file changes, 30 had unchanged upstream content, and two removed upstream skills were retained locally. See the [update report](reports/2026-11-07-skill-updates/REPORT.md) for reconciliation decisions and verification limits. [upstreams.json](upstreams.json) records applied bases and separate checked revisions for retained skills. A newer repository revision does not necessarily change every selected skill.
 
 | Source | Original repository | Pinned revision | Skills |
 |---|---|---|---:|
-| superpowers | [obra/superpowers](https://github.com/obra/superpowers) | `5bf4e78011075bcfc0dc295f0724994cd123ee71` | 8 |
-| mattpocock | [mattpocock/skills](https://github.com/mattpocock/skills) | `c55ee46073ed923f86ce59a5eb3b6d895095d1b7` | 24 |
-| mattpocock-pr | [mattpocock/skills](https://github.com/mattpocock/skills) | `49dd158d1076134a641b33efb035946536778336` | 1 |
-| warpdotdev | [warpdotdev/common-skills](https://github.com/warpdotdev/common-skills) | `7c4eb852de8d7c3e68c81802e1c59db9a611f914` | 1 |
-| pstack | [cursor/plugins](https://github.com/cursor/plugins) | `032be146865d973682535de75f2287da438550bf` | 7 |
-| ponytail | [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | `e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156` | 1 |
-| humanlayer | [humanlayer/skills](https://github.com/humanlayer/skills) | `ca7c8088db69e315a8b2deea43820270457f8f3c` | 1 |
-| vercel | [vercel-labs/skills](https://github.com/vercel-labs/skills) | `7407f3893ad4dceab546ac002c3ef806e4000c73` | 1 |
-| caveman | [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) | `542442bab314973709f95b85b1ac0b3f6f5b5dc6` | 20 |
-| wshobson | [wshobson/agents](https://github.com/wshobson/agents) | `46891e7e60da0e52baf1050b7b6391b64e84c6d9` | 1 |
-| addyosmani | [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) | `1401c8b8030e023baeebb31781a6653fe8e93026` | 2 |
+| superpowers | [obra/superpowers](https://github.com/obra/superpowers) | `22f0b463e7a5e579904dd6211a520321035526f7` | 8 |
+| mattpocock | [mattpocock/skills](https://github.com/mattpocock/skills) | `4ae2317ddb22b046e26455e4f9c9b3aaaf62212d` | 23 |
+| pstack | [cursor/plugins](https://github.com/cursor/plugins) | `6b0300214a09fd6029cfb7077043125758cd1fd2` | 7 |
+| ponytail | [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | `96608e078b2d5ea607c5c3b8b5a54d1c1fba6846` | 1 |
+| humanlayer | [humanlayer/skills](https://github.com/humanlayer/skills) | `4d69d20f6e9b57b4fcf0d501ccfb1be961f0f329` | 1 |
+| vercel | [vercel-labs/skills](https://github.com/vercel-labs/skills) | `d3701c11b1101251af14c9d148f026e1a47ebe17` | 1 |
+| caveman | [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) | `c310c9d300df13a1dd9f5c086120ffd857a164a1` | 20 |
+| wshobson | [wshobson/agents](https://github.com/wshobson/agents) | `4bde3168b43c0655c4d00ea2726e631719908a6d` | 1 |
+| addyosmani | [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) | `301b02b12bff98e4688e6984af6556802322bbde` | 2 |
 | severity1 | [severity1/claude-code-prompt-improver](https://github.com/severity1/claude-code-prompt-improver) | `50aae187bb4f08b852f318234b654df3332726a4` | 1 |
+| vercel-agent-browser | [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser) | `d44f6989bf5e9a9a1c6dd6d97175f8c33b138eca` | 1 |
 | taste | [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) | `b482f7a970abb98c4108d4a9f761e458c64cefc8` | 1 |
-| onewave | [OneWave-AI/claude-skills](https://github.com/OneWave-AI/claude-skills) | `fc5b7851a6c7ba367e05797df46ad3679df355dd` | 1 |
-| vercel-agent-browser | [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser) | `f7c8b071343dda29477a56cb336ea76144c05496` | 1 |
+| onewave | [OneWave-AI/claude-skills](https://github.com/OneWave-AI/claude-skills) | `b2267d9171af4f56848d82992381b20b89b44056` | 1 |
+| mattpocock-pr | [mattpocock/skills](https://github.com/mattpocock/skills) | `4ae2317ddb22b046e26455e4f9c9b3aaaf62212d` | 1 |
+| warpdotdev | [warpdotdev/common-skills](https://github.com/warpdotdev/common-skills) | `8792394ff1b655e0af451b8fabb68ef0cfcbd208` | 1 |
+| anthropics-frontend | [anthropics/skills](https://github.com/anthropics/skills) | `2c5958ecac7cee2b583967a2c4981d0f4a75c579` | 1 |
+| nextlevelbuilder | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | `b7d5353e0130feb8c5574ef1251f8a1db1873ccb` | 1 |
+| mattpocock-conflicts | [mattpocock/skills](https://github.com/mattpocock/skills) | `c55ee46073ed923f86ce59a5eb3b6d895095d1b7` | 1 |
 
 Architecture Patterns includes its upstream `references/details.md` and `references/advanced-patterns.md`. Incremental Implementation bundles the upstream shared `references/definition-of-done.md` inside its own reference directory; `upstreams.json` records that additional source-to-local mapping. Commit and delivery instructions in the Addy forks honor existing authorization and project requirements. Other workflow names remain optional, separately selected choices.
 

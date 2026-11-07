@@ -4,7 +4,7 @@ The skill-specific branch of [`writing-for-agents`](SKILL.md): what changes when
 
 ## Local invocation policy
 
-This collection is manual-only by user choice. Set both `disable-model-invocation: true` in SKILL.md and `policy.allow_implicit_invocation: false` in agents/openai.yaml. Preserve that choice when editing or updating a skill. The model-invoked options below describe upstream alternatives, not this installation's default.
+The repository's `invocation-policy.json` owns the selective automatic allowlist. Allowlisted skills set `disable-model-invocation: false` in SKILL.md and `policy.allow_implicit_invocation: true` in agents/openai.yaml. Other skills use `true` and `false`, respectively. Preserve that policy during edits and upstream updates. Invocation applies to the authorized task; another workflow name alone does not select it.
 
 ## Invocation
 

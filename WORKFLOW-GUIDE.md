@@ -1633,7 +1633,7 @@ Possible pairings do not automatically select another skill.
 |---|---|---|
 | [`architecture-patterns`](skills/architecture-patterns/SKILL.md) | Apply Clean Architecture, Hexagonal Architecture, or DDD to specified software boundaries. | Related upstream skills are optional. The library does not include those skills as dependencies. |
 | [`codebase-design`](skills/codebase-design/SKILL.md) | Select useful interfaces, seams, adapters, and module responsibilities. | Use the vocabulary during a specified design or refactor task. |
-| [`domain-modeling`](skills/domain-modeling/SKILL.md) | Record domain terms in `CONTEXT.md` and important decisions in ADRs. | Record decisions necessary for subsequent work. |
+| [`domain-modeling`](skills/domain-modeling/SKILL.md) | Record domain terms in `GLOSSARY.md` (or the project's existing domain document) and important decisions in ADRs. | Record decisions necessary for subsequent work. |
 | [`improve-codebase-architecture`](skills/improve-codebase-architecture/SKILL.md) | Find structural problems and give visual candidate changes. | Select a candidate before implementation. |
 
 ### Implementation — 5 workflows

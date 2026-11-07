@@ -8,6 +8,8 @@ Reads the current Claude Code session log and reports output tokens, cache-read 
 
 The transcript does not contain the same session without Caveman, so the report cannot calculate tokens saved, a reduction percentage, dollars saved, rule overhead, or a net result. Earlier releases applied a fixed ratio without a committed reviewed benchmark. Those estimates no longer appear in session reports, lifetime totals, shared summaries, or the statusline.
 
+This local edition registers no `SessionEnd` hook. `--all` and `--since` cover only snapshots that were actually recorded; unrecorded sessions and mode attribution remain unknown.
+
 Recorded history stays on disk. New snapshots contain observed usage and mode attribution; historical estimated-savings fields are ignored. Original/current memory-file pairs show byte-size differences separately, without treating them as provider savings.
 
 ## How to invoke

@@ -31,7 +31,7 @@ For each fact the change's safety depends on, get it as far down this list as is
 4. You ran it. A script or test that calls the real code and fails loud if you're wrong.
 5. You reproduced it in the running app.
 
-Any safety fact you can't get to step 4, say so. Don't write it up as settled. Step 4 is usually one small script that imports the same library the app ships and calls the exact function you're worried about.
+Step 4 is usually one small script that imports the same library the app ships and calls the exact function you're worried about.
 
 ## Steps
 
@@ -46,7 +46,7 @@ Any safety fact you can't get to step 4, say so. Don't write it up as settled. S
 
 - **What it does.** What changed, including the part that isn't obvious.
 - **The one fact it's safe because of.** State it, say which step you got it to, and show the proof. If you couldn't prove it, write unproven.
-- **Risks.** Only the real ones. Each names how it breaks, the `file:line`, how likely and how bad, and how to check. Paste the proof for the ones that matter.
+- **Risks.** Each names how it breaks, the `file:line`, how likely and how bad, and how to check. Paste the proof for the ones that matter.
 - **Cleared.** What you checked and why it's fine.
 - **Before you merge.** The cheapest test or repro that catches the real bug, including the script you wrote.
 
