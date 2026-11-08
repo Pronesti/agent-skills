@@ -1,111 +1,28 @@
-# Issue Taxonomy
+# Issue checklist
 
-Local fork of the upstream issue checklist; adapted terminology and scope for Manual QA. Read it at the start of a session to calibrate what to look for.
+Use this to select relevant cases within scope, not to label every warning or deviation a bug. Requirements establish correctness; observations establish what happened.
 
-## Contents
+## Severity
 
-- [Severity Levels](#severity-levels)
-- [Categories](#categories)
-- [Exploration Checklist](#exploration-checklist)
+Use any supplied project scale; otherwise assess actual user impact and affected reach:
 
-## Severity Levels
+| Severity | Impact |
+|---|---|
+| critical | Data loss, security/privacy exposure, or broad core-workflow outage. |
+| high | Major journey unusable for affected users, without a practical workaround. |
+| medium | Material impairment with a workaround or limited reach. |
+| low | Minor cosmetic/content issue without significant workflow impact. |
 
-| Severity | Definition |
-|----------|------------|
-| **critical** | Blocks a core workflow, causes data loss, or crashes the app |
-| **high** | Major feature broken or unusable, no workaround |
-| **medium** | Feature works but with noticeable problems, workaround exists |
-| **low** | Minor cosmetic or polish issue |
+State uncertainty where impact or reach is unknown. A failed case is not automatically a critical issue; several cases can describe one issue.
 
-## Categories
+## Coverage prompts
 
-### Visual / UI
+- **Functional:** links/redirects; form acceptance and validation; filtering, sorting, pagination; uploads/downloads; state persistence; repeated submission and stale results.
+- **Feedback and recovery:** loading, empty/full states, actionable error messages, recoverable dead ends, canceled operations, interrupted sessions.
+- **Visual/content:** overlap, clipping, missing assets, long/localized text, wrong labels, contrast, focus visibility, responsive layout and supported themes.
+- **Accessibility:** keyboard order, focus trapping/restoration, labels and errors, supported assistive technology. Accessible names alone do not establish visual quality or full accessibility compliance.
+- **Authorization:** signed-out access and authorized role boundaries; preserve user-owned state and do not invent additional identities.
+- **Performance:** observed delay, jank and layout shifts, recorded with conditions and timing method when measurable. A generic 300ms/3s threshold is not a product requirement; avoid claiming memory leaks or backend causes from slowness alone.
+- **Diagnostics:** native console errors, failed requests and warnings when exposed. Record relevance to the visible symptom; warnings alone do not prove a user-facing failure. No network/console access is a tooling limit, not a product bug.
 
-- Layout broken or misaligned elements
-- Overlapping or clipped text
-- Inconsistent spacing, padding, or margins
-- Missing or broken icons/images
-- Dark mode / light mode rendering issues
-- Responsive layout problems (viewport sizes)
-- Z-index stacking issues (elements hidden behind others)
-- Font rendering issues (wrong font, size, weight)
-- Color contrast problems
-- Animation glitches or jank
-
-### Functional
-
-- Broken links (404, wrong destination)
-- Buttons or controls that do nothing on click
-- Form validation that rejects valid input or accepts invalid input
-- Incorrect redirects
-- Features that fail silently
-- State not persisted when expected (lost on refresh, navigation)
-- Race conditions (double-submit, stale data)
-- Broken search or filtering
-- Pagination issues
-- File upload/download failures
-
-### UX
-
-- Confusing or unclear navigation
-- Missing loading indicators or feedback after actions
-- Slow or unresponsive interactions (>300ms perceived delay)
-- Unclear error messages
-- Missing confirmation for destructive actions
-- Dead ends (no way to go back or proceed)
-- Inconsistent patterns across similar features
-- Missing keyboard shortcuts or focus management
-- Unintuitive defaults
-- Missing empty states or unhelpful empty states
-
-### Content
-
-- Typos or grammatical errors
-- Outdated or incorrect text
-- Placeholder or lorem ipsum content left in
-- Truncated text without tooltip or expansion
-- Missing or wrong labels
-- Inconsistent terminology
-
-### Performance
-
-- Slow page loads (>3s)
-- Janky scrolling or animations
-- Large layout shifts (content jumping)
-- Excessive network requests (check via console/network)
-- Memory leaks (page slows over time)
-- Unoptimized images (large file sizes)
-
-### Console / Errors
-
-- JavaScript exceptions in console
-- Failed network requests (4xx, 5xx)
-- Deprecation warnings
-- CORS errors
-- Mixed content warnings
-- Unhandled promise rejections
-
-### Accessibility
-
-- Missing alt text on images
-- Unlabeled form inputs
-- Poor keyboard navigation (can't tab to elements)
-- Focus traps
-- Insufficient color contrast
-- Missing ARIA attributes on dynamic content
-- Screen reader incompatible patterns
-
-## Exploration Checklist
-
-Use this as a guide for what to test on each page/feature:
-
-1. **Visual scan** -- Take an annotated screenshot. Look for layout, alignment, and rendering issues.
-2. **Interactive elements** -- Use each relevant button, link, and control within scope and authorization. Does it work? Is there feedback?
-3. **Forms** -- Fill and submit. Test empty submission, invalid input, and edge cases.
-4. **Navigation** -- Follow all navigation paths. Check breadcrumbs, back button, deep links.
-5. **States** -- Check empty states, loading states, error states, and full/overflow states.
-6. **Console** -- When native diagnostics are available, check for JS errors, failed requests, and warnings; record diagnostic access limits.
-7. **Responsiveness** -- If relevant, test at different viewport sizes.
-8. **Auth boundaries** -- Test signed-out behavior and applicable roles using authorized accounts; record unavailable role coverage.
-
-Apply the checklist to the agreed scope. These categories are prompts for relevant cases, not permission to widen the task. Treat apparent performance delays as observations; a threshold alone does not establish a product requirement.
+For each relevant family, choose reachable cases with observable expectations. Include inaccessible requirements as coverage gaps. Source inspection, emulation, or a resized viewport cannot establish execution on an unavailable browser, device, or assistive technology.

@@ -17,7 +17,7 @@ Use only APIs described by the tool instructions or returned documentation. Do n
 
 Snapshots and accessible names can locate controls, but they do not alone prove visual layout, visibility, or usability. Use screenshots for those checks. Product documentation can establish expectations; do not read product source or set internal state to make the flow succeed. Available console/network diagnostics supplement visible outcomes rather than replacing them.
 
-During normal flows, use realistic interaction order and read the visible feedback. For rapid-action cases, deliberately vary timing and inspect the final result; slowing every action would hide the race being tested. Use keyboard input when testing typing, focus, or keyboard navigation.
+During normal flows, use realistic interaction order and read the visible feedback. For rapid-action cases, deliberately vary timing and inspect the final result; slowing every action would hide the race being tested. Use keyboard input when testing typing, focus, or keyboard navigation. For dialogs, check initial focus, traversal, exit/Escape, and focus restoration where applicable.
 
 A view resized inside one browser is responsive coverage, not proof of another device or browser engine. If resizing, a role, error injection, file interaction, or recording is unavailable, state that precise gap. Do not invent an action or claim it ran. Use permitted screenshots and reproduction steps when video is unavailable.
 
