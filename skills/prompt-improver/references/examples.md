@@ -2,7 +2,7 @@
 
 These are fictional repository findings used to illustrate the workflow. Their paths and symbols are not evidence about the user's project. Replace them with inspected facts for every real prompt.
 
-For each case, the light subagent inspects the target and supplied conversation history, answers investigation questions with evidence, and returns the prompt to the main agent. The main agent displays the prompt before following it. Prompt display is informational; implementation proceeds within the user's existing authorization.
+For each case, the light subagent investigates the target and supplied history. It returns a grounded prompt when ready, or a blocker and focused question when a material decision remains. The main agent displays a ready prompt before following it. Prompt display is informational; implementation proceeds within the user's existing authorization.
 
 ## A missing control with existing filtering support
 
@@ -41,6 +41,16 @@ Inspected findings: the category control is rendered, its selection reaches the 
 The subagent returns a verification-only prompt: "Confirm that the existing category filter on the products page satisfies the request. Inspect its reachable control and data path, use the relevant existing verification, and report evidence and any actual discrepancy. If the requested behavior is satisfied, make no code changes." The main agent shows it, runs the relevant verification, and reports the existing feature without adding another implementation.
 
 Reading a test is not running it. Report the distinction. If the feature is hidden by a flag or permission, report that condition and resolve the user's intended visibility before proposing activation.
+
+## Findings-only versus ensuring behavior
+
+Request: "confirm whether category filtering works; report findings only." If research finds the handler ignores the filter, return a verification prompt that reports the defect and runs appropriate authorized checks, with no repair. A research-only restriction on edits does not itself prohibit the main agent from running checks.
+
+If the request is instead "ensure category filtering works," a ready prompt should verify without editing when it works and permit the smallest repair if current code is broken. Preserve any explicit user restriction on edits or tests. Do not treat the research assignment's read-only scope as a user restriction.
+
+## A message used by a caller
+
+Request: "include the filename in parser errors." If research finds the CLI already prefixes the filename, trace the parser's discoverable callers and preserve existing failure type, timing, and handling unless the request or necessary work changes them. Check both the direct error and combined CLI output for missing or duplicated context. If a caller cannot be inspected, flag that limitation rather than asserting its behavior.
 
 ## The repository is unavailable
 
