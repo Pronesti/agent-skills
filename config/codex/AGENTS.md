@@ -6,6 +6,8 @@
 
 Use one feature branch created from `main`, including only direct dependencies scheduled for the same release. Open PRs to `dev` and `main` from that branch. Do not merge or rebase `dev` into it. If a conflict requires a separate integration branch for `dev`, explain why before departing from the normal workflow.
 
+Work in the existing project checkout by default. Creating any additional project copy, clone, checkout, or Git worktree requires the user's explicit permission before creation, regardless of its location or purpose. A feature request, unrelated local changes, or a desire for isolation does not grant that permission. If an extra copy is needed, explain why and ask first. Once authorized, keep it outside the primary project directory and all of its subdirectories, using an explicit absolute destination.
+
 ## PHP and Composer runtime
 
 Before running PHP or Composer commands, read `~/.config/agent-skills/runtime.md` on the machine where those commands will execute and use its command prefixes. If the file is missing or unclear, establish the runtime configuration before executing project commands. Determine the runtime from that machine's configuration rather than its operating system alone.
@@ -17,6 +19,10 @@ Before running PHP or Composer commands, read `~/.config/agent-skills/runtime.md
 - Fix defects and recurring problems in the source that owns the behavior: code, configuration, documentation, tooling, or memory generation. Do not use saved memories to conceal an unresolved problem, simulate a fix, or make correct behavior depend on remembering a workaround.
 - When a source fix is blocked, report the limitation and identify any workaround as temporary. Save a workaround as memory only when I explicitly request it, with its scope and removal condition.
 - When saving memory, retain durable information that cannot be recovered cheaply from an authoritative source. Keep historical findings dated and scoped; replace or remove stale claims when maintaining memory.
+
+## Links
+
+Fetch pasted URLs first. If the fetch misses the content (empty, script-only, blocked, sign-in wall) and `preview_*` tools exist (load via ToolSearch), open the URL with them instead. Say when you switch.
 
 ## Working with me
 
