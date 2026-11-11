@@ -1,4 +1,4 @@
-"""Render and explicitly install the repository's complete global Codex instructions."""
+"""Render the shared global instructions, install them for Codex, and wire Claude to import them."""
 import datetime
 import difflib
 import os
@@ -13,6 +13,8 @@ REPO = Path(__file__).resolve().parents[1]
 START = '<!-- personal-skill-policy:start -->'
 END = '<!-- personal-skill-policy:end -->'
 TOKEN = '{{PERSONAL_SKILL_POLICY}}'
+CLAUDE_HEADER = ('<!-- Claude loads the shared global instructions through this import. '
+                 'Edit config/AGENTS.md in the agent-skills repository, not this file. -->')
 
 
 def resolve_codex_home(home=None, codex_home=None):
@@ -23,7 +25,7 @@ def resolve_codex_home(home=None, codex_home=None):
 
 
 def render_instructions(root=REPO):
-    template = root / 'config/codex/AGENTS.md'
+    template = root / 'config/AGENTS.md'
     content = template.read_text(encoding='utf-8')
     if any(content.count(marker) != 1 for marker in (START, END, TOKEN)):
         raise ValueError(f'{template}: expected one policy block and one {TOKEN} placeholder')
@@ -52,7 +54,7 @@ def sync_instructions(home, codex_home, apply=False, root=REPO, *, replace_exist
     diff = ''.join(difflib.unified_diff(
         old.decode('utf-8').splitlines(keepends=True),
         new.decode('utf-8').splitlines(keepends=True),
-        fromfile=str(target), tofile='shared Codex instructions',
+        fromfile=str(target), tofile='shared global instructions',
     ))
     backup = None
     if apply and changed:
@@ -61,7 +63,7 @@ def sync_instructions(home, codex_home, apply=False, root=REPO, *, replace_exist
             backup_root = home / '.local/share/agent-skills/backups'
             backup_root.mkdir(parents=True, exist_ok=True)
             stamp = datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
-            backup_dir = Path(tempfile.mkdtemp(prefix=f'{stamp}-codex-agents-', dir=backup_root))
+            backup_dir = Path(tempfile.mkdtemp(prefix=f'{stamp}-agents-', dir=backup_root))
             backup = backup_dir / 'AGENTS.md'
             shutil.copy2(target, backup)
         target.parent.mkdir(parents=True, exist_ok=True)
@@ -87,3 +89,42 @@ def sync_instructions(home, codex_home, apply=False, root=REPO, *, replace_exist
     return {'applied': apply, 'changed': changed, 'target': str(target),
             'backup': str(backup) if backup else None, 'diff': diff,
             'preserved': not replace_existing and not changed}
+
+
+def claude_import_line(codex_home):
+    """The Claude Code import that loads the shared instructions from the Codex file."""
+    target = codex_home / 'AGENTS.md'
+    try:
+        return '@~/' + str(target.relative_to(Path.home().resolve()))
+    except ValueError:
+        return '@' + str(target)
+
+
+def imports_shared(text, codex_home):
+    target = (codex_home / 'AGENTS.md').resolve()
+    for line in text.splitlines():
+        line = line.strip()
+        if line.startswith('@') and Path(line[1:]).expanduser().resolve() == target:
+            return True
+    return False
+
+
+def link_claude(home, codex_home, apply=False):
+    """Create ~/.claude/CLAUDE.md as an import of the shared instructions when it is missing.
+
+    An existing file is never changed; the result reports whether it already imports them.
+    """
+    target = home / '.claude/CLAUDE.md'
+    if target.exists() or target.is_symlink():
+        text = target.read_text(encoding='utf-8') if target.is_file() else ''
+        return {'target': str(target), 'changed': False, 'applied': apply,
+                'imports_shared': imports_shared(text, codex_home)}
+    content = (CLAUDE_HEADER + '\n' + claude_import_line(codex_home) + '\n')
+    if apply:
+        target.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            with target.open('x', encoding='utf-8') as output:
+                output.write(content)
+        except FileExistsError:
+            return link_claude(home, codex_home, apply)
+    return {'target': str(target), 'changed': True, 'applied': apply, 'imports_shared': True}

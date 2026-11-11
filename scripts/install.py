@@ -7,17 +7,18 @@ from pathlib import Path
 import shutil
 
 from runtime_profile import apply_runtime, plan_runtime
-from codex_instructions import resolve_codex_home, sync_instructions
+from global_instructions import link_claude, resolve_codex_home, sync_instructions
 
 REPO = Path(__file__).resolve().parents[1]
 
 
 def install(home, apply=False, runtime='auto', refresh_runtime=False, codex_home=None,
-            sync_codex_agents=False):
+            sync_agents=False):
     runtime_plan = plan_runtime(home, runtime, refresh_runtime)
     codex_home = resolve_codex_home(home, codex_home)
     codex_result = sync_instructions(home, codex_home, root=REPO,
-                                     replace_existing=sync_codex_agents)
+                                     replace_existing=sync_agents)
+    claude_result = link_claude(home, codex_home)
     source = REPO / "skills"
     skills = sorted(p for p in source.iterdir() if (p / "SKILL.md").is_file())
     lock_path = home / ".agents/.skill-lock.json"
@@ -46,12 +47,15 @@ def install(home, apply=False, runtime='auto', refresh_runtime=False, codex_home
 
     if apply:
         codex_result = sync_instructions(home, codex_home, apply=True, root=REPO,
-                                         replace_existing=sync_codex_agents)
+                                         replace_existing=sync_agents)
+        claude_result = link_claude(home, codex_home, apply=True)
     codex_actions = []
     if codex_result['changed']:
         if codex_result['backup']:
             codex_actions.append(f"backup {codex_result['target']} -> {codex_result['backup']}")
-        codex_actions.append(f"write {codex_result['target']} (shared Codex instructions)")
+        codex_actions.append(f"write {codex_result['target']} (shared global instructions)")
+    if claude_result['changed']:
+        codex_actions.append(f"write {claude_result['target']} (import of shared global instructions)")
 
     for target_root in (home / ".agents/skills", home / ".claude/skills"):
         for skill in skills:
@@ -89,7 +93,7 @@ def install(home, apply=False, runtime='auto', refresh_runtime=False, codex_home
         actions.append(f"write {runtime_result['target']} ({runtime_result['selected']})")
     return {"applied": apply, "skills": len(skills), "backup": str(backup) if actions else None,
             "actions": codex_actions + actions, "runtime": runtime_result,
-            "codex_agents": codex_result}
+            "instructions": codex_result, "claude": claude_result}
 
 
 if __name__ == "__main__":
@@ -97,8 +101,8 @@ if __name__ == "__main__":
     parser.add_argument("--home", type=Path, help="Installation root; explicit scratch roots isolate Codex from CODEX_HOME")
     parser.add_argument("--codex-home", type=Path, help="Codex directory; overrides --home and CODEX_HOME")
     parser.add_argument("--apply", action="store_true", help="Without this flag, preview only")
-    parser.add_argument("--sync-codex-agents", action="store_true",
-                        help="Replace the complete global AGENTS.md with the shared template, backing up existing content")
+    parser.add_argument("--sync-agents", action="store_true",
+                        help="Replace the complete global instructions with the shared template, backing up existing content")
     parser.add_argument("--runtime", choices=('auto', 'lerd', 'direct', 'skip'), default='auto',
                         help="Runtime selection for a missing profile (default: auto); existing profiles are preserved")
     parser.add_argument("--refresh-runtime", action='store_true',
@@ -110,7 +114,7 @@ if __name__ == "__main__":
         home = (args.home or Path.home()).expanduser().resolve()
         codex_home = resolve_codex_home(args.home, args.codex_home)
         result = install(home, args.apply, args.runtime, args.refresh_runtime, codex_home,
-                         args.sync_codex_agents)
+                         args.sync_agents)
     except (OSError, ValueError, RuntimeError) as exc:
         parser.exit(1, f'Installation: {exc}\n')
     print(json.dumps(result, indent=2))

@@ -88,7 +88,7 @@ Skill picker labels use 20 functional prefixes, each grouping 2–5 skills by th
 
 ## Installation
 
-Run `python3 scripts/install.py` to preview, then `./install.sh` to apply. This command installs skill links and generates a missing [runtime profile](#machine-specific-php-and-composer-runtimes) when local executable paths identify an unambiguous runtime. Existing global instructions are preserved byte for byte, including local additions and managed policy blocks. When neither `AGENTS.md` nor `AGENTS.override.md` exists in the selected Codex directory, the installer creates the [shared Codex AGENTS.md](#share-global-codex-instructions-across-computers-and-vms). Existing symlinks and overrides are left in place. Full instruction replacement requires the explicit `--sync-codex-agents` flag.
+Run `python3 scripts/install.py` to preview, then `./install.sh` to apply. This command installs skill links and generates a missing [runtime profile](#machine-specific-php-and-composer-runtimes) when local executable paths identify an unambiguous runtime. Existing global instructions are preserved byte for byte, including local additions and managed policy blocks. When neither `AGENTS.md` nor `AGENTS.override.md` exists in the selected Codex directory, the installer creates the [shared global instructions](#share-global-instructions-across-hosts-computers-and-vms) there, and it creates a missing `~/.claude/CLAUDE.md` that imports them. Existing symlinks, overrides, and Claude files are left in place. Full instruction replacement requires the explicit `--sync-agents` flag.
 
 The installer keeps one canonical directory per standalone skill under this repository, links it through `~/.agents/skills` and `~/.claude/skills`, and retires repository-owned aliases under `~/.codex/skills` and `~/.cursor/skills-cursor`. It refuses unmanaged skill name collisions and backs up replaced copies outside discovery roots. Re-running it preserves existing runtime profiles, global instructions, and current skill links. If Impeccable was already installed globally by `npx`, back up that unmanaged skill directory outside discovery roots before running the installer; unmanaged collisions remain protected. Update the managed copy through Git and this installer, rather than `npx impeccable update`.
 
@@ -104,43 +104,43 @@ claude plugin disable caveman@caveman
 
 Disable the original `caveman@caveman` entry in Codex plugin settings as well; leave `caveman@personal` enabled. Do not delete upstream caches. Start a fresh task after changing discovery, and restart Claude Code to unload previously registered hooks. Application-managed built-in and specialist plugins remain owned by their host.
 
-### Share global Codex instructions across computers and VMs
+### Share global instructions across hosts, computers, and VMs
 
-[config/codex/AGENTS.md](config/codex/AGENTS.md) is the shared template for the complete global Codex instructions. Edit personal rules there. Keep its `{{PERSONAL_SKILL_POLICY}}` placeholder inside the policy markers; the sync command fills that section from [invocation-policy.json](invocation-policy.json) and the existing policy generator. The generated file contains your personal rules and the current skill policy on every machine running the same repository revision.
+[config/AGENTS.md](config/AGENTS.md) is the shared template for the complete global instructions of both Codex and Claude Code. Codex reads the installed copy at `~/.codex/AGENTS.md`. Claude Code reads `~/.claude/CLAUDE.md`, which the installer creates, when it is missing, as a single import of that same file (`@~/.codex/AGENTS.md`). One installed file therefore serves both hosts, and tools that write into `~/.codex/AGENTS.md`, such as `lerd mcp:enable-global`, reach both. An existing `CLAUDE.md` is never rewritten; the JSON result's `claude.imports_shared` reports whether it already imports the shared file. Edit personal rules there. Keep its `{{PERSONAL_SKILL_POLICY}}` placeholder inside the policy markers; the sync command fills that section from [invocation-policy.json](invocation-policy.json) and the existing policy generator. The generated file contains your personal rules and the current skill policy on every machine running the same repository revision.
 
-Ordinary skill updates preserve existing global instructions. To explicitly replace Codex instructions with the shared template while installing skills, preview the replacement first:
+Ordinary skill updates preserve existing global instructions. To explicitly replace the global instructions with the shared template while installing skills, preview the replacement first:
 
 ```sh
-python3 scripts/install.py --sync-codex-agents
-./install.sh --sync-codex-agents
+python3 scripts/install.py --sync-agents
+./install.sh --sync-agents
 ```
 
-The preview prints a JSON result with a `codex_agents` section containing the target path, whether it would change, and a unified diff. It creates no files. Default installation reports `preserved: true` and an empty diff when instructions already exist. With `--sync-codex-agents`, apply installs a regular UTF-8 file and reports the backup file path in `codex_agents.backup` when replacing existing content. Backups live under `~/.local/share/agent-skills/backups`. A repeated explicit sync with identical content does not rewrite the file or create another backup. Existing file permissions are preserved; replacement is atomic. Creating a missing file also preserves instructions that appear concurrently during installation.
+The preview prints a JSON result with an `instructions` section containing the target path, whether it would change, and a unified diff. It creates no files. Default installation reports `preserved: true` and an empty diff when instructions already exist. With `--sync-agents`, apply installs a regular UTF-8 file and reports the backup file path in `instructions.backup` when replacing existing content. Backups live under `~/.local/share/agent-skills/backups`. A repeated explicit sync with identical content does not rewrite the file or create another backup. Existing file permissions are preserved; replacement is atomic. Creating a missing file also preserves instructions that appear concurrently during installation.
 
 Explicit sync replaces the entire global file, including local additions. Review the preview before using it. Edit the repository template for changes you want to share; edits to the installed file are not imported. After committing and pushing shared instruction changes, opt into syncing on each machine with:
 
 ```sh
-git pull --ff-only && ./install.sh --sync-codex-agents
+git pull --ff-only && ./install.sh --sync-agents
 ```
 
-Skill links read this checkout's canonical files. Global instruction copies change only when initialized or explicitly synced. Start a fresh Codex session to load updated instructions.
+Skill links read this checkout's canonical files. Global instruction copies change only when initialized or explicitly synced. Start a fresh Codex or Claude Code session to load updated instructions.
 
 The target is `$CODEX_HOME/AGENTS.md` when that variable is set, otherwise `~/.codex/AGENTS.md`. Both the installer and standalone sync accept `--codex-home /path/to/profile` to select a specific Codex directory. For isolated testing, `--home /path/to/scratch-home` puts both the target and backups under that home and ignores `CODEX_HOME`; an explicit `--codex-home` can still select a separate target. Backups always use the selected home.
 
 Explicit instruction sync stops if `AGENTS.override.md` exists in the selected Codex directory, because it can take precedence over the shared file. Resolve that override before syncing. Explicit sync also refuses an existing symlink or non-file at the target; preserve or move that item before retrying. These checks run before changing skill links or runtime profiles. Default skill installation leaves those instruction paths untouched and continues. To restore an explicitly replaced file, copy the backup file reported in the JSON result to the reported target.
 
-To sync only Codex instructions, the standalone commands remain available:
+To sync only the global instructions, the standalone commands remain available:
 
 ```sh
-python3 scripts/configure_hosts.py --sync-codex-agents
-python3 scripts/configure_hosts.py --sync-codex-agents --apply
+python3 scripts/configure_hosts.py --sync-agents
+python3 scripts/configure_hosts.py --sync-agents --apply
 ```
 
-This standalone mode leaves skills, runtime profiles, Claude instructions, and marketplace registration untouched, and cannot be combined with `--policy-only`. The existing `--policy-only` command continues to update just the managed blocks while preserving other instructions. The combined installer also leaves Claude instructions and marketplace registration untouched. See [OpenAI's instruction discovery documentation](https://learn.chatgpt.com/docs/agent-configuration/agents-md) for global overrides and session loading.
+This standalone mode leaves skills, runtime profiles, and marketplace registration untouched, and cannot be combined with `--policy-only`. Like the installer, it creates a missing Claude import and leaves an existing `CLAUDE.md` alone. The `--policy-only` command updates just the managed blocks while preserving other instructions; it skips a `CLAUDE.md` that imports the shared file, because Claude already receives the block through the import. The combined installer leaves marketplace registration untouched. See [OpenAI's instruction discovery documentation](https://learn.chatgpt.com/docs/agent-configuration/agents-md) for global overrides and session loading.
 
 #### Machine-specific PHP and Composer runtimes
 
-The shared instructions explicitly tell the agent to read `~/.config/agent-skills/runtime.md` before running PHP or Composer commands. Run the installer on each computer or VM to generate this machine-specific file. It stays outside the repository, so the global `AGENTS.md` can remain identical across machines. The separate `--sync-codex-agents` command only installs the shared instructions and leaves runtime profiles alone.
+The shared instructions explicitly tell the agent to read `~/.config/agent-skills/runtime.md` before running PHP or Composer commands. Run the installer on each computer or VM to generate this machine-specific file. It stays outside the repository, so the global `AGENTS.md` can remain identical across machines. The separate `--sync-agents` command only installs the shared instructions and leaves runtime profiles alone.
 
 The installer inspects executables on its current `PATH` and resolves symlinks. It does not invoke the discovered tools, start containers, install runtimes, or test their health. Shell aliases and functions are not included. An explicit `--home` changes the installation destination; detection still describes the machine and environment running the installer.
 

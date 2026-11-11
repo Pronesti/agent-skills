@@ -198,7 +198,7 @@ class RuntimeDetectionTests(unittest.TestCase):
         override.parent.mkdir(parents=True)
         override.write_text('Local override')
         with self.assertRaisesRegex(ValueError, 'takes precedence'):
-            installer.install(self.home, apply=True, sync_codex_agents=True)
+            installer.install(self.home, apply=True, sync_agents=True)
         self.assertEqual(override.read_text(), 'Local override')
         self.assertFalse((self.home / '.agents').exists())
         self.assertFalse(self.target.exists())
@@ -210,7 +210,7 @@ class RuntimeDetectionTests(unittest.TestCase):
         agents.write_text('Existing global instructions')
         with patch.object(Path, 'replace', side_effect=OSError('disk failure')):
             with self.assertRaisesRegex(OSError, 'disk failure'):
-                installer.install(self.home, apply=True, sync_codex_agents=True)
+                installer.install(self.home, apply=True, sync_agents=True)
         self.assertEqual(agents.read_text(), 'Existing global instructions')
         self.assertFalse((self.home / '.agents').exists())
         self.assertFalse(self.target.exists())
@@ -261,7 +261,7 @@ class RuntimeDetectionTests(unittest.TestCase):
             capture_output=True, text=True, check=True,
         )
         self.assertEqual(json.loads(preview.stdout)['runtime']['status'], 'planned')
-        self.assertTrue(json.loads(preview.stdout)['codex_agents']['changed'])
+        self.assertTrue(json.loads(preview.stdout)['instructions']['changed'])
         self.assertFalse(self.home.exists())
         # The shell entrypoint needs dirname as well as Python on PATH.
         (self.bin / 'dirname').symlink_to('/usr/bin/dirname')
@@ -270,7 +270,7 @@ class RuntimeDetectionTests(unittest.TestCase):
             capture_output=True, text=True, check=True,
         )
         self.assertEqual(json.loads(applied.stdout)['runtime']['status'], 'written')
-        self.assertTrue(json.loads(applied.stdout)['codex_agents']['changed'])
+        self.assertTrue(json.loads(applied.stdout)['instructions']['changed'])
         self.assertIn('## Working with me', (self.home / '.codex/AGENTS.md').read_text())
         invalid_home = self.root / 'invalid-home'
         invalid = subprocess.run(

@@ -35,9 +35,9 @@ class InstallationTests(unittest.TestCase):
             initial = target.stat()
             for apply in (False, True, True):
                 result = installer.install(home, apply=apply, runtime='skip')
-                self.assertFalse(result['codex_agents']['changed'])
-                self.assertIsNone(result['codex_agents']['backup'])
-                self.assertEqual(result['codex_agents']['diff'], '')
+                self.assertFalse(result['instructions']['changed'])
+                self.assertIsNone(result['instructions']['backup'])
+                self.assertEqual(result['instructions']['diff'], '')
                 self.assertEqual(target.read_bytes(), original)
                 self.assertEqual(target.stat().st_ino, initial.st_ino)
                 self.assertEqual(target.stat().st_mtime_ns, initial.st_mtime_ns)
@@ -48,7 +48,7 @@ class InstallationTests(unittest.TestCase):
                 ['/bin/bash', str(installer.REPO / 'install.sh'), '--home', str(home),
                  '--runtime', 'skip'], capture_output=True, text=True, check=True,
             )
-            self.assertTrue(json.loads(applied.stdout)['codex_agents']['preserved'])
+            self.assertTrue(json.loads(applied.stdout)['instructions']['preserved'])
             self.assertEqual(target.read_bytes(), original)
             self.assertEqual(claude.read_bytes(), b'Existing Claude instructions\r\n')
             self.assertEqual(target.stat().st_mtime_ns, initial.st_mtime_ns)
@@ -70,7 +70,7 @@ class InstallationTests(unittest.TestCase):
                     target.symlink_to(protected)
                 for apply in (False, True):
                     result = installer.install(home, apply=apply, runtime='skip')
-                    self.assertFalse(result['codex_agents']['changed'])
+                    self.assertFalse(result['instructions']['changed'])
                     if kind == 'override':
                         self.assertFalse(target.exists())
                         self.assertEqual(protected.read_text(), 'Local override')
@@ -128,24 +128,24 @@ class InstallationTests(unittest.TestCase):
             claude = home / '.claude/CLAUDE.md'
             claude.parent.mkdir()
             claude.write_text('Existing Claude instructions')
-            preview = installer.install(home, runtime='skip', sync_codex_agents=True)
-            self.assertTrue(preview['codex_agents']['changed'])
-            self.assertIn('-Local instructions: español', preview['codex_agents']['diff'])
+            preview = installer.install(home, runtime='skip', sync_agents=True)
+            self.assertTrue(preview['instructions']['changed'])
+            self.assertIn('-Local instructions: español', preview['instructions']['diff'])
             self.assertEqual(target.read_bytes(), old)
             self.assertFalse((home / '.agents').exists())
             self.assertFalse((home / '.local').exists())
 
-            applied = installer.install(home, apply=True, runtime='skip', sync_codex_agents=True)
-            self.assertEqual(Path(applied['codex_agents']['backup']).read_bytes(), old)
+            applied = installer.install(home, apply=True, runtime='skip', sync_agents=True)
+            self.assertEqual(Path(applied['instructions']['backup']).read_bytes(), old)
             self.assertIn('## Working with me', target.read_text())
             self.assertIn('~/.config/agent-skills/runtime.md', target.read_text())
             self.assertNotIn('{{PERSONAL_SKILL_POLICY}}', target.read_text())
             self.assertEqual(target.stat().st_mode & 0o777, 0o600)
             self.assertEqual(claude.read_text(), 'Existing Claude instructions')
             before = target.stat()
-            repeated = installer.install(home, apply=True, runtime='skip', sync_codex_agents=True)
-            self.assertFalse(repeated['codex_agents']['changed'])
-            self.assertIsNone(repeated['codex_agents']['backup'])
+            repeated = installer.install(home, apply=True, runtime='skip', sync_agents=True)
+            self.assertFalse(repeated['instructions']['changed'])
+            self.assertIsNone(repeated['instructions']['backup'])
             self.assertEqual(repeated['actions'], [])
             self.assertEqual(target.stat().st_mtime_ns, before.st_mtime_ns)
             self.assertEqual(target.stat().st_ino, before.st_ino)
@@ -164,7 +164,7 @@ class InstallationTests(unittest.TestCase):
                     target.mkdir()
                 for apply in (False, True):
                     with self.assertRaises(ValueError):
-                        installer.install(home, apply=apply, runtime='skip', sync_codex_agents=True)
+                        installer.install(home, apply=apply, runtime='skip', sync_agents=True)
                     self.assertFalse((home / '.agents').exists())
                     self.assertFalse((home / '.claude').exists())
                     self.assertFalse((home / '.local').exists())
@@ -196,7 +196,7 @@ class InstallationTests(unittest.TestCase):
                     capture_output=True, text=True, env=env, check=True,
                 )
                 data = json.loads(result.stdout)
-                self.assertEqual(data['codex_agents']['target'], str(profile / 'AGENTS.md'))
+                self.assertEqual(data['instructions']['target'], str(profile / 'AGENTS.md'))
                 self.assertTrue((profile / 'AGENTS.md').is_file())
                 self.assertTrue((destination / '.agents/skills/grilling').is_symlink())
                 if mode != 'environment':
@@ -207,11 +207,11 @@ class InstallationTests(unittest.TestCase):
                 original = b'My checkout rule\r\n<!-- lerd:begin -->\r\nLocal runtime guidance\r\n'
                 target.write_bytes(original)
                 preserved = subprocess.run(command, capture_output=True, text=True, env=env, check=True)
-                self.assertTrue(json.loads(preserved.stdout)['codex_agents']['preserved'])
+                self.assertTrue(json.loads(preserved.stdout)['instructions']['preserved'])
                 self.assertEqual(target.read_bytes(), original)
-                synced = subprocess.run(command + ['--sync-codex-agents'],
+                synced = subprocess.run(command + ['--sync-agents'],
                                         capture_output=True, text=True, env=env, check=True)
-                sync_result = json.loads(synced.stdout)['codex_agents']
+                sync_result = json.loads(synced.stdout)['instructions']
                 self.assertTrue(sync_result['changed'])
                 self.assertEqual(Path(sync_result['backup']).read_bytes(), original)
                 self.assertIn('## Working with me', target.read_text())

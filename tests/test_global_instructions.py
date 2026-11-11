@@ -9,11 +9,11 @@ from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
-import codex_instructions
+import global_instructions
 sys.path.pop(0)
 
 
-class CodexInstructionsTests(unittest.TestCase):
+class GlobalInstructionsTests(unittest.TestCase):
     def test_bootstrap_preserves_a_file_created_during_installation(self):
         with tempfile.TemporaryDirectory() as temp:
             home = Path(temp).resolve()
@@ -25,8 +25,8 @@ class CodexInstructionsTests(unittest.TestCase):
                 target.write_bytes(original)
                 return link(source, destination)
 
-            with patch.object(codex_instructions.os, 'link', side_effect=create_before_link):
-                result = codex_instructions.sync_instructions(
+            with patch.object(global_instructions.os, 'link', side_effect=create_before_link):
+                result = global_instructions.sync_instructions(
                     home, target.parent, apply=True, replace_existing=False,
                 )
             self.assertTrue(result['preserved'])
@@ -42,7 +42,7 @@ class CodexInstructionsTests(unittest.TestCase):
         if home is not None:
             command += ['--home', str(home)]
         result = subprocess.run(
-            command + ['--sync-codex-agents', *flags],
+            command + ['--sync-agents', *flags],
             capture_output=True, text=True, env=env,
         )
         if success:
@@ -65,7 +65,9 @@ class CodexInstructionsTests(unittest.TestCase):
                 self.assertTrue(applied['applied'])
                 self.assertTrue(applied['changed'])
                 self.assertIsNone(applied['backup'])
-                self.assertFalse((home / '.claude').exists())
+                self.assertTrue(applied['claude']['changed'])
+                self.assertIn(f"@{home / '.codex/AGENTS.md'}",
+                              (home / '.claude/CLAUDE.md').read_text())
                 self.assertFalse((home / '.agents').exists())
                 self.assertFalse((home / 'plugins').exists())
             files = [home / '.codex/AGENTS.md' for home in homes]
@@ -184,7 +186,7 @@ class CodexInstructionsTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp:
             home = Path(temp).resolve() / 'home'
             for flags in (['--apply'], ['--codex-home', str(home / '.codex')],
-                          ['--sync-codex-agents', '--policy-only']):
+                          ['--sync-agents', '--policy-only']):
                 result = subprocess.run(
                     [sys.executable, str(ROOT / 'scripts/configure_hosts.py'),
                      '--home', str(home), *flags], capture_output=True, text=True,
@@ -192,7 +194,7 @@ class CodexInstructionsTests(unittest.TestCase):
                 self.assertNotEqual(result.returncode, 0)
                 self.assertFalse(home.exists())
 
-    def test_policy_only_refresh_does_not_change_synced_codex_instructions(self):
+    def test_policy_only_refresh_does_not_change_synced_global_instructions(self):
         with tempfile.TemporaryDirectory() as temp:
             home = Path(temp).resolve()
             self.run_sync(home, '--apply')
@@ -206,20 +208,20 @@ class CodexInstructionsTests(unittest.TestCase):
             self.assertEqual(target.read_bytes(), content)
 
     def test_invalid_template_fails_before_any_host_changes(self):
-        start, end, token = (codex_instructions.START, codex_instructions.END,
-                             codex_instructions.TOKEN)
+        start, end, token = (global_instructions.START, global_instructions.END,
+                             global_instructions.TOKEN)
         templates = ['', f'{start}\n{end}', f'{start}\n{token}\n{token}\n{end}',
                      f'{end}\n{start}\n{token}', f'{start}\n{token}\nExtra policy\n{end}']
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp).resolve()
-            template = root / 'config/codex/AGENTS.md'
+            template = root / 'config/AGENTS.md'
             template.parent.mkdir(parents=True)
             home = root / 'home'
             for content in templates:
                 with self.subTest(content=content):
                     template.write_text(content)
                     with self.assertRaises(ValueError):
-                        codex_instructions.sync_instructions(home, home / '.codex', True, root)
+                        global_instructions.sync_instructions(home, home / '.codex', True, root)
                     self.assertFalse(home.exists())
 
     def test_failed_atomic_replace_preserves_original_and_backup(self):
@@ -230,12 +232,47 @@ class CodexInstructionsTests(unittest.TestCase):
             target.write_text('Existing instructions')
             with patch.object(Path, 'replace', side_effect=OSError('disk failure')):
                 with self.assertRaisesRegex(OSError, 'disk failure'):
-                    codex_instructions.sync_instructions(home, target.parent, True)
+                    global_instructions.sync_instructions(home, target.parent, True)
             self.assertEqual(target.read_text(), 'Existing instructions')
             backups = list((home / '.local/share/agent-skills/backups').glob('*/AGENTS.md'))
             self.assertEqual(len(backups), 1)
             self.assertEqual(backups[0].read_bytes(), target.read_bytes())
             self.assertEqual(list(target.parent.iterdir()), [target])
+
+    def test_claude_import_is_created_once_and_existing_file_is_preserved(self):
+        with tempfile.TemporaryDirectory() as temp:
+            home = Path(temp).resolve()
+            codex_home = home / '.codex'
+            preview = global_instructions.link_claude(home, codex_home)
+            self.assertTrue(preview['changed'])
+            self.assertFalse((home / '.claude').exists())
+            global_instructions.link_claude(home, codex_home, apply=True)
+            claude = home / '.claude/CLAUDE.md'
+            content = claude.read_text()
+            self.assertIn(f"@{codex_home / 'AGENTS.md'}", content)
+            self.assertTrue(global_instructions.imports_shared(content, codex_home))
+            repeated = global_instructions.link_claude(home, codex_home, apply=True)
+            self.assertFalse(repeated['changed'])
+            self.assertTrue(repeated['imports_shared'])
+            claude.write_text('Own Claude instructions')
+            kept = global_instructions.link_claude(home, codex_home, apply=True)
+            self.assertFalse(kept['changed'])
+            self.assertFalse(kept['imports_shared'])
+            self.assertEqual(claude.read_text(), 'Own Claude instructions')
+
+    def test_policy_only_skips_claude_file_that_imports_shared_instructions(self):
+        with tempfile.TemporaryDirectory() as temp:
+            home = Path(temp).resolve()
+            self.run_sync(home, '--apply')
+            claude = home / '.claude/CLAUDE.md'
+            before = claude.read_bytes()
+            subprocess.run(
+                [sys.executable, str(ROOT / 'scripts/configure_hosts.py'),
+                 '--home', str(home), '--policy-only'],
+                check=True, capture_output=True, text=True,
+            )
+            self.assertEqual(claude.read_bytes(), before)
+            self.assertNotIn('personal-skill-policy', claude.read_text())
 
 
 if __name__ == '__main__':

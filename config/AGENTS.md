@@ -22,7 +22,7 @@ Before running PHP or Composer commands, read `~/.config/agent-skills/runtime.md
 
 ## Links
 
-Fetch pasted URLs first. If the fetch misses the content (empty, script-only, blocked, sign-in wall) and `preview_*` tools exist (load via ToolSearch), open the URL with them instead. Say when you switch.
+Fetch pasted URLs first. If the fetch misses the content (empty, script-only, blocked, sign-in wall) and `preview_*` tools exist (load them first if they are deferred), open the URL with them instead. Say when you switch.
 
 ## Working with me
 

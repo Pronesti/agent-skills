@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Install the approved personal policy and local Codex marketplace entry."""
+"""Install the approved personal policy, the local Codex marketplace entry, and the shared global instructions."""
 import argparse
 import datetime
 import json
@@ -9,26 +9,27 @@ import shutil
 import sys
 
 from invocation_policy import host_policy_body
-from codex_instructions import resolve_codex_home, sync_instructions
+from global_instructions import imports_shared, link_claude, resolve_codex_home, sync_instructions
 
 REPO = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--home', type=Path, help='Host root; explicit scratch roots also isolate Codex from CODEX_HOME')
 mode = parser.add_mutually_exclusive_group()
 mode.add_argument('--policy-only', action='store_true', help='Update managed instruction blocks without marketplace changes')
-mode.add_argument('--sync-codex-agents', action='store_true', help='Preview the complete shared Codex AGENTS.md; skips Claude and marketplace setup')
-parser.add_argument('--apply', action='store_true', help='Apply --sync-codex-agents with a backup; otherwise sync only previews')
-parser.add_argument('--codex-home', type=Path, help='Codex directory for --sync-codex-agents; overrides --home and CODEX_HOME')
+mode.add_argument('--sync-agents', action='store_true', help='Preview the shared global instructions for Codex and the Claude import; skips marketplace setup')
+parser.add_argument('--apply', action='store_true', help='Apply --sync-agents with a backup; otherwise sync only previews')
+parser.add_argument('--codex-home', type=Path, help='Codex directory for --sync-agents; overrides --home and CODEX_HOME')
 args = parser.parse_args()
-if (args.apply or args.codex_home is not None) and not args.sync_codex_agents:
-    parser.error('--apply and --codex-home require --sync-codex-agents')
+if (args.apply or args.codex_home is not None) and not args.sync_agents:
+    parser.error('--apply and --codex-home require --sync-agents')
 HOME_DIR = (args.home or Path.home()).expanduser().resolve()
-if args.sync_codex_agents:
+if args.sync_agents:
     try:
         codex_home = resolve_codex_home(args.home, args.codex_home)
         result = sync_instructions(HOME_DIR, codex_home, args.apply)
+        result['claude'] = link_claude(HOME_DIR, codex_home, args.apply)
     except (OSError, ValueError) as exc:
-        parser.exit(1, f'Codex instructions: {exc}\n')
+        parser.exit(1, f'Global instructions: {exc}\n')
     print(json.dumps(result, indent=2))
     sys.exit(0)
 backup = HOME_DIR / ".local/share/agent-skills/backups" / (datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%dT%H%M%S%fZ") + "-host-policy")
@@ -59,8 +60,14 @@ if not args.policy_only:
 start = "<!-- personal-skill-policy:start -->"
 end = "<!-- personal-skill-policy:end -->"
 body = host_policy_body()
-for path in (HOME_DIR / ".codex/AGENTS.md", HOME_DIR / ".claude/CLAUDE.md"):
+codex_home = HOME_DIR / ".codex"
+claude = HOME_DIR / ".claude/CLAUDE.md"
+if not claude.exists() and not claude.is_symlink():
+    link_claude(HOME_DIR, codex_home, apply=True)
+for path in (codex_home / "AGENTS.md", claude):
     old = path.read_text() if path.exists() else ""
+    if path == claude and imports_shared(old, codex_home):
+        continue  # Claude already receives the policy block through the import.
     block = start + "\n" + body + end
     new = re.sub(re.escape(start) + r".*?" + re.escape(end), lambda _: block, old, flags=re.S) if start in old else old.rstrip() + "\n\n" + block + "\n"
     if new != old:
