@@ -105,6 +105,29 @@ class InstallationTests(unittest.TestCase):
             self.assertNotIn("grilling", json.loads(lock.read_text())["skills"])
             self.assertEqual(installer.install(home, True, runtime='skip')["actions"], [])
 
+    def test_fresh_install_reports_no_backup(self):
+        with tempfile.TemporaryDirectory() as temp:
+            home = Path(temp).resolve()
+            self.assertIsNone(installer.install(home, runtime='skip')['backup'])
+            self.assertIsNone(installer.install(home, True, runtime='skip')['backup'])
+            self.assertFalse((home / '.local').exists())
+
+    def test_stale_link_sweep_compares_real_paths(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp).resolve()
+            home = root / 'home'
+            alias = root / 'repo-alias'
+            alias.symlink_to(installer.REPO, target_is_directory=True)
+            other = root / 'other-checkout/skills/grilling'
+            other.mkdir(parents=True)
+            old_root = home / '.codex/skills'
+            old_root.mkdir(parents=True)
+            (old_root / 'grilling').symlink_to(alias / 'skills/grilling')
+            (old_root / 'foreign').symlink_to(other)
+            installer.install(home, True, runtime='skip')
+            self.assertFalse((old_root / 'grilling').exists() or (old_root / 'grilling').is_symlink())
+            self.assertTrue((old_root / 'foreign').is_symlink())
+
     def test_unmanaged_collision_changes_nothing(self):
         with tempfile.TemporaryDirectory() as temp:
             home = Path(temp)

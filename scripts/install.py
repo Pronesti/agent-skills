@@ -3,11 +3,12 @@
 import argparse
 import datetime
 import json
+import os
 from pathlib import Path
 import shutil
 
 from runtime_profile import apply_runtime, plan_runtime
-from global_instructions import link_claude, resolve_codex_home, sync_instructions
+from global_instructions import codex_home_path, link_claude, sync_instructions
 
 REPO = Path(__file__).resolve().parents[1]
 
@@ -15,10 +16,11 @@ REPO = Path(__file__).resolve().parents[1]
 def install(home, apply=False, runtime='auto', refresh_runtime=False, codex_home=None,
             sync_agents=False):
     runtime_plan = plan_runtime(home, runtime, refresh_runtime)
-    codex_home = resolve_codex_home(home, codex_home)
+    configured_codex_home = codex_home_path(home, codex_home)
+    codex_home = configured_codex_home.resolve()
     codex_result = sync_instructions(home, codex_home, root=REPO,
                                      replace_existing=sync_agents)
-    claude_result = link_claude(home, codex_home)
+    claude_result = link_claude(home, configured_codex_home)
     source = REPO / "skills"
     skills = sorted(p for p in source.iterdir() if (p / "SKILL.md").is_file())
     lock_path = home / ".agents/.skill-lock.json"
@@ -48,7 +50,7 @@ def install(home, apply=False, runtime='auto', refresh_runtime=False, codex_home
     if apply:
         codex_result = sync_instructions(home, codex_home, apply=True, root=REPO,
                                          replace_existing=sync_agents)
-        claude_result = link_claude(home, codex_home, apply=True)
+        claude_result = link_claude(home, configured_codex_home, apply=True)
     codex_actions = []
     if codex_result['changed']:
         if codex_result['backup']:
@@ -73,7 +75,7 @@ def install(home, apply=False, runtime='auto', refresh_runtime=False, codex_home
         if not target_root.exists():
             continue
         for target in target_root.iterdir():
-            if target.is_symlink() and target.readlink().parent == source:
+            if target.is_symlink() and Path(os.path.realpath(target)).parent == source.resolve():
                 save(target)
 
     migrated = owned.intersection(p.name for p in skills)
@@ -91,7 +93,7 @@ def install(home, apply=False, runtime='auto', refresh_runtime=False, codex_home
         if runtime_result['backup']:
             actions.append(f"backup {runtime_result['target']} -> {runtime_result['backup']}")
         actions.append(f"write {runtime_result['target']} ({runtime_result['selected']})")
-    return {"applied": apply, "skills": len(skills), "backup": str(backup) if actions else None,
+    return {"applied": apply, "skills": len(skills), "backup": (str(backup) if any(a.startswith("backup ") for a in actions) else None),
             "actions": codex_actions + actions, "runtime": runtime_result,
             "instructions": codex_result, "claude": claude_result}
 
@@ -112,7 +114,7 @@ if __name__ == "__main__":
         parser.error('--refresh-runtime cannot be combined with --runtime skip')
     try:
         home = (args.home or Path.home()).expanduser().resolve()
-        codex_home = resolve_codex_home(args.home, args.codex_home)
+        codex_home = codex_home_path(args.home, args.codex_home)
         result = install(home, args.apply, args.runtime, args.refresh_runtime, codex_home,
                          args.sync_agents)
     except (OSError, ValueError, RuntimeError) as exc:

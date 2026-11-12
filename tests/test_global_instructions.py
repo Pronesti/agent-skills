@@ -9,6 +9,8 @@ from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
+import atomic_files
+import configure_hosts
 import global_instructions
 sys.path.pop(0)
 
@@ -25,7 +27,7 @@ class GlobalInstructionsTests(unittest.TestCase):
                 target.write_bytes(original)
                 return link(source, destination)
 
-            with patch.object(global_instructions.os, 'link', side_effect=create_before_link):
+            with patch.object(atomic_files.os, 'link', side_effect=create_before_link):
                 result = global_instructions.sync_instructions(
                     home, target.parent, apply=True, replace_existing=False,
                 )
@@ -250,7 +252,7 @@ class GlobalInstructionsTests(unittest.TestCase):
             claude = home / '.claude/CLAUDE.md'
             content = claude.read_text()
             self.assertIn(f"@{codex_home / 'AGENTS.md'}", content)
-            self.assertTrue(global_instructions.imports_shared(content, codex_home))
+            self.assertTrue(global_instructions.imports_shared(content, codex_home, claude.parent))
             repeated = global_instructions.link_claude(home, codex_home, apply=True)
             self.assertFalse(repeated['changed'])
             self.assertTrue(repeated['imports_shared'])
@@ -273,6 +275,145 @@ class GlobalInstructionsTests(unittest.TestCase):
             )
             self.assertEqual(claude.read_bytes(), before)
             self.assertNotIn('personal-skill-policy', claude.read_text())
+
+    def configure(self, home, *flags, env=None, success=True):
+        command = [sys.executable, str(ROOT / 'scripts/configure_hosts.py')]
+        if home is not None:
+            command += ['--home', str(home)]
+        result = subprocess.run(command + list(flags), capture_output=True, text=True, env=env)
+        if success:
+            self.assertEqual(result.returncode, 0, result.stderr)
+            return json.loads(result.stdout)
+        self.assertNotEqual(result.returncode, 0)
+        return result
+
+    def test_policy_only_on_fresh_home_installs_full_template_and_claude_import(self):
+        with tempfile.TemporaryDirectory() as temp:
+            home = Path(temp).resolve()
+            result = self.configure(home, '--policy-only')
+            content = (home / '.codex/AGENTS.md').read_text()
+            self.assertEqual(content, global_instructions.render_instructions())
+            self.assertTrue(result['instructions']['changed'])
+            claude = (home / '.claude/CLAUDE.md').read_text()
+            self.assertNotIn('personal-skill-policy', claude)
+            self.assertIsNone(result['backup'])
+            self.assertFalse(self.configure(home, '--policy-only')['instructions']['changed'])
+
+    def test_policy_only_follows_codex_home(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp).resolve()
+            home, profile = root / 'home', root / 'profile'
+            home.mkdir()
+            env = dict(os.environ, HOME=str(home), CODEX_HOME=str(profile))
+            self.configure(None, '--policy-only', env=env)
+            self.assertIn('<!-- personal-skill-policy:start -->', (profile / 'AGENTS.md').read_text())
+            self.assertFalse((home / '.codex').exists())
+            claude = (home / '.claude/CLAUDE.md').read_text()
+            self.assertIn(f"@{profile / 'AGENTS.md'}", claude)
+            self.assertNotIn('personal-skill-policy', claude)
+
+    def test_policy_only_rejects_unclosed_policy_block(self):
+        with tempfile.TemporaryDirectory() as temp:
+            home = Path(temp).resolve()
+            target = home / '.codex/AGENTS.md'
+            target.parent.mkdir()
+            target.write_text('Mine\n<!-- personal-skill-policy:start -->\nOld\n')
+            before = target.read_bytes()
+            result = self.configure(home, '--policy-only', success=False)
+            self.assertIn('left untouched', result.stderr)
+            self.assertEqual(target.read_bytes(), before)
+
+    def test_marketplace_mode_upserts_entry_and_is_idempotent(self):
+        with tempfile.TemporaryDirectory() as temp:
+            home = Path(temp).resolve()
+            marketplace = home / '.agents/plugins/marketplace.json'
+            marketplace.parent.mkdir(parents=True)
+            other = {'name': 'other', 'source': {'source': 'local', 'path': './plugins/other'}}
+            stale = {'name': 'caveman', 'category': 'Old'}
+            marketplace.write_text(json.dumps({'name': 'mine', 'extra': 1, 'plugins': [other, stale]}))
+            first = self.configure(home)
+            data = json.loads(marketplace.read_text())
+            self.assertEqual(data['name'], 'mine')
+            self.assertEqual(data['extra'], 1)
+            self.assertEqual(data['plugins'], [other, configure_hosts.MARKETPLACE_ENTRY])
+            self.assertEqual((home / 'plugins/caveman').resolve(), ROOT / 'plugins/caveman')
+            self.assertIsNotNone(first['backup'])
+            before = marketplace.stat().st_mtime_ns
+            second = self.configure(home)
+            self.assertIsNone(second['backup'])
+            self.assertEqual(marketplace.stat().st_mtime_ns, before)
+
+    def test_marketplace_mode_on_fresh_home(self):
+        with tempfile.TemporaryDirectory() as temp:
+            home = Path(temp).resolve()
+            self.configure(home)
+            data = json.loads((home / '.agents/plugins/marketplace.json').read_text())
+            self.assertEqual(data['interface'], {'displayName': 'Personal'})
+            self.assertEqual(data['plugins'], [configure_hosts.MARKETPLACE_ENTRY])
+
+    def test_marketplace_mode_validates_before_any_change(self):
+        for problem in ('unmanaged-source', 'bad-json', 'bad-plugins'):
+            with self.subTest(problem=problem), tempfile.TemporaryDirectory() as temp:
+                home = Path(temp).resolve()
+                marketplace = home / '.agents/plugins/marketplace.json'
+                marketplace.parent.mkdir(parents=True)
+                marketplace.write_text('{"plugins": []}')
+                if problem == 'unmanaged-source':
+                    (home / 'plugins/caveman').mkdir(parents=True)
+                elif problem == 'bad-json':
+                    marketplace.write_text('{not json')
+                else:
+                    marketplace.write_text('{"plugins": {}}')
+                before = marketplace.read_bytes()
+                self.configure(home, success=False)
+                self.assertEqual(marketplace.read_bytes(), before)
+                self.assertFalse((home / '.codex').exists())
+                self.assertFalse((home / '.local').exists())
+                if problem != 'unmanaged-source':
+                    self.assertFalse((home / 'plugins').exists())
+
+    def test_claude_import_is_skipped_when_only_override_exists(self):
+        with tempfile.TemporaryDirectory() as temp:
+            home = Path(temp).resolve()
+            (home / '.codex').mkdir()
+            (home / '.codex/AGENTS.override.md').write_text('Override')
+            result = global_instructions.link_claude(home, home / '.codex', apply=True)
+            self.assertFalse(result['changed'])
+            self.assertIn('skipped', result)
+            self.assertFalse((home / '.claude').exists())
+
+    def test_imports_shared_forms(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp).resolve()
+            codex_home, claude_dir = root / 'codex', root / 'claude'
+            cases = {
+                f'@{codex_home}/AGENTS.md': True,
+                f'See @{codex_home}/AGENTS.md for rules.': True,
+                '@../codex/AGENTS.md': True,
+                f'`@{codex_home}/AGENTS.md`': False,
+                f'mail@{codex_home}/AGENTS.md': False,
+                '@AGENTS.md': False,
+            }
+            for text, expected in cases.items():
+                with self.subTest(text=text):
+                    self.assertIs(global_instructions.imports_shared(text, codex_home, claude_dir), expected)
+            with patch.dict(os.environ, HOME=str(root)):
+                self.assertTrue(global_instructions.imports_shared('@~/codex/AGENTS.md', codex_home, claude_dir))
+
+    def test_import_line_uses_home_tilde_and_keeps_symlinks(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp).resolve()
+            with patch.dict(os.environ, HOME=str(root)):
+                self.assertEqual(global_instructions.claude_import_line(root / '.codex'),
+                                 '@~/.codex/AGENTS.md')
+            real = root / 'real-codex'
+            real.mkdir()
+            link = root / 'linked-codex'
+            link.symlink_to(real, target_is_directory=True)
+            configured = global_instructions.codex_home_path(None, link)
+            self.assertEqual(configured, link)
+            self.assertEqual(global_instructions.claude_import_line(configured), f'@{link}/AGENTS.md')
+            self.assertTrue(global_instructions.imports_shared(f'@{link}/AGENTS.md', configured.resolve(), root))
 
 
 if __name__ == '__main__':

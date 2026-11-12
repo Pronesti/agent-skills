@@ -9,6 +9,7 @@ from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
+import atomic_files
 import runtime_profile
 import install as installer
 sys.path.pop(0)
@@ -247,7 +248,7 @@ class RuntimeDetectionTests(unittest.TestCase):
             target.write_text('Concurrent handwritten instructions')
             return link(source, target)
 
-        with patch.object(runtime_profile.os, 'link', side_effect=competing_creation):
+        with patch.object(atomic_files.os, "link", side_effect=competing_creation):
             result = runtime_profile.apply_runtime(plan, self.root / 'backups')
         self.assertEqual(result['status'], 'preserved')
         self.assertEqual(self.target.read_text(), 'Concurrent handwritten instructions')

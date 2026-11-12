@@ -3,10 +3,12 @@ import datetime
 import difflib
 import os
 from pathlib import Path
+import re
 import shutil
 import stat
 import tempfile
 
+from atomic_files import write_atomic
 from invocation_policy import host_policy_body
 
 REPO = Path(__file__).resolve().parents[1]
@@ -17,11 +19,16 @@ CLAUDE_HEADER = ('<!-- Claude loads the shared global instructions through this 
                  'Edit config/AGENTS.md in the agent-skills repository, not this file. -->')
 
 
-def resolve_codex_home(home=None, codex_home=None):
+def codex_home_path(home=None, codex_home=None):
+    """The selected Codex directory as an absolute path that keeps symlinks as written."""
     if codex_home is None:
         codex_home = (home / '.codex' if home is not None else
                       Path(os.environ.get('CODEX_HOME') or Path.home() / '.codex'))
-    return codex_home.expanduser().resolve()
+    return Path(os.path.abspath(codex_home.expanduser()))
+
+
+def resolve_codex_home(home=None, codex_home=None):
+    return codex_home_path(home, codex_home).resolve()
 
 
 def render_instructions(root=REPO):
@@ -66,45 +73,43 @@ def sync_instructions(home, codex_home, apply=False, root=REPO, *, replace_exist
             backup_dir = Path(tempfile.mkdtemp(prefix=f'{stamp}-agents-', dir=backup_root))
             backup = backup_dir / 'AGENTS.md'
             shutil.copy2(target, backup)
-        target.parent.mkdir(parents=True, exist_ok=True)
-        temporary = None
-        try:
-            with tempfile.NamedTemporaryFile(dir=target.parent, prefix='.AGENTS.md-', delete=False) as output:
-                temporary = Path(output.name)
-                output.write(new)
-            temporary.chmod(mode)
-            if replace_existing:
-                temporary.replace(target)
-            elif override.exists() or override.is_symlink():
-                changed, diff = False, ''
-            else:
-                # Create without replacing a file that appeared after preflight.
-                try:
-                    os.link(temporary, target)
-                except FileExistsError:
-                    changed, diff = False, ''
-        finally:
-            if temporary is not None and temporary.exists():
-                temporary.unlink()
+        if not replace_existing and (override.exists() or override.is_symlink()):
+            changed, diff = False, ''
+        # Create-only mode never replaces a file that appeared after preflight.
+        elif not write_atomic(target, new, mode, replace=replace_existing):
+            changed, diff = False, ''
     return {'applied': apply, 'changed': changed, 'target': str(target),
             'backup': str(backup) if backup else None, 'diff': diff,
             'preserved': not replace_existing and not changed}
 
 
 def claude_import_line(codex_home):
-    """The Claude Code import that loads the shared instructions from the Codex file."""
-    target = codex_home / 'AGENTS.md'
+    """The Claude Code import that loads the shared instructions from the Codex file.
+
+    Pass the Codex directory as configured (see codex_home_path), so a symlinked
+    directory stays a symlink in the import instead of freezing its current target.
+    """
+    target = Path(os.path.abspath(codex_home / 'AGENTS.md'))
     try:
-        return '@~/' + str(target.relative_to(Path.home().resolve()))
+        return '@~/' + str(target.relative_to(Path.home()))
     except ValueError:
         return '@' + str(target)
 
 
-def imports_shared(text, codex_home):
+IMPORT = re.compile(r'(?<![\w`])@([^\s`]+)')
+
+
+def imports_shared(text, codex_home, base_dir):
+    """Whether Claude memory text imports the shared AGENTS.md.
+
+    Claude resolves a relative import against the directory of the importing file.
+    """
     target = (codex_home / 'AGENTS.md').resolve()
-    for line in text.splitlines():
-        line = line.strip()
-        if line.startswith('@') and Path(line[1:]).expanduser().resolve() == target:
+    for match in IMPORT.finditer(text):
+        path = Path(match.group(1)).expanduser()
+        if not path.is_absolute():
+            path = base_dir / path
+        if path.resolve() == target:
             return True
     return False
 
@@ -113,18 +118,20 @@ def link_claude(home, codex_home, apply=False):
     """Create ~/.claude/CLAUDE.md as an import of the shared instructions when it is missing.
 
     An existing file is never changed; the result reports whether it already imports them.
+    Nothing is created while only AGENTS.override.md exists, because the import would
+    point at a missing file.
     """
     target = home / '.claude/CLAUDE.md'
+    shared = codex_home / 'AGENTS.md'
+    override = codex_home / 'AGENTS.override.md'
     if target.exists() or target.is_symlink():
         text = target.read_text(encoding='utf-8') if target.is_file() else ''
         return {'target': str(target), 'changed': False, 'applied': apply,
-                'imports_shared': imports_shared(text, codex_home)}
-    content = (CLAUDE_HEADER + '\n' + claude_import_line(codex_home) + '\n')
-    if apply:
-        target.parent.mkdir(parents=True, exist_ok=True)
-        try:
-            with target.open('x', encoding='utf-8') as output:
-                output.write(content)
-        except FileExistsError:
-            return link_claude(home, codex_home, apply)
+                'imports_shared': imports_shared(text, codex_home, target.parent)}
+    if not (shared.exists() or shared.is_symlink()) and (override.exists() or override.is_symlink()):
+        return {'target': str(target), 'changed': False, 'applied': apply, 'imports_shared': False,
+                'skipped': f'{override} replaces AGENTS.md for Codex; no shared file to import'}
+    content = (CLAUDE_HEADER + '\n' + claude_import_line(codex_home) + '\n').encode('utf-8')
+    if apply and not write_atomic(target, content, 0o644, replace=False):
+        return link_claude(home, codex_home, apply)
     return {'target': str(target), 'changed': True, 'applied': apply, 'imports_shared': True}
