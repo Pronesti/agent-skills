@@ -6,7 +6,7 @@ Read the [workflow guide](WORKFLOW-GUIDE.md) for 56 scenarios in ASD-STE100 Engl
 
 ## Author revisions
 
-All 73 managed skills were checked against their authors on 7 November 2026: 41 had upstream file changes, 30 had unchanged upstream content, and two removed upstream skills were retained locally. See the [update report](reports/2026-11-07-skill-updates/REPORT.md) for reconciliation decisions and verification limits. [upstreams.json](upstreams.json) records applied bases and separate checked revisions for retained skills. A newer repository revision does not necessarily change every selected skill.
+All 73 managed skills were checked against their authors on 7 November 2026: 41 had upstream file changes, 30 had unchanged upstream content, and two removed upstream skills were retained locally. See the [update report](reports/2026-11-07-skill-updates/REPORT.md) for reconciliation decisions and verification limits. [upstreams.json](upstreams.json) records applied bases and separate checked revisions for retained skills. A newer repository revision does not necessarily change every selected skill. Impeccable, added later the same day, was not part of that check, which is why it counted 73 of the current 74 skills.
 
 | Source | Original repository | Pinned revision | Skills |
 |---|---|---|---:|
@@ -52,9 +52,11 @@ Skill picker labels use 20 functional prefixes, each grouping 2–5 skills by th
 
 **superpowers:** `brainstorming`, `executing-plans`, `finishing-a-development-branch`, `requesting-code-review`, `subagent-driven-development`, `systematic-debugging`, `test-driven-development`, `writing-plans`.
 
-**mattpocock:** `grill-me`, `grill-with-docs`, `grilling`, `research`, `resolving-merge-conflicts`, `wait-what`, `wizard`, `writing-for-agents`, `code-review`, `codebase-design`, `diagnosing-bugs`, `domain-modeling`, `handoff`, `implement`, `improve-codebase-architecture`, `prototype`, `setup-matt-pocock-skills`, `tdd`, `teach`, `to-questionnaire`, `to-spec`, `to-tickets`, `triage`, `wayfinder`.
+**mattpocock:** `grill-me`, `grill-with-docs`, `grilling`, `research`, `wait-what`, `wizard`, `writing-for-agents`, `code-review`, `codebase-design`, `diagnosing-bugs`, `domain-modeling`, `handoff`, `implement`, `improve-codebase-architecture`, `prototype`, `setup-matt-pocock-skills`, `tdd`, `teach`, `to-questionnaire`, `to-spec`, `to-tickets`, `triage`, `wayfinder`.
 
 **mattpocock-pr:** `pr`.
+
+**mattpocock-conflicts:** `resolving-merge-conflicts`.
 
 **warpdotdev:** `write-pr-description`.
 
@@ -117,7 +119,7 @@ python3 scripts/install.py --sync-agents
 
 The preview prints a JSON result with an `instructions` section containing the target path, whether it would change, and a unified diff. It creates no files. Default installation reports `preserved: true` and an empty diff when instructions already exist. With `--sync-agents`, apply installs a regular UTF-8 file and reports the backup file path in `instructions.backup` when replacing existing content. Backups live under `~/.local/share/agent-skills/backups`. A repeated explicit sync with identical content does not rewrite the file or create another backup. Existing file permissions are preserved; replacement is atomic. Creating a missing file also preserves instructions that appear concurrently during installation.
 
-Explicit sync replaces the entire global file, including local additions. Review the preview before using it. Edit the repository template for changes you want to share; edits to the installed file are not imported. After committing and pushing shared instruction changes, opt into syncing on each machine with:
+Explicit sync replaces the entire global file, including local additions such as the block that `lerd mcp:enable-global` writes; rerun that command after a sync on machines that use lerd. Review the preview before using it. Edit the repository template for changes you want to share; edits to the installed file are not imported. After committing and pushing shared instruction changes, opt into syncing on each machine with:
 
 ```sh
 git pull --ff-only && ./install.sh --sync-agents
@@ -136,7 +138,7 @@ python3 scripts/configure_hosts.py --sync-agents
 python3 scripts/configure_hosts.py --sync-agents --apply
 ```
 
-This standalone mode leaves skills, runtime profiles, and marketplace registration untouched, and cannot be combined with `--policy-only`. Like the installer, it creates a missing Claude import and leaves an existing `CLAUDE.md` alone. The `--policy-only` command updates just the managed blocks while preserving other instructions; it skips a `CLAUDE.md` that imports the shared file, because Claude already receives the block through the import. The combined installer leaves marketplace registration untouched. See [OpenAI's instruction discovery documentation](https://learn.chatgpt.com/docs/agent-configuration/agents-md) for global overrides and session loading.
+This standalone mode leaves skills, runtime profiles, and marketplace registration untouched, and cannot be combined with `--policy-only`. Like the installer, it creates a missing Claude import and leaves an existing `CLAUDE.md` alone. The `--policy-only` command updates just the managed blocks while preserving other instructions; it skips a `CLAUDE.md` that imports the shared file, because Claude already receives the block through the import. Where no global instructions exist, it installs the complete shared template first rather than a policy-only fragment. The combined installer leaves marketplace registration untouched. See [OpenAI's instruction discovery documentation](https://learn.chatgpt.com/docs/agent-configuration/agents-md) for global overrides and session loading.
 
 #### Machine-specific PHP and Composer runtimes
 
@@ -200,7 +202,7 @@ The example test commands assume the project provides those commands or scripts.
 
 ## Local policy overlay
 
-- [invocation-policy.json](invocation-policy.json) owns the seven automatic skills and their triggers. Their entrypoints set `disable-model-invocation: false` and `policy.allow_implicit_invocation: true`. The other 66 entrypoints keep the opposite settings. Both fields must agree with the allowlist.
+- [invocation-policy.json](invocation-policy.json) owns the seven automatic skills and their triggers. Their entrypoints set `disable-model-invocation: false` and `policy.allow_implicit_invocation: true`. The other 67 entrypoints keep the opposite settings. Both fields must agree with the allowlist.
 - Selection applies to one task. Session-wide modes need an explicit request. Always-on style mandates, forced workflow transitions, and automatic activation from generated plans or handoffs are removed or made optional.
 - Supporting files are still readable. `grill-me` declares the grilling procedure; `grill-with-docs` declares grilling and domain documentation.
 - Project runtime, verification, delivery requirements, and existing user authorization take precedence. Superpowers namespace references are adapted for standalone installation; optional isolation uses host facilities.
@@ -209,7 +211,7 @@ The example test commands assume the project provides those commands or scripts.
 
 ## Updating without losing the policy
 
-Run `python3 scripts/check_updates.py` to compare the pinned revisions with the authors’ default branches. It reports only; it never replaces skills. Merge changed skill files against the recorded base, preserve the selective invocation overlay, update `upstreams.json`, and review executable helpers. For Caveman, bump the local plugin version and reinstall through each host after editing the source. Do not edit versioned plugin caches.
+Run `python3 scripts/check_updates.py` to compare the pinned revisions with the authors’ default branches. It reports only; it never replaces skills. Merge changed skill files against the recorded base, preserve the selective invocation overlay, update `upstreams.json`, and review executable helpers. The invocation overlay applies to every entry, so an entry's `local_changes` lists only deviations beyond it. For Caveman, bump the local plugin version and reinstall through each host after editing the source. Do not edit versioned plugin caches.
 
 Validate metadata and references with `python3 scripts/validate.py` (requires `pip install -r scripts/requirements.txt` in your chosen environment). Run `python3 -m unittest discover -s tests -v` for installer behavior. Verify that all personal skills remain available for explicit selection, only the allowlisted skills appear in automatic discovery, and each automatic trigger stays within the authorized task. Start a fresh task after changing discovery.
 

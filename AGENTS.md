@@ -28,13 +28,13 @@ Then start a fresh Codex or Claude Code session, since instructions and skills l
 
 - `config/AGENTS.md` is the template for the user's global instructions, not instructions for this repository. It installs to `~/.codex/AGENTS.md`, which `~/.claude/CLAUDE.md` imports. Keep the `<!-- lerd:begin -->` block out of it; lerd writes that block into the live file.
 - `invocation-policy.json` owns the automatic-skill allowlist; each skill's two invocation flags must agree with it ([POLICY.md](POLICY.md)). Keep those flags when merging upstream updates.
-- `upstreams.json` has one entry per skill directory under `skills/` and `plugins/caveman/skills/`; add or remove it with the directory. An entry's `revision` must equal its source's `revision`, so a skill pinned to an older revision needs its own source key. Record local deviations from upstream in the entry's `local_changes`.
-- `MANIFEST.md` and `WORKFLOW-GUIDE.md` state skill and workflow counts. Update them when the catalog changes.
+- `upstreams.json` has one entry per skill directory under `skills/` and `plugins/caveman/skills/`; add or remove it with the directory. An entry's `revision` must equal its source's `revision`, so a skill pinned to an older revision needs its own source key. Record deviations beyond the shared invocation overlay in the entry's `local_changes`.
+- `MANIFEST.md` and `WORKFLOW-GUIDE.md` state skill and workflow counts. Update them when the catalog changes; `validate.py` checks the `MANIFEST.md` summary counts.
 
 ## Upstream updates
 
 - `python3 scripts/check_updates.py` only reports. Merge upstream changes against the recorded `revision`, then update `upstreams.json`.
-- Record each review in `reports/YYYY-MM-DD-skill-updates/` (`REPORT.md`, `upstream-check.json`) and update the dated summary in `MANIFEST.md`.
+- Record each review in `reports/YYYY-MM-DD-skill-updates/` (`REPORT.md`, `upstream-check.json`; folders before 2026-11-07 hold only the check) and update the dated summary in `MANIFEST.md`.
 - For Caveman changes, bump `version` in both `plugins/caveman/.claude-plugin/plugin.json` and `.codex-plugin/plugin.json`, and log the change in `plugins/caveman/LOCAL-CHANGES.md`.
 
 ## Checks

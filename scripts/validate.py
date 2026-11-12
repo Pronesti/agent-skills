@@ -58,6 +58,22 @@ for path in skills:
         if target.endswith(".md") and target.startswith(("../", "references/")):
             if not (path.parent / target).exists():
                 errors.append(f"{path}: missing supporting reference {target}")
+NUMBERS = {"seven": 7}
+manifest_text = (ROOT / "MANIFEST.md").read_text()
+summary = re.search(r"\*\*(\d+) standalone skills and a (\d+)-skill Caveman edition\*\*\. (\w+) focused skills "
+                    r"allow automatic invocation; the other (\d+) personal workflows", manifest_text)
+standalone = len(list((ROOT / "skills").glob("*/SKILL.md")))
+expected = (standalone, len(skills) - standalone, len(automatic_paths), len(skills) - len(automatic_paths))
+if not summary:
+    errors.append("MANIFEST.md: catalog summary sentence not found")
+else:
+    stated = tuple(int(v) if v.isdigit() else NUMBERS.get(v.lower(), -1) for v in summary.groups())
+    if stated != expected:
+        errors.append(f"MANIFEST.md: catalog summary states {stated}, repository has {expected} "
+                      "(standalone, Caveman, automatic, manual)")
+other = re.search(r"The other (\d+) entrypoints", manifest_text)
+if other and int(other.group(1)) != expected[3]:
+    errors.append(f"MANIFEST.md: 'The other {other.group(1)} entrypoints' should be {expected[3]}")
 for manifest in (ROOT / "plugins/caveman/.codex-plugin/plugin.json", ROOT / "plugins/caveman/.claude-plugin/plugin.json"):
     data = json.loads(manifest.read_text())
     if data.get("name") != "caveman" or "hooks" in data:

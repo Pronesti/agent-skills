@@ -98,3 +98,7 @@ Compression tests first encountered blocked writes to the default user state dir
 ## Delivery state
 
 The user authorized direct delivery on `main`, pushing to origin, and a local skill refresh after reviewing the update. Standalone skills link to the canonical source files. Refresh the cached Caveman edition through the hosts’ plugin commands; preserve existing global instructions rather than replacing them with the narrower shared template. Commit and installation results are reported in the delivery chat. Existing `.DS_Store`, `.idea/`, and `reports/2026-09-19-skill-audit/` changes are excluded from delivery.
+
+## Addendum — 2026-11-11
+
+Impeccable 4.8.0 was added after this check (`efb4c81`), bringing the catalog to 74 skills. It was not part of the 73 skills checked here.
