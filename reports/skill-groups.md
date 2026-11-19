@@ -1,6 +1,6 @@
 # Skill groups
 
-All 74 repository-owned skills are divided into 20 functional groups, each containing 2–5 skills. Prefixes appear in `interface.display_name` in each skill’s `agents/openai.yaml`. Existing skill IDs, directories, invocation policy, and supporting references stay compatible. Host-owned skills outside this repository are outside this catalog.
+All 75 repository-owned skills are divided into 20 functional groups, each containing 2–5 skills. Prefixes appear in `interface.display_name` in each skill’s `agents/openai.yaml`. Existing skill IDs, directories, invocation policy, and supporting references stay compatible. Host-owned skills outside this repository are outside this catalog.
 
 Standalone installations linked to this repository pick up the metadata after discovery refresh. The Caveman source version is `4.1.0+selective.20261107`; installed plugin copies need updating through their host to load these labels.
 
@@ -19,7 +19,7 @@ Standalone installations linked to this repository pick up the metadata after di
 | Delivery: | 4 | Organize tickets and complete branch integration. |
 | Pull Requests: | 2 | Draft PR descriptions from verified changes and evidence. |
 | Exploration: | 4 | Research questions and understand repositories. |
-| Teaching: | 3 | Explain concepts clearly and visually. |
+| Teaching: | 4 | Explain concepts clearly and visually. |
 | Writing: | 3 | Create and improve technical and agent documentation. |
 | Compression: | 3 | Use concise communication and compress text. |
 | Context: | 3 | Recover, record, and transfer working context. |
@@ -169,7 +169,7 @@ Research questions and understand repositories.
 | `research` | [Exploration: Research](../skills/research/SKILL.md) |
 | `why` | [Exploration: Why](../skills/why/SKILL.md) |
 
-## Teaching (3)
+## Teaching (4)
 
 Explain concepts clearly and visually.
 
@@ -178,6 +178,7 @@ Explain concepts clearly and visually.
 | `show-me` | [Teaching: Show Me](../skills/show-me/SKILL.md) |
 | `teach` | [Teaching: Teach](../skills/teach/SKILL.md) |
 | `wait-what` | [Teaching: Wait What](../skills/wait-what/SKILL.md) |
+| `wait-what-list` | [Teaching: Wait What List](../skills/wait-what-list/SKILL.md) |
 
 ## Writing (3)
 

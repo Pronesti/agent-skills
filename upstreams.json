@@ -292,6 +292,20 @@
       "upstream_status": "reconciled"
     },
     {
+      "name": "wait-what-list",
+      "source": "mattpocock",
+      "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "path": "skills/productivity/wait-what",
+      "local_path": "skills/wait-what-list",
+      "local_changes": [
+        "Local variant of wait-what with no upstream counterpart: explain a named topic, or re-pitch the last message, as a detailed ordered list in ASD-STE100.",
+        "Add ordered-list rules: one action or fact per item, condition before command, 20-word items, lettered sub-steps, warnings before their item."
+      ],
+      "changed_files": 0,
+      "checked_on": "2026-11-19",
+      "upstream_status": "local_variant"
+    },
+    {
       "name": "wizard",
       "source": "mattpocock",
       "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",

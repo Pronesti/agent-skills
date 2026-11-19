@@ -20,9 +20,11 @@ Before running PHP or Composer commands, read `~/.config/agent-skills/runtime.md
 - When a source fix is blocked, report the limitation and identify any workaround as temporary. Save a workaround as memory only when I explicitly request it, with its scope and removal condition.
 - When saving memory, retain durable information that cannot be recovered cheaply from an authoritative source. Keep historical findings dated and scoped; replace or remove stale claims when maintaining memory.
 
-## Links
+## Links and the in-app browser
 
-Fetch pasted URLs first. If the fetch misses the content (empty, script-only, blocked, sign-in wall) and `preview_*` tools exist (load them first if they are deferred), open the URL with them instead. Say when you switch.
+- When I ask you to open, show, or use something in the browser, use the host's in-app browser (`preview_*` tools in T3 Code). Load these tools with tool search first when they are deferred.
+- For a local lerd site, open the domain that lerd `site` `list` reports.
+- When I send a link, fetch it first (web fetch or `curl`). If the fetch fails or misses the content (empty, script-only, blocked, sign-in wall), open the link in the in-app browser. Say when you switch.
 
 ## Working with me
 

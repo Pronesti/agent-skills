@@ -1,0 +1,5 @@
+interface:
+  display_name: "Teaching: Wait What List"
+  short_description: 'Explain it as a detailed ordered list in ASD-STE100'
+policy:
+  allow_implicit_invocation: false

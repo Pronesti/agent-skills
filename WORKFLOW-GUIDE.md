@@ -1,11 +1,11 @@
 # Use the collected skills together
 
-This guide tells you how to use the 74 workflows in this repository.
+This guide tells you how to use the 75 workflows in this repository.
 It gives the sequence, purpose, and completion conditions for 56 scenarios.
 It also identifies workflows that can conflict.
 
 **Library date: 7 November 2026.**
-The library contains 54 standalone skills and 20 Caveman skills.
+The library contains 55 standalone skills and 20 Caveman skills.
 
 **Language reference:** [ASD-STE100, Issue 9](https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf).
 The guide uses short sentences and active voice.
@@ -33,7 +33,7 @@ Software terms and skill names keep their technical meanings.
   - [Library configuration](#library-configuration)
   - [Additional QA scenarios](#additional-qa-scenarios)
 - [Example requests](#example-requests)
-- [All 74 workflows](#all-74-workflows)
+- [All 75 workflows](#all-75-workflows)
 - [Information for the next stage](#information-for-the-next-stage)
 - [Source documents](#source-documents)
 
@@ -181,7 +181,7 @@ Neither alias selects a planning or implementation workflow.
 
 ### This guide covers the collected library
 
-The repository owns the 74 workflows in this guide.
+The repository owns the 75 workflows in this guide.
 Host-owned document, spreadsheet, image, and website plugins are outside this catalog.
 Follow the host's mandatory built-in skill rules for specialist artifacts.
 Other hosts can use different procedures or upstream editions.
@@ -1307,6 +1307,7 @@ Do not ask the current user to invent another person's knowledge.
 2. Use `teach` instead for a sustained learning workspace.
 3. Use `show-me` for a useful visual explanation.
 4. Use `wait-what` if the last explanation must have a different form.
+5. Use `wait-what-list` if the explanation must be a detailed ordered list.
 
 **Completion:** The user receives the specified explanation or lesson at the necessary level.
 **Separation:** Do not make a full teaching workspace for each short question.
@@ -1602,7 +1603,7 @@ Keep stored artifacts in clear English.
 Keep all necessary acceptance and project checks.
 ```
 
-## All 74 workflows
+## All 75 workflows
 
 The groups below follow [the functional catalog](reports/skill-groups.md).
 Each workflow appears once in this reference.
@@ -1724,13 +1725,14 @@ Possible pairings do not automatically select another skill.
 | [`research`](skills/research/SKILL.md) | Use a background agent for primary-source research in Markdown. | Research does not give approval for product edits. |
 | [`why`](skills/why/SKILL.md) | Identify previous design reasons from available evidence sources. | Keep facts separate from inferences. Record unavailable evidence sources. |
 
-### Teaching — 3 workflows
+### Teaching — 4 workflows
 
 | Workflow | Purpose | Boundary or next use |
 |---|---|---|
 | [`show-me`](skills/show-me/SKILL.md) | Give information about the topic with a diagram, code sketch, or focused HTML artifact. | Keep the visual within the current question. |
 | [`teach`](skills/teach/SKILL.md) | Make lessons and learning records in a teaching workspace. | Select this for sustained instruction. |
 | [`wait-what`](skills/wait-what/SKILL.md) | Give the previous explanation in a different form. | Use the existing facts unless information is missing. |
+| [`wait-what-list`](skills/wait-what-list/SKILL.md) | Give the topic or the previous explanation as a detailed ordered list. | Use the existing facts. Identify missing facts in the list. |
 
 ### Writing — 3 workflows
 
@@ -1815,7 +1817,7 @@ Upstream editions can have different hooks, transitions, delivery steps, and hos
 - [MANIFEST.md](MANIFEST.md) identifies the collection, versions, installation procedure, and update procedure.
 - [POLICY.md](POLICY.md) gives the invocation boundaries.
 - [invocation-policy.json](invocation-policy.json) owns the seven automatic triggers.
-- [reports/skill-groups.md](reports/skill-groups.md) lists the 74 workflows in 20 groups.
+- [reports/skill-groups.md](reports/skill-groups.md) lists the 75 workflows in 20 groups.
 - Each linked `SKILL.md` gives the specified procedure and supporting references.
 - [upstreams.json](upstreams.json) records pinned revisions and local file mappings.
 - [ASD-STE100, Issue 9](https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf) supplies the language rules and dictionary.
