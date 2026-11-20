@@ -28,7 +28,9 @@ Examples:
 
 When both skills apply, `write-pr-description` owns fact collection, template handling, drafting, and the final self-check. `pr` supplies summary, evidence, and merge-impact guidance inside that same draft. Reuse already inspected context and observed verification; do not duplicate collection or produce competing bodies. Referencing another workflow does not select it.
 
-Follow the user's requested format and the target repository's required template. Otherwise, use Matt's Summary / Evidence / Merge Danger shape for a substantive PR; a small change can be a short paragraph. These rules take precedence over the generic format suggestions in either skill. Use a structural visual only when it makes the change easier to assess. Include recovery or impact details in proportion to the actual change.
+Follow the user's requested format and the target repository's required template. Otherwise, use Matt's Summary / Evidence / Merge Danger shape for a substantive PR; a small change can be a short paragraph. These rules take precedence over the generic format suggestions in either skill. Include recovery or impact details in proportion to the actual change.
+
+Every format, a repository template included, carries one structural visual from `pr`'s Summary toolbox when the change has a shape a reviewer must grasp: a new or moved call, a changed file layout, altered control flow, or a new component or module boundary. Under a template, place it in the first section that summarizes or describes the change, beside the sentence it supports; the template keeps its headings and order. A mechanical, config-only, or one-line change carries prose alone.
 
 ## Facts, scope, and completion
 

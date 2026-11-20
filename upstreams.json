@@ -942,7 +942,8 @@
         "Enable narrow automatic invocation in both host metadata formats and the shared allowlist.",
         "Require a specific authorized PR authoring deliverable; exclude review, research, ordinary coding, and instruction/template editing.",
         "Share an activation/authorization check and format precedence; compose one body using Warp procedure and Matt evidence/impact guidance.",
-        "Use existing domain documentation and report unavailable evidence without invented before/after results."
+        "Use existing domain documentation and report unavailable evidence without invented before/after results.",
+        "Carry one structural visual from the Summary toolbox inside a repository template when the change has a reviewable shape; mechanical changes stay prose-only."
       ],
       "changed_files": 0,
       "checked_on": "2026-11-07",
@@ -958,7 +959,8 @@
         "Enable narrow automatic invocation in both host metadata formats and the shared allowlist.",
         "Require a specific authorized PR authoring deliverable; exclude review, research, ordinary coding, and instruction/template editing.",
         "Share an activation/authorization check and format precedence; compose one body using Warp procedure and Matt evidence/impact guidance.",
-        "Retain upstream references and evaluation cases; inspect the full branch diff, support requested titles, honor combined format precedence, and keep publication native and separately authorized."
+        "Retain upstream references and evaluation cases; inspect the full branch diff, support requested titles, honor combined format precedence, and keep publication native and separately authorized.",
+        "Carry one structural visual from the Summary toolbox inside a repository template when the change has a reviewable shape; mechanical changes stay prose-only."
       ],
       "changed_files": 0,
       "checked_on": "2026-11-07",
