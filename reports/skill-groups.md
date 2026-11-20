@@ -1,6 +1,6 @@
 # Skill groups
 
-All 75 repository-owned skills are divided into 20 functional groups, each containing 2–5 skills. Prefixes appear in `interface.display_name` in each skill’s `agents/openai.yaml`. Existing skill IDs, directories, invocation policy, and supporting references stay compatible. Host-owned skills outside this repository are outside this catalog.
+All 76 repository-owned skills are divided into 20 functional groups, each containing 2–5 skills. Prefixes appear in `interface.display_name` in each skill’s `agents/openai.yaml`. Existing skill IDs, directories, invocation policy, and supporting references stay compatible. Host-owned skills outside this repository are outside this catalog.
 
 Standalone installations linked to this repository pick up the metadata after discovery refresh. The Caveman source version is `4.1.0+selective.20261107`; installed plugin copies need updating through their host to load these labels.
 
@@ -15,7 +15,7 @@ Standalone installations linked to this repository pick up the metadata after di
 | Maintenance: | 4 | Refactor, migrate, and patch existing behavior. |
 | Testing: | 4 | Develop test-first, exercise user journeys, and verify acceptance conditions. |
 | Debugging: | 3 | Investigate failures and regressions. |
-| Review: | 4 | Review code and assess change impact. |
+| Review: | 5 | Review code and assess change impact. |
 | Delivery: | 4 | Organize tickets and complete branch integration. |
 | Pull Requests: | 2 | Draft PR descriptions from verified changes and evidence. |
 | Exploration: | 4 | Research questions and understand repositories. |
@@ -127,7 +127,7 @@ Investigate failures and regressions.
 | `diagnosing-bugs` | [Debugging: Diagnosing Bugs](../skills/diagnosing-bugs/SKILL.md) |
 | `systematic-debugging` | [Debugging: Systematic Debugging](../skills/systematic-debugging/SKILL.md) |
 
-## Review (4)
+## Review (5)
 
 Review code and assess change impact.
 
@@ -136,6 +136,7 @@ Review code and assess change impact.
 | `blast-radius` | [Review: Blast Radius](../skills/blast-radius/SKILL.md) |
 | `caveman:caveman-review` | [Review: Caveman Review](../plugins/caveman/skills/caveman-review/SKILL.md) |
 | `code-review` | [Review: Code Review](../skills/code-review/SKILL.md) |
+| `council` | [Review: Council](../skills/council/SKILL.md) |
 | `requesting-code-review` | [Review: Requesting Code Review](../skills/requesting-code-review/SKILL.md) |
 
 ## Delivery (4)

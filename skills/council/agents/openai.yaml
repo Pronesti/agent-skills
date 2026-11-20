@@ -1,0 +1,5 @@
+interface:
+  display_name: "Review: Council"
+  short_description: 'Review with three models from different providers'
+policy:
+  allow_implicit_invocation: false

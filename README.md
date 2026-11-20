@@ -1,6 +1,6 @@
 # Agent skills
 
-A curated library of 75 agent skills for Codex, Claude Code, and Cursor: 55 standalone skills and a 20-skill Caveman edition, vendored from their authors at pinned revisions. It also ships one set of global instructions shared by Codex and Claude Code, and an installer that links everything into each host.
+A curated library of 76 agent skills for Codex, Claude Code, and Cursor: 56 standalone skills and a 20-skill Caveman edition, vendored from their authors at pinned revisions. It also ships one set of global instructions shared by Codex and Claude Code, and an installer that links everything into each host.
 
 Only seven focused skills start on their own; every other skill runs when you select it. [POLICY.md](POLICY.md) explains the rules and the reasons behind them.
 

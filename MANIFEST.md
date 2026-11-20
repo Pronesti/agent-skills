@@ -1,12 +1,12 @@
 # Curated Agent Skills
 
-This repository owns **55 standalone skills and a 20-skill Caveman edition**. Seven focused skills allow automatic invocation; the other 68 personal workflows require explicit user selection. See [POLICY.md](POLICY.md) for invocation boundaries.
+This repository owns **56 standalone skills and a 20-skill Caveman edition**. Seven focused skills allow automatic invocation; the other 69 personal workflows require explicit user selection. See [POLICY.md](POLICY.md) for invocation boundaries.
 
-Read the [workflow guide](WORKFLOW-GUIDE.md) for 56 scenarios in ASD-STE100 English. The guide covers all 75 workflows, their sequences, and combinations with different instructions.
+Read the [workflow guide](WORKFLOW-GUIDE.md) for 56 scenarios in ASD-STE100 English. The guide covers all 76 workflows, their sequences, and combinations with different instructions.
 
 ## Author revisions
 
-All 73 managed skills were checked against their authors on 7 November 2026: 41 had upstream file changes, 30 had unchanged upstream content, and two removed upstream skills were retained locally. See the [update report](reports/2026-11-07-skill-updates/REPORT.md) for reconciliation decisions and verification limits. [upstreams.json](upstreams.json) records applied bases and separate checked revisions for retained skills. A newer repository revision does not necessarily change every selected skill. Impeccable, added later the same day, and the local `wait-what-list` variant, added on 19 November 2026, were not part of that check, which is why it counted 73 of the current 75 skills.
+All 73 managed skills were checked against their authors on 7 November 2026: 41 had upstream file changes, 30 had unchanged upstream content, and two removed upstream skills were retained locally. See the [update report](reports/2026-11-07-skill-updates/REPORT.md) for reconciliation decisions and verification limits. [upstreams.json](upstreams.json) records applied bases and separate checked revisions for retained skills. A newer repository revision does not necessarily change every selected skill. Impeccable, added later the same day, and the local `wait-what-list` variant and tstack `council`, both added on 19 November 2026, were not part of that check, which is why it counted 73 of the current 76 skills.
 
 | Source | Original repository | Pinned revision | Skills |
 |---|---|---|---:|
@@ -29,6 +29,7 @@ All 73 managed skills were checked against their authors on 7 November 2026: 41 
 | nextlevelbuilder | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | `b7d5353e0130feb8c5574ef1251f8a1db1873ccb` | 1 |
 | mattpocock-conflicts | [mattpocock/skills](https://github.com/mattpocock/skills) | `c55ee46073ed923f86ce59a5eb3b6d895095d1b7` | 1 |
 | impeccable | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) | `414603bf14c7a344edb466bb1f85690c77ce8b7d` (`skill-v4.8.0`) | 1 |
+| tstack | [t3dotgg/tstack](https://github.com/t3dotgg/tstack) | `11e37a74d0a6868c121cd0910ab2b3bd9873b92a` | 1 |
 
 Architecture Patterns includes its upstream `references/details.md` and `references/advanced-patterns.md`. Incremental Implementation bundles the upstream shared `references/definition-of-done.md` inside its own reference directory; `upstreams.json` records that additional source-to-local mapping. Commit and delivery instructions in the Addy forks honor existing authorization and project requirements. Other workflow names remain optional, separately selected choices.
 
@@ -44,9 +45,11 @@ Anthropic `frontend-design` and Next Level Builder `ui-ux-pro-max` were added on
 
 Impeccable 4.8.0 was added on 7 November 2026 from the compiled Codex skill in the pinned `skill-v4.8.0` release. It bundles references, helper-agent prompts, data, and portable launchers; platform binaries and hook registration are excluded. The launcher downloads a checksum-verified engine into the user cache when needed. Invoke `$impeccable` explicitly. The same repository directory is linked at user level for Codex, Cursor, and Claude. Existing project-local copies can take precedence and remain separately managed.
 
+tstack `council` was added on 19 November 2026. It sends one review or feedback request to three strong models from different providers, through `orchestrator_capabilities` and `delegate_task` in T3 Code or the host's subagent tools elsewhere. Delegates stay read-only, an unreachable provider is reported instead of replaced, and each review round is scored. A run sends the request context to three paid providers. The upstream body is unchanged; manual invocation metadata and the authorization preamble are the only local changes. The MIT notice is preserved in `licenses/`.
+
 ## Functional groups
 
-Skill picker labels use 20 functional prefixes, each grouping 2–5 skills by their main purpose. All 75 skills are assigned exactly once. Invocation names and installation paths are preserved. See the [complete grouping](reports/skill-groups.md).
+Skill picker labels use 20 functional prefixes, each grouping 2–5 skills by their main purpose. All 76 skills are assigned exactly once. Invocation names and installation paths are preserved. See the [complete grouping](reports/skill-groups.md).
 
 ## Catalog
 
@@ -85,6 +88,8 @@ Skill picker labels use 20 functional prefixes, each grouping 2–5 skills by th
 **nextlevelbuilder:** `ui-ux-pro-max`.
 
 **impeccable:** `impeccable`.
+
+**tstack:** `council`.
 
 **caveman:** `caveman:cavecrew`, `caveman:caveman`, `caveman:caveman-commit`, `caveman:caveman-compress`, `caveman:caveman-discover`, `caveman:caveman-evidence-review`, `caveman:caveman-explore`, `caveman:caveman-help`, `caveman:caveman-learn`, `caveman:caveman-manage`, `caveman:caveman-optimize`, `caveman:caveman-review`, `caveman:caveman-setup`, `caveman:caveman-stats`, `caveman:investigate-first`, `caveman:lean-build`, `caveman:migration`, `caveman:safe-refactor`, `caveman:surgical-patch`, `caveman:verify-and-stop`.
 
@@ -202,7 +207,7 @@ The example test commands assume the project provides those commands or scripts.
 
 ## Local policy overlay
 
-- [invocation-policy.json](invocation-policy.json) owns the seven automatic skills and their triggers. Their entrypoints set `disable-model-invocation: false` and `policy.allow_implicit_invocation: true`. The other 68 entrypoints keep the opposite settings. Both fields must agree with the allowlist.
+- [invocation-policy.json](invocation-policy.json) owns the seven automatic skills and their triggers. Their entrypoints set `disable-model-invocation: false` and `policy.allow_implicit_invocation: true`. The other 69 entrypoints keep the opposite settings. Both fields must agree with the allowlist.
 - Selection applies to one task. Session-wide modes need an explicit request. Always-on style mandates, forced workflow transitions, and automatic activation from generated plans or handoffs are removed or made optional.
 - Supporting files are still readable. `grill-me` declares the grilling procedure; `grill-with-docs` declares grilling and domain documentation.
 - Project runtime, verification, delivery requirements, and existing user authorization take precedence. Superpowers namespace references are adapted for standalone installation; optional isolation uses host facilities.

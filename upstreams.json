@@ -147,6 +147,12 @@
       "artifact": "https://github.com/pbakaus/impeccable/releases/download/skill-v4.8.0/universal.zip",
       "artifact_sha256": "82e6f6ff3a2b18f46f0f2fc388c1ab7abf3ccc52bbfc522456396d13011d6706",
       "note": "Vendor the compiled Codex skill from the pinned release, not unreleased HEAD."
+    },
+    "tstack": {
+      "url": "https://github.com/t3dotgg/tstack",
+      "revision": "11e37a74d0a6868c121cd0910ab2b3bd9873b92a",
+      "added_on": "2026-11-19",
+      "checked_on": "2026-11-19"
     }
   },
   "skills": [
@@ -999,6 +1005,18 @@
         "Retain the upstream Apache 2.0 license; update managed content through this repository.",
         "Normalize Markdown whitespace for the Git gate and preserve the Windows launcher CRLF through scoped Git attributes."
       ]
+    },
+    {
+      "name": "council",
+      "source": "tstack",
+      "revision": "11e37a74d0a6868c121cd0910ab2b3bd9873b92a",
+      "path": "skills/council/SKILL.md",
+      "local_path": "skills/council",
+      "local_changes": [
+        "Replace the 'say council' trigger description with a manual-workflow description and set manual invocation metadata.",
+        "Add the task-scoped authorization preamble; the upstream body is unchanged."
+      ],
+      "checked_on": "2026-11-19"
     }
   ]
 }

@@ -1,11 +1,11 @@
 # Use the collected skills together
 
-This guide tells you how to use the 75 workflows in this repository.
+This guide tells you how to use the 76 workflows in this repository.
 It gives the sequence, purpose, and completion conditions for 56 scenarios.
 It also identifies workflows that can conflict.
 
 **Library date: 7 November 2026.**
-The library contains 55 standalone skills and 20 Caveman skills.
+The library contains 56 standalone skills and 20 Caveman skills.
 
 **Language reference:** [ASD-STE100, Issue 9](https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf).
 The guide uses short sentences and active voice.
@@ -33,7 +33,7 @@ Software terms and skill names keep their technical meanings.
   - [Library configuration](#library-configuration)
   - [Additional QA scenarios](#additional-qa-scenarios)
 - [Example requests](#example-requests)
-- [All 75 workflows](#all-75-workflows)
+- [All 76 workflows](#all-76-workflows)
 - [Information for the next stage](#information-for-the-next-stage)
 - [Source documents](#source-documents)
 
@@ -181,7 +181,7 @@ Neither alias selects a planning or implementation workflow.
 
 ### This guide covers the collected library
 
-The repository owns the 75 workflows in this guide.
+The repository owns the 76 workflows in this guide.
 Host-owned document, spreadsheet, image, and website plugins are outside this catalog.
 Follow the host's mandatory built-in skill rules for specialist artifacts.
 Other hosts can use different procedures or upstream editions.
@@ -432,6 +432,7 @@ Select the design before implementation if two workflows give different abstract
 | `code-review` | Does the diff agree with the spec and repository standards? |
 | `requesting-code-review` | What problems does a new reviewer find in the completed implementation? |
 | `blast-radius` | Which effects occur outside the diff, and what evidence shows that the change is safe? |
+| `council` | What do three models from different providers find, and where do they disagree? |
 | `caveman:caveman-review` | Which short findings give the problem, location, and necessary repair? |
 | `manual-qa` | Do the specified user journeys work through the actual interface? |
 | `caveman:verify-and-stop` | Do the acceptance conditions and necessary project checks pass? |
@@ -1603,7 +1604,7 @@ Keep stored artifacts in clear English.
 Keep all necessary acceptance and project checks.
 ```
 
-## All 75 workflows
+## All 76 workflows
 
 The groups below follow [the functional catalog](reports/skill-groups.md).
 Each workflow appears once in this reference.
@@ -1691,13 +1692,14 @@ Possible pairings do not automatically select another skill.
 | [`diagnosing-bugs`](skills/diagnosing-bugs/SKILL.md) | Make a failing loop before hypothesis tests and permitted repair. | Use its performance procedure for measured regressions. |
 | [`systematic-debugging`](skills/systematic-debugging/SKILL.md) | Find the cause through pattern comparison and controlled hypothesis tests. | Use this procedure when repeated speculative repairs do not solve the failure. |
 
-### Review — 4 workflows
+### Review — 5 workflows
 
 | Workflow | Purpose | Boundary or next use |
 |---|---|---|
 | [`blast-radius`](skills/blast-radius/SKILL.md) | Identify external effects with real-code evidence for the important safety fact. | Use independent reviewers only when the user requests that method. |
 | [`caveman:caveman-review`](plugins/caveman/skills/caveman-review/SKILL.md) | Write short findings with a location, problem, and repair. | The skill does not repair, lint, submit, or give approval. |
 | [`code-review`](skills/code-review/SKILL.md) | Compare a known change range with the spec and standards. | Keep the two review results separate. |
+| [`council`](skills/council/SKILL.md) | Get review or feedback from three models from different providers. Score each review round. | Keep the delegates read-only. Report an unavailable provider. Do not use a substitute. |
 | [`requesting-code-review`](skills/requesting-code-review/SKILL.md) | Get a new review of completed implementation and requirements. | Do not do an executor's equivalent review again without a different question. |
 
 ### Delivery — 4 workflows
@@ -1817,7 +1819,7 @@ Upstream editions can have different hooks, transitions, delivery steps, and hos
 - [MANIFEST.md](MANIFEST.md) identifies the collection, versions, installation procedure, and update procedure.
 - [POLICY.md](POLICY.md) gives the invocation boundaries.
 - [invocation-policy.json](invocation-policy.json) owns the seven automatic triggers.
-- [reports/skill-groups.md](reports/skill-groups.md) lists the 75 workflows in 20 groups.
+- [reports/skill-groups.md](reports/skill-groups.md) lists the 76 workflows in 20 groups.
 - Each linked `SKILL.md` gives the specified procedure and supporting references.
 - [upstreams.json](upstreams.json) records pinned revisions and local file mappings.
 - [ASD-STE100, Issue 9](https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf) supplies the language rules and dictionary.
