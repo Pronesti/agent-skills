@@ -18,4 +18,17 @@ Translate acceptance conditions into smallest sufficient proof set.
 - Do not edit product code unless verification request includes fixes.
 - Do not add polish, cleanup, or unrelated tests after criteria pass.
 
+Each claim needs its own proof:
+
+| Claim | Proof |
+|---|---|
+| Tests pass | Test output, zero failures, exit 0 |
+| Build or lint clean | That command's own output, exit 0 |
+| Bug fixed | Original symptom reproduced, now passing |
+| Regression test works | Seen red before fix, green after |
+| Subagent or tool finished | Diff or artifact inspected, not its report |
+| Requirements met | Each acceptance condition checked one by one |
+
+Hedged status words ("should", "probably", "seems", "Done!") mean proof missing. Run the check, or report status unverified.
+
 Stop immediately when acceptance proof is complete. Report commands, results, and unresolved risk only.

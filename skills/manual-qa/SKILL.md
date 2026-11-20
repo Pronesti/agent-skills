@@ -1,6 +1,6 @@
 ---
 name: manual-qa
-description: 'Manual workflow: Test realistic user journeys and edge cases with native Codex Computer Use, track every case, and report observed bugs with evidence.'
+description: 'Manual workflow: Test realistic user journeys and edge cases through native host browser or computer control, track every case, and report observed bugs with evidence.'
 disable-model-invocation: true
 ---
 

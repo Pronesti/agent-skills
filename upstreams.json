@@ -788,6 +788,9 @@
       "revision": "c310c9d300df13a1dd9f5c086120ffd857a164a1",
       "path": "skills/verify-and-stop",
       "local_path": "plugins/caveman/skills/verify-and-stop",
+      "local_changes": [
+        "Add a claim-to-proof table and a hedged-wording check adapted from obra/superpowers verification-before-completion; keep reuse of still-current results."
+      ],
       "changed_files": 0,
       "checked_on": "2026-11-07",
       "upstream_status": "unchanged"
@@ -856,7 +859,7 @@
       "local_path": "skills/manual-qa",
       "local_changes": [
         "Rename the local skill, UI labels, report, and references to Manual QA; retain original paths only for upstream update tracking.",
-        "Replace browser CLI restrictions and commands with native Codex Computer Use and supported runtime documentation.",
+        "Replace browser CLI restrictions and commands with the host's native control: Codex Computer Use, T3 Code `preview_*` in-app browser tools, or another host's documented browser tools.",
         "Resolve target, credentials, browser, scope, exclusions, and budget from the invoking prompt and relevant conversation context.",
         "Plan and display multiple realistic and edge cases, reset their starting states, and track PASS, FAIL, BLOCKED, and NOT RUN.",
         "Continue independent cases after failures and finish by scoped coverage rather than a bug-count target.",
