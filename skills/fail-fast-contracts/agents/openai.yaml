@@ -1,0 +1,5 @@
+interface:
+  display_name: "Execution: Fail Fast Contracts"
+  short_description: 'Trust contracts, assert on logic errors, keep code small'
+policy:
+  allow_implicit_invocation: false

@@ -237,6 +237,20 @@
       "upstream_status": "reconciled"
     },
     {
+      "name": "fail-fast-contracts",
+      "source": "superpowers",
+      "revision": "22f0b463e7a5e579904dd6211a520321035526f7",
+      "path": "skills/writing-plans",
+      "local_path": "skills/fail-fast-contracts",
+      "local_changes": [
+        "Local companion of writing-plans with no upstream counterpart: user-authored rules for contracts, fail-fast asserts, simplicity, and crash-only software.",
+        "Narrow writing-plans Review Focus and self-review item 4 to trust-boundary inputs when both skills are selected."
+      ],
+      "changed_files": 0,
+      "checked_on": "2026-11-19",
+      "upstream_status": "local_variant"
+    },
+    {
       "name": "grill-me",
       "source": "mattpocock",
       "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",

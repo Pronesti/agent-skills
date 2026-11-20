@@ -1,11 +1,11 @@
 # Use the collected skills together
 
-This guide tells you how to use the 76 workflows in this repository.
+This guide tells you how to use the 77 workflows in this repository.
 It gives the sequence, purpose, and completion conditions for 56 scenarios.
 It also identifies workflows that can conflict.
 
 **Library date: 7 November 2026.**
-The library contains 56 standalone skills and 20 Caveman skills.
+The library contains 57 standalone skills and 20 Caveman skills.
 
 **Language reference:** [ASD-STE100, Issue 9](https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf).
 The guide uses short sentences and active voice.
@@ -33,7 +33,7 @@ Software terms and skill names keep their technical meanings.
   - [Library configuration](#library-configuration)
   - [Additional QA scenarios](#additional-qa-scenarios)
 - [Example requests](#example-requests)
-- [All 76 workflows](#all-76-workflows)
+- [All 77 workflows](#all-77-workflows)
 - [Information for the next stage](#information-for-the-next-stage)
 - [Source documents](#source-documents)
 
@@ -181,7 +181,7 @@ Neither alias selects a planning or implementation workflow.
 
 ### This guide covers the collected library
 
-The repository owns the 76 workflows in this guide.
+The repository owns the 77 workflows in this guide.
 Host-owned document, spreadsheet, image, and website plugins are outside this catalog.
 Follow the host's mandatory built-in skill rules for specialist artifacts.
 Other hosts can use different procedures or upstream editions.
@@ -1604,7 +1604,7 @@ Keep stored artifacts in clear English.
 Keep all necessary acceptance and project checks.
 ```
 
-## All 76 workflows
+## All 77 workflows
 
 The groups below follow [the functional catalog](reports/skill-groups.md).
 Each workflow appears once in this reference.
@@ -1658,11 +1658,12 @@ Possible pairings do not automatically select another skill.
 | [`image-to-code`](skills/image-to-code/SKILL.md) | Generate section images, analyze them, and implement the frontend. | Text-to-image-to-code. Requires image generation for its preferred process. |
 | [`screenshot-to-code`](skills/screenshot-to-code/SKILL.md) | Extract a visual spec from a supplied screenshot and implement it. | Match the source viewport. Report missing assets and unverified comparisons. |
 
-### Execution — 3 workflows
+### Execution — 4 workflows
 
 | Workflow | Purpose | Boundary or next use |
 |---|---|---|
 | [`caveman:cavecrew`](plugins/caveman/skills/cavecrew/SKILL.md) | Use compact investigator, builder, or reviewer subagent presets. | The builder must have known locations and a one-file or two-file scope. |
+| [`fail-fast-contracts`](skills/fail-fast-contracts/SKILL.md) | Apply contract, fail-fast, simplicity, and crash-only rules during planning, implementation, and review. | Select it with `writing-plans` or one executor. It narrows Review Focus to trust-boundary inputs. |
 | [`executing-plans`](skills/executing-plans/SKILL.md) | Execute plan tasks in the primary agent with a ledger and final review. | Select this method instead of the subagent task-loop owner. |
 | [`subagent-driven-development`](skills/subagent-driven-development/SKILL.md) | Execute plan tasks with separate implementers and specified review loops. | Run one implementer at a time in the shared workspace. |
 
@@ -1819,7 +1820,7 @@ Upstream editions can have different hooks, transitions, delivery steps, and hos
 - [MANIFEST.md](MANIFEST.md) identifies the collection, versions, installation procedure, and update procedure.
 - [POLICY.md](POLICY.md) gives the invocation boundaries.
 - [invocation-policy.json](invocation-policy.json) owns the seven automatic triggers.
-- [reports/skill-groups.md](reports/skill-groups.md) lists the 76 workflows in 20 groups.
+- [reports/skill-groups.md](reports/skill-groups.md) lists the 77 workflows in 20 groups.
 - Each linked `SKILL.md` gives the specified procedure and supporting references.
 - [upstreams.json](upstreams.json) records pinned revisions and local file mappings.
 - [ASD-STE100, Issue 9](https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf) supplies the language rules and dictionary.

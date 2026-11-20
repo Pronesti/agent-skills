@@ -1,6 +1,6 @@
 # Skill groups
 
-All 76 repository-owned skills are divided into 20 functional groups, each containing 2–5 skills. Prefixes appear in `interface.display_name` in each skill’s `agents/openai.yaml`. Existing skill IDs, directories, invocation policy, and supporting references stay compatible. Host-owned skills outside this repository are outside this catalog.
+All 77 repository-owned skills are divided into 20 functional groups, each containing 2–5 skills. Prefixes appear in `interface.display_name` in each skill’s `agents/openai.yaml`. Existing skill IDs, directories, invocation policy, and supporting references stay compatible. Host-owned skills outside this repository are outside this catalog.
 
 Standalone installations linked to this repository pick up the metadata after discovery refresh. The Caveman source version is `4.1.0+selective.20261107`; installed plugin copies need updating through their host to load these labels.
 
@@ -11,7 +11,7 @@ Standalone installations linked to this repository pick up the metadata after di
 | Architecture: | 4 | Model domains and improve code structure. |
 | Design: | 5 | Design and improve interfaces from briefs, guidance, or visual references. |
 | Implementation: | 5 | Build features and prototypes with appropriate scope. |
-| Execution: | 3 | Carry out plans inline or with selected delegation. |
+| Execution: | 4 | Carry out plans inline or with selected delegation. |
 | Maintenance: | 4 | Refactor, migrate, and patch existing behavior. |
 | Testing: | 4 | Develop test-first, exercise user journeys, and verify acceptance conditions. |
 | Debugging: | 3 | Investigate failures and regressions. |
@@ -85,13 +85,14 @@ Build features and prototypes with appropriate scope.
 | `ponytail` | [Implementation: Ponytail](../skills/ponytail/SKILL.md) |
 | `prototype` | [Implementation: Prototype](../skills/prototype/SKILL.md) |
 
-## Execution (3)
+## Execution (4)
 
 Carry out plans inline or with selected delegation.
 
 | Invocation name | Display name |
 |---|---|
 | `caveman:cavecrew` | [Execution: Cavecrew](../plugins/caveman/skills/cavecrew/SKILL.md) |
+| `fail-fast-contracts` | [Execution: Fail Fast Contracts](../skills/fail-fast-contracts/SKILL.md) |
 | `executing-plans` | [Execution: Executing Plans](../skills/executing-plans/SKILL.md) |
 | `subagent-driven-development` | [Execution: Subagent Driven Development](../skills/subagent-driven-development/SKILL.md) |
 
