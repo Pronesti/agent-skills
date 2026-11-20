@@ -2,7 +2,7 @@
 
 These are fictional repository findings used to illustrate the workflow. Their paths and symbols are not evidence about the user's project. Replace them with inspected facts for every real prompt.
 
-For each case, the light subagent investigates the target and supplied history. It returns a grounded prompt when ready, or a blocker and focused question when a material decision remains. The main agent displays a ready prompt before following it. Prompt display is informational; implementation proceeds within the user's existing authorization.
+For each case, the researcher (the light subagent, or the main agent for a concrete request) investigates the target and supplied history. It returns a grounded prompt when ready, or a blocker and focused question when a material decision remains. The main agent displays a ready prompt before following it. Prompt display is informational; implementation proceeds within the user's existing authorization.
 
 ## A missing control with existing filtering support
 
@@ -11,26 +11,40 @@ Request: "add category filter to products page".
 Inspected findings: `ProductsPage.tsx` has search and pagination. `useProducts` already accepts a category ID, and its API handler applies it. The orders page has a single-select filter using `FilterSelect`; categories come from `useCategories`. The products page lacks a category control. Neighboring list filters reset pagination on selection and clearing.
 
 ```markdown
-Add a category filter to the products page. The remaining change is to expose and connect the existing category filtering support in the page.
-
-Before editing, read the project instructions and recheck ProductsPage.tsx, useProducts, its API handler, and the orders page's FilterSelect usage. If the products page already exposes a working category filter, verify it and report the evidence without changing code. If it is partly implemented, complete only the missing connection.
-
-Reuse FilterSelect, useCategories, and the category ID accepted by useProducts. Match the orders page's filter state and interaction conventions. Keep the existing API filtering logic and domain types.
-
-Scope is the category control, its connection to the existing query, and relevant verification. Preserve search, sorting, pagination, permissions, and existing loading/error behavior. Add no unrelated filters, category-management UI, redesign, new dependency, endpoint, or schema change. If existing support cannot satisfy the request without a wider change, explain that prerequisite before expanding the work.
-
-Acceptance: selecting a category limits products to that category; clearing it restores the unfiltered category state. Follow the inspected list-filter convention of resetting pagination on those changes. Existing search and sorting continue to work with the filter.
-
-Use the project's relevant checks and existing filter test pattern to verify selection, clearing, and interaction with the existing controls. Review the diff for scope and duplication, then report changed paths and checks actually run. Commit or publish only within existing authorization.
+## Goal
+Add a category filter to the products page. — Action: addition
+## Preflight
+- Read the project instructions and recheck `ProductsPage.tsx`, `useProducts`, its API handler, and the orders page's `FilterSelect` usage. If a working category filter exists, verify it and report without editing; if partial, complete only the missing connection.
+## Evidence
+- `ProductsPage.tsx`: search and pagination; no category control.
+- `useProducts`: accepts a category ID; its API handler applies it.
+- Orders page: single-select filter with `FilterSelect`; categories from `useCategories`; selecting or clearing resets pagination.
+## Decisions
+- Default: single category selection (convention: orders page filter).
+## Scope
+- In: the category control, its connection to `useProducts`, and its tests.
+- Out: other filters, category management, URL persistence, saved filters, redesign, new dependency, endpoint, or schema change.
+## Constraints
+- Reuse `FilterSelect`, `useCategories`, and the existing category ID query parameter.
+- Match the orders page's filter state and interaction conventions.
+- Preserve search, sorting, pagination, permissions, and loading/error behavior.
+- If existing support cannot satisfy the request without a wider change, explain that prerequisite before expanding the work.
+## Acceptance
+- Selecting a category lists only that category's products and resets pagination.
+- Clearing it restores the unfiltered list and resets pagination.
+- Search and sorting still work with the filter applied.
+## Checks
+- Run the project's relevant checks and the existing filter test pattern for selection, clearing, and interaction with existing controls.
+- Review the diff for scope and duplication; report changed paths and checks actually run.
 ```
 
-URL persistence, multi-select, result-count badges, and saved filters are not implied by this request. Include one only when the user requested it or it is an established requirement of the reused implementation.
+Result-count badges and the out-of-scope items are not implied by this request. Include one only when the user requested it or it is an established requirement of the reused implementation.
 
 ## A control that exists but is not connected
 
 Inspected findings: `ProductsPage.tsx` already renders `CategoryFilter` and tracks `categoryId`, but the `useProducts` call omits that value. The query supports it.
 
-The prompt should say: "Connect the existing category filter state to useProducts. Keep the current control and category source. Verify selection and clearing; do not add a second filter or rewrite the backend."
+Its Goal is "Connect the existing category filter state to useProducts. — Action: repair". Scope keeps the current control and category source and excludes a second filter or backend rewrite. Acceptance covers selection and clearing.
 
 It must still ask the executing agent to recheck current code and verify rather than edit if the connection has already been fixed. It should name the inspected state, query, and applicable tests in the real output.
 
@@ -38,7 +52,7 @@ It must still ask the executing agent to recheck current code and verify rather 
 
 Inspected findings: the category control is rendered, its selection reaches the query and backend, and existing tests cover selection and clearing.
 
-The subagent returns a verification-only prompt: "Confirm that the existing category filter on the products page satisfies the request. Inspect its reachable control and data path, use the relevant existing verification, and report evidence and any actual discrepancy. If the requested behavior is satisfied, make no code changes." The main agent shows it, runs the relevant verification, and reports the existing feature without adding another implementation.
+The subagent returns a short verification prompt: Goal "Confirm that the existing category filter on the products page satisfies the request. — Action: verification"; Scope "In: inspection and existing checks. Out: code changes while the behavior holds"; Acceptance "evidence for the reachable control and data path, and any actual discrepancy"; Checks the relevant existing verification. The main agent shows it, runs the relevant verification, and reports the existing feature without adding another implementation.
 
 Reading a test is not running it. Report the distinction. If the feature is hidden by a flag or permission, report that condition and resolve the user's intended visibility before proposing activation.
 

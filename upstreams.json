@@ -833,7 +833,10 @@
         "Research and recheck existing behavior before choosing verification, repair, or addition.",
         "Add explicit reuse, implementation-fit, scope, acceptance, and diff-review requirements.",
         "Return the grounded prompt to the main agent, expose it to the user, and execute within existing authorization.",
-        "Replace Claude-specific tool requirements and upstream guides with a portable subagent research brief and worked examples."
+        "Replace Claude-specific tool requirements and upstream guides with a portable subagent research brief and worked examples.",
+        "Triage concrete requests (observable outcome) without dispatch; return a sectioned prompt that logs user answers and labeled defaults.",
+        "Block only on target, data-loss, or public-interface questions; ask others beside a ready prompt, at most five, each with evidence-based options, a recommendation, and why it matters (after Spec Kit /clarify).",
+        "Scan for gaps and vague quality words; preview, recovery, and confirmation guardrails for irreversible work (after steelprompt)."
       ],
       "changed_files": 0,
       "checked_on": "2026-11-07",
