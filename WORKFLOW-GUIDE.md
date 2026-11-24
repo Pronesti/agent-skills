@@ -1,11 +1,11 @@
 # Use the collected skills together
 
-This guide tells you how to use the 77 workflows in this repository.
+This guide tells you how to use the 78 workflows in this repository.
 It gives the sequence, purpose, and completion conditions for 56 scenarios.
 It also identifies workflows that can conflict.
 
 **Library date: 7 November 2026.**
-The library contains 57 standalone skills and 20 Caveman skills.
+The library contains 58 standalone skills and 20 Caveman skills.
 
 **Language reference:** [ASD-STE100, Issue 9](https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf).
 The guide uses short sentences and active voice.
@@ -33,7 +33,7 @@ Software terms and skill names keep their technical meanings.
   - [Library configuration](#library-configuration)
   - [Additional QA scenarios](#additional-qa-scenarios)
 - [Example requests](#example-requests)
-- [All 77 workflows](#all-77-workflows)
+- [All 78 workflows](#all-78-workflows)
 - [Information for the next stage](#information-for-the-next-stage)
 - [Source documents](#source-documents)
 
@@ -181,7 +181,7 @@ Neither alias selects a planning or implementation workflow.
 
 ### This guide covers the collected library
 
-The repository owns the 77 workflows in this guide.
+The repository owns the 78 workflows in this guide.
 Host-owned document, spreadsheet, image, and website plugins are outside this catalog.
 Follow the host's mandatory built-in skill rules for specialist artifacts.
 Other hosts can use different procedures or upstream editions.
@@ -222,6 +222,7 @@ Select the workflow for the information or work necessary at this time.
 | Decrease agent token use | `caveman:caveman-learn` | Apply selected changes with its consent and measurement procedure. |
 | Write user documentation | `technical-writing` | Use `unslop` if another clarity pass is necessary. |
 | Write agent instructions | `writing-for-agents` | Examine triggers, references, and completion conditions. |
+| Find agent environment improvements after a session | `retro` | Apply the selected changes as a separate task. |
 
 ## Use workflows in sequence
 
@@ -1604,7 +1605,7 @@ Keep stored artifacts in clear English.
 Keep all necessary acceptance and project checks.
 ```
 
-## All 77 workflows
+## All 78 workflows
 
 The groups below follow [the functional catalog](reports/skill-groups.md).
 Each workflow appears once in this reference.
@@ -1753,12 +1754,13 @@ Possible pairings do not automatically select another skill.
 | [`caveman:caveman-commit`](plugins/caveman/skills/caveman-commit/SKILL.md) | Write a short Conventional Commits message. | The skill does not stage, commit, or amend files. |
 | [`caveman:caveman-compress`](plugins/caveman/skills/caveman-compress/SKILL.md) | Compress a selected permitted prose file with a backup and validation. | Keep code, paths, and rule meanings specified. Do not compress source or configuration files. |
 
-### Context — 3 workflows
+### Context — 4 workflows
 
 | Workflow | Purpose | Boundary or next use |
 |---|---|---|
 | [`handoff`](skills/handoff/SKILL.md) | Write a temporary continuation document with references to primary artifacts. | The skill does not make another chat or send messages to another chat. |
 | [`recall`](skills/recall/SKILL.md) | Recover applicable recent work from available history and live state. | Keep searches within the requested project and time window. |
+| [`retro`](skills/retro/SKILL.md) | Examine a coding session and identify changes to the agent environment, in order of severity. | The skill gives candidates only. Apply a selected change as a separate permitted task. |
 | [`show-me-your-work`](skills/show-me-your-work/SKILL.md) | Record decisions in a TSV trail with evidence pointers and a review procedure. | Select the skill at the start of the work. |
 
 ### Setup — 5 workflows
@@ -1820,7 +1822,7 @@ Upstream editions can have different hooks, transitions, delivery steps, and hos
 - [MANIFEST.md](MANIFEST.md) identifies the collection, versions, installation procedure, and update procedure.
 - [POLICY.md](POLICY.md) gives the invocation boundaries.
 - [invocation-policy.json](invocation-policy.json) owns the seven automatic triggers.
-- [reports/skill-groups.md](reports/skill-groups.md) lists the 77 workflows in 20 groups.
+- [reports/skill-groups.md](reports/skill-groups.md) lists the 78 workflows in 20 groups.
 - Each linked `SKILL.md` gives the specified procedure and supporting references.
 - [upstreams.json](upstreams.json) records pinned revisions and local file mappings.
 - [ASD-STE100, Issue 9](https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf) supplies the language rules and dictionary.

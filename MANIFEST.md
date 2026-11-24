@@ -1,17 +1,17 @@
 # Curated Agent Skills
 
-This repository owns **57 standalone skills and a 20-skill Caveman edition**. Seven focused skills allow automatic invocation; the other 70 personal workflows require explicit user selection. See [POLICY.md](POLICY.md) for invocation boundaries.
+This repository owns **58 standalone skills and a 20-skill Caveman edition**. Seven focused skills allow automatic invocation; the other 71 personal workflows require explicit user selection. See [POLICY.md](POLICY.md) for invocation boundaries.
 
-Read the [workflow guide](WORKFLOW-GUIDE.md) for 56 scenarios in ASD-STE100 English. The guide covers all 77 workflows, their sequences, and combinations with different instructions.
+Read the [workflow guide](WORKFLOW-GUIDE.md) for 56 scenarios in ASD-STE100 English. The guide covers all 78 workflows, their sequences, and combinations with different instructions.
 
 ## Author revisions
 
-All 73 managed skills were checked against their authors on 7 November 2026: 41 had upstream file changes, 30 had unchanged upstream content, and two removed upstream skills were retained locally. See the [update report](reports/2026-11-07-skill-updates/REPORT.md) for reconciliation decisions and verification limits. [upstreams.json](upstreams.json) records applied bases and separate checked revisions for retained skills. A newer repository revision does not necessarily change every selected skill. Impeccable, added later the same day, and the local `wait-what-list` variant, tstack `council`, and the local `fail-fast-contracts` companion of `writing-plans`, all added on 19 November 2026, were not part of that check, which is why it counted 73 of the current 77 skills.
+All 73 managed skills were checked against their authors on 7 November 2026: 41 had upstream file changes, 30 had unchanged upstream content, and two removed upstream skills were retained locally. See the [update report](reports/2026-11-07-skill-updates/REPORT.md) for reconciliation decisions and verification limits. [upstreams.json](upstreams.json) records applied bases and separate checked revisions for retained skills. A newer repository revision does not necessarily change every selected skill. Impeccable, added later the same day, and the local `wait-what-list` variant, tstack `council`, and the local `fail-fast-contracts` companion of `writing-plans`, all added on 19 November 2026, were not part of that check, which is why it counted 73 of the current 77 skills. Matt's `retro`, added on 24 November 2026 from the already pinned revision, brings the catalog to 78.
 
 | Source | Original repository | Pinned revision | Skills |
 |---|---|---|---:|
 | superpowers | [obra/superpowers](https://github.com/obra/superpowers) | `22f0b463e7a5e579904dd6211a520321035526f7` | 9 |
-| mattpocock | [mattpocock/skills](https://github.com/mattpocock/skills) | `4ae2317ddb22b046e26455e4f9c9b3aaaf62212d` | 24 |
+| mattpocock | [mattpocock/skills](https://github.com/mattpocock/skills) | `4ae2317ddb22b046e26455e4f9c9b3aaaf62212d` | 25 |
 | pstack | [cursor/plugins](https://github.com/cursor/plugins) | `6b0300214a09fd6029cfb7077043125758cd1fd2` | 7 |
 | ponytail | [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | `96608e078b2d5ea607c5c3b8b5a54d1c1fba6846` | 1 |
 | humanlayer | [humanlayer/skills](https://github.com/humanlayer/skills) | `4d69d20f6e9b57b4fcf0d501ccfb1be961f0f329` | 1 |
@@ -51,13 +51,13 @@ tstack `council` was added on 19 November 2026. It sends one review or feedback 
 
 ## Functional groups
 
-Skill picker labels use 20 functional prefixes, each grouping 2–5 skills by their main purpose. All 77 skills are assigned exactly once. Invocation names and installation paths are preserved. See the [complete grouping](reports/skill-groups.md).
+Skill picker labels use 20 functional prefixes, each grouping 2–5 skills by their main purpose. All 78 skills are assigned exactly once. Invocation names and installation paths are preserved. See the [complete grouping](reports/skill-groups.md).
 
 ## Catalog
 
 **superpowers:** `brainstorming`, `executing-plans`, `fail-fast-contracts`, `finishing-a-development-branch`, `requesting-code-review`, `subagent-driven-development`, `systematic-debugging`, `test-driven-development`, `writing-plans`.
 
-**mattpocock:** `grill-me`, `grill-with-docs`, `grilling`, `research`, `wait-what`, `wait-what-list`, `wizard`, `writing-for-agents`, `code-review`, `codebase-design`, `diagnosing-bugs`, `domain-modeling`, `handoff`, `implement`, `improve-codebase-architecture`, `prototype`, `setup-matt-pocock-skills`, `tdd`, `teach`, `to-questionnaire`, `to-spec`, `to-tickets`, `triage`, `wayfinder`.
+**mattpocock:** `grill-me`, `grill-with-docs`, `grilling`, `research`, `wait-what`, `wait-what-list`, `wizard`, `writing-for-agents`, `code-review`, `codebase-design`, `diagnosing-bugs`, `domain-modeling`, `handoff`, `implement`, `improve-codebase-architecture`, `prototype`, `setup-matt-pocock-skills`, `tdd`, `teach`, `to-questionnaire`, `to-spec`, `to-tickets`, `triage`, `wayfinder`, `retro`.
 
 **mattpocock-pr:** `pr`.
 
@@ -209,7 +209,7 @@ The example test commands assume the project provides those commands or scripts.
 
 ## Local policy overlay
 
-- [invocation-policy.json](invocation-policy.json) owns the seven automatic skills and their triggers. Their entrypoints set `disable-model-invocation: false` and `policy.allow_implicit_invocation: true`. The other 70 entrypoints keep the opposite settings. Both fields must agree with the allowlist.
+- [invocation-policy.json](invocation-policy.json) owns the seven automatic skills and their triggers. Their entrypoints set `disable-model-invocation: false` and `policy.allow_implicit_invocation: true`. The other 71 entrypoints keep the opposite settings. Both fields must agree with the allowlist.
 - Selection applies to one task. Session-wide modes need an explicit request. Always-on style mandates, forced workflow transitions, and automatic activation from generated plans or handoffs are removed or made optional.
 - Supporting files are still readable. `grill-me` declares the grilling procedure; `grill-with-docs` declares grilling and domain documentation.
 - Project runtime, verification, delivery requirements, and existing user authorization take precedence. Superpowers namespace references are adapted for standalone installation; optional isolation uses host facilities.

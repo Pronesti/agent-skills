@@ -1,6 +1,6 @@
 # Skill groups
 
-All 77 repository-owned skills are divided into 20 functional groups, each containing 2–5 skills. Prefixes appear in `interface.display_name` in each skill’s `agents/openai.yaml`. Existing skill IDs, directories, invocation policy, and supporting references stay compatible. Host-owned skills outside this repository are outside this catalog.
+All 78 repository-owned skills are divided into 20 functional groups, each containing 2–5 skills. Prefixes appear in `interface.display_name` in each skill’s `agents/openai.yaml`. Existing skill IDs, directories, invocation policy, and supporting references stay compatible. Host-owned skills outside this repository are outside this catalog.
 
 Standalone installations linked to this repository pick up the metadata after discovery refresh. The Caveman source version is `4.1.0+selective.20261107`; installed plugin copies need updating through their host to load these labels.
 
@@ -22,7 +22,7 @@ Standalone installations linked to this repository pick up the metadata after di
 | Teaching: | 4 | Explain concepts clearly and visually. |
 | Writing: | 3 | Create and improve technical and agent documentation. |
 | Compression: | 3 | Use concise communication and compress text. |
-| Context: | 3 | Recover, record, and transfer working context. |
+| Context: | 4 | Recover, record, and transfer working context. |
 | Setup: | 5 | Discover skills and configure workflow tools. |
 | Optimization: | 3 | Apply cost improvements and manage experiments. |
 | Measurement: | 3 | Discover workflows and inspect usage evidence. |
@@ -202,7 +202,7 @@ Use concise communication and compress text.
 | `caveman:caveman-commit` | [Compression: Caveman Commit](../plugins/caveman/skills/caveman-commit/SKILL.md) |
 | `caveman:caveman-compress` | [Compression: Caveman Compress](../plugins/caveman/skills/caveman-compress/SKILL.md) |
 
-## Context (3)
+## Context (4)
 
 Recover, record, and transfer working context.
 
@@ -210,6 +210,7 @@ Recover, record, and transfer working context.
 |---|---|
 | `handoff` | [Context: Handoff](../skills/handoff/SKILL.md) |
 | `recall` | [Context: Recall](../skills/recall/SKILL.md) |
+| `retro` | [Context: Retro](../skills/retro/SKILL.md) |
 | `show-me-your-work` | [Context: Show Me Your Work](../skills/show-me-your-work/SKILL.md) |
 
 ## Setup (5)

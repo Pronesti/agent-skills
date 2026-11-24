@@ -506,6 +506,19 @@
       "upstream_status": "reconciled"
     },
     {
+      "name": "retro",
+      "source": "mattpocock",
+      "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "path": "skills/engineering/retro",
+      "local_path": "skills/retro",
+      "local_changes": [
+        "Step 1 reads writing-for-agents as a declared supporting reference instead of calling the Skill tool, so the style guide loads without a separate workflow selection."
+      ],
+      "changed_files": 0,
+      "checked_on": "2026-11-24",
+      "upstream_status": "unchanged"
+    },
+    {
       "name": "blast-radius",
       "source": "pstack",
       "revision": "6b0300214a09fd6029cfb7077043125758cd1fd2",
