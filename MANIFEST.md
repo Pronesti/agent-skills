@@ -6,30 +6,31 @@ Read the [workflow guide](WORKFLOW-GUIDE.md) for 56 scenarios in ASD-STE100 Engl
 
 ## Author revisions
 
-All 73 managed skills were checked against their authors on 7 November 2026: 41 had upstream file changes, 30 had unchanged upstream content, and two removed upstream skills were retained locally. See the [update report](reports/2026-11-07-skill-updates/REPORT.md) for reconciliation decisions and verification limits. [upstreams.json](upstreams.json) records applied bases and separate checked revisions for retained skills. A newer repository revision does not necessarily change every selected skill. Impeccable, added later the same day, and the local `wait-what-list` variant, tstack `council`, and the local `fail-fast-contracts` companion of `writing-plans`, all added on 19 November 2026, were not part of that check, which is why it counted 73 of the current 77 skills. Matt's `retro`, added on 24 November 2026 from the already pinned revision, brings the catalog to 78.
+All 78 managed skills were checked against their authors on 24 November 2026: 13 were reconciled with upstream file changes, 61 had no upstream change to their files (including the local `wait-what-list` variant), `how` and `why` were kept at their 7 November base by decision after upstream reduced them to single-pass prompts, and two skills removed upstream remain retained locally. Impeccable moved to the `skill-v4.10.0` release. See the [update report](reports/2026-11-24-skill-updates/REPORT.md) for reconciliation decisions and verification limits; the [7 November report](reports/2026-11-07-skill-updates/REPORT.md) covers the previous review. [upstreams.json](upstreams.json) records applied bases and separate checked revisions for retained skills. A newer repository revision does not necessarily change every selected skill.
 
 | Source | Original repository | Pinned revision | Skills |
 |---|---|---|---:|
 | superpowers | [obra/superpowers](https://github.com/obra/superpowers) | `22f0b463e7a5e579904dd6211a520321035526f7` | 9 |
-| mattpocock | [mattpocock/skills](https://github.com/mattpocock/skills) | `4ae2317ddb22b046e26455e4f9c9b3aaaf62212d` | 25 |
-| pstack | [cursor/plugins](https://github.com/cursor/plugins) | `6b0300214a09fd6029cfb7077043125758cd1fd2` | 7 |
-| ponytail | [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | `96608e078b2d5ea607c5c3b8b5a54d1c1fba6846` | 1 |
+| mattpocock | [mattpocock/skills](https://github.com/mattpocock/skills) | `d65391149dbb5fe76478e76fa8d5122b2aa5a70e` | 25 |
+| pstack | [cursor/plugins](https://github.com/cursor/plugins) | `ca782ed8b3c2c521cead8e1720d55c3a5dbf2347` | 5 |
+| ponytail | [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | `ebd8654c2c627f721eb8f9c0d1bd4090a29f9e10` | 1 |
 | humanlayer | [humanlayer/skills](https://github.com/humanlayer/skills) | `4d69d20f6e9b57b4fcf0d501ccfb1be961f0f329` | 1 |
-| vercel | [vercel-labs/skills](https://github.com/vercel-labs/skills) | `d3701c11b1101251af14c9d148f026e1a47ebe17` | 1 |
-| caveman | [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) | `c310c9d300df13a1dd9f5c086120ffd857a164a1` | 20 |
-| wshobson | [wshobson/agents](https://github.com/wshobson/agents) | `4bde3168b43c0655c4d00ea2726e631719908a6d` | 1 |
-| addyosmani | [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) | `301b02b12bff98e4688e6984af6556802322bbde` | 2 |
+| vercel | [vercel-labs/skills](https://github.com/vercel-labs/skills) | `57217cf86ba38148a57af9e90d14a4c049558330` | 1 |
+| caveman | [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) | `47c61be2d10a354f0c5cbe2b90959d24c06b16c6` | 20 |
+| wshobson | [wshobson/agents](https://github.com/wshobson/agents) | `c96b5f6552dba32e4492307493ee613581430715` | 1 |
+| addyosmani | [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) | `e997ac5b9a74eab332d5e9793bb38a38c8cfdd74` | 2 |
 | severity1 | [severity1/claude-code-prompt-improver](https://github.com/severity1/claude-code-prompt-improver) | `50aae187bb4f08b852f318234b654df3332726a4` | 1 |
-| vercel-agent-browser | [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser) | `d44f6989bf5e9a9a1c6dd6d97175f8c33b138eca` | 1 |
+| vercel-agent-browser | [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser) | `0a923358ea989d7602f0d06507ad3447c62ffe9b` | 1 |
 | taste | [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) | `b482f7a970abb98c4108d4a9f761e458c64cefc8` | 1 |
 | onewave | [OneWave-AI/claude-skills](https://github.com/OneWave-AI/claude-skills) | `b2267d9171af4f56848d82992381b20b89b44056` | 1 |
-| mattpocock-pr | [mattpocock/skills](https://github.com/mattpocock/skills) | `4ae2317ddb22b046e26455e4f9c9b3aaaf62212d` | 1 |
+| mattpocock-pr | [mattpocock/skills](https://github.com/mattpocock/skills) | `d65391149dbb5fe76478e76fa8d5122b2aa5a70e` | 1 |
 | warpdotdev | [warpdotdev/common-skills](https://github.com/warpdotdev/common-skills) | `8792394ff1b655e0af451b8fabb68ef0cfcbd208` | 1 |
-| anthropics-frontend | [anthropics/skills](https://github.com/anthropics/skills) | `2c5958ecac7cee2b583967a2c4981d0f4a75c579` | 1 |
-| nextlevelbuilder | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | `b7d5353e0130feb8c5574ef1251f8a1db1873ccb` | 1 |
+| anthropics-frontend | [anthropics/skills](https://github.com/anthropics/skills) | `e4bb5d960d87126ff3b3a8af1a104b7db67560ba` | 1 |
+| nextlevelbuilder | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | `cc7b20d85d64d8fa022292cfad731995d3cd4eeb` | 1 |
 | mattpocock-conflicts | [mattpocock/skills](https://github.com/mattpocock/skills) | `c55ee46073ed923f86ce59a5eb3b6d895095d1b7` | 1 |
-| impeccable | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) | `414603bf14c7a344edb466bb1f85690c77ce8b7d` (`skill-v4.8.0`) | 1 |
+| impeccable | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) | `b49177d32788f2dc585c42831d845dacf1ebed2c` (`skill-v4.10.0`) | 1 |
 | tstack | [t3dotgg/tstack](https://github.com/t3dotgg/tstack) | `11e37a74d0a6868c121cd0910ab2b3bd9873b92a` | 1 |
+| pstack-retained | [cursor/plugins](https://github.com/cursor/plugins) | `6b0300214a09fd6029cfb7077043125758cd1fd2` | 2 |
 
 Architecture Patterns includes its upstream `references/details.md` and `references/advanced-patterns.md`. Incremental Implementation bundles the upstream shared `references/definition-of-done.md` inside its own reference directory; `upstreams.json` records that additional source-to-local mapping. Commit and delivery instructions in the Addy forks honor existing authorization and project requirements. Other workflow names remain optional, separately selected choices.
 
@@ -43,7 +44,7 @@ Matt's `pr` and Warp's `write-pr-description` were added on 14 October 2026 with
 
 Anthropic `frontend-design` and Next Level Builder `ui-ux-pro-max` were added on 17 October 2026. The first guides visual direction and frontend implementation. The second provides a local searchable UI/UX catalog and stack-specific guidance. Both are manual workflows with pinned upstream revisions, bundled data and scripts where needed, and upstream license notices.
 
-Impeccable 4.8.0 was added on 7 November 2026 from the compiled Codex skill in the pinned `skill-v4.8.0` release. It bundles references, helper-agent prompts, data, and portable launchers; platform binaries and hook registration are excluded. The launcher downloads a checksum-verified engine into the user cache when needed. Invoke `$impeccable` explicitly. The same repository directory is linked at user level for Codex, Cursor, and Claude. Existing project-local copies can take precedence and remain separately managed.
+Impeccable 4.8.0 was added on 7 November 2026 from the compiled Codex skill in the pinned `skill-v4.8.0` release. It bundles references, helper-agent prompts, data, and portable launchers; platform binaries and hook registration are excluded. The launcher downloads a checksum-verified engine into the user cache when needed. Invoke `$impeccable` explicitly. The same repository directory is linked at user level for Codex, Cursor, and Claude. Existing project-local copies can take precedence and remain separately managed. On 24 November 2026 it moved to `skill-v4.10.0` (engine 0.1.27) with the same overlay.
 
 `fail-fast-contracts` was added on 19 November 2026 as a local companion of `writing-plans` and the execution workflows, with no upstream counterpart. Its rules come from the user: assume callers obey contracts, assert and abort on logic errors, ask "Can I make this simpler?", and treat declared crash-only software as abort-first. When it is selected with `writing-plans`, it narrows Review Focus and self-review item 4 to trust-boundary inputs. `writing-plans` itself is unchanged.
 

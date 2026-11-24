@@ -6,6 +6,9 @@ description: 'Manual workflow: Read-only repository explorer for cold-start orie
 tools: Read, Glob, Grep
 model: haiku
 disable-model-invocation: true
+context: fork
+agent: Explore
+background: false
 ---
 
 Use only when explicitly selected by the user. Other named workflows require separate selection.

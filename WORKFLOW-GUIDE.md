@@ -4,7 +4,7 @@ This guide tells you how to use the 78 workflows in this repository.
 It gives the sequence, purpose, and completion conditions for 56 scenarios.
 It also identifies workflows that can conflict.
 
-**Library date: 7 November 2026.**
+**Library date: 24 November 2026.**
 The library contains 58 standalone skills and 20 Caveman skills.
 
 **Language reference:** [ASD-STE100, Issue 9](https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf).

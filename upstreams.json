@@ -1,158 +1,170 @@
 {
-  "checked_on": "2026-11-07",
+  "checked_on": "2026-11-24",
   "sources": {
     "superpowers": {
       "url": "https://github.com/obra/superpowers",
       "revision": "22f0b463e7a5e579904dd6211a520321035526f7",
       "previous_revision": "5bf4e78011075bcfc0dc295f0724994cd123ee71",
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "checked_revision": "22f0b463e7a5e579904dd6211a520321035526f7"
     },
     "mattpocock": {
       "url": "https://github.com/mattpocock/skills",
-      "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
-      "previous_revision": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
-      "checked_on": "2026-11-07",
-      "checked_revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d"
+      "revision": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e",
+      "previous_revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "checked_on": "2026-11-24",
+      "checked_revision": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e"
     },
     "pstack": {
       "url": "https://github.com/cursor/plugins",
-      "revision": "6b0300214a09fd6029cfb7077043125758cd1fd2",
-      "previous_revision": "032be146865d973682535de75f2287da438550bf",
-      "checked_on": "2026-11-07",
-      "checked_revision": "6b0300214a09fd6029cfb7077043125758cd1fd2"
+      "revision": "ca782ed8b3c2c521cead8e1720d55c3a5dbf2347",
+      "previous_revision": "6b0300214a09fd6029cfb7077043125758cd1fd2",
+      "checked_on": "2026-11-24",
+      "checked_revision": "ca782ed8b3c2c521cead8e1720d55c3a5dbf2347"
     },
     "ponytail": {
       "url": "https://github.com/DietrichGebert/ponytail",
-      "revision": "96608e078b2d5ea607c5c3b8b5a54d1c1fba6846",
-      "previous_revision": "e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156",
-      "checked_on": "2026-11-07",
-      "checked_revision": "96608e078b2d5ea607c5c3b8b5a54d1c1fba6846"
+      "revision": "ebd8654c2c627f721eb8f9c0d1bd4090a29f9e10",
+      "previous_revision": "96608e078b2d5ea607c5c3b8b5a54d1c1fba6846",
+      "checked_on": "2026-11-24",
+      "checked_revision": "ebd8654c2c627f721eb8f9c0d1bd4090a29f9e10"
     },
     "humanlayer": {
       "url": "https://github.com/humanlayer/skills",
       "revision": "4d69d20f6e9b57b4fcf0d501ccfb1be961f0f329",
       "previous_revision": "ca7c8088db69e315a8b2deea43820270457f8f3c",
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "checked_revision": "4d69d20f6e9b57b4fcf0d501ccfb1be961f0f329"
     },
     "vercel": {
       "url": "https://github.com/vercel-labs/skills",
-      "revision": "d3701c11b1101251af14c9d148f026e1a47ebe17",
-      "checked_on": "2026-11-07",
-      "checked_revision": "d3701c11b1101251af14c9d148f026e1a47ebe17",
-      "previous_revision": "7407f3893ad4dceab546ac002c3ef806e4000c73"
+      "revision": "57217cf86ba38148a57af9e90d14a4c049558330",
+      "checked_on": "2026-11-24",
+      "checked_revision": "57217cf86ba38148a57af9e90d14a4c049558330",
+      "previous_revision": "d3701c11b1101251af14c9d148f026e1a47ebe17"
     },
     "caveman": {
       "url": "https://github.com/JuliusBrussee/caveman",
-      "revision": "c310c9d300df13a1dd9f5c086120ffd857a164a1",
-      "checked_on": "2026-11-07",
-      "checked_revision": "c310c9d300df13a1dd9f5c086120ffd857a164a1",
-      "previous_revision": "542442bab314973709f95b85b1ac0b3f6f5b5dc6"
+      "revision": "47c61be2d10a354f0c5cbe2b90959d24c06b16c6",
+      "checked_on": "2026-11-24",
+      "checked_revision": "47c61be2d10a354f0c5cbe2b90959d24c06b16c6",
+      "previous_revision": "c310c9d300df13a1dd9f5c086120ffd857a164a1"
     },
     "wshobson": {
       "url": "https://github.com/wshobson/agents",
-      "revision": "4bde3168b43c0655c4d00ea2726e631719908a6d",
+      "revision": "c96b5f6552dba32e4492307493ee613581430715",
       "added_on": "2026-10-07",
-      "checked_on": "2026-11-07",
-      "checked_revision": "4bde3168b43c0655c4d00ea2726e631719908a6d",
-      "previous_revision": "46891e7e60da0e52baf1050b7b6391b64e84c6d9"
+      "checked_on": "2026-11-24",
+      "checked_revision": "c96b5f6552dba32e4492307493ee613581430715",
+      "previous_revision": "4bde3168b43c0655c4d00ea2726e631719908a6d"
     },
     "addyosmani": {
       "url": "https://github.com/addyosmani/agent-skills",
-      "revision": "301b02b12bff98e4688e6984af6556802322bbde",
+      "revision": "e997ac5b9a74eab332d5e9793bb38a38c8cfdd74",
       "added_on": "2026-10-07",
-      "checked_on": "2026-11-07",
-      "checked_revision": "301b02b12bff98e4688e6984af6556802322bbde",
-      "previous_revision": "1401c8b8030e023baeebb31781a6653fe8e93026"
+      "checked_on": "2026-11-24",
+      "checked_revision": "e997ac5b9a74eab332d5e9793bb38a38c8cfdd74",
+      "previous_revision": "301b02b12bff98e4688e6984af6556802322bbde"
     },
     "severity1": {
       "url": "https://github.com/severity1/claude-code-prompt-improver",
       "revision": "50aae187bb4f08b852f318234b654df3332726a4",
       "added_on": "2026-10-07",
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "checked_revision": "50aae187bb4f08b852f318234b654df3332726a4"
     },
     "vercel-agent-browser": {
       "url": "https://github.com/vercel-labs/agent-browser",
-      "revision": "d44f6989bf5e9a9a1c6dd6d97175f8c33b138eca",
+      "revision": "0a923358ea989d7602f0d06507ad3447c62ffe9b",
       "added_on": "2026-10-07",
-      "checked_on": "2026-11-07",
-      "checked_revision": "d44f6989bf5e9a9a1c6dd6d97175f8c33b138eca",
-      "previous_revision": "f7c8b071343dda29477a56cb336ea76144c05496"
+      "checked_on": "2026-11-24",
+      "checked_revision": "0a923358ea989d7602f0d06507ad3447c62ffe9b",
+      "previous_revision": "d44f6989bf5e9a9a1c6dd6d97175f8c33b138eca"
     },
     "taste": {
       "url": "https://github.com/Leonxlnx/taste-skill",
       "revision": "b482f7a970abb98c4108d4a9f761e458c64cefc8",
       "added_on": "2026-10-08",
-      "checked_on": "2026-11-07",
-      "checked_revision": "f6b76575f949707b4e3c37cd86cb44b0b98643e8",
+      "checked_on": "2026-11-24",
+      "checked_revision": "6c0b5c78f5d31776e2210305abaa210cdc0030bf",
       "upstream_status": "selected_skill_removed"
     },
     "onewave": {
       "url": "https://github.com/OneWave-AI/claude-skills",
       "revision": "b2267d9171af4f56848d82992381b20b89b44056",
       "added_on": "2026-10-08",
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "checked_revision": "b2267d9171af4f56848d82992381b20b89b44056",
       "previous_revision": "fc5b7851a6c7ba367e05797df46ad3679df355dd"
     },
     "mattpocock-pr": {
       "url": "https://github.com/mattpocock/skills",
-      "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "revision": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e",
       "added_on": "2026-10-14",
       "note": "PR skill checked at the same upstream revision as the other active Matt skills; local authoring safeguards retained.",
-      "checked_on": "2026-11-07",
-      "checked_revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
-      "previous_revision": "49dd158d1076134a641b33efb035946536778336"
+      "checked_on": "2026-11-24",
+      "checked_revision": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e",
+      "previous_revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d"
     },
     "warpdotdev": {
       "url": "https://github.com/warpdotdev/common-skills",
       "revision": "8792394ff1b655e0af451b8fabb68ef0cfcbd208",
       "added_on": "2026-10-14",
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "checked_revision": "8792394ff1b655e0af451b8fabb68ef0cfcbd208",
       "previous_revision": "7c4eb852de8d7c3e68c81802e1c59db9a611f914"
     },
     "anthropics-frontend": {
       "url": "https://github.com/anthropics/skills",
-      "revision": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
+      "revision": "e4bb5d960d87126ff3b3a8af1a104b7db67560ba",
       "added_on": "2026-10-17",
-      "checked_on": "2026-11-07",
-      "checked_revision": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
-      "previous_revision": "dbd4588f9e1033efb41dad4bef2f7947c8993d44"
+      "checked_on": "2026-11-24",
+      "checked_revision": "e4bb5d960d87126ff3b3a8af1a104b7db67560ba",
+      "previous_revision": "2c5958ecac7cee2b583967a2c4981d0f4a75c579"
     },
     "nextlevelbuilder": {
       "url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
-      "revision": "b7d5353e0130feb8c5574ef1251f8a1db1873ccb",
+      "revision": "cc7b20d85d64d8fa022292cfad731995d3cd4eeb",
       "added_on": "2026-10-17",
-      "checked_on": "2026-11-07",
-      "checked_revision": "b7d5353e0130feb8c5574ef1251f8a1db1873ccb",
-      "previous_revision": "56ea9cf174ed86786187daa9de0e6247cb0747e4"
+      "checked_on": "2026-11-24",
+      "checked_revision": "cc7b20d85d64d8fa022292cfad731995d3cd4eeb",
+      "previous_revision": "b7d5353e0130feb8c5574ef1251f8a1db1873ccb"
     },
     "mattpocock-conflicts": {
       "url": "https://github.com/mattpocock/skills",
       "revision": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
       "previous_revision": "6654f6b60cd9d5be8b54c6fafe44346dabeb3b76",
       "note": "Retained resolving-merge-conflicts base: skill removed upstream; latest source check is recorded separately.",
-      "checked_on": "2026-11-07",
-      "checked_revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "checked_on": "2026-11-24",
+      "checked_revision": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e",
       "upstream_status": "selected_skill_removed"
     },
     "impeccable": {
       "url": "https://github.com/pbakaus/impeccable",
-      "revision": "414603bf14c7a344edb466bb1f85690c77ce8b7d",
+      "revision": "b49177d32788f2dc585c42831d845dacf1ebed2c",
       "added_on": "2026-11-07",
-      "release": "skill-v4.8.0",
-      "artifact": "https://github.com/pbakaus/impeccable/releases/download/skill-v4.8.0/universal.zip",
-      "artifact_sha256": "82e6f6ff3a2b18f46f0f2fc388c1ab7abf3ccc52bbfc522456396d13011d6706",
-      "note": "Vendor the compiled Codex skill from the pinned release, not unreleased HEAD."
+      "release": "skill-v4.10.0",
+      "artifact": "https://github.com/pbakaus/impeccable/releases/download/skill-v4.10.0/universal.zip",
+      "artifact_sha256": "76c056a775bef9f5ce1a80889b6f961e7d0f9a3e8ef6343789392130d0383148",
+      "note": "Vendor the compiled Codex skill from the pinned release, not unreleased HEAD.",
+      "previous_revision": "414603bf14c7a344edb466bb1f85690c77ce8b7d",
+      "checked_on": "2026-11-24",
+      "checked_revision": "b49177d32788f2dc585c42831d845dacf1ebed2c"
     },
     "tstack": {
       "url": "https://github.com/t3dotgg/tstack",
       "revision": "11e37a74d0a6868c121cd0910ab2b3bd9873b92a",
       "added_on": "2026-11-19",
-      "checked_on": "2026-11-19"
+      "checked_on": "2026-11-24",
+      "checked_revision": "11e37a74d0a6868c121cd0910ab2b3bd9873b92a"
+    },
+    "pstack-retained": {
+      "url": "https://github.com/cursor/plugins",
+      "revision": "6b0300214a09fd6029cfb7077043125758cd1fd2",
+      "checked_on": "2026-11-24",
+      "checked_revision": "ca782ed8b3c2c521cead8e1720d55c3a5dbf2347",
+      "upstream_status": "upstream_simplified_retained_local",
+      "note": "how and why kept at the 2026-11-07 base: upstream reduced them to single-pass prompts and deleted their references; the user chose to retain the investigative versions on 2026-11-24."
     }
   },
   "skills": [
@@ -163,7 +175,7 @@
       "path": "skills/brainstorming",
       "changed_files": 5,
       "local_path": "skills/brainstorming",
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "reconciled"
     },
     {
@@ -173,7 +185,7 @@
       "path": "skills/executing-plans",
       "changed_files": 3,
       "local_path": "skills/executing-plans",
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "reconciled"
     },
     {
@@ -183,7 +195,7 @@
       "path": "skills/finishing-a-development-branch",
       "changed_files": 0,
       "local_path": "skills/finishing-a-development-branch",
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "unchanged"
     },
     {
@@ -193,7 +205,7 @@
       "path": "skills/requesting-code-review",
       "changed_files": 1,
       "local_path": "skills/requesting-code-review",
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "reconciled"
     },
     {
@@ -203,7 +215,7 @@
       "path": "skills/subagent-driven-development",
       "changed_files": 14,
       "local_path": "skills/subagent-driven-development",
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "reconciled"
     },
     {
@@ -213,7 +225,7 @@
       "path": "skills/systematic-debugging",
       "changed_files": 6,
       "local_path": "skills/systematic-debugging",
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "reconciled"
     },
     {
@@ -223,7 +235,7 @@
       "path": "skills/test-driven-development",
       "changed_files": 0,
       "local_path": "skills/test-driven-development",
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "unchanged"
     },
     {
@@ -233,7 +245,7 @@
       "path": "skills/writing-plans",
       "changed_files": 2,
       "local_path": "skills/writing-plans",
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "reconciled"
     },
     {
@@ -247,48 +259,48 @@
         "Narrow writing-plans Review Focus and self-review item 4 to trust-boundary inputs when both skills are selected."
       ],
       "changed_files": 0,
-      "checked_on": "2026-11-19",
+      "checked_on": "2026-11-24",
       "upstream_status": "local_variant"
     },
     {
       "name": "grill-me",
       "source": "mattpocock",
-      "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "revision": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e",
       "path": "skills/productivity/grill-me",
       "changed_files": 0,
       "local_path": "skills/grill-me",
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "unchanged"
     },
     {
       "name": "grill-with-docs",
       "source": "mattpocock",
-      "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "revision": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e",
       "path": "skills/engineering/grill-with-docs",
       "changed_files": 0,
       "local_path": "skills/grill-with-docs",
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "unchanged"
     },
     {
       "name": "grilling",
       "source": "mattpocock",
-      "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "revision": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e",
       "path": "skills/productivity/grilling",
-      "changed_files": 1,
+      "changed_files": 0,
       "local_path": "skills/grilling",
-      "checked_on": "2026-11-07",
-      "upstream_status": "reconciled"
+      "checked_on": "2026-11-24",
+      "upstream_status": "unchanged"
     },
     {
       "name": "research",
       "source": "mattpocock",
-      "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "revision": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e",
       "path": "skills/engineering/research",
-      "changed_files": 1,
+      "changed_files": 0,
       "local_path": "skills/research",
-      "checked_on": "2026-11-07",
-      "upstream_status": "reconciled"
+      "checked_on": "2026-11-24",
+      "upstream_status": "unchanged"
     },
     {
       "name": "resolving-merge-conflicts",
@@ -297,24 +309,24 @@
       "path": "skills/engineering/resolving-merge-conflicts",
       "changed_files": 0,
       "local_path": "skills/resolving-merge-conflicts",
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "removed_retained_local",
-      "checked_revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d"
+      "checked_revision": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e"
     },
     {
       "name": "wait-what",
       "source": "mattpocock",
-      "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "revision": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e",
       "path": "skills/productivity/wait-what",
-      "changed_files": 1,
+      "changed_files": 0,
       "local_path": "skills/wait-what",
-      "checked_on": "2026-11-07",
-      "upstream_status": "reconciled"
+      "checked_on": "2026-11-24",
+      "upstream_status": "unchanged"
     },
     {
       "name": "wait-what-list",
       "source": "mattpocock",
-      "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "revision": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e",
       "path": "skills/productivity/wait-what",
       "local_path": "skills/wait-what-list",
       "local_changes": [
@@ -322,193 +334,193 @@
         "Add ordered-list rules: one action or fact per item, condition before command, 20-word items, lettered sub-steps, warnings before their item."
       ],
       "changed_files": 0,
-      "checked_on": "2026-11-19",
+      "checked_on": "2026-11-24",
       "upstream_status": "local_variant"
     },
     {
       "name": "wizard",
       "source": "mattpocock",
-      "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "revision": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e",
       "path": "skills/engineering/wizard",
-      "changed_files": 1,
+      "changed_files": 0,
       "local_path": "skills/wizard",
-      "checked_on": "2026-11-07",
-      "upstream_status": "reconciled"
+      "checked_on": "2026-11-24",
+      "upstream_status": "unchanged"
     },
     {
       "name": "writing-for-agents",
       "source": "mattpocock",
-      "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "revision": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e",
       "path": "skills/productivity/writing-for-agents",
       "changed_files": 0,
       "local_path": "skills/writing-for-agents",
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "unchanged"
     },
     {
       "name": "code-review",
       "source": "mattpocock",
-      "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "revision": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e",
       "path": "skills/engineering/code-review",
-      "changed_files": 1,
+      "changed_files": 0,
       "local_path": "skills/code-review",
-      "checked_on": "2026-11-07",
-      "upstream_status": "reconciled"
+      "checked_on": "2026-11-24",
+      "upstream_status": "unchanged"
     },
     {
       "name": "codebase-design",
       "source": "mattpocock",
-      "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "revision": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e",
       "path": "skills/engineering/codebase-design",
-      "changed_files": 1,
+      "changed_files": 0,
       "local_path": "skills/codebase-design",
-      "checked_on": "2026-11-07",
-      "upstream_status": "reconciled"
+      "checked_on": "2026-11-24",
+      "upstream_status": "unchanged"
     },
     {
       "name": "diagnosing-bugs",
       "source": "mattpocock",
-      "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "revision": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e",
       "path": "skills/engineering/diagnosing-bugs",
-      "changed_files": 1,
+      "changed_files": 0,
       "local_path": "skills/diagnosing-bugs",
-      "checked_on": "2026-11-07",
-      "upstream_status": "reconciled"
+      "checked_on": "2026-11-24",
+      "upstream_status": "unchanged"
     },
     {
       "name": "domain-modeling",
       "source": "mattpocock",
-      "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "revision": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e",
       "path": "skills/engineering/domain-modeling",
-      "changed_files": 3,
+      "changed_files": 0,
       "local_path": "skills/domain-modeling",
-      "checked_on": "2026-11-07",
-      "upstream_status": "reconciled"
+      "checked_on": "2026-11-24",
+      "upstream_status": "unchanged"
     },
     {
       "name": "handoff",
       "source": "mattpocock",
-      "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "revision": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e",
       "path": "skills/productivity/handoff",
-      "changed_files": 1,
+      "changed_files": 0,
       "local_path": "skills/handoff",
-      "checked_on": "2026-11-07",
-      "upstream_status": "reconciled"
+      "checked_on": "2026-11-24",
+      "upstream_status": "unchanged"
     },
     {
       "name": "implement",
       "source": "mattpocock",
-      "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "revision": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e",
       "path": "skills/engineering/implement",
-      "changed_files": 1,
+      "changed_files": 0,
       "local_path": "skills/implement",
-      "checked_on": "2026-11-07",
-      "upstream_status": "reconciled"
+      "checked_on": "2026-11-24",
+      "upstream_status": "unchanged"
     },
     {
       "name": "improve-codebase-architecture",
       "source": "mattpocock",
-      "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "revision": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e",
       "path": "skills/engineering/improve-codebase-architecture",
-      "changed_files": 1,
+      "changed_files": 0,
       "local_path": "skills/improve-codebase-architecture",
-      "checked_on": "2026-11-07",
-      "upstream_status": "reconciled"
+      "checked_on": "2026-11-24",
+      "upstream_status": "unchanged"
     },
     {
       "name": "prototype",
       "source": "mattpocock",
-      "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "revision": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e",
       "path": "skills/engineering/prototype",
       "changed_files": 0,
       "local_path": "skills/prototype",
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "unchanged"
     },
     {
       "name": "setup-matt-pocock-skills",
       "source": "mattpocock",
-      "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "revision": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e",
       "path": "skills/engineering/setup-matt-pocock-skills",
-      "changed_files": 5,
+      "changed_files": 0,
       "local_path": "skills/setup-matt-pocock-skills",
-      "checked_on": "2026-11-07",
-      "upstream_status": "reconciled"
+      "checked_on": "2026-11-24",
+      "upstream_status": "unchanged"
     },
     {
       "name": "tdd",
       "source": "mattpocock",
-      "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "revision": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e",
       "path": "skills/engineering/tdd",
-      "changed_files": 1,
+      "changed_files": 0,
       "local_path": "skills/tdd",
-      "checked_on": "2026-11-07",
-      "upstream_status": "reconciled"
+      "checked_on": "2026-11-24",
+      "upstream_status": "unchanged"
     },
     {
       "name": "teach",
       "source": "mattpocock",
-      "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "revision": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e",
       "path": "skills/productivity/teach",
-      "changed_files": 1,
+      "changed_files": 0,
       "local_path": "skills/teach",
-      "checked_on": "2026-11-07",
-      "upstream_status": "reconciled"
+      "checked_on": "2026-11-24",
+      "upstream_status": "unchanged"
     },
     {
       "name": "to-questionnaire",
       "source": "mattpocock",
-      "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "revision": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e",
       "path": "skills/productivity/to-questionnaire",
       "changed_files": 0,
       "local_path": "skills/to-questionnaire",
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "unchanged"
     },
     {
       "name": "to-spec",
       "source": "mattpocock",
-      "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "revision": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e",
       "path": "skills/engineering/to-spec",
       "changed_files": 0,
       "local_path": "skills/to-spec",
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "unchanged"
     },
     {
       "name": "to-tickets",
       "source": "mattpocock",
-      "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "revision": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e",
       "path": "skills/engineering/to-tickets",
-      "changed_files": 1,
+      "changed_files": 0,
       "local_path": "skills/to-tickets",
-      "checked_on": "2026-11-07",
-      "upstream_status": "reconciled"
+      "checked_on": "2026-11-24",
+      "upstream_status": "unchanged"
     },
     {
       "name": "triage",
       "source": "mattpocock",
-      "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "revision": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e",
       "path": "skills/engineering/triage",
-      "changed_files": 1,
+      "changed_files": 0,
       "local_path": "skills/triage",
-      "checked_on": "2026-11-07",
-      "upstream_status": "reconciled"
+      "checked_on": "2026-11-24",
+      "upstream_status": "unchanged"
     },
     {
       "name": "wayfinder",
       "source": "mattpocock",
-      "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "revision": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e",
       "path": "skills/engineering/wayfinder",
-      "changed_files": 1,
+      "changed_files": 0,
       "local_path": "skills/wayfinder",
-      "checked_on": "2026-11-07",
-      "upstream_status": "reconciled"
+      "checked_on": "2026-11-24",
+      "upstream_status": "unchanged"
     },
     {
       "name": "retro",
       "source": "mattpocock",
-      "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "revision": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e",
       "path": "skills/engineering/retro",
       "local_path": "skills/retro",
       "local_changes": [
@@ -521,82 +533,99 @@
     {
       "name": "blast-radius",
       "source": "pstack",
-      "revision": "6b0300214a09fd6029cfb7077043125758cd1fd2",
+      "revision": "ca782ed8b3c2c521cead8e1720d55c3a5dbf2347",
       "path": "pstack/skills/blast-radius",
       "changed_files": 1,
       "local_path": "skills/blast-radius",
-      "checked_on": "2026-11-07",
-      "upstream_status": "reconciled"
+      "checked_on": "2026-11-24",
+      "upstream_status": "reconciled",
+      "local_changes": [
+        "Keep local PR-reading, proof, and requested-review wording in steps 1, 5, and 6; adopt the removal of the why coupling."
+      ]
     },
     {
       "name": "how",
-      "source": "pstack",
+      "source": "pstack-retained",
       "revision": "6b0300214a09fd6029cfb7077043125758cd1fd2",
       "path": "pstack/skills/how",
       "changed_files": 2,
       "local_path": "skills/how",
-      "checked_on": "2026-11-07",
-      "upstream_status": "reconciled"
+      "checked_on": "2026-11-24",
+      "upstream_status": "upstream_simplified_retained_local",
+      "checked_revision": "ca782ed8b3c2c521cead8e1720d55c3a5dbf2347",
+      "local_changes": [
+        "Retained at the 2026-11-07 base by user decision on 2026-11-24; upstream reduced this skill to a single-pass prompt and deleted its references."
+      ]
     },
     {
       "name": "recall",
       "source": "pstack",
-      "revision": "6b0300214a09fd6029cfb7077043125758cd1fd2",
+      "revision": "ca782ed8b3c2c521cead8e1720d55c3a5dbf2347",
       "path": "pstack/skills/recall",
       "changed_files": 1,
       "local_path": "skills/recall",
-      "checked_on": "2026-11-07",
-      "upstream_status": "reconciled"
+      "checked_on": "2026-11-24",
+      "upstream_status": "reconciled",
+      "local_changes": [
+        "Keep the local step 4 sweep with available tools and the step 3 host-supported subagent settings; adopt the upstream intro that names the shared-record sources without the why coupling."
+      ]
     },
     {
       "name": "show-me-your-work",
       "source": "pstack",
-      "revision": "6b0300214a09fd6029cfb7077043125758cd1fd2",
+      "revision": "ca782ed8b3c2c521cead8e1720d55c3a5dbf2347",
       "path": "pstack/skills/show-me-your-work",
-      "changed_files": 2,
+      "changed_files": 1,
       "local_path": "skills/show-me-your-work",
-      "checked_on": "2026-11-07",
-      "upstream_status": "reconciled"
+      "checked_on": "2026-11-24",
+      "upstream_status": "reconciled",
+      "local_changes": [
+        "Choose the cross-model reviewer's reasoning effort with host-supported settings instead of the unbundled poteto-mode skill."
+      ]
     },
     {
       "name": "technical-writing",
       "source": "pstack",
-      "revision": "6b0300214a09fd6029cfb7077043125758cd1fd2",
+      "revision": "ca782ed8b3c2c521cead8e1720d55c3a5dbf2347",
       "path": "pstack/skills/technical-writing",
       "changed_files": 1,
       "local_path": "skills/technical-writing",
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "reconciled"
     },
     {
       "name": "unslop",
       "source": "pstack",
-      "revision": "6b0300214a09fd6029cfb7077043125758cd1fd2",
+      "revision": "ca782ed8b3c2c521cead8e1720d55c3a5dbf2347",
       "path": "pstack/skills/unslop",
       "changed_files": 1,
       "local_path": "skills/unslop",
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "reconciled"
     },
     {
       "name": "why",
-      "source": "pstack",
+      "source": "pstack-retained",
       "revision": "6b0300214a09fd6029cfb7077043125758cd1fd2",
       "path": "pstack/skills/why",
       "changed_files": 9,
       "local_path": "skills/why",
-      "checked_on": "2026-11-07",
-      "upstream_status": "reconciled"
+      "checked_on": "2026-11-24",
+      "upstream_status": "upstream_simplified_retained_local",
+      "checked_revision": "ca782ed8b3c2c521cead8e1720d55c3a5dbf2347",
+      "local_changes": [
+        "Retained at the 2026-11-07 base by user decision on 2026-11-24; upstream reduced this skill to a single-pass prompt and deleted its references."
+      ]
     },
     {
       "name": "ponytail",
       "source": "ponytail",
-      "revision": "96608e078b2d5ea607c5c3b8b5a54d1c1fba6846",
+      "revision": "ebd8654c2c627f721eb8f9c0d1bd4090a29f9e10",
       "path": "skills/ponytail",
-      "changed_files": 1,
+      "changed_files": 0,
       "local_path": "skills/ponytail",
-      "checked_on": "2026-11-07",
-      "upstream_status": "reconciled"
+      "checked_on": "2026-11-24",
+      "upstream_status": "unchanged"
     },
     {
       "name": "show-me",
@@ -605,247 +634,250 @@
       "path": "plugins/show-me/skills/show-me",
       "changed_files": 0,
       "local_path": "skills/show-me",
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "unchanged"
     },
     {
       "name": "find-skills",
       "source": "vercel",
-      "revision": "d3701c11b1101251af14c9d148f026e1a47ebe17",
+      "revision": "57217cf86ba38148a57af9e90d14a4c049558330",
       "path": "skills/find-skills",
       "result": "updated_from_author_without_known_base",
       "local_path": "skills/find-skills",
       "changed_files": 0,
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "unchanged"
     },
     {
       "name": "caveman:cavecrew",
       "source": "caveman",
-      "revision": "c310c9d300df13a1dd9f5c086120ffd857a164a1",
+      "revision": "47c61be2d10a354f0c5cbe2b90959d24c06b16c6",
       "path": "skills/cavecrew",
       "local_path": "plugins/caveman/skills/cavecrew",
       "changed_files": 1,
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "reconciled"
     },
     {
       "name": "caveman:caveman",
       "source": "caveman",
-      "revision": "c310c9d300df13a1dd9f5c086120ffd857a164a1",
+      "revision": "47c61be2d10a354f0c5cbe2b90959d24c06b16c6",
       "path": "skills/caveman",
       "local_path": "plugins/caveman/skills/caveman",
-      "changed_files": 2,
-      "checked_on": "2026-11-07",
-      "upstream_status": "reconciled"
+      "changed_files": 0,
+      "checked_on": "2026-11-24",
+      "upstream_status": "unchanged"
     },
     {
       "name": "caveman:caveman-commit",
       "source": "caveman",
-      "revision": "c310c9d300df13a1dd9f5c086120ffd857a164a1",
+      "revision": "47c61be2d10a354f0c5cbe2b90959d24c06b16c6",
       "path": "skills/caveman-commit",
       "local_path": "plugins/caveman/skills/caveman-commit",
       "changed_files": 0,
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "unchanged"
     },
     {
       "name": "caveman:caveman-compress",
       "source": "caveman",
-      "revision": "c310c9d300df13a1dd9f5c086120ffd857a164a1",
+      "revision": "47c61be2d10a354f0c5cbe2b90959d24c06b16c6",
       "path": "skills/caveman-compress",
       "local_path": "plugins/caveman/skills/caveman-compress",
-      "changed_files": 7,
-      "checked_on": "2026-11-07",
+      "changed_files": 5,
+      "checked_on": "2026-11-24",
       "upstream_status": "reconciled"
     },
     {
       "name": "caveman:caveman-discover",
       "source": "caveman",
-      "revision": "c310c9d300df13a1dd9f5c086120ffd857a164a1",
+      "revision": "47c61be2d10a354f0c5cbe2b90959d24c06b16c6",
       "path": "skills/caveman-discover",
       "local_path": "plugins/caveman/skills/caveman-discover",
       "changed_files": 0,
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "unchanged"
     },
     {
       "name": "caveman:caveman-evidence-review",
       "source": "caveman",
-      "revision": "c310c9d300df13a1dd9f5c086120ffd857a164a1",
+      "revision": "47c61be2d10a354f0c5cbe2b90959d24c06b16c6",
       "path": "skills/caveman-evidence-review",
       "local_path": "plugins/caveman/skills/caveman-evidence-review",
       "changed_files": 0,
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "unchanged"
     },
     {
       "name": "caveman:caveman-explore",
       "source": "caveman",
-      "revision": "c310c9d300df13a1dd9f5c086120ffd857a164a1",
+      "revision": "47c61be2d10a354f0c5cbe2b90959d24c06b16c6",
       "path": "skills/caveman-explore",
       "local_path": "plugins/caveman/skills/caveman-explore",
-      "changed_files": 1,
-      "checked_on": "2026-11-07",
-      "upstream_status": "reconciled"
+      "changed_files": 2,
+      "checked_on": "2026-11-24",
+      "upstream_status": "reconciled",
+      "local_changes": [
+        "Keep disable-model-invocation alongside the upstream context: fork, agent: Explore, and background: false frontmatter."
+      ]
     },
     {
       "name": "caveman:caveman-help",
       "source": "caveman",
-      "revision": "c310c9d300df13a1dd9f5c086120ffd857a164a1",
+      "revision": "47c61be2d10a354f0c5cbe2b90959d24c06b16c6",
       "path": "skills/caveman-help",
       "local_path": "plugins/caveman/skills/caveman-help",
-      "changed_files": 2,
-      "checked_on": "2026-11-07",
-      "upstream_status": "reconciled"
+      "changed_files": 0,
+      "checked_on": "2026-11-24",
+      "upstream_status": "unchanged"
     },
     {
       "name": "caveman:caveman-learn",
       "source": "caveman",
-      "revision": "c310c9d300df13a1dd9f5c086120ffd857a164a1",
+      "revision": "47c61be2d10a354f0c5cbe2b90959d24c06b16c6",
       "path": "skills/caveman-learn",
       "local_path": "plugins/caveman/skills/caveman-learn",
-      "changed_files": 5,
-      "checked_on": "2026-11-07",
+      "changed_files": 1,
+      "checked_on": "2026-11-24",
       "upstream_status": "reconciled"
     },
     {
       "name": "caveman:caveman-manage",
       "source": "caveman",
-      "revision": "c310c9d300df13a1dd9f5c086120ffd857a164a1",
+      "revision": "47c61be2d10a354f0c5cbe2b90959d24c06b16c6",
       "path": "skills/caveman-manage",
       "local_path": "plugins/caveman/skills/caveman-manage",
       "changed_files": 0,
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "unchanged"
     },
     {
       "name": "caveman:caveman-optimize",
       "source": "caveman",
-      "revision": "c310c9d300df13a1dd9f5c086120ffd857a164a1",
+      "revision": "47c61be2d10a354f0c5cbe2b90959d24c06b16c6",
       "path": "skills/caveman-optimize",
       "local_path": "plugins/caveman/skills/caveman-optimize",
       "changed_files": 0,
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "unchanged"
     },
     {
       "name": "caveman:caveman-review",
       "source": "caveman",
-      "revision": "c310c9d300df13a1dd9f5c086120ffd857a164a1",
+      "revision": "47c61be2d10a354f0c5cbe2b90959d24c06b16c6",
       "path": "skills/caveman-review",
       "local_path": "plugins/caveman/skills/caveman-review",
       "changed_files": 0,
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "unchanged"
     },
     {
       "name": "caveman:caveman-setup",
       "source": "caveman",
-      "revision": "c310c9d300df13a1dd9f5c086120ffd857a164a1",
+      "revision": "47c61be2d10a354f0c5cbe2b90959d24c06b16c6",
       "path": "skills/caveman-setup",
       "local_path": "plugins/caveman/skills/caveman-setup",
       "changed_files": 0,
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "unchanged"
     },
     {
       "name": "caveman:caveman-stats",
       "source": "caveman",
-      "revision": "c310c9d300df13a1dd9f5c086120ffd857a164a1",
+      "revision": "47c61be2d10a354f0c5cbe2b90959d24c06b16c6",
       "path": "skills/caveman-stats",
       "local_path": "plugins/caveman/skills/caveman-stats",
       "changed_files": 1,
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "reconciled"
     },
     {
       "name": "caveman:investigate-first",
       "source": "caveman",
-      "revision": "c310c9d300df13a1dd9f5c086120ffd857a164a1",
+      "revision": "47c61be2d10a354f0c5cbe2b90959d24c06b16c6",
       "path": "skills/investigate-first",
       "local_path": "plugins/caveman/skills/investigate-first",
       "changed_files": 0,
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "unchanged"
     },
     {
       "name": "caveman:lean-build",
       "source": "caveman",
-      "revision": "c310c9d300df13a1dd9f5c086120ffd857a164a1",
+      "revision": "47c61be2d10a354f0c5cbe2b90959d24c06b16c6",
       "path": "skills/lean-build",
       "local_path": "plugins/caveman/skills/lean-build",
       "changed_files": 0,
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "unchanged"
     },
     {
       "name": "caveman:migration",
       "source": "caveman",
-      "revision": "c310c9d300df13a1dd9f5c086120ffd857a164a1",
+      "revision": "47c61be2d10a354f0c5cbe2b90959d24c06b16c6",
       "path": "skills/migration",
       "local_path": "plugins/caveman/skills/migration",
       "changed_files": 0,
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "unchanged"
     },
     {
       "name": "caveman:safe-refactor",
       "source": "caveman",
-      "revision": "c310c9d300df13a1dd9f5c086120ffd857a164a1",
+      "revision": "47c61be2d10a354f0c5cbe2b90959d24c06b16c6",
       "path": "skills/safe-refactor",
       "local_path": "plugins/caveman/skills/safe-refactor",
       "changed_files": 0,
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "unchanged"
     },
     {
       "name": "caveman:surgical-patch",
       "source": "caveman",
-      "revision": "c310c9d300df13a1dd9f5c086120ffd857a164a1",
+      "revision": "47c61be2d10a354f0c5cbe2b90959d24c06b16c6",
       "path": "skills/surgical-patch",
       "local_path": "plugins/caveman/skills/surgical-patch",
       "changed_files": 0,
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "unchanged"
     },
     {
       "name": "caveman:verify-and-stop",
       "source": "caveman",
-      "revision": "c310c9d300df13a1dd9f5c086120ffd857a164a1",
+      "revision": "47c61be2d10a354f0c5cbe2b90959d24c06b16c6",
       "path": "skills/verify-and-stop",
       "local_path": "plugins/caveman/skills/verify-and-stop",
       "local_changes": [
         "Add a claim-to-proof table and a hedged-wording check adapted from obra/superpowers verification-before-completion; keep reuse of still-current results."
       ],
       "changed_files": 0,
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "unchanged"
     },
     {
       "name": "architecture-patterns",
       "source": "wshobson",
-      "revision": "4bde3168b43c0655c4d00ea2726e631719908a6d",
+      "revision": "c96b5f6552dba32e4492307493ee613581430715",
       "path": "plugins/backend-development/skills/architecture-patterns",
       "local_path": "skills/architecture-patterns",
-      "changed_files": 1,
-      "checked_on": "2026-11-07",
-      "upstream_status": "reconciled"
+      "changed_files": 0,
+      "checked_on": "2026-11-24",
+      "upstream_status": "unchanged"
     },
     {
       "name": "code-simplification",
       "source": "addyosmani",
-      "revision": "301b02b12bff98e4688e6984af6556802322bbde",
+      "revision": "e997ac5b9a74eab332d5e9793bb38a38c8cfdd74",
       "path": "skills/code-simplification",
       "local_path": "skills/code-simplification",
-      "changed_files": 1,
-      "checked_on": "2026-11-07",
-      "upstream_status": "reconciled"
+      "changed_files": 0,
+      "checked_on": "2026-11-24",
+      "upstream_status": "unchanged"
     },
     {
       "name": "incremental-implementation",
       "source": "addyosmani",
-      "revision": "301b02b12bff98e4688e6984af6556802322bbde",
+      "revision": "e997ac5b9a74eab332d5e9793bb38a38c8cfdd74",
       "path": "skills/incremental-implementation",
       "local_path": "skills/incremental-implementation",
       "supporting_files": [
@@ -854,9 +886,12 @@
           "local_path": "skills/incremental-implementation/references/definition-of-done.md"
         }
       ],
-      "changed_files": 0,
-      "checked_on": "2026-11-07",
-      "upstream_status": "unchanged"
+      "changed_files": 2,
+      "checked_on": "2026-11-24",
+      "upstream_status": "reconciled",
+      "local_changes": [
+        "Keep the adapted Definition of Done at references/definition-of-done.md; upstream also ships an identical-text copy at references/shared/, not vendored."
+      ]
     },
     {
       "name": "prompt-improver",
@@ -875,13 +910,13 @@
         "Scan for gaps and vague quality words; preview, recovery, and confirmation guardrails for irreversible work (after steelprompt)."
       ],
       "changed_files": 0,
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "unchanged"
     },
     {
       "name": "manual-qa",
       "source": "vercel-agent-browser",
-      "revision": "d44f6989bf5e9a9a1c6dd6d97175f8c33b138eca",
+      "revision": "0a923358ea989d7602f0d06507ad3447c62ffe9b",
       "path": "skill-data/dogfood",
       "local_path": "skills/manual-qa",
       "local_changes": [
@@ -903,7 +938,7 @@
         }
       ],
       "changed_files": 0,
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "unchanged"
     },
     {
@@ -917,9 +952,9 @@
         "Add Design picker metadata for the canonical shared installation."
       ],
       "changed_files": 0,
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "removed_retained_local",
-      "checked_revision": "f6b76575f949707b4e3c37cd86cb44b0b98643e8"
+      "checked_revision": "6c0b5c78f5d31776e2210305abaa210cdc0030bf"
     },
     {
       "name": "screenshot-to-code",
@@ -942,13 +977,13 @@
         }
       ],
       "changed_files": 0,
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "unchanged"
     },
     {
       "name": "pr",
       "source": "mattpocock-pr",
-      "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "revision": "d65391149dbb5fe76478e76fa8d5122b2aa5a70e",
       "path": "skills/engineering/pr",
       "local_path": "skills/pr",
       "local_changes": [
@@ -959,7 +994,7 @@
         "Carry one structural visual from the Summary toolbox inside a repository template when the change has a reviewable shape; mechanical changes stay prose-only."
       ],
       "changed_files": 0,
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "unchanged"
     },
     {
@@ -976,13 +1011,13 @@
         "Carry one structural visual from the Summary toolbox inside a repository template when the change has a reviewable shape; mechanical changes stay prose-only."
       ],
       "changed_files": 0,
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "unchanged"
     },
     {
       "name": "frontend-design",
       "source": "anthropics-frontend",
-      "revision": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
+      "revision": "e4bb5d960d87126ff3b3a8af1a104b7db67560ba",
       "path": "skills/frontend-design",
       "local_path": "skills/frontend-design",
       "local_changes": [
@@ -990,20 +1025,21 @@
         "Add Codex picker metadata; retain the upstream Apache 2.0 license inside the skill."
       ],
       "changed_files": 0,
-      "checked_on": "2026-11-07",
+      "checked_on": "2026-11-24",
       "upstream_status": "unchanged"
     },
     {
       "name": "ui-ux-pro-max",
       "source": "nextlevelbuilder",
-      "revision": "b7d5353e0130feb8c5574ef1251f8a1db1873ccb",
+      "revision": "cc7b20d85d64d8fa022292cfad731995d3cd4eeb",
       "path": ".claude/skills/ui-ux-pro-max",
       "local_path": "skills/ui-ux-pro-max",
       "local_changes": [
         "Apply the repository manual invocation and task-scoped policy overlay.",
         "Resolve the search script from this installed skill directory instead of CLAUDE_PLUGIN_ROOT.",
         "Add Codex picker metadata and the upstream MIT license.",
-        "Normalize trailing whitespace in the bundled design-system script for the repository Git gate."
+        "Strip trailing whitespace in the bundled design-system script; the 2026-11-24 merge also replaced a prior local copy that had a blank line after every line.",
+        "Point the new --preview and --tokens examples at ${SKILL_DIR}/scripts/search.py as well."
       ],
       "supporting_files": [
         {
@@ -1019,14 +1055,14 @@
           "local_path": "skills/ui-ux-pro-max/scripts"
         }
       ],
-      "changed_files": 12,
-      "checked_on": "2026-11-07",
+      "changed_files": 23,
+      "checked_on": "2026-11-24",
       "upstream_status": "reconciled"
     },
     {
       "name": "impeccable",
       "source": "impeccable",
-      "revision": "414603bf14c7a344edb466bb1f85690c77ce8b7d",
+      "revision": "b49177d32788f2dc585c42831d845dacf1ebed2c",
       "path": "skill/SKILL.src.md",
       "local_path": "skills/impeccable",
       "release_path": ".agents/skills/impeccable",
@@ -1035,8 +1071,12 @@
         "Apply manual invocation metadata and the task-scoped authorization policy.",
         "Resolve documented launcher calls from the installed skill directory for user-level discovery while retaining project cwd.",
         "Retain the upstream Apache 2.0 license; update managed content through this repository.",
-        "Normalize Markdown whitespace for the Git gate and preserve the Windows launcher CRLF through scoped Git attributes."
-      ]
+        "Normalize Markdown whitespace for the Git gate and preserve the Windows launcher CRLF through scoped Git attributes.",
+        "Vendored from the skill-v4.10.0 universal.zip on 2026-11-24 with the same path rewrite and overlay, reproduced byte-for-byte against the 4.8.0 copy before applying."
+      ],
+      "checked_on": "2026-11-24",
+      "changed_files": 39,
+      "upstream_status": "reconciled"
     },
     {
       "name": "council",
@@ -1048,7 +1088,7 @@
         "Replace the 'say council' trigger description with a manual-workflow description and set manual invocation metadata.",
         "Add the task-scoped authorization preamble; the upstream body is unchanged."
       ],
-      "checked_on": "2026-11-19"
+      "checked_on": "2026-11-24"
     }
   ]
 }
